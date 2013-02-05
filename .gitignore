@@ -10,3 +10,4 @@ web/info.php
 vendor/*
 _chef/cookbooks/*
 _chef/tmp
+.vagrant

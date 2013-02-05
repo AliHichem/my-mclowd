@@ -6,6 +6,7 @@ app/logs/*
 web/bundles/*
 web/css/*
 web/js/*
+web/info.php
 vendor/*
 _chef/cookbooks/*
 _chef/tmp

@@ -39,6 +39,7 @@ GIT
 
 DEPENDENCIES
   beanstalkd (>= 0)
+  mysql (>= 0)
   nginx (>= 0)
   php (>= 0)
   php-fpm (>= 0)

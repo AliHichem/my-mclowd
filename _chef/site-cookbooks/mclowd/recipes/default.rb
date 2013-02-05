@@ -13,31 +13,6 @@ template "php-fpm.inc" do
 end
 
 
-#directory node.app.web_dir do
-#  owner node.user.name
-#  mode "0755"
-#  recursive true
-#end
-
-#directory "#{node.app.web_dir}/web" do
-#  owner node.user.name
-#  mode "0755"
-#  recursive true
-#end
-
-#directory "#{node.app.web_dir}/app/logs" do
-#  owner node.user.name
-#  mode "0777"
-#  recursive true
-#end
-
-#directory "#{node.app.web_dir}/app/cache" do
-#  owner node.user.name
-#  mode "0777"
-#  recursive true
-#end
-
-
 template "#{node.nginx.dir}/sites-available/#{node.app.name}.conf" do
   source "nginx.conf.erb"
   mode "0644"
@@ -48,6 +23,5 @@ nginx_site "#{node.app.name}.conf"
 cookbook_file "#{node.app.web_dir}/web/info.php" do
   source "info.php"
   mode 0755
-  #owner node.user.name
 end
 

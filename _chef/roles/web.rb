@@ -7,6 +7,8 @@ run_list(
   "recipe[php-fpm]",
   "recipe[nginx::source]",
   "recipe[beanstalkd]",
+  "recipe[mysql::client]",
+  "recipe[mysql:server]",
   "recipe[mclowd]"
 )
 

@@ -1,0 +1,8 @@
+{
+  "user":{
+    "name": "vagrant"
+  },
+  "run_list": [
+    "role[web]"
+  ]
+}

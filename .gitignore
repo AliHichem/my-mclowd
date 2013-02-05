@@ -7,3 +7,5 @@ web/bundles/*
 web/css/*
 web/js/*
 vendor/*
+_chef/cookbooks/*
+_chef/tmp

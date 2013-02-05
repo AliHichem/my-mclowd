@@ -1,0 +1,25 @@
+name "web"
+description "Base mclowd web node setup."
+ 
+run_list(
+  "recipe[mclowd::apt]",
+  "recipe[php]",
+  "recipe[php-fpm]",
+  "recipe[nginx::source]",
+  "recipe[beanstalkd]",
+  "recipe[mclowd]"
+)
+
+default_attributes(
+  "app" => {
+    "name" => "mclowd",
+    "web_dir" => "/vagrant/web"
+  },
+  "nginx" => {
+    "version" => "1.2.6",
+    "default_site_enabled" => true,
+    "source" => {
+        "modules" => ["http_gzip_static_module", "http_ssl_module"]
+    }
+  }
+)

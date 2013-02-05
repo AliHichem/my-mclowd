@@ -34,12 +34,12 @@ Vagrant::Config.run do |config|
   # folder, and the third is the path on the host to the actual folder.
   # config.vm.share_folder "v-data", "/vagrant_data", "../data"
 
-  VAGRANT_JSON = MultiJson.load(Pathname(__FILE__).dirname.join('chef', 'nodes', 'vagrant_test.json').read)
+  VAGRANT_JSON = MultiJson.load(Pathname(__FILE__).dirname.join('_chef', 'nodes', 'vagrant.json').read)
 
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path =  ["chef/site-cookbooks", "chef/cookbooks"]
-    chef.roles_path = "chef/roles"
-    chef.data_bags_path = "chef/data_bags"
+    chef.cookbooks_path =  ["_chef/site-cookbooks", "_chef/cookbooks"]
+    chef.roles_path = "_chef/roles"
+    chef.data_bags_path = "_chef/data_bags"
     chef.provisioning_path = "/tmp/vagrant-chef"
    
     chef.json = VAGRANT_JSON
@@ -48,7 +48,7 @@ Vagrant::Config.run do |config|
       chef.add_recipe(recipe)
     end if VAGRANT_JSON['run_list']
 
-    Dir["#{Pathname(__FILE__).dirname.join('chef', 'roles')}/*.json"].each do |role|
+    Dir["#{Pathname(__FILE__).dirname.join('_chef', 'roles')}/*.json"].each do |role|
       chef.add_role(role)
     end
 

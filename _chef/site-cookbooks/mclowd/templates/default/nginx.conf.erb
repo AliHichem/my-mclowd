@@ -1,0 +1,17 @@
+server {
+    listen 80 default;
+
+    
+    keepalive_timeout 10;                                                                                                                                                                                   
+    root <%= node.app.web_dir %>;
+    index app.php;
+    
+    location ~* \.php$ { # for requests ending with .php
+
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;    
+        fastcgi_param PATH_INFO $fastcgi_script_name;
+        include fastcgi_params;
+    }
+}
+

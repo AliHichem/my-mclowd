@@ -1,4 +1,5 @@
 package "git"
+package "acl"
 
 # config php-fpm for nginx
 template "php-fpm.inc" do
@@ -12,17 +13,29 @@ template "php-fpm.inc" do
 end
 
 
-directory node.app.web_dir do
-  owner node.user.name
-  mode "0755"
-  recursive true
-end
+#directory node.app.web_dir do
+#  owner node.user.name
+#  mode "0755"
+#  recursive true
+#end
 
-directory "#{node.app.web_dir}" do
-  owner node.user.name
-  mode "0755"
-  recursive true
-end
+#directory "#{node.app.web_dir}/web" do
+#  owner node.user.name
+#  mode "0755"
+#  recursive true
+#end
+
+#directory "#{node.app.web_dir}/app/logs" do
+#  owner node.user.name
+#  mode "0777"
+#  recursive true
+#end
+
+#directory "#{node.app.web_dir}/app/cache" do
+#  owner node.user.name
+#  mode "0777"
+#  recursive true
+#end
 
 
 template "#{node.nginx.dir}/sites-available/#{node.app.name}.conf" do
@@ -32,12 +45,9 @@ end
 
 nginx_site "#{node.app.name}.conf"
 
-cookbook_file "#{node.app.web_dir}/info.php" do
+cookbook_file "#{node.app.web_dir}/web/info.php" do
   source "info.php"
   mode 0755
-  owner node.user.name
+  #owner node.user.name
 end
 
-php_pear "mongo" do
-  action :install
-end

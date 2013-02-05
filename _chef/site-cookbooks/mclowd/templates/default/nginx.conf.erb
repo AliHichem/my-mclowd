@@ -3,7 +3,7 @@ server {
 
     
     keepalive_timeout 10;                                                                                                                                                                                   
-    root <%= node.app.web_dir %>;
+    root <%= node.app.web_dir %>/web;
     index app.php;
     
     location ~* \.php$ { # for requests ending with .php

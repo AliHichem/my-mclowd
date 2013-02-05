@@ -13,7 +13,7 @@ run_list(
 default_attributes(
   "app" => {
     "name" => "mclowd",
-    "web_dir" => "/vagrant/web"
+    "web_dir" => "/var/www/mclowd"
   },
   "nginx" => {
     "version" => "1.2.6",

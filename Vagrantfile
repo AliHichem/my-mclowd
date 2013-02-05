@@ -27,12 +27,13 @@ Vagrant::Config.run do |config|
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
-  config.vm.forward_port 80, 8000
+  config.vm.forward_port 80, 1818
 
   # Share an additional folder to the guest VM. The first argument is
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
-  # config.vm.share_folder "v-data", "/vagrant_data", "../data"
+
+  config.vm.share_folder "v-mclowd", "/var/www/mclowd", ".", :owner => "www-data", :group => "www-data", :create => true, :nfs => true
 
   VAGRANT_JSON = MultiJson.load(Pathname(__FILE__).dirname.join('_chef', 'nodes', 'vagrant.json').read)
 

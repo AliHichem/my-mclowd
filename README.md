@@ -8,5 +8,10 @@ MCLOWD
 5) vagrant up
 6) Navigate to http://localhost:1818/app_dev.php like a gangster :)
 
+
+Notes
+When u vagrant ssh to server, app is located at /var/www/mcloud
+Its a shared folder to your repo main directory.
+
 QUESTIONS?
 Mail me at michal.dabrowski@trisoft.ro or dabrowski@brillante.pl 

@@ -2,6 +2,11 @@
   "user":{
     "name": "vagrant"
   },
+  "mysql": {
+    "server_root_password": "mclowd1",
+    "server_repl_password": "mclowd1",
+    "server_debian_password": "mclowd1"
+  },
   "run_list": [
     "role[web]"
   ]

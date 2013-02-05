@@ -8,7 +8,7 @@ run_list(
   "recipe[nginx::source]",
   "recipe[beanstalkd]",
   "recipe[mysql::client]",
-  "recipe[mysql:server]",
+  "recipe[mysql::server]",
   "recipe[mclowd]"
 )
 
@@ -16,6 +16,10 @@ default_attributes(
   "app" => {
     "name" => "mclowd",
     "web_dir" => "/var/www/mclowd"
+  },
+  "php" => {
+    "version" => "5.4.11",
+    "install_method" => "source"
   },
   "nginx" => {
     "version" => "1.2.6",

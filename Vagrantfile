@@ -33,7 +33,7 @@ Vagrant::Config.run do |config|
   # an identifier, the second is the path on the guest to mount the
   # folder, and the third is the path on the host to the actual folder.
 
-  config.vm.share_folder "v-mclowd", "/var/www/mclowd", ".", :owner => "www-data", :group => "www-data", :create => true
+  config.vm.share_folder "v-mclowd", "/var/www/mclowd", ".", :owner => "www-data", :group => "www-data", :extra => 'dmode=777,fmode=777', :create => true
 
   VAGRANT_JSON = MultiJson.load(Pathname(__FILE__).dirname.join('_chef', 'nodes', 'vagrant.json').read)
 

@@ -19,6 +19,22 @@ template "#{node.nginx.dir}/sites-available/#{node.app.name}.conf" do
   mode "0644"
 end
 
+template "/etc/php5/fpm/php.ini" do
+  path "/etc/php5/fpm/php.ini"
+  source "php.ini"
+  owner "root"
+  group "root"
+  mode 0644
+  action :create
+end  
+
+template "#{node.app.web_dir}/app/config/parameters.yml" do
+  path "#{node.app.web_dir}/app/config/parameters.yml"
+  source "parameters.yml"
+  mode 0644
+  action :create
+end  
+
 nginx_site "#{node.app.name}.conf"
 
 cookbook_file "#{node.app.web_dir}/web/info.php" do

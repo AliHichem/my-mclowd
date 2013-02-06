@@ -1,12 +1,12 @@
 {
-    "name": "knplabs/rad-edition",
-    "description": "The \"KnpLabs Symfony2 Rad Edition\"",
-    "keywords": ["Symfony2", "Symfony2 Rad Edition", "Symfony2 Distribution"],
+    "name": "mclowd/marketplace",
+    "description": "Mclowd.com Marketplace",
+    "keywords": ["Symfony2"],
     "license":     "MIT",
     "authors": [
         {
-            "name":     "Knplabs",
-            "homepage": "http://knplabs.com"
+            "name":     "Mclowd",
+            "homepage": "http://mclowd.com"
         }
     ],
     "require": {
@@ -21,7 +21,8 @@
         "symfony/monolog-bundle": "2.1.*",
         "sensio/distribution-bundle": "2.1.*",
         "mopa/bootstrap-bundle": "dev-master",
-        "knplabs/rad-bundle": "dev-develop"
+        "knplabs/rad-bundle": "dev-develop",
+        "friendsofsymfony/user-bundle": "*"
     },
     "require-dev": {
         "behat/behat": "2.4.*",

@@ -14,4 +14,4 @@ When u vagrant ssh to server, app is located at /var/www/mcloud
 Its a shared folder to your repo main directory.
 
 QUESTIONS?
-Mail me at michal.dabrowski@trisoft.ro or dabrowski@brillante.pl 
+Mail me at michal.dabrowski@trisoft.ro 

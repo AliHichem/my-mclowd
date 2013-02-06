@@ -18,8 +18,8 @@ default_attributes(
     "web_dir" => "/var/www/mclowd"
   },
   "php" => {
-    "version" => "5.4.11",
-    "install_method" => "source"
+    "version" => "5.3.10",
+    "install_method" => "package"
   },
   "nginx" => {
     "version" => "1.2.6",

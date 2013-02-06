@@ -1,5 +1,7 @@
 package "git"
 package "acl"
+package "php5-mysql"
+package "php5-intl"
 
 # config php-fpm for nginx
 template "php-fpm.inc" do
@@ -12,7 +14,6 @@ template "php-fpm.inc" do
   only_if "dpkg --get-selections | grep php5-fpm"
 end
 
-
 template "#{node.nginx.dir}/sites-available/#{node.app.name}.conf" do
   source "nginx.conf.erb"
   mode "0644"
@@ -24,4 +25,5 @@ cookbook_file "#{node.app.web_dir}/web/info.php" do
   source "info.php"
   mode 0755
 end
+
 

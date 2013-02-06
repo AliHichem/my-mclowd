@@ -13,6 +13,8 @@ SITE
       yum (>= 0.0.0)
     runit (1.0.2)
       build-essential (>= 0.0.0)
+    xml (1.1.2)
+      build-essential (>= 0.0.0)
     yum (2.1.0)
 
 GIT
@@ -37,4 +39,5 @@ DEPENDENCIES
   nginx (>= 0)
   php-fpm (>= 0)
   runit (>= 0)
+  xml (>= 0)
 

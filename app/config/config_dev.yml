@@ -22,9 +22,9 @@ monolog:
 assetic:
     use_controller: true
 
-framework:
-    router:
-        http_port: 1818
+#framework:
+#    router:
+#        http_port: 1818
 
 #swiftmailer:
 #    delivery_address: me@example.com

@@ -4,14 +4,24 @@ server {
     
     keepalive_timeout 10;                                                                                                                                                                                   
     root <%= node.app.web_dir %>/web;
-    index app.php;
-    
-    location ~* \.php$ { # for requests ending with .php
-
-        fastcgi_pass 127.0.0.1:9000;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;    
-        fastcgi_param PATH_INFO $fastcgi_script_name;
-        include fastcgi_params;
+        
+    rewrite ^/app\.php/?(.*)$ /$1 permanent;
+ 
+    location / {
+        index app.php;
+        try_files $uri @rewriteapp;
     }
+     
+    location @rewriteapp {
+        rewrite ^(.*)$ /app.php/$1 last;
+    }            
+
+    location ~ ^/(app|app_dev)\.php(/|$) {
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param  SCRIPT_FILENAME    $document_root$fastcgi_script_name;
+        fastcgi_param  HTTPS              off;
+  }
 }
 

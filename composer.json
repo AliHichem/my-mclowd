@@ -22,7 +22,8 @@
         "sensio/distribution-bundle": "2.1.*",
         "mopa/bootstrap-bundle": "dev-master",
         "knplabs/rad-bundle": "dev-develop",
-        "friendsofsymfony/user-bundle": "*"
+        "friendsofsymfony/user-bundle": "*",
+        "friendsofsymfony/advanced-encoder-bundle": "dev-master"
     },
     "require-dev": {
         "behat/behat": "2.4.*",

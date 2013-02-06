@@ -3,12 +3,13 @@ namespace App\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\AdvancedEncoderBundle\Security\Encoder\EncoderAwareInterface;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_users")
  */
-class User extends BaseUser
+class User extends BaseUser implements EncoderAwareInterface
 {
     /**
      * @ORM\Id
@@ -130,5 +131,12 @@ class User extends BaseUser
         return $this;
     }
 
+    public function getEncoderName() {
+        if ($this->isLegacy()) {
+            return "wp_encoder";
+        } else {
+            return null;
+        }      
+    }
 
 }

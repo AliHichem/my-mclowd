@@ -1,5 +1,5 @@
 {
-    "hash": "a73bc0d77c8713adaf903484252d5ba6",
+    "hash": "eba15dea8c89eba86b0e10ec0c3ae2c9",
     "packages": [
         {
             "name": "doctrine/common",
@@ -377,6 +377,51 @@
             "keywords": [
                 "database",
                 "orm"
+            ]
+        },
+        {
+            "name": "friendsofsymfony/advanced-encoder-bundle",
+            "version": "dev-master",
+            "target-dir": "FOS/AdvancedEncoderBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSAdvancedEncoderBundle",
+                "reference": "e3ef1f1317805195e6cbbba5fc9f69bfb35e9ddd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSAdvancedEncoderBundle/zipball/e3ef1f1317805195e6cbbba5fc9f69bfb35e9ddd",
+                "reference": "e3ef1f1317805195e6cbbba5fc9f69bfb35e9ddd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.1,<2.3-dev",
+                "symfony/security-bundle": ">=2.1,<2.3-dev"
+            },
+            "time": "2013-01-12 11:56:19",
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "FOS\\AdvancedEncoderBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                }
+            ],
+            "description": "Symfony2 bundle adding a way to specify the encoder on a user instance basis",
+            "homepage": "https://github.com/friendsofsymfony/FOSAdvancedEncoderBundle",
+            "keywords": [
+                "Symfony2",
+                "encoder",
+                "security"
             ]
         },
         {
@@ -1301,6 +1346,7 @@
     "stability-flags": {
         "mopa/bootstrap-bundle": 20,
         "knplabs/rad-bundle": 20,
+        "friendsofsymfony/advanced-encoder-bundle": 20,
         "phpspec/phpspec2": 20
     }
 }

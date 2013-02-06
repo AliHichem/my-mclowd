@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\AdvancedEncoderBundle\FOSAdvancedEncoderBundle(),
 
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\RadBundle\KnpRadBundle(),

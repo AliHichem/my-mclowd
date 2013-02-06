@@ -52,7 +52,7 @@ Vagrant::Config.run do |config|
     Dir["#{Pathname(__FILE__).dirname.join('_chef', 'roles')}/*.json"].each do |role|
       chef.add_role(role)
     end
-
+    
   end
 
   

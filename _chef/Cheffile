@@ -7,5 +7,5 @@ cookbook 'runit'
 cookbook 'nginx', :git => 'git://github.com/opscode-cookbooks/nginx.git'
 cookbook 'php-fpm'
 cookbook 'beanstalkd', :git => 'git://github.com/escapestudios/chef-beanstalkd.git'
-cookbook 'mysql'
+cookbook 'mysql', :git => "git://github.com/everm1nd/mysql.git"
 cookbook 'xml'

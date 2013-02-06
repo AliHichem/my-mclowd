@@ -3,9 +3,6 @@ SITE
   specs:
     apt (1.8.4)
     build-essential (1.3.4)
-    mysql (2.1.2)
-      build-essential (>= 0.0.0)
-      openssl (>= 0.0.0)
     ohai (1.1.6)
     openssl (1.0.0)
     php-fpm (0.3.1)
@@ -23,6 +20,14 @@ GIT
   sha: 7248dee591a683d256660ba0e96bb7ae2bdfc3a4
   specs:
     beanstalkd (0.1.0)
+
+GIT
+  remote: git://github.com/everm1nd/mysql.git
+  ref: master
+  sha: 6c056ae1fe62d373c947aa8b79207d33f96f660e
+  specs:
+    mysql (1.2.4)
+      openssl (>= 0.0.0)
 
 GIT
   remote: git://github.com/opscode-cookbooks/nginx.git

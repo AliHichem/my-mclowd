@@ -1,6 +1,8 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: bundles/fos_user.yml }
+
 
 framework:
     #esi:             ~

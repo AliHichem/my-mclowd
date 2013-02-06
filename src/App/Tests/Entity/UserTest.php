@@ -28,16 +28,20 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $user->setDisplayName(null);
         $this->assertEquals($user->getDisplayName(), 'defrag');
     }
-
+    
     public function test_default_encoder_for_user()
     {
         $this->assertNull($this->user->getEncoderName());
+        return $this->user;
     }
 
-    public function test_wordpress_encoder_for_legacy_user()
+    /**
+     * @depends test_default_encoder_for_user
+     */
+    public function test_wordpress_encoder_for_legacy_user(User $user)
     {
-        $this->user->setIsLegacy(true);
-        $this->assertEquals($this->user->getEncoderName(), 'wp_encoder');
+        $user->setIsLegacy(true);
+        $this->assertEquals($user->getEncoderName(), 'wp_encoder');
     }
 
 }

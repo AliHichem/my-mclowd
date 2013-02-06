@@ -48,9 +48,16 @@ class User extends BaseUser
     /**
      * @var string $displayName
      *
-     * @ORM\Column(name="display_name", type="string", length=250)
+     * @ORM\Column(name="display_name", type="string", length=250, nullable=true)
      */
     protected $displayName;
+
+    /**
+     * @var boolean $isLegacy
+     *
+     * @ORM\Column(name="is_legacy", type="boolean")
+     */
+    protected $isLegacy = false;
 
 
     public function __construct()
@@ -108,6 +115,20 @@ class User extends BaseUser
         return $this;
     }
 
+
+    public function isLegacy()
+    {
+        return $this->isLegacy;
+    }
+
+    public function getIsLegacy() { //this is for twig only
+        return $this->isLegacy();
+    }
+        
+    public function setIsLegacy($isLegacy) {
+        $this->isLegacy = $isLegacy;    
+        return $this;
+    }
 
 
 }

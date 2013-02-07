@@ -24,28 +24,28 @@ abstract class User extends BaseUser implements EncoderAwareInterface
     /**
      * @var string $url
      *
-     * @ORM\Column(name="user_url", type="string", length=100)
+     * @ORM\Column(name="user_url", type="string", length=100, nullable=true)
      */
     protected $url;
 
     /**
      * @var datetime $registeredDate
      *
-     * @ORM\Column(name="user_registered", type="datetime")
+     * @ORM\Column(name="user_registered", type="datetime", nullable=true)
      */
     protected $registeredDate;
 
     /**
      * @var string $activationKey
      *
-     * @ORM\Column(name="user_activation_key", type="string", length=60)
+     * @ORM\Column(name="user_activation_key", type="string", length=60, nullable=true)
      */
     protected $activationKey;
 
     /**
      * @var integer $status
      *
-     * @ORM\Column(name="user_status", type="integer", length=11)
+     * @ORM\Column(name="user_status", type="integer", length=11, nullable=true)
      */
     protected $status;
 

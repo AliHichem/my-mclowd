@@ -6,7 +6,7 @@ pugx_multi_user:
         registration:
           form: 
             type: MC\UserBundle\Form\Type\RegistrationClientFormType
-            name: fos_user_registration_form
+            #name: fos_user_registration_form
             validation_groups:  [Registration, Default]
           template: MCUserBundle:Registration:client.form.html.twig
         #profile:

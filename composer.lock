@@ -1,5 +1,5 @@
 {
-    "hash": "eba15dea8c89eba86b0e10ec0c3ae2c9",
+    "hash": "85b81b6991e8bd26e717ea20172b5104",
     "packages": [
         {
             "name": "doctrine/common",
@@ -882,6 +882,52 @@
             ]
         },
         {
+            "name": "pugx/multi-user-bundle",
+            "version": "dev-master",
+            "target-dir": "PUGX/MultiUserBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PUGX/PUGXMultiUserBundle",
+                "reference": "c8d019b4ed9043ab73b20887f3d821c8cfb1b221"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PUGX/PUGXMultiUserBundle/zipball/c8d019b4ed9043ab73b20887f3d821c8cfb1b221",
+                "reference": "c8d019b4ed9043ab73b20887f3d821c8cfb1b221",
+                "shasum": ""
+            },
+            "require": {
+                "friendsofsymfony/user-bundle": "dev-master",
+                "symfony/form": ">=2.1,<2.3-dev"
+            },
+            "time": "2013-01-25 23:51:43",
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "PUGX\\MultiUserBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Leonardo Proietti",
+                    "email": "leonardo.proietti@gmail.com"
+                },
+                {
+                    "name": "Community",
+                    "homepage": "https://github.com/PUGX/PUGXMultiUserBundle/contributors"
+                }
+            ],
+            "description": "Symfony PUGXMultiUserBundle",
+            "homepage": "https://github.com/PUGX",
+            "keywords": [
+                "user management multi user management"
+            ]
+        },
+        {
             "name": "sensio/distribution-bundle",
             "version": "2.1.x-dev",
             "target-dir": "Sensio/Bundle/DistributionBundle",
@@ -1347,6 +1393,7 @@
         "mopa/bootstrap-bundle": 20,
         "knplabs/rad-bundle": 20,
         "friendsofsymfony/advanced-encoder-bundle": 20,
+        "pugx/multi-user-bundle": 20,
         "phpspec/phpspec2": 20
     }
 }

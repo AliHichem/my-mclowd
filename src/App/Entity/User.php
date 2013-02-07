@@ -8,8 +8,11 @@ use FOS\AdvancedEncoderBundle\Security\Encoder\EncoderAwareInterface;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_users")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"client" = "Client", "contractor" = "Contractor"})
  */
-class User extends BaseUser implements EncoderAwareInterface
+abstract class User extends BaseUser implements EncoderAwareInterface
 {
     /**
      * @ORM\Id

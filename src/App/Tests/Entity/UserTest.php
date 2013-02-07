@@ -8,8 +8,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
     protected $user;
  
     protected function setUp()
-    {
-        $this->user = new User;
+    {        
+        $this->user = $this->getMockForAbstractClass('App\Entity\User');
         $this->user->setUserName('defrag');
         $this->user->setDisplayName('Michal D.');
     }

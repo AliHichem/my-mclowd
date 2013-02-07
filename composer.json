@@ -23,7 +23,8 @@
         "mopa/bootstrap-bundle": "dev-master",
         "knplabs/rad-bundle": "dev-develop",
         "friendsofsymfony/user-bundle": "*",
-        "friendsofsymfony/advanced-encoder-bundle": "dev-master"
+        "friendsofsymfony/advanced-encoder-bundle": "dev-master",
+        "pugx/multi-user-bundle": "dev-master"
     },
     "require-dev": {
         "behat/behat": "2.4.*",

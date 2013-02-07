@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Doctrine\Common\Util\Inflector;
 use Behat\MinkExtension\Context\MinkContext;
 
-use App\Entity,\
+use App\Entity,
     MC\UserBundle\Entity\User,
     MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor;

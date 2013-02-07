@@ -18,3 +18,7 @@ knp_rad:
         logger: true
     listener:
         exception_rethrow: true
+
+doctrine:
+    dbal:
+        dbname:   mclowd_test

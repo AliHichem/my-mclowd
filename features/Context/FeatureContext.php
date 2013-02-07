@@ -11,20 +11,22 @@ use Behat\Symfony2Extension\Context\KernelAwareInterface;
 
 use Symfony\Component\HttpKernel\KernelInterface;
 use Doctrine\Common\Util\Inflector;
+use Behat\MinkExtension\Context\MinkContext;
 
 use App\Entity;
 
-class FeatureContext extends RawMinkContext implements KernelAwareInterface
+class FeatureContext extends MinkContext implements KernelAwareInterface
 {
     private $kernel;
 
+    
     /**
-     * @Given /^I am on the ([\w\s]+)( page)?$/
-     * @When /^I go to the ([\w\s]+)( page)?$/
+     * @Given /^users table is empty$/
      */
-    public function iAmOnThePage($page)
+    public function usersTableIsEmpty()
     {
-        $this->getSession()->visit($this->generatePageUrl($page, $parameters));
+        $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        $em->createQuery('DELETE MCUserBundle:User')->execute();
     }
 
     /**
@@ -69,7 +71,7 @@ class FeatureContext extends RawMinkContext implements KernelAwareInterface
      * 
      * @return string
      */
-    private function generatePageUrl($page, array $parameters = [])
+    private function generatePageUrl($page, array $parameters = array())
     {
         $parts = explode(' ', trim($page), 2);
         if (2 === count($parts)) {

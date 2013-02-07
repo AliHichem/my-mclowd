@@ -25,6 +25,20 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
         <h2>Mclowd Markretplace</h2>
+
+
+         {% if  app.session.flashbag.count() > 0 %}
+            <section id="flash-messages">
+            {% for type, flashMessages in app.session.flashbag.all() %}
+                {% for flashMessage in flashMessages %}
+                    <div class="flash-{{ type }}">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            </section>
+        {% endif %}
+
         {% block content %}{% endblock content %}
 
         {% block javascripts %}{% endblock javascripts %}

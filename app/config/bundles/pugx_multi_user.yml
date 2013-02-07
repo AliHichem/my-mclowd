@@ -1,0 +1,26 @@
+pugx_multi_user:
+  users:
+    client:
+        entity: 
+          class: MC\UserBundle\Entity\Client
+        registration:
+          form: 
+            type: MC\UserBundle\Form\Type\RegistrationClientFormType
+            name: fos_user_registration_form
+            validation_groups:  [Registration, Default]
+          template: MCUserBundle:Registration:client.form.html.twig
+        #profile:
+        #  form:
+        #    type: Acme\UserBundle\Form\Type\ProfileUserOneFormType
+        #    name: fos_user_profile_form
+        #    validation_groups:  [Profile, Default] 
+    contractor:
+        entity: 
+          class: MC\UserBundle\Entity\Contractor
+        registration:
+          form: 
+            type: MC\UserBundle\Form\Type\RegistrationContractorFormType
+          template: MCUserBundle:Registration:contractor.form.html.twig
+        #profile:
+        #  form: 
+        #    type: Acme\UserBundle\Form\Type\ProfileUserTwoFormType

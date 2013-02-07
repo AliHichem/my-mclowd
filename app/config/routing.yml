@@ -1,3 +1,9 @@
 app:
     resource: "@App/Resources/config/routing.yml"
     type:     "rad_convention"
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"    
+
+mc_user:
+    resource: "@MCUserBundle/Resources/config/routing.yml"    

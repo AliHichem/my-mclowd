@@ -1,7 +1,8 @@
 <?php
-namespace App\Tests\Entity;
 
-use App\Entity\User;
+namespace MC\UserBundle\Tests\Entity;
+
+use MC\UserBundle\Entity\User;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {
@@ -9,7 +10,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
  
     protected function setUp()
     {        
-        $this->user = $this->getMockForAbstractClass('App\Entity\User');
+        $this->user = $this->getMockForAbstractClass('MC\UserBundle\Entity\User');
         $this->user->setUserName('defrag');
         $this->user->setDisplayName('Michal D.');
     }

@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<form  class="shared-form" class="form-wrap" action="{{ path('client_registration') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    {{ form_widget(form) }}
+    <div>
+        <input class="submit"  type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+    </div>
+
+    {{ form_rest(form) }}
+
+</form>
+{% endblock %}

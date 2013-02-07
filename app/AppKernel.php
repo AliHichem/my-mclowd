@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new PUGX\MultiUserBundle\PUGXMultiUserBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\RadBundle\KnpRadBundle(),
+
+            new MC\UserBundle\MCUserBundle(),
             new App\App(),
         );
 

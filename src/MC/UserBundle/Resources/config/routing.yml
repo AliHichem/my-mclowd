@@ -1,0 +1,7 @@
+client_registration:
+    pattern:  /register/client
+    defaults: { _controller: MCUserBundle:Registration:registerClient }
+
+contractor_registration:
+    pattern:  /register/contractor
+    defaults: { _controller: MCUserBundle:Registration:registerContractor }

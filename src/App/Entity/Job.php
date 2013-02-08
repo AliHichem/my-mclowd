@@ -14,8 +14,8 @@ class Job {
     const TYPE_HOURLY = 'hourly';
 
 
-    protected $types = array(self::TYPE_FIXED, self::TYPE_HOURLY);
-    protected $currencies = array('USD', 'EUR');
+    protected static $types = array(self::TYPE_FIXED, self::TYPE_HOURLY);
+    protected static $currencies = array('USD', 'EUR');
 
 
     /**
@@ -55,12 +55,12 @@ class Job {
 
     public function getTypes()
     {
-        return $this->types;
+        return self::$types;
     }
 
     public function getCurrencies()
     {
-        return $this->currencies;
+        return self::$currencies;
     }
 
     public function setName($value)

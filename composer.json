@@ -25,7 +25,8 @@
         "friendsofsymfony/user-bundle": "*",
         "friendsofsymfony/advanced-encoder-bundle": "dev-master",
         "pugx/multi-user-bundle": "dev-master",
-        "jms/security-extra-bundle": "1.2.*"
+        "jms/security-extra-bundle": "1.2.*",
+        "friendsofsymfony/message-bundle": "dev-master"
     },
     "require-dev": {
         "behat/behat": "2.4.*",

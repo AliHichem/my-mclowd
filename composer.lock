@@ -1,5 +1,5 @@
 {
-    "hash": "3a04a0ee77143b7c45845cef54d4d691",
+    "hash": "a940e62ed9e9556974039cbd6b12a7eb",
     "packages": [
         {
             "name": "doctrine/common",
@@ -422,6 +422,60 @@
                 "Symfony2",
                 "encoder",
                 "security"
+            ]
+        },
+        {
+            "name": "friendsofsymfony/message-bundle",
+            "version": "dev-master",
+            "target-dir": "FOS/MessageBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSMessageBundle.git",
+                "reference": "da743d0d90409181ddbcb82cf80412c4f05771a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSMessageBundle/zipball/da743d0d90409181ddbcb82cf80412c4f05771a1",
+                "reference": "da743d0d90409181ddbcb82cf80412c4f05771a1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "2.1.*",
+                "symfony/twig-bundle": "2.1.*"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "dev-master",
+                "doctrine/mongodb-odm-bundle": "dev-master"
+            },
+            "time": "2013-02-03 02:14:05",
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "FOS\\MessageBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com",
+                    "homepage": "http://ornicar.github.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSMessageBundle/contributors"
+                }
+            ],
+            "description": "Provides user-to-user messaging features for your Symfony2 application.",
+            "homepage": "https://github.com/FriendsOfSymfony/FOSMessageBundle",
+            "keywords": [
+                "message",
+                "messaging",
+                "symfony"
             ]
         },
         {
@@ -1649,6 +1703,7 @@
         "knplabs/rad-bundle": 20,
         "friendsofsymfony/advanced-encoder-bundle": 20,
         "pugx/multi-user-bundle": 20,
+        "friendsofsymfony/message-bundle": 20,
         "phpspec/phpspec2": 20
     }
 }

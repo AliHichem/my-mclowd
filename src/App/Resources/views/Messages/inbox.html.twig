@@ -1,0 +1,7 @@
+You have {{ fos_message_nb_unread() }} new messages}
+
+{% for $thread in $threads %}
+	{% if not fos_message_is_read(message) %} This message is new! {% endif %}
+	{{dump($thread)}}    
+{% endfor %}
+

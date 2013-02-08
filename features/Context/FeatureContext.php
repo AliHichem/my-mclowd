@@ -76,6 +76,18 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I am logged in as "([^"]*)" with password "([^"]*)"$/
+     */
+    public function iAmLoggedInAsWithPassword($email, $password)
+    {
+        $this->visit('/login');
+        $this->fillField('username', $email);
+        $this->fillField('password', $password);
+        $this->pressButton('Login');
+        $this->iAmLoggedInSystem();
+    }
+
+    /**
      * Sets Kernel instance.
      *
      * @param KernelInterface $kernel HttpKernel instance

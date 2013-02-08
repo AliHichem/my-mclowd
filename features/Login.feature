@@ -13,6 +13,6 @@ Feature: Login to system
   Scenario: Signin into system with valid login and password 
     Given I fill in "username" with "defrag"
     And I fill in "password" with "12345"
-    When I press "security.login.submit"
+    When I press "Login"
     Then I am logged in system
       

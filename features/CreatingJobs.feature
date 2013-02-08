@@ -4,11 +4,16 @@ Feature: Creating jobs as client
     I want to post jobs
     So I can find contractors
 
+  Scenario: Entering creation page unauthenticated
+    When I am on "/jobs/new"    
+    Then the response status code should not be 200
+
   Scenario: Sending form with valid data
-    Given users table is empty    
+    Given users table is empty        
     And the following people exist:
         | username      | email                       | password      | type     |
         | defrag        | michal.dabrowski@trisoft.ro | 12345         | client   |
+    And I am logged in as "defrag" with password "12345"       
     When I am on "/jobs/new"    
         And I fill in the following:
             | new_job[name]              | Will work for food |

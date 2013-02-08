@@ -5,11 +5,17 @@ use App\Entity\Job;
 use App\Form\Type\NewJobType;
 use Doctrine\Common\Persistence\PersistentObject;
 use Symfony\Component\HttpFoundation\Request;
+use JMS\SecurityExtraBundle\Annotation\Secure;
+
 class JobsController extends Controller
 {
     
+
     public function newAction(Request $request)
     {                
+        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
         $job = new Job;
         $form = $this->createBoundObjectForm($job, 'new');    
 

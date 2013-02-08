@@ -40,11 +40,14 @@ class Job {
 
     /**
      * @ORM\Column(type="string", length=12)     
+     * 
+     * @Assert\Choice(callback = "getTypes")     
      */     
     protected $type = self::TYPE_FIXED;
 
     /**
      * @ORM\Column(type="string", length=3)     
+     * @Assert\Choice(callback = "getCurrencies")     
      */     
     protected $currency = 'USD';
 
@@ -53,14 +56,14 @@ class Job {
         return $this->id;
     }
 
-    public function getTypes()
+    public static function getTypes()
     {
-        return self::$types;
+        return static::$types;
     }
 
-    public function getCurrencies()
+    public static function getCurrencies()
     {
-        return self::$currencies;
+        return static::$currencies;
     }
 
     public function setName($value)
@@ -90,7 +93,7 @@ class Job {
     
     
     public function setType($type) {
-        if (in_array($type, $this->getTypes()) === false) {
+        if (in_array($type, static::getTypes()) === false) {
             throw new Exception\InvalidJobTypeException("Invalid type $type. Avilable types: ". join($this->getTypes(), ','));
         }
         $this->type = $type;    
@@ -103,7 +106,7 @@ class Job {
     }
     
     public function setCurrency($currency) {
-        if (in_array($currency, $this->getCurrencies()) === false) {
+        if (in_array($currency, static::getCurrencies()) === false) {
             throw new Exception\InvalidJobCurrencyException("Invalid currency $currency. Avilable currencies: ". join($this->getCurrencies(), ','));
         }
         $this->currency = $currency;    

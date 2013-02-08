@@ -3,7 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: bundles/fos_user.yml }
     - { resource: bundles/pugx_multi_user.yml }
-
+    - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
 framework:
     #esi:             ~

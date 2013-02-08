@@ -6,7 +6,7 @@ Feature: Client Registration
 
   Scenario: Sending form with valid data
     Given users table is empty
-    When I am on "/register/contractor"
+    When I am on "/register/contractor"    
         And I fill in the following:
             | fos_user_registration_form[username]              | defrag |
             | fos_user_registration_form[email]                 | michal.dabrowski@trisoft.ro |

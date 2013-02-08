@@ -120,9 +120,9 @@ unless platform_family?(%w{mac_os_x})
   service "mysql" do
     service_name node['mysql']['service_name']
     if node['mysql']['use_upstart']
-      restart_command "restart mysql"
-      stop_command "stop mysql"
-      start_command "start mysql"
+      #restart_command "mysql restart"
+      #stop_command "mysql stop "
+      #start_command "mysql start"
     end
     supports :status => true, :restart => true, :reload => true
     action :enable

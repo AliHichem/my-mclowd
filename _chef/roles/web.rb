@@ -3,6 +3,7 @@ description "Base mclowd web node setup."
  
 run_list(
   "recipe[apt]",
+  "recipe[mysql::server]",
   "recipe[chef-dotdeb]", 
   "recipe[chef-dotdeb::php54]", 
   "recipe[apache2]", 
@@ -11,7 +12,7 @@ run_list(
   "recipe[php]",  
   "recipe[beanstalkd]",
   "recipe[mclowd]",
-  "recipe[mysql]"  
+  "recipe[mysql::client]"  
 )
 
 default_attributes(

@@ -17,9 +17,13 @@ cookbook_file "#{node.app.web_dir}/web/info.php" do
   mode 0755
 end
 
+cookbook_file "/etc/php5/apache2/php.ini" do
+  path "/etc/php5/apache2/php.ini"
+  source "php.ini"
+  action :create
+end    
 
 web_app "mclowd" do
   server_name 'mclowd.dev'
-  #server_aliases [node['fqdn'], "my-site.example.com"]
   docroot  "#{node.app.web_dir}/web"
 end

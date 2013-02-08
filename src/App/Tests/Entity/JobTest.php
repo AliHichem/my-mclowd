@@ -27,6 +27,34 @@ class JobTest extends \PHPUnit_Framework_TestCase
         return $this->job;
     }
 
+    public function test_default_type()
+    {
+        $job = new Job;
+        $this->assertEquals($job->getType(), Job::TYPE_FIXED);
+    }
+
+    public function test_default_currency()
+    {
+        $job = new Job;
+        $this->assertEquals($job->getCurrency(), 'USD');
+    }
+
+    /**
+     * @expectedException     \App\Exception\InvalidJobTypeException     
+     */
+    public function test_invalid_types()
+    {
+        $this->job->setType('non_existend');
+    }
+
+    /**
+     * @expectedException     \App\Exception\InvalidJobCurrencyException     
+     */
+    public function test_invalid_currency()
+    {
+        $this->job->setCurrency('PLN');
+    }
+
     /**
      * @depends test_default_valid
      */

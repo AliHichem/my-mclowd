@@ -2,13 +2,21 @@
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use App\Exception;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="jobs")
  */
 class Job {
+
+    const TYPE_FIXED = 'fixed';
+    const TYPE_HOURLY = 'hourly';
+
+
+    protected $types = array(self::TYPE_FIXED, self::TYPE_HOURLY);
+    protected $currencies = array('USD', 'EUR');
+
 
     /**
      * @ORM\Id
@@ -30,10 +38,29 @@ class Job {
      */
     protected $description;
 
+    /**
+     * @ORM\Column(type="string", length=12)     
+     */     
+    protected $type = self::TYPE_FIXED;
+
+    /**
+     * @ORM\Column(type="string", length=3)     
+     */     
+    protected $currency = 'USD';
 
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getTypes()
+    {
+        return $this->types;
+    }
+
+    public function getCurrencies()
+    {
+        return $this->currencies;
     }
 
     public function setName($value)
@@ -54,6 +81,32 @@ class Job {
     
     public function setDescription($description) {
         $this->description = $description;
+        return $this;
+    }
+    
+    public function getType() {
+        return $this->type;
+    }
+    
+    
+    public function setType($type) {
+        if (in_array($type, $this->getTypes()) === false) {
+            throw new Exception\InvalidJobTypeException("Invalid type $type. Avilable types: ". join($this->getTypes(), ','));
+        }
+        $this->type = $type;    
+        return $this;
+    }
+
+
+    public function getCurrency() {
+        return $this->currency;
+    }
+    
+    public function setCurrency($currency) {
+        if (in_array($currency, $this->getCurrencies()) === false) {
+            throw new Exception\InvalidJobCurrencyException("Invalid currency $currency. Avilable currencies: ". join($this->getCurrencies(), ','));
+        }
+        $this->currency = $currency;    
         return $this;
     }
 }

@@ -5,8 +5,9 @@ Feature: Creating jobs as client
     So I can find contractors
 
   Scenario: Entering creation page unauthenticated
-    When I am on "/jobs/new"    
-    Then the response status code should not be 200
+    Given I do not follow redirects
+    When I go to "/jobs/new"    
+    Then I should be redirected to "/login"
 
   Scenario: Sending form with valid data
     Given users table is empty        

@@ -10,12 +10,11 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 class JobsController extends Controller
 {
     
-
+    /**
+     * @Secure(roles="IS_AUTHENTICATED_FULLY")           
+     */
     public function newAction(Request $request)
-    {                
-        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException();
-        }
+    {                        
         $job = new Job;
         $form = $this->createBoundObjectForm($job, 'new');    
 

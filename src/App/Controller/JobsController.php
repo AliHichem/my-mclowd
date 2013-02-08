@@ -24,7 +24,7 @@ class JobsController extends Controller
             return $this->redirectToRoute('app_jobs_show', array('id' => $job->getId()));
         }
 
-        return array('form' => $form->createView());
+        return ['form' => $form->createView()];
     }
 
     public function showAction(Request $request, $id)

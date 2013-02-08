@@ -1,5 +1,5 @@
 {
-    "hash": "a940e62ed9e9556974039cbd6b12a7eb",
+    "hash": "0a49dad75779b9ba59af19c048200515",
     "packages": [
         {
             "name": "doctrine/common",
@@ -846,6 +846,58 @@
                 "expression",
                 "secure",
                 "security"
+            ]
+        },
+        {
+            "name": "knplabs/doctrine-behaviors",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/KnpLabs/DoctrineBehaviors.git",
+                "reference": "956ff0551907f1e1d719f39c120bc4c9233f20e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/DoctrineBehaviors/zipball/956ff0551907f1e1d719f39c120bc4c9233f20e6",
+                "reference": "956ff0551907f1e1d719f39c120bc4c9233f20e6",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": ">=2.2",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "doctrine/mongodb-odm": "dev-master",
+                "doctrine/orm": ">=2.2"
+            },
+            "time": "2013-02-02 09:06:50",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Knp\\DoctrineBehaviors": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Knplabs",
+                    "homepage": "http://knplabs.com"
+                }
+            ],
+            "description": "Doctrine2 behavior traits",
+            "homepage": "http://knplabs.com",
+            "keywords": [
+                "Blameable",
+                "behaviors",
+                "doctrine2",
+                "filterable",
+                "softdeletable",
+                "timestampable",
+                "translatable",
+                "tree"
             ]
         },
         {
@@ -1704,6 +1756,7 @@
         "friendsofsymfony/advanced-encoder-bundle": 20,
         "pugx/multi-user-bundle": 20,
         "friendsofsymfony/message-bundle": 20,
+        "knplabs/doctrine-behaviors": 20,
         "phpspec/phpspec2": 20
     }
 }

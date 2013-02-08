@@ -22,4 +22,4 @@ Feature: Creating jobs as client
             
     And I press "Create Job"
     Then the response status code should be 200
-    And the response should contain "You have added a job"
+    And the response should contain "Job have been created"

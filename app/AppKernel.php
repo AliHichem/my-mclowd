@@ -20,6 +20,10 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\AdvancedEncoderBundle\FOSAdvancedEncoderBundle(),
 
+            new JMS\AopBundle\JMSAopBundle(),
+            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+
             new PUGX\MultiUserBundle\PUGXMultiUserBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\RadBundle\KnpRadBundle(),

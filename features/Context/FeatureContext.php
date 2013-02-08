@@ -76,6 +76,49 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^I am logged in as "([^"]*)" with password "([^"]*)"$/
+     */
+    public function iAmLoggedInAsWithPassword($email, $password)
+    {
+        $this->visit('/login');
+        $this->fillField('username', $email);
+        $this->fillField('password', $password);
+        $this->pressButton('Login');
+        $this->iAmLoggedInSystem();
+    }
+
+    /**
+     * @Given /^I do not follow redirects$/
+     */
+    public function iDoNotFollowRedirects()
+    {
+        $this->getSession()->getDriver()->getClient()->followRedirects(false);
+    }
+
+    /**
+     * @Then /^I should be redirected to "([^"]*)"$/
+     */
+    public function iShouldBeRedirectedTo($location = null)
+    {
+        $headers = $this->getSession()->getResponseHeaders();
+
+        $redirectComponents = parse_url($headers['Location']);
+        
+        $client = $this
+            ->getSession()
+            ->getDriver()
+            ->getClient()
+        ;
+
+        if ($redirectComponents['path'] !== $location) {
+            throw new Exception("Redirecting to ". $redirectComponents['path'] . ". Expected $location");            
+        }
+                       
+        $client->followRedirects(true);
+        $client->followRedirect(true);            
+    }
+
+    /**
      * Sets Kernel instance.
      *
      * @param KernelInterface $kernel HttpKernel instance

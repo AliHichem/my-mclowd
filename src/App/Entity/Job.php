@@ -3,16 +3,19 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Exception;
-
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * @ORM\Entity
  * @ORM\Table(name="jobs")
  */
 class Job {
 
+    use ORMBehaviors\Timestampable\Timestampable,                
+        ORMBehaviors\Sluggable\Sluggable
+    ;
+
     const TYPE_FIXED = 'fixed';
     const TYPE_HOURLY = 'hourly';
-
 
     protected static $types = array(self::TYPE_FIXED, self::TYPE_HOURLY);
     protected static $currencies = array('USD', 'EUR');
@@ -111,5 +114,10 @@ class Job {
         }
         $this->currency = $currency;    
         return $this;
+    }
+
+    public function getSluggableFields()
+    {
+        return ['id','name'];    
     }
 }

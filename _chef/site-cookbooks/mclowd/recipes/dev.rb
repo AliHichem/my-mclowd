@@ -17,3 +17,8 @@ php_pear "PHPUnit" do
   version "3.7.13"
   action :install
 end
+
+bash "install coffee" do
+  user "root"
+  code "npm install -g coffee-script"
+end

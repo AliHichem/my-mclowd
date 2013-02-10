@@ -1,3 +1,7 @@
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+    
 app:
     resource: "@App/Resources/config/routing.yml"
     type:     "rad_convention"

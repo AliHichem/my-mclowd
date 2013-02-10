@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\RadBundle\KnpRadBundle(),
 
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new MC\UserBundle\MCUserBundle(),
             new App\App(),
         );

@@ -1,5 +1,5 @@
 <?php
-namespace Acme\MessageBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,12 +21,12 @@ class MessageMetadata extends BaseMessageMetadata
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Acme\MessageBundle\Entity\Message", inversedBy="metadata")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Message", inversedBy="metadata")
      */
     protected $message;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User")
      */
     protected $participant;
 

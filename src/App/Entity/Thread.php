@@ -1,5 +1,5 @@
 <?php
-namespace Acme\MessageBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,17 +22,17 @@ class Thread extends BaseThread
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User")
      */
     protected $createdBy;
 
     /**
-     * @ORM\OneToMany(targetEntity="Acme\MessageBundle\Entity\Message", mappedBy="thread")
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="thread")
      */
     protected $messages;
 
     /**
-     * @ORM\OneToMany(targetEntity="Acme\MessageBundle\Entity\ThreadMetadata", mappedBy="thread", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="App\Entity\ThreadMetadata", mappedBy="thread", cascade={"all"})
      */
     protected $metadata;
 

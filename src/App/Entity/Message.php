@@ -1,7 +1,8 @@
 <?php
-namespace Acme\MessageBundle\Entity;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 use FOS\MessageBundle\Entity\Message as BaseMessage;
 use FOS\MessageBundle\Model\ThreadInterface;
@@ -21,19 +22,19 @@ class Message extends BaseMessage
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Acme\MessageBundle\Entity\Thread", inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Thread", inversedBy="messages")
      * @ORM\JoinColumn(name="thread_id", referencedColumnName="id")
      */
     protected $thread;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Acme\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $sender;
 
     /**
-     * @ORM\OneToMany(targetEntity="Acme\MessageBundle\Entity\MessageMetadata", mappedBy="message", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="App\Entity\MessageMetadata", mappedBy="message", cascade={"all"})
      */
     protected $metadata;
 

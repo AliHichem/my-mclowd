@@ -12,3 +12,6 @@ vendor/*
 _chef/tmp
 .vagrant
 .idea
+/nbproject
+/composer.phar
+/app/bootstrap.php.cache

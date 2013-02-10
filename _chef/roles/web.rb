@@ -12,7 +12,8 @@ run_list(
   "recipe[php]",  
   "recipe[beanstalkd]",
   "recipe[mclowd]",
-  "recipe[mysql::client]"  
+  "recipe[mysql::client]",
+  "recipe[mclowd::dev]"
 )
 
 default_attributes(

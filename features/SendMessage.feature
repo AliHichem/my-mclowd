@@ -19,7 +19,5 @@ Feature: Send Message
             | message[body]                   | Testing  the send message function |
     When I press ""
     Then the response status code should be 200
-
-  Scenario: Message was sent
-    Given I go to "/messages/sent"
-    Then the response should contain "Testing the send message function"
+    When I go to "/messages/sent"
+    Then the response should contain "Test message"

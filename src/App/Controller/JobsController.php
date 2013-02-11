@@ -14,10 +14,7 @@ class JobsController extends Controller
      * @Secure(roles="IS_AUTHENTICATED_FULLY")           
      */
     public function newAction(Request $request)
-    {                        
-
-        $root = $this->getEntityManager()->getRepository('App:JobCategory')->getTree();
-        //$this->getRepository('App:JobCategory')
+    {                                        
         $job = new Job;
         $form = $this->createBoundObjectForm($job, 'new');    
 

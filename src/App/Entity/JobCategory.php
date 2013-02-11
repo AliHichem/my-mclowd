@@ -43,4 +43,9 @@ class JobCategory implements ORMBehaviors\Tree\NodeInterface, \ArrayAccess
     {
         $this->name = $value;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

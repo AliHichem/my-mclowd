@@ -54,6 +54,14 @@ class Job {
      */     
     protected $currency = 'USD';
 
+    /**
+     * @ORM\ManyToOne(targetEntity="JobCategory", inversedBy="jobs")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
+     *
+     * @var JobCategory $category
+     */
+    protected $category;
+
     public function getId()
     {
         return $this->id;
@@ -119,5 +127,14 @@ class Job {
     public function getSluggableFields()
     {
         return ['id','name'];    
+    }
+
+    public function getCategory() {
+        return $this->category;
+    }
+    
+    public function setCategory($category) {
+        $this->category = $category;    
+        return $this;
     }
 }

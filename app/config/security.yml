@@ -23,6 +23,19 @@ security:
             logout:       true
             anonymous:    true
 
+        secured_area:
+            oauth:
+                resource_owners:
+                    facebook:           "/login/check-facebook"
+                    google:             "/login/check-google"
+                    my_custom_provider: "/login/check-custom"
+                    my_github:          "/login/check-github"
+                login_path:        /login
+                failure_path:      /login
+
+                oauth_user_provider:
+                    service: hwi_oauth.user.provider.fosub_bridge
+
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register/client, role: IS_AUTHENTICATED_ANONYMOUSLY }

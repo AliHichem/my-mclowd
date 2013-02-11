@@ -1,5 +1,5 @@
 {
-    "hash": "0a49dad75779b9ba59af19c048200515",
+    "hash": "a1ca404879195b9c435d6eb6dae13681",
     "packages": [
         {
             "name": "doctrine/common",
@@ -425,6 +425,60 @@
             ]
         },
         {
+            "name": "friendsofsymfony/message-bundle",
+            "version": "dev-master",
+            "target-dir": "FOS/MessageBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSMessageBundle.git",
+                "reference": "da743d0d90409181ddbcb82cf80412c4f05771a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSMessageBundle/zipball/da743d0d90409181ddbcb82cf80412c4f05771a1",
+                "reference": "da743d0d90409181ddbcb82cf80412c4f05771a1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "2.1.*",
+                "symfony/twig-bundle": "2.1.*"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "dev-master",
+                "doctrine/mongodb-odm-bundle": "dev-master"
+            },
+            "time": "2013-02-03 02:14:05",
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "FOS\\MessageBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com",
+                    "homepage": "http://ornicar.github.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSMessageBundle/contributors"
+                }
+            ],
+            "description": "Provides user-to-user messaging features for your Symfony2 application.",
+            "homepage": "https://github.com/FriendsOfSymfony/FOSMessageBundle",
+            "keywords": [
+                "message",
+                "messaging",
+                "symfony"
+            ]
+        },
+        {
             "name": "friendsofsymfony/user-bundle",
             "version": "dev-master",
             "target-dir": "FOS/UserBundle",
@@ -500,18 +554,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker",
-                "reference": "85e375431996868ff2c8c866b47eac57d43e7c59"
+                "reference": "9fe1a478ad9b7f3ecf8a09e27e01127a37c5bd36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/85e375431996868ff2c8c866b47eac57d43e7c59",
-                "reference": "85e375431996868ff2c8c866b47eac57d43e7c59",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/9fe1a478ad9b7f3ecf8a09e27e01127a37c5bd36",
+                "reference": "9fe1a478ad9b7f3ecf8a09e27e01127a37c5bd36",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
-            "time": "2013-02-04 09:56:26",
+            "time": "2013-02-06 07:43:50",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -537,6 +591,88 @@
                 "data",
                 "faker",
                 "fixtures"
+            ]
+        },
+        {
+            "name": "hwi/oauth-bundle",
+            "version": "dev-master",
+            "target-dir": "HWI/Bundle/OAuthBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hwi/HWIOAuthBundle",
+                "reference": "461cdae22f81836a0722f4f3c596b598827bd9cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/461cdae22f81836a0722f4f3c596b598827bd9cd",
+                "reference": "461cdae22f81836a0722f4f3c596b598827bd9cd",
+                "shasum": ""
+            },
+            "require": {
+                "kriswallsmith/buzz": "0.7",
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": ">=2.0,<2.3-dev",
+                "symfony/security-bundle": ">=2.0,<2.3-dev"
+            },
+            "require-dev": {
+                "doctrine/orm": ">=2.1,<2.4-dev",
+                "friendsofsymfony/user-bundle": ">=1.2,<2.0-dev",
+                "symfony/twig-bundle": ">=2.0,<2.3-dev",
+                "symfony/validator": ">=2.0,<2.3-dev"
+            },
+            "suggest": {
+                "doctrine/doctrine-bundle": "to use Doctrine user provider",
+                "friendsofsymfony/user-bundle": "to connect FOSUB with this bundle",
+                "symfony/twig-bundle": "to use the Twig hwi_oauth_* functions"
+            },
+            "time": "2013-02-09 21:51:17",
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "HWI\\Bundle\\OAuthBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Geoffrey Bachelet",
+                    "email": "geoffrey.bachelet@gmail.com",
+                    "homepage": "https://github.com/ubermuda"
+                },
+                {
+                    "name": "Alexander",
+                    "email": "alexander@hardware.info"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/hwi/HWIOAuthBundle/contributors"
+                }
+            ],
+            "description": "Support for authenticating users via oauth in Symfony2.",
+            "homepage": "http://github.com/hwi/HWIOAuthBundle",
+            "keywords": [
+                "facebook",
+                "firewall",
+                "github",
+                "google",
+                "linkedin",
+                "oauth",
+                "oauth1",
+                "oauth2",
+                "security",
+                "sensio connect",
+                "twitter",
+                "vkontakte",
+                "windows live",
+                "yahoo"
             ]
         },
         {
@@ -853,23 +989,23 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/KnpLabs/KnpRadBundle.git",
-                "reference": "e3fc7daa2f3ce2a34f42e8abfc55c0a2a80c69d5"
+                "reference": "55b1ab4bb80397a9d9c2d5b5988e105e57f2a91b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpRadBundle/zipball/e3fc7daa2f3ce2a34f42e8abfc55c0a2a80c69d5",
-                "reference": "e3fc7daa2f3ce2a34f42e8abfc55c0a2a80c69d5",
+                "url": "https://api.github.com/repos/KnpLabs/KnpRadBundle/zipball/55b1ab4bb80397a9d9c2d5b5988e105e57f2a91b",
+                "reference": "55b1ab4bb80397a9d9c2d5b5988e105e57f2a91b",
                 "shasum": ""
             },
             "require": {
                 "fzaninotto/faker": "*",
                 "nelmio/alice": "*",
-                "php": ">=5.3.3",
+                "php": ">=5.3.9",
                 "symfony/symfony": "2.1.*"
             },
             "require-dev": {
                 "doctrine/doctrine-fixtures-bundle": "dev-master",
-                "doctrine/orm": ">=2.2.3,<2.4-dev",
+                "doctrine/orm": ">=2.2.3,<3.0",
                 "phpspec/phpspec2": "dev-develop",
                 "symfony/swiftmailer-bundle": "2.1.*",
                 "twig/twig": ">=1.11.0,<2.0"
@@ -881,7 +1017,7 @@
                 "symfony/security": "To take advantage of the Rad User Interface",
                 "symfony/swiftmailer-bundle": "To take advantage of the Rad mailer logger in your tests"
             },
-            "time": "2013-02-05 15:16:14",
+            "time": "2013-02-08 11:03:57",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -906,12 +1042,12 @@
             "source": {
                 "type": "git",
                 "url": "http://github.com/kriswallsmith/assetic.git",
-                "reference": "faf3b245977d8bc06c9da4710dbcad37756993a9"
+                "reference": "v1.1.0-alpha2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/faf3b245977d8bc06c9da4710dbcad37756993a9",
-                "reference": "faf3b245977d8bc06c9da4710dbcad37756993a9",
+                "url": "https://api.github.com/repos/kriswallsmith/assetic/zipball/v1.1.0-alpha2",
+                "reference": "v1.1.0-alpha2",
                 "shasum": ""
             },
             "require": {
@@ -968,6 +1104,51 @@
                 "assets",
                 "compression",
                 "minification"
+            ]
+        },
+        {
+            "name": "kriswallsmith/buzz",
+            "version": "v0.7",
+            "source": {
+                "type": "git",
+                "url": "http://github.com/kriswallsmith/Buzz.git",
+                "reference": "v0.7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/kriswallsmith/Buzz/zipball/v0.7",
+                "reference": "v0.7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "suggest": {
+                "ext-curl": "*"
+            },
+            "time": "2012-06-25 12:01:38",
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Buzz": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Lightweight HTTP client",
+            "homepage": "https://github.com/kriswallsmith/Buzz",
+            "keywords": [
+                "curl",
+                "http client"
             ]
         },
         {
@@ -1033,12 +1214,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phiamo/MopaBootstrapBundle.git",
-                "reference": "554be9780a71fd02a992a9bc44f384d050aed8b1"
+                "reference": "0bf383047874cee11baaa6e0ec5032898aadf8a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/554be9780a71fd02a992a9bc44f384d050aed8b1",
-                "reference": "554be9780a71fd02a992a9bc44f384d050aed8b1",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/0bf383047874cee11baaa6e0ec5032898aadf8a5",
+                "reference": "0bf383047874cee11baaa6e0ec5032898aadf8a5",
                 "shasum": ""
             },
             "require": {
@@ -1052,7 +1233,7 @@
                 "knplabs/knp-paginator-bundle": "dev-master",
                 "twitter/bootstrap": "2.0.*"
             },
-            "time": "2013-02-01 14:47:58",
+            "time": "2013-02-09 19:27:49",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -1512,12 +1693,12 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/symfony/symfony.git",
-                "reference": "3e2ff71b7c24c0d1bfff02f94dc846f58fd9e97a"
+                "reference": "e0637fa9b75e9a74e6a23dd0167cf74ee9518403"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/3e2ff71b7c24c0d1bfff02f94dc846f58fd9e97a",
-                "reference": "3e2ff71b7c24c0d1bfff02f94dc846f58fd9e97a",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/e0637fa9b75e9a74e6a23dd0167cf74ee9518403",
+                "reference": "e0637fa9b75e9a74e6a23dd0167cf74ee9518403",
                 "shasum": ""
             },
             "require": {
@@ -1566,7 +1747,7 @@
                 "monolog/monolog": ">=1.0,<1.3-dev",
                 "propel/propel1": "dev-master"
             },
-            "time": "2013-02-04 18:15:54",
+            "time": "2013-02-07 22:54:50",
             "type": "library",
             "autoload": {
                 "psr-0": {
@@ -1647,18 +1828,18 @@
             "source": {
                 "type": "git",
                 "url": "git://github.com/fabpot/Twig.git",
-                "reference": "c6445fb5cd6823f7bd65108a717064957b6eafd5"
+                "reference": "72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/c6445fb5cd6823f7bd65108a717064957b6eafd5",
-                "reference": "c6445fb5cd6823f7bd65108a717064957b6eafd5",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f",
+                "reference": "72c8bb73e90cf6d2e992b01ab508f7fc13e38c8f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2.4"
             },
-            "time": "2013-02-01 09:44:45",
+            "time": "2013-02-09 18:37:02",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1701,6 +1882,7 @@
         "knplabs/rad-bundle": 20,
         "friendsofsymfony/advanced-encoder-bundle": 20,
         "pugx/multi-user-bundle": 20,
+        "friendsofsymfony/message-bundle": 20,
         "knplabs/doctrine-behaviors": 20,
         "phpspec/phpspec2": 20
     }

@@ -22,11 +22,13 @@ class MessageMetadata extends BaseMessageMetadata
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Message", inversedBy="metadata")
+     * @ORM\JoinColumn(name="message_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $message;
 
     /**
      * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $participant;
 

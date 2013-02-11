@@ -24,13 +24,13 @@ class Message extends BaseMessage
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Thread", inversedBy="messages")
-     * @ORM\JoinColumn(name="thread_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="thread_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $thread;
 
     /**
      * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $sender;
 

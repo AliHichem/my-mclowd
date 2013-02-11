@@ -23,6 +23,7 @@ class Thread extends BaseThread
 
     /**
      * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $createdBy;
 

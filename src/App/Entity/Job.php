@@ -5,7 +5,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Exception;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="jobs")
  */
 class Job {

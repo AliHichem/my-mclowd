@@ -15,6 +15,9 @@ class JobsController extends Controller
      */
     public function newAction(Request $request)
     {                        
+
+        $root = $this->getEntityManager()->getRepository('App:JobCategory')->getTree();
+        //$this->getRepository('App:JobCategory')
         $job = new Job;
         $form = $this->createBoundObjectForm($job, 'new');    
 

@@ -26,7 +26,8 @@
         "friendsofsymfony/advanced-encoder-bundle": "dev-master",
         "pugx/multi-user-bundle": "dev-master",
         "jms/security-extra-bundle": "1.2.*",
-        "knplabs/doctrine-behaviors": "dev-master"
+        "knplabs/doctrine-behaviors": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "dev-master"
     },
     "require-dev": {
         "behat/behat": "2.4.*",

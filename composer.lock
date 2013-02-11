@@ -1,5 +1,5 @@
 {
-    "hash": "0a49dad75779b9ba59af19c048200515",
+    "hash": "379e1bcd15e76d810957c3fc0eef2c27",
     "packages": [
         {
             "name": "doctrine/common",
@@ -1697,6 +1697,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "doctrine/doctrine-fixtures-bundle": 20,
         "mopa/bootstrap-bundle": 20,
         "knplabs/rad-bundle": 20,
         "friendsofsymfony/advanced-encoder-bundle": 20,

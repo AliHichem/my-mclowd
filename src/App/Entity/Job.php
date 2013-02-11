@@ -4,6 +4,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Exception;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="jobs")
@@ -11,7 +12,8 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 class Job {
 
     use ORMBehaviors\Timestampable\Timestampable,                
-        ORMBehaviors\Sluggable\Sluggable
+        ORMBehaviors\Sluggable\Sluggable,
+        \App\Behaviours\Ownable
     ;
 
     const TYPE_FIXED = 'fixed';
@@ -53,6 +55,15 @@ class Job {
      * @Assert\Choice(callback = "getCurrencies")     
      */     
     protected $currency = 'USD';
+
+    /**
+     * Trait property here:
+     * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     *
+     * @var User $user
+     */
+    protected $user;
 
     public function getId()
     {

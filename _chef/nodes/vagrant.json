@@ -8,6 +8,7 @@
     "server_debian_password": "mclowd1"
   },
   "run_list": [
-    "role[web]"
+    "role[web]",
+    "role[dev]"
   ]
 }

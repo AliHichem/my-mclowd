@@ -17,13 +17,13 @@ class ProposalsController extends Controller
     public function newAction(Request $request)
     {
         $proposal = new Proposal;
-        $proposal->setJob($this->getEntityManager()->getReference('App:Job', $request->get('job')));
-        $form = $this->createBoundObjectForm($proposal, 'new');
+        $form = $this->createObjectForm($proposal, 'new', array('em' => $this->getDoctrine()->getEntityManager()));
 
         if ($form->isBound() && $form->isValid()) {
+            $proposal->setJob($this->getEntityManager()->getReference('App:Job', $form->getData->get('job')));
             $this->persist($proposal, true);
             $this->addFlash('success', 'Proposal has been sent');
-            return $this->redirectToRoute('app_proposals_show', array('id' => $job->getId()));
+            return $this->redirectToRoute('app_proposals_show', array('id' => $proposal->getJob()->getId()));
         }
 
         return ['form' => $form->createView()];

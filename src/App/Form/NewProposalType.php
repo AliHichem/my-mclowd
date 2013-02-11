@@ -17,6 +17,8 @@ class NewProposalType extends AbstractType
 
         $builder
             ->add('description')
+            ->add('hours')
+            ->add('duration')
             ->add('rate')
             ->add(
                     $builder->create('job', 'hidden')

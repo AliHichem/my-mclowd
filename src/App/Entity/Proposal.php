@@ -42,6 +42,17 @@ class Proposal {
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      */
+    protected $hours;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $duration;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     */
     protected $rate;
 
     /**
@@ -74,6 +85,24 @@ class Proposal {
 
     public function getRate() {
         return $this->rate;
+    }
+
+    public function setHours($hours) {
+        $this->hours = $hours;
+        return $this;
+    }
+
+    public function getHours() {
+        return $this->hours;
+    }
+
+    public function setDuration($duration) {
+        $this->duration = $duration;
+        return $this;
+    }
+
+    public function getduration() {
+        return $this->duration;
     }
 
     public function setJob(Job $job) {

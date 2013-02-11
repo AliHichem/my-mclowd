@@ -14,6 +14,9 @@ use FOS\MessageBundle\Model\MessageMetadata as ModelMessageMetadata;
  */
 class Message extends BaseMessage
 {
+
+    use ORMBehaviors\Timestampable\Timestampable;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

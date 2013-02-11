@@ -21,3 +21,8 @@ Feature: Send Message
     Then the response status code should be 200
     When I go to "/messages/sent"
     Then the response should contain "Test message"
+    Then I logout
+    Given I am logged in as "defrag" with password "12345"
+    When I am on "/messages"
+    And I press "delete"
+    Then the response status code should be 200

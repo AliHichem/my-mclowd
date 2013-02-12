@@ -1,0 +1,18 @@
+hwi_oauth:
+    resource_owners:
+      facebook:
+        type:                facebook
+        client_id:           <client_id>
+        client_secret:       <client_secret>
+        scope:               ""
+    # name of the firewall the oauth bundle is active in
+    firewall_name: secured_area
+
+    # optional FOSUserBundle integration
+    fosub:
+      # try 30 times to check if a username is available (foo, foo1, foo2 etc)
+      username_iterations: 30
+
+      # mapping between resource owners (see below) and properties
+      properties:
+        facebook: facebookId

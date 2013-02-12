@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+<form action="{{ path('app_proposals_create') }}" method="POST">
+    {{ form_widget(form) }}
+
+    <input type="submit" value="Make Proposal" />
+
+</form>
+
+{% endblock %}

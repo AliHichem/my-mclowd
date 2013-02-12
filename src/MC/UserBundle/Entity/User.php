@@ -4,6 +4,7 @@ namespace MC\UserBundle\Entity;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\AdvancedEncoderBundle\Security\Encoder\EncoderAwareInterface;
+use FOS\MessageBundle\Model\ParticipantInterface;
 
 /**
  * @ORM\Entity
@@ -12,7 +13,7 @@ use FOS\AdvancedEncoderBundle\Security\Encoder\EncoderAwareInterface;
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"client" = "Client", "contractor" = "Contractor"})
  */
-abstract class User extends BaseUser implements EncoderAwareInterface
+abstract class User extends BaseUser implements EncoderAwareInterface, ParticipantInterface
 {
     /**
      * @ORM\Id

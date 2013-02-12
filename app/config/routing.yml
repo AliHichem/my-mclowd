@@ -1,3 +1,7 @@
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+    
 app:
     resource: "@App/Resources/config/routing.yml"
     type:     "rad_convention"
@@ -11,3 +15,7 @@ fos_user_register:
 
 mc_user:
     resource: "@MCUserBundle/Resources/config/routing.yml"    
+
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /messages    

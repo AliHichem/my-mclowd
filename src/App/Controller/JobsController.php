@@ -9,27 +9,27 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class JobsController extends Controller
 {
-    
+
     /**
-     * @Secure(roles="IS_AUTHENTICATED_FULLY")           
+     * @Secure(roles="IS_AUTHENTICATED_FULLY")
      */
     public function newAction(Request $request)
-    {                                        
+    {
         $job = new Job;
-        $form = $this->createBoundObjectForm($job, 'new');    
+        $form = $this->createBoundObjectForm($job, 'new');
 
         if ($form->isBound() && $form->isValid()) {            
             $this->persist($job, true);
             $this->addFlash('success', 'Job have been created');
-            return $this->redirectToRoute('app_jobs_show', array('id' => $job->getId()));
+            return $this->redirectToRoute('app_jobs_show', array('id' => $job->getSlug()));
         }
 
         return ['form' => $form->createView()];
     }
 
     public function showAction(Request $request, $id)
-    {        
-        $job = $this->findOr404('App\Entity\Job', array('id' => $id));
+    {
+        $job = $this->findOr404('App\Entity\Job', array('slug' => $id));
         return compact('job');
     }
 

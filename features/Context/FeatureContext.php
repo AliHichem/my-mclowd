@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Doctrine\Common\Util\Inflector;
 use Behat\MinkExtension\Context\MinkContext;
 
-use App\Entity,
+use App\Entity\Job,
     MC\UserBundle\Entity\User,
     MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor;
@@ -25,7 +25,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
 {
     private $kernel;
 
-    
+
     /**
      * @Given /^users table is empty$/
      */
@@ -51,19 +51,37 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
 
                 case 'contractor':
                     $user = new Client;
-                    break;                    
-                
+                    break;
+
                 default:
-                    throw new Exception("User type not supported");                    
+                    throw new Exception("User type not supported");
                     break;
             }
             $user->setUsername($row['username']);
             $user->setEmail($row['email']);
             $user->setPlainPassword($row['password']);
             $user->setEnabled(true);
-            $this->getContainer()->get('fos_user.user_manager')->updateUser($user);                  
+            $this->getContainer()->get('fos_user.user_manager')->updateUser($user);
         }
     }
+
+    /**
+     * @Given /^the following jobs exist:$/
+     */
+    public function theFollowingJobsExist(TableNode $table)
+    {
+        $hash = $table->getHash();
+        $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        foreach ($hash as $row) {
+            $job = new Job;
+
+            $job->setName($row['name']);
+            $job->setDescription($row['description']);
+            $em->persist($job);
+        }
+        $em->flush();
+    }
+
 
     /**
      * @Then /^I am logged in system$/
@@ -72,8 +90,17 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     {
         if ($this->getContainer()->get('security.context')->getToken()->getUser() instanceof User !== true) {
             throw new Exception("Security token is:\n" . $this->output);
-        }        
+        }
     }
+
+    /**
+     * @Then /^I logout$/
+     */
+    public function iLogout()
+    {
+        $this->visit('/logout');
+    }
+
 
     /**
      * @Given /^I am logged in as "([^"]*)" with password "([^"]*)"$/
@@ -103,7 +130,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         $headers = $this->getSession()->getResponseHeaders();
 
         $redirectComponents = parse_url($headers['Location']);
-        
+
         $client = $this
             ->getSession()
             ->getDriver()
@@ -111,11 +138,11 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         ;
 
         if ($redirectComponents['path'] !== $location) {
-            throw new Exception("Redirecting to ". $redirectComponents['path'] . ". Expected $location");            
+            throw new Exception("Redirecting to ". $redirectComponents['path'] . ". Expected $location");
         }
-                       
+
         $client->followRedirects(true);
-        $client->followRedirect(true);            
+        $client->followRedirect(true);
     }
 
     /**
@@ -130,7 +157,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
 
     /**
      * Returns Container instance.
-     * 
+     *
      * @return ContainerInterface
      */
     private function getContainer()
@@ -140,11 +167,11 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
 
     /**
      * Generates url with Router.
-     * 
+     *
      * @param string  $route
      * @param array   $parameters
      * @param Boolean $absolute
-     * 
+     *
      * @return string
      */
     private function generateUrl($route, array $parameters = array(), $absolute = false)
@@ -154,10 +181,10 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
 
     /**
      * Generate page url from name and parameters.
-     * 
+     *
      * @param string $page
      * @param array  $parameters
-     * 
+     *
      * @return string
      */
     private function generatePageUrl($page, array $parameters = array())
@@ -176,4 +203,6 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
 
         return $this->getMinkParameter('base_url').$this->generateUrl($route, $parameters);
     }
+
+
 }

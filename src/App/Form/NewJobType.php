@@ -15,7 +15,7 @@ class NewJobType extends AbstractType
             ->add('description')
             ->add('type', 'choice', array('choices' =>  array_combine(Job::getTypes(), Job::getTypes())))
             ->add('currency', 'choice', array('choices' => array_combine(Job::getCurrencies(), Job::getCurrencies())))
-            ->add('category')
+            ->add('category', 'job_category', ['empty_value' => 'Choose a category'])
         ;        
 
     }

@@ -32,8 +32,18 @@
 
             <h2>Mclowd Markretplace</h2>
 
-
-             {% if  app.session.flashbag.count() > 0 %}
+            <ul class="nav nav-pills">
+                {% if is_granted("IS_AUTHENTICATED_FULLY") %}     
+                    <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>            
+                {% else %}
+                    <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>            
+                    <li><a href="{{ path('client_registration') }}">Register as client</a></li>                                
+                    <li><a href="{{ path('contractor_registration') }}">Register as contractor</a></li>
+                {% endif %}
+                <li><a href="{{ path('app_jobs_new') }}">Add new job</a></li>            
+                <li><a href="{{ path('app_jobs_index') }}">Browse jobs</a></li>
+            </ul>
+            {% if  app.session.flashbag.count() > 0 %}
                 <section id="flash-messages">
                 {% for type, flashMessages in app.session.flashbag.all() %}
                     {% for flashMessage in flashMessages %}

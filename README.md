@@ -7,6 +7,8 @@ MCLOWD
  4. vagrant up
  5. Navigate to http://192.168.33.10/app_dev.php like a gangster :) (make sure your local port 80 is free)
 
+Optionally:
+    app/console doctrine:fixtures:load --fixtures=src/App/DataFixtures/
 
 Notes
 When u vagrant ssh to server, app is located at /var/www/mcloud

@@ -6,7 +6,7 @@ use App\Exception;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="jobs")
  */
 class Job {
@@ -57,6 +57,14 @@ class Job {
     protected $currency = 'USD';
 
     /**
+     * @ORM\ManyToOne(targetEntity="JobCategory", inversedBy="jobs")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
+     *
+     * @var JobCategory $category
+     */
+    protected $category;
+    
+    /*
      * Trait property here:
      * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
@@ -130,5 +138,14 @@ class Job {
     public function getSluggableFields()
     {
         return ['id','name'];    
+    }
+
+    public function getCategory() {
+        return $this->category;
+    }
+    
+    public function setCategory($category) {
+        $this->category = $category;    
+        return $this;
     }
 }

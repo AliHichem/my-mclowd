@@ -1,5 +1,5 @@
 {
-    "hash": "a1ca404879195b9c435d6eb6dae13681",
+    "hash": "30f7a8899ad2e529e1402b446d51a175",
     "packages": [
         {
             "name": "doctrine/common",
@@ -1878,12 +1878,13 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "doctrine/doctrine-fixtures-bundle": 20,
         "mopa/bootstrap-bundle": 20,
         "knplabs/rad-bundle": 20,
         "friendsofsymfony/advanced-encoder-bundle": 20,
         "pugx/multi-user-bundle": 20,
-        "friendsofsymfony/message-bundle": 20,
         "knplabs/doctrine-behaviors": 20,
+        "friendsofsymfony/message-bundle": 20,
         "phpspec/phpspec2": 20
     }
 }

@@ -18,7 +18,7 @@ class JobsController extends Controller
         $job = new Job;
         $form = $this->createBoundObjectForm($job, 'new');
 
-        if ($form->isBound() && $form->isValid()) {
+        if ($form->isBound() && $form->isValid()) {            
             $this->persist($job, true);
             $this->addFlash('success', 'Job have been created');
             return $this->redirectToRoute('app_jobs_show', array('id' => $job->getSlug()));

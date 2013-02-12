@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Doctrine\Common\Util\Inflector;
 use Behat\MinkExtension\Context\MinkContext;
 
-use App\Entity,
+use App\Entity\Job,
     MC\UserBundle\Entity\User,
     MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor;
@@ -64,6 +64,24 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
             $this->getContainer()->get('fos_user.user_manager')->updateUser($user);
         }
     }
+
+    /**
+     * @Given /^the following jobs exist:$/
+     */
+    public function theFollowingJobsExist(TableNode $table)
+    {
+        $hash = $table->getHash();
+        $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        foreach ($hash as $row) {
+            $job = new Job;
+
+            $job->setName($row['name']);
+            $job->setDescription($row['description']);
+            $em->persist($job);
+        }
+        $em->flush();
+    }
+
 
     /**
      * @Then /^I am logged in system$/
@@ -185,4 +203,6 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
 
         return $this->getMinkParameter('base_url').$this->generateUrl($route, $parameters);
     }
+
+
 }

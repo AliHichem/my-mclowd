@@ -29,6 +29,8 @@ twig:
     form:
         resources:
             - 'App:Form:fields.html.twig'
+    globals:
+        settings: '@app.services.settings'
 
 # Assetic Configuration
 assetic:

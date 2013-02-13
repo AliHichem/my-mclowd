@@ -4,5 +4,10 @@ homepage:
     pattern: /
     defaults: { _controller: FrameworkBundle:Template:template, template: 'App::homepage.html.twig' }
 
+settings:
+    pattern: /admin/settings
+    defaults: { _controller: App:Settings:list, template: 'App:Settings:list.html.twig'}
+
 App:Jobs: ~
 App:Proposals: ~
+App:Settings: ~

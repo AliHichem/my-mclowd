@@ -6,3 +6,9 @@ services:
         arguments: ['@service_container']
         tags:
             - { name: doctrine.event_subscriber }
+    app.services.settings:
+        class:      "App\Services\Settings"
+        public:     true
+        arguments:  ['@doctrine.orm.entity_manager']
+        calls:
+            - [setFormFactory, ['@form.factory']]

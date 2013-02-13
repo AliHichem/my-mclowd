@@ -1,0 +1,4 @@
+<form action="{{ path('settings') }}" method="POST" {{ form_enctype(settingsForm) }}>
+    {{ form_widget(settingsForm) }}
+    <button>Submit</button>
+</form>

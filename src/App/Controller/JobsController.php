@@ -13,6 +13,7 @@ class JobsController extends Controller
     public function indexAction(Request $request)
     {
         $finder = $this->get('foq_elastica.finder.mclowd_website.job');
+        $finder->find('bob');
     }
 
     /**

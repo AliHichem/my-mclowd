@@ -1,6 +1,7 @@
 package "git"
 package "acl"
 package "php5-mysqlnd"
+package "php5-curl"
 #package "php5-intl"
 
 

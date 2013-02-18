@@ -19,7 +19,18 @@ class JobsController extends Controller
             ->bind($request->query->getIterator()->getArrayCopy())
         ;
 
-        return ['form' => $form->createView()];
+
+        $query = $request->query->get('query') ? $request->query->get('query') : '*';
+        
+        $paginator = $this->get('knp_paginator')
+            ->paginate(
+                $finder->createPaginatorAdapter($query),
+                $request->query->get('page', 1)
+            )
+        ;
+        
+
+        return ['form' => $form->createView(), 'paginator' => $paginator];
     }
 
     /**

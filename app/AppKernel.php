@@ -30,7 +30,8 @@ class AppKernel extends Kernel
             new PUGX\MultiUserBundle\PUGXMultiUserBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\RadBundle\KnpRadBundle(),
-
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new MC\UserBundle\MCUserBundle(),
             new App\App(),

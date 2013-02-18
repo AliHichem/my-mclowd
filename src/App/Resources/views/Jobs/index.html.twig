@@ -12,4 +12,16 @@
 
 </form>    
 
+
+{% for job in paginator %}
+
+    <div>
+        <h5>{{ job.name }}</h5>
+        <p>{{ job.description }}</p>
+    </div>
+{% else %}
+    <p>No results</p>
+{% endfor %} 
+
+
 {% endblock %}

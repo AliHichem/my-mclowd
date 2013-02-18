@@ -1,0 +1,21 @@
+foq_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    indexes:
+        mclowd_website:
+            client: default    
+            types:
+                job:
+                    mappings:
+                        name: { boost: 5, analyzer: snowball }
+                        description: { boost: 2, analyzer: snowball }
+                        type: { type: keyword }
+                        currency: {analyzer: keyword}
+                        createdAt: {type: date}
+                        hasImage: {type: boolean}
+                    persistence:
+                        driver: orm # orm, mongodb, propel are available
+                        model: App\Entity\Job
+                        provider: ~    
+                        finder: ~
+                        listener: ~

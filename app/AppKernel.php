@@ -21,6 +21,8 @@ class AppKernel extends Kernel
             new FOS\AdvancedEncoderBundle\FOSAdvancedEncoderBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
 
+            new FOQ\ElasticaBundle\FOQElasticaBundle(),
+
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),

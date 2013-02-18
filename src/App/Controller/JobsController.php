@@ -10,6 +10,11 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 class JobsController extends Controller
 {
 
+    public function indexAction(Request $request)
+    {
+        $finder = $this->get('foq_elastica.finder.mclowd_website.job');
+    }
+
     /**
      * @Secure(roles="IS_AUTHENTICATED_FULLY")
      */

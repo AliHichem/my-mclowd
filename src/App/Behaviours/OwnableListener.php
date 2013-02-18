@@ -9,6 +9,7 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata,
     Doctrine\ORM\Event\OnFlushEventArgs,
     Doctrine\ORM\Events,
     Doctrine\ORM\Event\LifecycleEventArgs,
+    Doctrine\ORM\Event\LoadClassMetadataEventArgs,
     Symfony\Component\DependencyInjection\ContainerInterface,
     Symfony\Component\Security\Core\User\UserInterface;
 
@@ -29,6 +30,27 @@ class OwnableListener implements EventSubscriber
         $this->container = $container;
     }
 
+    /**
+     *
+     * @param LoadClassMetadataEventArgs $eventArgs
+     */
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    {
+        $classMetadata = $eventArgs->getClassMetadata();
+
+        if (null === $classMetadata->reflClass) {
+            return;
+        }
+
+        if ($this->isEntitySupported($classMetadata)) {
+            if (!$classMetadata->hasAssociation('user')) {
+                $classMetadata->mapManyToOne([
+                    'fieldName'    => 'user',
+                    'targetEntity' => 'MC\UserBundle\Entity\User',
+                ]);
+            }
+        }
+    }
 
     public function updateUser(LifecycleEventArgs $args)
     {        
@@ -46,10 +68,10 @@ class OwnableListener implements EventSubscriber
 
                 $entity->setUser($sc->getToken()->getUser());                
 
-                $uow->propertyChanged($entity, 'user', $oldValue, $entity->getUser());                                
+                $uow->propertyChanged($entity, 'user', $oldValue, $entity->getUser());     
                 $uow->scheduleExtraUpdate($entity, [
-                    'user' => [$oldValue, $entity->getUser()],
-                ]);
+                    'user' => [null,  $sc->getToken()->getUser()],
+                ]);                                           
             }
         }
         
@@ -81,6 +103,6 @@ class OwnableListener implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return [Events::prePersist];
+        return [Events::prePersist, Events::loadClassMetadata];
     }
 }

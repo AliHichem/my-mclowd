@@ -4,6 +4,12 @@
 
 <h3>Search for jobs</h3>
 
+<form id="search_form" method="get" action="{{ path('app_jobs_index') }}" novalidate="novalidate">
 
+    {{ form_widget(form.query, { 'attr': {'class': 'text-input', 'placeholder': 'Search for tasks...'} }) }}
+
+    <input type="submit" value="Search"/>
+
+</form>    
 
 {% endblock %}

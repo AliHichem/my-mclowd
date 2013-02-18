@@ -6,6 +6,7 @@ use App\Form\Type\NewJobType;
 use Doctrine\Common\Persistence\PersistentObject;
 use Symfony\Component\HttpFoundation\Request;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use App\Form\SearchType;
 
 class JobsController extends Controller
 {
@@ -13,7 +14,12 @@ class JobsController extends Controller
     public function indexAction(Request $request)
     {
         $finder = $this->get('foq_elastica.finder.mclowd_website.job');
-        $finder->find('bob');
+        $form = $this
+            ->createForm(new SearchType())
+            ->bind($request->query->getIterator()->getArrayCopy())
+        ;
+
+        return ['form' => $form->createView()];
     }
 
     /**

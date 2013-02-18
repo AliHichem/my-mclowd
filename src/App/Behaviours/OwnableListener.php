@@ -31,7 +31,7 @@ class OwnableListener implements EventSubscriber
 
 
     public function updateUser(LifecycleEventArgs $args)
-    {
+    {        
         $em  = $args->getEntityManager();
         $uow = $em->getUnitOfWork();    
         $entity = $args->getEntity();            
@@ -39,12 +39,14 @@ class OwnableListener implements EventSubscriber
 
         $classMetadata = $em->getClassMetadata(get_class($entity));
         if ($this->isEntitySupported($classMetadata)) {
+
             $oldValue = $entity->getUser();
 
-            if ($oldValue instanceof UserInterface === false && $sc->getToken()->getUser() instanceof UserInterface === true) {
+            if ($sc->getToken()->getUser() instanceof UserInterface) {
 
                 $entity->setUser($sc->getToken()->getUser());                
-                $uow->propertyChanged($entity, 'user', $oldValue, $entity->getUser());
+
+                $uow->propertyChanged($entity, 'user', $oldValue, $entity->getUser());                                
                 $uow->scheduleExtraUpdate($entity, [
                     'user' => [$oldValue, $entity->getUser()],
                 ]);
@@ -55,13 +57,9 @@ class OwnableListener implements EventSubscriber
 
     public function prePersist(LifecycleEventArgs $eventArgs)
     {
-        $this->updateUser($eventArgs, false);
+        $this->updateUser($eventArgs);
     }
-
-    public function preUpdate(LifecycleEventArgs $eventArgs)
-    {
-        $this->updateUser($eventArgs, true);
-    }
+    
 
     /**
      * Checks whether provided entity is supported.
@@ -83,6 +81,6 @@ class OwnableListener implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return [Events::prePersist, Events::preUpdate];
+        return [Events::prePersist];
     }
 }

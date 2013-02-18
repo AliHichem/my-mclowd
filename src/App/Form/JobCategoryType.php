@@ -10,21 +10,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class JobCategoryType extends AbstractType implements ContainerAwareInterface
 {
-
     
-
-   public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
 
         $root = $this->container->get('app.entity.job_category_repository')->getTree();
-
         $choices = [];
-
         foreach ($root->getChildren() as $item) {
-            $choices[$item->getName()] = [];            
-            foreach ($item->getChildren() as $child) {
-                $choices[$item->getName()][$child->getId()] = $child->getName();
-            }
+            $choices[$item->getId()] = $item->getName();                        
         }
         $resolver->setDefaults([
             'choices' => $choices

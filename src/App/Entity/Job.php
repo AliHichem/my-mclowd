@@ -148,4 +148,15 @@ class Job {
         $this->category = $category;    
         return $this;
     }
+
+    public function setUser($user) {
+        $this->user = $user;
+        return $user;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
 }

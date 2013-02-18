@@ -14,7 +14,8 @@ Feature: Creating jobs as client
     And the following people exist:
         | username      | email                       | password      | type     |
         | defrag        | michal.dabrowski@trisoft.ro | 12345         | client   |
-    And I am logged in as "defrag" with password "12345"       
+    And I am logged in as "defrag" with password "12345"   
+    And the default categories are in database    
     When I am on "/jobs/new"    
         And I fill in the following:
             | new_job[name]              | Will work for food |

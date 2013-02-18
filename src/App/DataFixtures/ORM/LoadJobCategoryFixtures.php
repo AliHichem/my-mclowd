@@ -34,48 +34,17 @@ class LoadJobCategoryFixtures extends AbstractFixture implements OrderedFixtureI
         
         $manager->persist($root);
         $manager->flush();
-        
-        $category = new JobCategory();
-        $category->setId(2); // tree nodes need an id to construct path.
-        $category->setChildOf($root);
-        $category->setName('IT/Telecomunication');
+        $id = 2;
+        foreach (['Accounting', 'Bookkeeping', 'Data entry', 'Concierge', 'Tax', 'Audits'] as $name) {
+            $category = new JobCategory();
+            $category->setId($id); // tree nodes need an id to construct path.
+            $category->setChildOf($root);
+            $category->setName($name);
+            ++$id;
+            $manager->persist($category);
+        }
 
 
-        $child = new JobCategory;
-        $child->setId(3);
-        $child->setChildOf($category);
-        $child->setName('Programming');
-        $child2 = new JobCategory;
-        $child2->setId(4);
-        $child2->setChildOf($category);
-        $child2->setName('Web design');
-
-        $manager->persist($category);
-        $manager->persist($child);
-        $manager->persist($child2);
-        
-        
-        $manager->flush();
-
-        unset($child, $child2, $category);
-
-        $category = new JobCategory();
-        $category->setId(5); // tree nodes need an id to construct path.
-        $category->setChildOf($root);        
-        $category->setName('Legal');
-        $child = new JobCategory;
-        $child->setId(6);
-        $child->setChildOf($category);
-        $child->setName('Tax Law');
-        $child2 = new JobCategory;
-        $child2->setId(7);
-        $child2->setChildOf($category);
-        $child2->setName('Bankrupcy');
-
-
-        $manager->persist($child);
-        $manager->persist($child2);
-        $manager->persist($category);
         $manager->flush();
         
     }

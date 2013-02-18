@@ -1,0 +1,7 @@
+{
+  "id" : "users",
+  "users" : [
+    {"username" : "defrag", "password" : "mclowd1"}
+  ]
+}
+

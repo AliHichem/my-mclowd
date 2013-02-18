@@ -9,6 +9,11 @@
   },
   "run_list": [
     "role[web]",
-    "role[dev]"
-  ]
+    "role[dev]",
+    "role[search]"
+  ],
+  "elasticsearch" : {
+    "cluster_name" : "mclowd_test_elastic",
+    "mlockall"     : false
+  }
 }

@@ -30,7 +30,9 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "friendsofsymfony/message-bundle": "dev-master",
         "knplabs/doctrine-behaviors": "dev-master",
-        "hwi/oauth-bundle": "*"
+        "hwi/oauth-bundle": "*",
+        "exercise/elastica-bundle": "dev-master",
+        "knplabs/knp-paginator-bundle": "2.3.*@dev"
     },
     "require-dev": {
         "behat/behat": "2.4.*",

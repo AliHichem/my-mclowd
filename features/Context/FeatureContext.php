@@ -14,6 +14,7 @@ use Doctrine\Common\Util\Inflector;
 use Behat\MinkExtension\Context\MinkContext;
 
 use App\Entity\Job,
+    App\Entity\JobCategory,
     MC\UserBundle\Entity\User,
     MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor;
@@ -50,7 +51,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
                     break;
 
                 case 'contractor':
-                    $user = new Client;
+                    $user = new Contractor;
                     break;
 
                 default:
@@ -80,6 +81,32 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
             $em->persist($job);
         }
         $em->flush();
+    }
+
+    /**
+     * @Given /^the default categories are in database$/
+     */
+    public function theDefaultCategoriesAreInDatabase()
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        $em->createQuery('DELETE App:JobCategory')->execute();
+        $root = new JobCategory;
+        $root->setId(1);
+        $root->setName('Root');    
+        
+        $em->persist($root);
+        $em->flush();
+        $id = 2;
+        foreach (['Accounting', 'Bookkeeping', 'Data entry', 'Concierge', 'Tax', 'Audits'] as $name) {
+            $category = new JobCategory();
+            $category->setId($id); // tree nodes need an id to construct path.
+            $category->setChildOf($root);
+            $category->setName($name);
+            ++$id;
+            $em->persist($category);
+        }
+        $em->flush();
+  
     }
 
 

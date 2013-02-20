@@ -9,6 +9,7 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata,
     Doctrine\ORM\Event\OnFlushEventArgs,
     Doctrine\ORM\Events,
     Doctrine\ORM\Event\LifecycleEventArgs,
+    Doctrine\ORM\Event\LoadClassMetadataEventArgs,
     Symfony\Component\DependencyInjection\ContainerInterface,
     Symfony\Component\Security\Core\User\UserInterface;
 
@@ -29,9 +30,30 @@ class OwnableListener implements EventSubscriber
         $this->container = $container;
     }
 
+    /**
+     *
+     * @param LoadClassMetadataEventArgs $eventArgs
+     */
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    {
+        $classMetadata = $eventArgs->getClassMetadata();
+
+        if (null === $classMetadata->reflClass) {
+            return;
+        }
+
+        if ($this->isEntitySupported($classMetadata)) {
+            if (!$classMetadata->hasAssociation('user')) {
+                $classMetadata->mapManyToOne([
+                    'fieldName'    => 'user',
+                    'targetEntity' => 'MC\UserBundle\Entity\User',
+                ]);
+            }
+        }
+    }
 
     public function updateUser(LifecycleEventArgs $args)
-    {
+    {        
         $em  = $args->getEntityManager();
         $uow = $em->getUnitOfWork();    
         $entity = $args->getEntity();            
@@ -39,15 +61,17 @@ class OwnableListener implements EventSubscriber
 
         $classMetadata = $em->getClassMetadata(get_class($entity));
         if ($this->isEntitySupported($classMetadata)) {
+
             $oldValue = $entity->getUser();
 
-            if ($oldValue instanceof UserInterface === false && $sc->getToken()->getUser() instanceof UserInterface === true) {
+            if ($sc->getToken()->getUser() instanceof UserInterface) {
 
                 $entity->setUser($sc->getToken()->getUser());                
-                $uow->propertyChanged($entity, 'user', $oldValue, $entity->getUser());
+
+                $uow->propertyChanged($entity, 'user', $oldValue, $entity->getUser());     
                 $uow->scheduleExtraUpdate($entity, [
-                    'user' => [$oldValue, $entity->getUser()],
-                ]);
+                    'user' => [null,  $sc->getToken()->getUser()],
+                ]);                                           
             }
         }
         
@@ -55,13 +79,9 @@ class OwnableListener implements EventSubscriber
 
     public function prePersist(LifecycleEventArgs $eventArgs)
     {
-        $this->updateUser($eventArgs, false);
+        $this->updateUser($eventArgs);
     }
-
-    public function preUpdate(LifecycleEventArgs $eventArgs)
-    {
-        $this->updateUser($eventArgs, true);
-    }
+    
 
     /**
      * Checks whether provided entity is supported.
@@ -83,6 +103,6 @@ class OwnableListener implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return [Events::prePersist, Events::preUpdate];
+        return [Events::prePersist, Events::loadClassMetadata];
     }
 }

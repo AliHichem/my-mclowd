@@ -66,7 +66,7 @@ class Job {
     
     /*
      * Trait property here:
-     * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User", inversedBy="jobs")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *
      * @var User $user
@@ -148,4 +148,15 @@ class Job {
         $this->category = $category;    
         return $this;
     }
+
+    public function setUser($user) {
+        $this->user = $user;
+        return $user;
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
 }

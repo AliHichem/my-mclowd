@@ -21,6 +21,8 @@ class AppKernel extends Kernel
             new FOS\AdvancedEncoderBundle\FOSAdvancedEncoderBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
 
+            new FOQ\ElasticaBundle\FOQElasticaBundle(),
+
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
@@ -28,7 +30,8 @@ class AppKernel extends Kernel
             new PUGX\MultiUserBundle\PUGXMultiUserBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Knp\RadBundle\KnpRadBundle(),
-
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new MC\UserBundle\MCUserBundle(),
             new App\App(),

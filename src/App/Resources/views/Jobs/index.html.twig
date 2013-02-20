@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+<h3>Search for jobs</h3>
+
+<form id="search_form" method="get" action="{{ path('app_jobs_index') }}" novalidate="novalidate">
+
+    <div id="search-query">
+        {{ form_widget(form.query, { 'attr': {'class': 'text-input', 'placeholder': 'Search for tasks...'} }) }}
+
+        <input type="submit" id="search-button" value="Search"/>
+    
+    </div>
+</form>    
+
+
+{% for job in paginator %}
+
+    <div>
+        <h5>{{ job.name }}</h5>
+        <p>{{ job.description }}</p>
+    </div>
+{% else %}
+    <p>No results</p>
+{% endfor %} 
+
+{{ knp_pagination_render(paginator) }}
+
+
+{% endblock %}

@@ -20,7 +20,7 @@ class JobCategoryType extends AbstractType implements ContainerAwareInterface
             $choices[$item->getId()] = $item->getName();                        
         }
         $resolver->setDefaults([
-            'choices' => $choices
+            'choices' => $choices            
         ]);
     }
 

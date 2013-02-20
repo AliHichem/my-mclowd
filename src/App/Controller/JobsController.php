@@ -18,7 +18,6 @@ class JobsController extends Controller
             ->createForm(new SearchType())
             ->bind($request->query->getIterator()->getArrayCopy())
         ;
-
         
         $query = $this->getSearchQuery($request->query);
 
@@ -61,6 +60,18 @@ class JobsController extends Controller
         if ($params->get('categories')) {
             $es['filter']['and'][] = [
                 'terms' => ['categoryId' => $params->get('categories')]
+            ];
+        }
+
+        if ($params->get('type')) {
+            $es['filter']['and'][] = [
+                'terms' => ['type' => $params->get('type')]
+            ];
+        }
+
+        if ($params->get('currency')) {
+            $es['filter']['and'][] = [
+                'terms' => ['currency' => $params->get('currency')]
             ];
         }
              

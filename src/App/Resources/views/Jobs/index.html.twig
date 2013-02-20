@@ -18,7 +18,14 @@
     <div id ="search-sidebar">
         <h5>Filtering options</h5>
 
+        <h6>Categories</h6>
         {{ form_widget(form.categories) }}
+
+        <h6>Type</h6>
+        {{ form_widget(form.type) }}
+
+        <h6>Currency</h6>
+        {{ form_widget(form.currency) }}
 
         <input type="submit" id="filter-button" value="Filter"/>
     </div>

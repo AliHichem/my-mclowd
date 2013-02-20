@@ -10,7 +10,13 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('query')            
+            ->add('query')   
+            ->add('categories', 'entity', [
+                'class' => 'App:JobCategory',
+                'property' => 'name',
+                'multiple' => true,
+                'expanded' => true
+            ]);         
         ;
     }
 

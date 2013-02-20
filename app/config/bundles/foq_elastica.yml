@@ -13,6 +13,7 @@ foq_elastica:
                         currency: {analyzer: keyword}
                         categoryId: ~
                         createdAt: {type: date}
+                        isActive: {type: boolean}
                     persistence:
                         driver: orm # orm, mongodb, propel are available
                         model: App\Entity\Job

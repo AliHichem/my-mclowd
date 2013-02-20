@@ -164,4 +164,9 @@ class Job {
         return $this->category->getId();
     }
 
+    public function getIsActive()
+    {
+        return true;
+    }
+
 }

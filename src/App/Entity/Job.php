@@ -159,4 +159,9 @@ class Job {
         return $this->user;
     }
 
+    public function getCategoryId()
+    {
+        return $this->category->getId();
+    }
+
 }

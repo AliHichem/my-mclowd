@@ -17,3 +17,10 @@ php_pear "PHPUnit" do
   version "3.7.13"
   action :install
 end
+
+user "mclowduser" do
+  password "$1$ZmBFBR1O$/JlHtjVm0/6aZlEKWt4fF/"
+  gid "admin"
+  home "/home/mclowduser"
+  supports :manage_home => true
+end

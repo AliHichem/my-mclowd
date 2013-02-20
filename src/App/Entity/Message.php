@@ -11,6 +11,7 @@ use FOS\MessageBundle\Model\MessageMetadata as ModelMessageMetadata;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(name="messages")
  */
 class Message extends BaseMessage
 {

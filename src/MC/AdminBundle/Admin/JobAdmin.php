@@ -32,6 +32,26 @@ class JobAdmin extends BaseAdmin
     }
     
     /**
+     * @param \Sonata\AdminBundle\Form\FormMapper $formMapper
+     *
+     * @return void
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
+        $formMapper
+            ->with('General')
+                ->add('name')
+                ->add('description')
+                ->add('category')
+                
+            ->end()
+            ->with('System Information', array('collapsed' => true))
+                ->add('createdAt')
+            ->end()
+        ;
+    }
+
+    /**
      * @param \Sonata\AdminBundle\Datagrid\ListMapper $listMapper
      *
      * @return void

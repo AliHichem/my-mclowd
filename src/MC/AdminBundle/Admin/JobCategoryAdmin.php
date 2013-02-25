@@ -12,10 +12,15 @@ use Knp\Menu\ItemInterface as MenuItemInterface;
 
 use App\Entity\Job;
 
-class JobCategoryAdmin extends BaseAdmin
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+
+class JobCategoryAdmin extends BaseAdmin implements ContainerAwareInterface
 {
-     protected $baseRouteName = 'admin_job_category';
-     protected $baseRoutePattern = 'categories';
+    protected $baseRouteName = 'admin_job_category';
+    protected $baseRoutePattern = 'categories';
+
+    protected $container;
 
     /**
      * @param \Sonata\AdminBundle\Show\ShowMapper $showMapper
@@ -67,4 +72,45 @@ class JobCategoryAdmin extends BaseAdmin
             ->add('name')
         ;
     }
+
+    /**
+     * Creates new category. We lock table and ensure parent root and correct id is set
+     *
+     **/
+    public function create($object)
+    {
+        $em = $this->container->get('doctrine')->getEntityManager();
+        $em->getConnection()->beginTransaction();
+        $table = $em->getClassMetadata('App:JobCategory')->getTableName();
+        try {
+            $root = $em->getRepository('App:JobCategory')->getRootNodes()[0];
+            
+            $em->getConnection()->exec('LOCK TABLES '.$table.' WRITE;');
+
+            $stmt = 'SELECT MAX(id) FROM '. $table;
+            $id  = $em->getConnection()->fetchColumn($stmt);
+            $object->setId(++$id);
+            $object->setChildOf($root);
+
+            $em->persist($object);
+            $em->flush();
+            $em->getConnection()->commit();
+            
+        } catch (Exception $e) {
+            $em->getConnection()->rollback();
+            $em->close();
+            throw $e;
+        }
+        $em->getConnection()->exec('UNLOCK TABLES;');
+
+        $this->postPersist($object);
+        $this->createObjectSecurity($object);
+    }
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+    
+    
 }

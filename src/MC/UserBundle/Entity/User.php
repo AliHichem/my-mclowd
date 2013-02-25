@@ -11,7 +11,7 @@ use FOS\MessageBundle\Model\ParticipantInterface;
  * @ORM\Table(name="fos_users")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"client" = "Client", "contractor" = "Contractor"})
+ * @ORM\DiscriminatorMap({"client" = "Client", "contractor" = "Contractor", "manager" = "Manager"})
  */
 abstract class User extends BaseUser implements EncoderAwareInterface, ParticipantInterface
 {

@@ -24,3 +24,6 @@ pugx_multi_user:
         #profile:
         #  form: 
         #    type: Acme\UserBundle\Form\Type\ProfileUserTwoFormType
+    manager:
+        entity: 
+          class: MC\UserBundle\Entity\Manager

@@ -7,7 +7,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use MC\UserBundle\Entity\Client,
-    MC\UserBundle\Entity\Contractor;
+    MC\UserBundle\Entity\Contractor,
+    MC\UserBundle\Entity\Manager;
 
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -41,7 +42,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user2->setEmail('contractor@mclowd.com');
         $user2->setPlainPassword('contractor');
         $user2->setEnabled(true);
-        $this->container->get('fos_user.user_manager')->updateUser($user);
+        $this->container->get('fos_user.user_manager')->updateUser($user2);
+
+        $user3 = new Manager();
+        $user3->setUsername('admin');
+        $user3->setEmail('admin@mclowd.com');
+        $user3->setPlainPassword('admin');
+        $user3->setEnabled(true);
+        $this->container->get('fos_user.user_manager')->updateUser($user3);
         
     }
 

@@ -33,6 +33,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     public function usersTableIsEmpty()
     {
         $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        $em->createQuery('DELETE App:Job')->execute();
         $em->createQuery('DELETE MCUserBundle:User')->execute();
     }
 

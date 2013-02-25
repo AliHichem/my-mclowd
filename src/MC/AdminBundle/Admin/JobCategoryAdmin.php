@@ -88,7 +88,7 @@ class JobCategoryAdmin extends BaseAdmin implements ContainerAwareInterface
             $em->getConnection()->exec('LOCK TABLES '.$table.' WRITE;');
 
             $stmt = 'SELECT MAX(id) FROM '. $table;
-            $id  = $em->getConnection()->fetchColumn($stmt);
+            $id = $em->getConnection()->fetchColumn($stmt);
             $object->setId(++$id);
             $object->setChildOf($root);
 

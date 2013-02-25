@@ -44,15 +44,15 @@ class JobsController extends Controller
         if ($form->isBound() && $form->isValid()) {            
             $this->persist($job, true);
             $this->addFlash('success', 'Job have been created');
-            return $this->redirectToRoute('app_jobs_show', array('id' => $job->getSlug()));
+            return $this->redirectToRoute('app_jobs_show', ['id' => $job->getId(), 'slug' => $job->getSlug()]);
         }
 
         return ['form' => $form->createView()];
     }
 
-    public function showAction(Request $request, $id)
+    public function showAction(Request $request, $id, $slug)
     {
-        $job = $this->findOr404('App\Entity\Job', array('slug' => $id));
+        $job = $this->findOr404('App\Entity\Job', ['id' => $id, 'slug' => $slug]);
         return compact('job');
     }
 

@@ -1,0 +1,6 @@
+services:
+   sonata.admin.job:
+      class: MC\AdminBundle\Admin\JobAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: sonata_job, label: job }
+      arguments: [null, App\Entity\Job, MCAdminBundle:JobAdmin]

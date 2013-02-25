@@ -29,9 +29,12 @@ class AppKernel extends Kernel
 
             new PUGX\MultiUserBundle\PUGXMultiUserBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
+
             new Knp\RadBundle\KnpRadBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            
 
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\jQueryBundle\SonatajQueryBundle(),
@@ -40,6 +43,7 @@ class AppKernel extends Kernel
             
             #local
             new MC\UserBundle\MCUserBundle(),
+            new MC\AdminBundle\MCAdminBundle(),
             new App\App(),
         );
 

@@ -6,6 +6,7 @@ imports:
     - { resource: bundles/fos_message.yml }
     - { resource: bundles/pugx_multi_user.yml }
     - { resource: bundles/foq_elastica.yml }
+    - { resource: bundles/sonata.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
 framework:

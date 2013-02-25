@@ -1,6 +1,12 @@
 services:
-   sonata.admin.job:
-      class: MC\AdminBundle\Admin\JobAdmin
-      tags:
-        - { name: sonata.admin, manager_type: orm, group: sonata_job, label: job }
-      arguments: [null, App\Entity\Job, MCAdminBundle:JobAdmin]
+    sonata.admin.job:
+        class: MC\AdminBundle\Admin\JobAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sonata_job, label: Jobs }
+        arguments: [null, App\Entity\Job, MCAdminBundle:JobAdmin]
+
+    sonata.admin.job_category:
+        class: MC\AdminBundle\Admin\JobCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: sonata_job, label: Categories }
+        arguments: [null, App\Entity\JobCategory, MCAdminBundle:JobCategoryAdmin]

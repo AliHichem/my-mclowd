@@ -25,6 +25,10 @@ fos_user_register:
 mc_user:
     resource: "@MCUserBundle/Resources/config/routing.yml"    
 
+mc_admin:
+    resource: '@MCAdminBundle/Resources/config/routing.yml'
+    prefix: /admin
+
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
     prefix: /messages    

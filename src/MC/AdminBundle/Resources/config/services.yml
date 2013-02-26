@@ -2,13 +2,40 @@ services:
     sonata.admin.job:
         class: MC\AdminBundle\Admin\JobAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: sonata_job, label: Jobs }
+            - { name: sonata.admin, manager_type: orm, group: Jobs, label: Jobs }
         arguments: [null, App\Entity\Job, MCAdminBundle:JobAdmin]
 
     sonata.admin.job_category:
         class: MC\AdminBundle\Admin\JobCategoryAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: sonata_job, label: Categories }
+            - { name: sonata.admin, manager_type: orm, group: Jobs, label: Categories }
         arguments: [null, App\Entity\JobCategory, MCAdminBundle:JobCategoryAdmin]
         calls:
             - [ setContainer, [ @service_container ] ]
+
+    re.admin.clients: 
+        class: MC\AdminBundle\Admin\ClientAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Users, label: Clients }
+        arguments: [null, MC\UserBundle\Entity\Client, SonataAdminBundle:CRUD]
+        calls:
+            - [ setUserManager, ["@fos_user.user_manager"] ]
+            - [ setContainer, [ @service_container ] ]  
+        
+    re.admin.homeowners: 
+        class: MC\AdminBundle\Admin\ContractorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Users, label: Contractors }
+        arguments: [null, MC\UserBundle\Entity\Contractor, SonataAdminBundle:CRUD]
+        calls:
+            - [ setUserManager, ["@fos_user.user_manager"] ]
+            - [ setContainer, [ @service_container ] ]          
+
+    re.admin.managers: 
+        class: MC\AdminBundle\Admin\ManagerAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Users, label: Managers }
+        arguments: [null, MC\UserBundle\Entity\Manager, SonataAdminBundle:CRUD]
+        calls:
+            - [ setUserManager, ["@fos_user.user_manager"] ]
+            - [ setContainer, [ @service_container ] ]          

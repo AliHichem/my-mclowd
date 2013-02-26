@@ -25,7 +25,7 @@ abstract class UserAdmin extends Admin
         ->end();
         
         
-        $formMapper->with('User Data')
+        $formMapper->with('Password')
             ->add('plainPassword', 'password',  array('required' => false)) //TODO: add edit of password
         ->end();
         
@@ -59,12 +59,6 @@ abstract class UserAdmin extends Admin
     public function validate(ErrorElement $errorElement, $object)
     {
         $errorElement
-            ->with('firstname')
-                ->assertNotBlank()
-            ->end()
-            ->with('lastname')
-                ->assertNotBlank()
-            ->end()
             ->with('email')
                 ->assertNotBlank()
             ->end()

@@ -11,7 +11,9 @@ foq_elastica:
                         description: { boost: 2, analyzer: snowball }
                         type: { analyzer: keyword }
                         currency: {analyzer: keyword}
+                        categoryId: ~
                         createdAt: {type: date}
+                        isActive: {type: boolean}
                     persistence:
                         driver: orm # orm, mongodb, propel are available
                         model: App\Entity\Job

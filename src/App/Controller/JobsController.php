@@ -18,10 +18,9 @@ class JobsController extends Controller
             ->createForm(new SearchType())
             ->bind($request->query->getIterator()->getArrayCopy())
         ;
-
-
-        $query = $request->query->get('query') ? $request->query->get('query') : '*';
         
+        $query = $this->getSearchQuery($request->query);
+
         $paginator = $this->get('knp_paginator')
             ->paginate(
                 $finder->createPaginatorAdapter($query),
@@ -31,6 +30,59 @@ class JobsController extends Controller
         
 
         return ['form' => $form->createView(), 'paginator' => $paginator];
+    }
+
+    protected function getSearchQuery($params) 
+    {
+        $q_string = '*';
+        if($params->get('query')) {
+            $q_string = $params->get('query');
+        }
+
+        $es = [
+            'query' => [
+                'filtered' => [
+                    "query" => [
+                        "query_string" => [
+                            "query"  => $q_string,
+                            "default_operator" => "OR"
+                        ]
+                    ],                    
+                ],                
+            ],
+            'filter' => [],   
+        ];
+
+        $es['filter']['and'][] = ['term' => ['isActive' => true]];
+        //$es['query']['filtered']['filter']['and'][] = array('term' => array('isActive' => true));
+
+
+        if ($params->get('categories')) {
+            $es['filter']['and'][] = [
+                'terms' => ['categoryId' => $params->get('categories')]
+            ];
+        }
+
+        if ($params->get('type')) {
+            $es['filter']['and'][] = [
+                'terms' => ['type' => $params->get('type')]
+            ];
+        }
+
+        if ($params->get('currency')) {
+            $es['filter']['and'][] = [
+                'terms' => ['currency' => $params->get('currency')]
+            ];
+        }
+             
+        
+        $es['facets'] = [
+            'categories' => [
+                'terms' => ['field' => 'categoryId', 'size' => 1000]
+            ],
+        ];
+        
+        return new \Elastica_Query($es);
     }
 
     /**

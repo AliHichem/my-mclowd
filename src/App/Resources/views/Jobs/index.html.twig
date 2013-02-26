@@ -7,25 +7,49 @@
 <form id="search_form" method="get" action="{{ path('app_jobs_index') }}" novalidate="novalidate">
 
     <div id="search-query">
-        {{ form_widget(form.query, { 'attr': {'class': 'text-input', 'placeholder': 'Search for tasks...'} }) }}
-
+        {{ form_widget(form.query, { 'attr': {'class': 'text-input', 'placeholder': 'Search for tasks...'} }) }}        
         <input type="submit" id="search-button" value="Search"/>
     
     </div>
+
+    
+
+
+    <div id ="search-sidebar">
+        <h5>Filtering options</h5>
+
+        <h6>Categories</h6>
+        {{ form_widget(form.categories) }}
+
+        <h6>Type</h6>
+        {{ form_widget(form.type) }}
+
+        <h6>Currency</h6>
+        {{ form_widget(form.currency) }}
+
+        <input type="submit" id="filter-button" value="Filter"/>
+    </div>
+
+    <div id="search-content">
+        <h3>Search results</h3>
+        {% for job in paginator %}
+
+            <div>
+                <h5>{{ job.name }}</h5>
+                <p>{{ job.description }}</p>
+                {% if job.category %}
+                    <small>{{ job.category }}</small>
+                {% endif %}
+            </div>
+        {% else %}
+            <p>No results</p>
+        {% endfor %} 
+
+        {{ knp_pagination_render(paginator) }}
+    </div>
+
 </form>    
 
-
-{% for job in paginator %}
-
-    <div>
-        <h5>{{ job.name }}</h5>
-        <p>{{ job.description }}</p>
-    </div>
-{% else %}
-    <p>No results</p>
-{% endfor %} 
-
-{{ knp_pagination_render(paginator) }}
 
 
 {% endblock %}

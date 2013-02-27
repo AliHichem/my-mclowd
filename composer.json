@@ -34,7 +34,8 @@
         "exercise/elastica-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "2.3.*@dev",
         "sonata-project/admin-bundle": "dev-master",
-        "sonata-project/doctrine-orm-admin-bundle": "dev-master"
+        "sonata-project/doctrine-orm-admin-bundle": "dev-master",
+        "tss/assets-install-windows-bundle": "dev-master"
     },
     "require-dev": {
         "behat/behat": "2.4.*",

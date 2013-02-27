@@ -40,7 +40,9 @@ class AppKernel extends Kernel
             new Sonata\jQueryBundle\SonatajQueryBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-            
+
+            new TSS\AssetsInstallWindowsBundle\TSSAssetsInstallWindowsBundle(),
+
             #local
             new MC\UserBundle\MCUserBundle(),
             new MC\AdminBundle\MCAdminBundle(),

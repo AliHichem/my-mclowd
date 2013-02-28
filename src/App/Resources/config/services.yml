@@ -12,3 +12,9 @@ services:
         arguments:  ['@doctrine.orm.entity_manager']
         calls:
             - [setFormFactory, ['@form.factory']]
+            
+    app.services.notifications:
+        class:      "App\Services\Notifications"
+        public:     true
+        arguments: ['%notifications_server%','%notifications_port%']
+            

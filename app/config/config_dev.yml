@@ -1,6 +1,10 @@
 imports:
     - { resource: config.yml }
 
+parameters:
+    notifications_server: '127.0.0.1'
+    notifications_port: '6060'
+
 framework:
     router:   { resource: "%kernel.root_dir%/config/routing_dev.yml" }
     profiler: { only_exceptions: false }

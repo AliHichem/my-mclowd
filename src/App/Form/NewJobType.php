@@ -18,8 +18,12 @@ class NewJobType extends AbstractType  implements ContainerAwareInterface
         $builder
             ->add('name')
             ->add('description')
-            ->add('type', 'choice', array('choices' =>  array_combine(Job::getTypes(), Job::getTypes())))
-            ->add('currency', 'choice', array('choices' => array_combine(Job::getCurrencies(), Job::getCurrencies())))
+            ->add('type', 'choice', array('choices' =>  array_combine(Job::getTypes(), Job::getTypes()), 'expanded' => true ))
+            ->add('timePeriod', 'choice', array(
+                'choices' => Job::getTimePeriods(),  
+                'empty_value' => 'Choose a time period',
+                'empty_data'  => null)
+            )
             ->add(
                 $builder
                     ->create('category', 'job_category', ['empty_value' => 'Choose a category'])

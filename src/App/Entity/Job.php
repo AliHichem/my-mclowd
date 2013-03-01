@@ -21,6 +21,14 @@ class Job {
 
     protected static $types = array(self::TYPE_FIXED, self::TYPE_HOURLY);
     protected static $currencies = array('USD', 'EUR');
+    protected static $time_periods = [
+        1 => '1-2 days',
+        2 => '3-5 days',
+        4 => '1-2 weeks',
+        8 => '2-4 weeks',
+        16 => '1-3 months',
+        32 => 'Ongoing',
+    ];
 
 
     /**
@@ -57,8 +65,16 @@ class Job {
     protected $currency = 'USD';
 
     /**
+     * @ORM\Column(type="integer")     
+     * @Assert\Choice(callback = "getTimePeriods")     
+     * @Assert\NotBlank()
+     */     
+    protected $timePeriod;
+
+    /**
      * @ORM\ManyToOne(targetEntity="JobCategory", inversedBy="jobs")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
+     * @Assert\NotBlank()
      *
      * @var JobCategory $category
      */
@@ -86,6 +102,11 @@ class Job {
     public static function getCurrencies()
     {
         return static::$currencies;
+    }
+
+    public static function getTimePeriods()
+    {
+        return static::$time_periods;
     }
 
     public function setName($value)
@@ -157,6 +178,16 @@ class Job {
     public function getUser()
     {
         return $this->user;
+    }
+    
+    public function getTimePeriod() {
+        return $this->timePeriod;
+    }
+    
+    public function setTimePeriod($timePeriod) {
+        $this->timePeriod = $timePeriod;
+    
+        return $this;
     }
 
 }

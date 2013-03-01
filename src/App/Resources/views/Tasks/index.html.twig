@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<h3>Search for jobs</h3>
+<h3>Search for tasks</h3>
 
-<form id="search_form" method="get" action="{{ path('app_jobs_index') }}" novalidate="novalidate">
+<form id="search_form" method="get" action="{{ path('app_tasks_index') }}" novalidate="novalidate">
 
     <div id="search-query">
         {{ form_widget(form.query, { 'attr': {'class': 'text-input', 'placeholder': 'Search for tasks...'} }) }}        
@@ -21,6 +21,11 @@
         <h6>Categories</h6>
         {{ form_widget(form.categories) }}
 
+{% for task in paginator %}
+
+    <div>
+        <h5>{{ task.name }}</h5>
+        <p>{{ task.description }}</p>
         <h6>Type</h6>
         {{ form_widget(form.type) }}
 

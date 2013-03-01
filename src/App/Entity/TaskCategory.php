@@ -5,10 +5,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * @ORM\Entity(repositoryClass="JobCategoryRepository")
- * @ORM\Table(name="job_categories")
+ * @ORM\Entity(repositoryClass="TaskCategoryRepository")
+ * @ORM\Table(name="task_categories")
  */
-class JobCategory implements ORMBehaviors\Tree\NodeInterface, \ArrayAccess
+class TaskCategory implements ORMBehaviors\Tree\NodeInterface, \ArrayAccess
 {
     use ORMBehaviors\Tree\Node;
 

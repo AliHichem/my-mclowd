@@ -5,7 +5,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use App\Entity\Proposal;
-use App\Form\DataTransformer\IntegerToJobTransformer;
+use App\Form\DataTransformer\IntegerToTaskTransformer;
 
 class NewProposalType extends AbstractType
 {
@@ -13,7 +13,7 @@ class NewProposalType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $em = $options['em'];
-        $modelTransformer = new IntegerToJobTransformer($em);
+        $modelTransformer = new IntegerToTaskTransformer($em);
 
         $builder
             ->add('description')
@@ -21,7 +21,7 @@ class NewProposalType extends AbstractType
             ->add('duration')
             ->add('rate')
             ->add(
-                    $builder->create('job', 'hidden')
+                    $builder->create('task', 'hidden')
                     ->addModelTransformer($modelTransformer)
                     )
         ;

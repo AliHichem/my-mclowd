@@ -15,7 +15,7 @@ Background:
         | Test job        | Test decription    |
 
   Scenario: Submit proposal
-    Given I am on "/jobs/test-job"
+    Given I am on "/tasks/test-job"
     When I follow "Make Proposal"
     Then I fill in the following:
         | new_proposal[description]  | Will work for food |

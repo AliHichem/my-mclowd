@@ -1,0 +1,17 @@
+Generated at 2013-02-27 17:02:00 +0400
+Chef::Exceptions::CookbookNotFound: No cookbook found in ["/var/chef/cookbooks", "/var/chef/site-cookbooks"], make sure cookbook_path is set correctly.
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/client.rb:534:in `block in assert_cookbook_path_not_empty'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/client.rb:528:in `each'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/client.rb:528:in `each_with_index'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/client.rb:528:in `assert_cookbook_path_not_empty'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/client.rb:225:in `setup_run_context'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/client.rb:467:in `do_run'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/client.rb:200:in `run'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/application.rb:190:in `run_chef_client'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/application/solo.rb:239:in `block in run_application'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/application/solo.rb:231:in `loop'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/application/solo.rb:231:in `run_application'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/lib/chef/application.rb:73:in `run'
+/opt/chef/embedded/lib/ruby/gems/1.9.1/gems/chef-11.4.0/bin/chef-solo:25:in `<top (required)>'
+/usr/bin/chef-solo:23:in `load'
+/usr/bin/chef-solo:23:in `<main>'

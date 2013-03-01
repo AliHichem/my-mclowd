@@ -15,6 +15,21 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        admin:
+            switch_user:        true
+            context:            user
+            pattern:            /admin(.*)
+            form_login:
+                provider:       fos_userbundle
+                login_path:     admin_security_login
+                check_path:     admin_security_check
+                failure_path:   null
+                default_target_path: sonata_admin_dashboard
+            logout:
+                path:           admin_security_logout
+                target: sonata_admin_dashboard
+            anonymous:    true    
+
         main:
             pattern: ^/
             form_login:
@@ -42,4 +57,5 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         #admin area
+        - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }

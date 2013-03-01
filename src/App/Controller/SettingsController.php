@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Job;
 use App\Entity\Proposal;
 use App\Form\Type\NewProposalType;
 use Doctrine\Common\Persistence\PersistentObject;

@@ -1,46 +1,49 @@
 <?php
 
-namespace App\Job\Tests\Entity;
+namespace App\Task\Tests\Entity;
 
-use App\Entity\Job;
+use App\Entity\Task;
+use App\Entity\TaskCategory;
 use Symfony\Component\Validator\Validation;
 
-class JobTest extends \PHPUnit_Framework_TestCase
+class TaskTest extends \PHPUnit_Framework_TestCase
 {
     protected $job;
     protected $validator;
 
     protected function setUp()
     {        
-        $this->job = new Job;
+        $this->job = new Task;
         $this->job
             ->setName('Will work for food')
             ->setDescription('sample desc')
+            ->setCategory(new TaskCategory)
+            ->setTimePeriod(1)
         ;
         $this->validator = Validation::createValidatorBuilder()->enableAnnotationMapping()->getValidator();
     }
 
     public function test_default_valid()
     {
-        $errors = $this->validator->validate($this->job);                
+        $errors = $this->validator->validate($this->job);           
         $this->assertEquals(0, count($errors)); 
         return $this->job;
     }
 
     public function test_default_type()
     {
-        $job = new Job;
-        $this->assertEquals($job->getType(), Job::TYPE_FIXED);
+        $job = new Task;
+        $this->assertEquals($job->getType(), Task::TYPE_FIXED);
     }
 
     public function test_default_currency()
     {
-        $job = new Job;
+        $job = new Task;
         $this->assertEquals($job->getCurrency(), 'USD');
     }
 
     /**
-     * @expectedException     \App\Exception\InvalidJobTypeException     
+     * @expectedException     \App\Exception\InvalidTaskTypeException     
      */
     public function test_invalid_types()
     {
@@ -48,7 +51,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException     \App\Exception\InvalidJobCurrencyException     
+     * @expectedException     \App\Exception\InvalidTaskCurrencyException     
      */
     public function test_invalid_currency()
     {
@@ -58,7 +61,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     /**
      * @depends test_default_valid
      */
-    public function test_valid_name(Job $job)
+    public function test_valid_name(Task $job)
     {       
         $not_valid = array(
             null,
@@ -75,7 +78,7 @@ class JobTest extends \PHPUnit_Framework_TestCase
     /**
      * @depends test_default_valid
      */
-    public function test_valid_description(Job $job)
+    public function test_valid_description(Task $job)
     {       
         $not_valid = array(
             null,

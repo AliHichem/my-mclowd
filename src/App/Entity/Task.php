@@ -195,4 +195,14 @@ class Task {
         return $this;
     }
 
+    public function getCategoryId()
+    {
+        return $this->category->getId();
+    }
+
+    public function getIsActive()
+    {
+        return true;
+    }
+
 }

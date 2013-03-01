@@ -3,30 +3,30 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use App\Entity\Job;
+use App\Entity\Task;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use App\Form\DataTransformer\IntegerToJobCategoryTransformer;
+use App\Form\DataTransformer\IntegerToTaskCategoryTransformer;
 
-class NewJobType extends AbstractType  implements ContainerAwareInterface
+class NewTaskType extends AbstractType  implements ContainerAwareInterface
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $em = $this->container->get('doctrine')->getEntityManager();
-        $modelTransformer = new IntegerToJobCategoryTransformer($em);
+        $modelTransformer = new IntegerToTaskCategoryTransformer($em);
         $builder
             ->add('name')
             ->add('description')
-            ->add('type', 'choice', array('choices' =>  array_combine(Job::getTypes(), Job::getTypes()), 'expanded' => true ))
+            ->add('type', 'choice', array('choices' =>  array_combine(Task::getTypes(), Task::getTypes()), 'expanded' => true ))
             ->add('timePeriod', 'choice', array(
-                'choices' => Job::getTimePeriods(),  
+                'choices' => Task::getTimePeriods(),  
                 'empty_value' => 'Choose a time period',
                 'empty_data'  => null)
             )
             ->add(
                 $builder
-                    ->create('category', 'job_category', ['empty_value' => 'Choose a category'])
+                    ->create('category', 'task_category', ['empty_value' => 'Choose a category'])
                     ->addModelTransformer($modelTransformer)
             )
         ;        
@@ -35,13 +35,13 @@ class NewJobType extends AbstractType  implements ContainerAwareInterface
     
     public function getDefaultOptions(array $options) {
         return array(
-            'data_class' => 'App\Entity\Job'            
+            'data_class' => 'App\Entity\Task'            
         );
     }    
 
     public function getName()
     {
-        return 'new_job';
+        return 'new_task';
     }
 
     public function setContainer(ContainerInterface $container = null)

@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Job;
+use App\Entity\Task;
 use App\Entity\Proposal;
 use App\Form\Type\NewProposalType;
 use Doctrine\Common\Persistence\PersistentObject;
@@ -20,10 +20,10 @@ class ProposalsController extends Controller
         $form = $this->createObjectForm($proposal, 'new', array('em' => $this->getDoctrine()->getEntityManager()));
 
         if ($form->isBound() && $form->isValid()) {
-            $proposal->setJob($this->getEntityManager()->getReference('App:Job', $form->getData->get('job')));
+            $proposal->setTask($this->getEntityManager()->getReference('App:Task', $form->getData->get('task')));
             $this->persist($proposal, true);
             $this->addFlash('success', 'Proposal has been sent');
-            return $this->redirectToRoute('app_proposals_show', array('id' => $proposal->getJob()->getId()));
+            return $this->redirectToRoute('app_proposals_show', array('id' => $proposal->getTask()->getId()));
         }
 
         return ['form' => $form->createView()];

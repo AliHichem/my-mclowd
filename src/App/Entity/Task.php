@@ -7,9 +7,9 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="jobs")
+ * @ORM\Table(name="tasks")
  */
-class Job {
+class Task {
 
     use ORMBehaviors\Timestampable\Timestampable,                
         ORMBehaviors\Sluggable\Sluggable,
@@ -66,23 +66,23 @@ class Job {
 
     /**
      * @ORM\Column(type="integer")     
-     * @Assert\Choice(callback = "getTimePeriods")     
+     * @Assert\Choice(callback = "getTimePeriodKeys")     
      * @Assert\NotBlank()
      */     
     protected $timePeriod;
 
     /**
-     * @ORM\ManyToOne(targetEntity="JobCategory", inversedBy="jobs")
+     * @ORM\ManyToOne(targetEntity="TaskCategory", inversedBy="tasks")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank()
      *
-     * @var JobCategory $category
+     * @var TaskCategory $category
      */
     protected $category;
     
     /*
      * Trait property here:
-     * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User", inversedBy="jobs")
+     * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User", inversedBy="tasks")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *
      * @var User $user
@@ -107,6 +107,11 @@ class Job {
     public static function getTimePeriods()
     {
         return static::$time_periods;
+    }
+
+    public static function getTimePeriodKeys()
+    {
+        return array_keys(static::$time_periods);
     }
 
     public function setName($value)
@@ -137,7 +142,7 @@ class Job {
     
     public function setType($type) {
         if (in_array($type, static::getTypes()) === false) {
-            throw new Exception\InvalidJobTypeException("Invalid type $type. Avilable types: ". join($this->getTypes(), ','));
+            throw new Exception\InvalidTaskTypeException("Invalid type $type. Avilable types: ". join($this->getTypes(), ','));
         }
         $this->type = $type;    
         return $this;
@@ -150,7 +155,7 @@ class Job {
     
     public function setCurrency($currency) {
         if (in_array($currency, static::getCurrencies()) === false) {
-            throw new Exception\InvalidJobCurrencyException("Invalid currency $currency. Avilable currencies: ". join($this->getCurrencies(), ','));
+            throw new Exception\InvalidTaskCurrencyException("Invalid currency $currency. Avilable currencies: ". join($this->getCurrencies(), ','));
         }
         $this->currency = $currency;    
         return $this;

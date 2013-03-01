@@ -1,15 +1,15 @@
 services:
-    sonata.admin.job:
-        class: MC\AdminBundle\Admin\JobAdmin
+    sonata.admin.task:
+        class: MC\AdminBundle\Admin\TaskAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Jobs, label: Jobs }
-        arguments: [null, App\Entity\Job, MCAdminBundle:JobAdmin]
+            - { name: sonata.admin, manager_type: orm, group: Tasks, label: Tasks }
+        arguments: [null, App\Entity\Task, MCAdminBundle:TaskAdmin]
 
-    sonata.admin.job_category:
-        class: MC\AdminBundle\Admin\JobCategoryAdmin
+    sonata.admin.task_category:
+        class: MC\AdminBundle\Admin\TaskCategoryAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Jobs, label: Categories }
-        arguments: [null, App\Entity\JobCategory, MCAdminBundle:JobCategoryAdmin]
+            - { name: sonata.admin, manager_type: orm, group: Tasks, label: Categories }
+        arguments: [null, App\Entity\TaskCategory, MCAdminBundle:TaskCategoryAdmin]
         calls:
             - [ setContainer, [ @service_container ] ]
 

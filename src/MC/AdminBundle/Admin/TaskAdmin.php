@@ -10,12 +10,12 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
-use App\Entity\Job;
+use App\Entity\Task;
 
-class JobAdmin extends BaseAdmin
+class TaskAdmin extends BaseAdmin
 {
-     protected $baseRouteName = 'admin_job';
-     protected $baseRoutePattern = 'jobs';
+     protected $baseRouteName = 'admin_tasks';
+     protected $baseRoutePattern = 'tasks';
 
     /**
      * @param \Sonata\AdminBundle\Show\ShowMapper $showMapper

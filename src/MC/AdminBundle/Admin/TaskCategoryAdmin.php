@@ -10,14 +10,14 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 use Knp\Menu\ItemInterface as MenuItemInterface;
 
-use App\Entity\Job;
+use App\Entity\Task;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
-class JobCategoryAdmin extends BaseAdmin implements ContainerAwareInterface
+class TaskCategoryAdmin extends BaseAdmin implements ContainerAwareInterface
 {
-    protected $baseRouteName = 'admin_job_category';
+    protected $baseRouteName = 'admin_task_category';
     protected $baseRoutePattern = 'categories';
 
     protected $container;
@@ -81,9 +81,9 @@ class JobCategoryAdmin extends BaseAdmin implements ContainerAwareInterface
     {
         $em = $this->container->get('doctrine')->getEntityManager();
         $em->getConnection()->beginTransaction();
-        $table = $em->getClassMetadata('App:JobCategory')->getTableName();
+        $table = $em->getClassMetadata('App:TaskCategory')->getTableName();
         try {
-            $root = $em->getRepository('App:JobCategory')->getRootNodes()[0];
+            $root = $em->getRepository('App:TaskCategory')->getRootNodes()[0];
             
             $em->getConnection()->exec('LOCK TABLES '.$table.' WRITE;');
 

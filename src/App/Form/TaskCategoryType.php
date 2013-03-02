@@ -3,18 +3,18 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use App\Entity\Job;
+use App\Entity\Task;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
-class JobCategoryType extends AbstractType implements ContainerAwareInterface
+class TaskCategoryType extends AbstractType implements ContainerAwareInterface
 {
     
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
 
-        $root = $this->container->get('app.entity.job_category_repository')->getTree();
+        $root = $this->container->get('app.entity.task_category_repository')->getTree();
         $choices = [];
         foreach ($root->getChildren() as $item) {
             $choices[$item->getId()] = $item->getName();                        
@@ -31,7 +31,7 @@ class JobCategoryType extends AbstractType implements ContainerAwareInterface
 
     public function getName()
     {
-        return 'job_category';
+        return 'task_category';
     }
 
     public function setContainer(ContainerInterface $container = null)

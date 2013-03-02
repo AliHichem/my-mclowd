@@ -7,9 +7,9 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * @ORM\Entity()
- * @ORM\Table(name="jobs")
+ * @ORM\Table(name="tasks")
  */
-class Job {
+class Task {
 
     use ORMBehaviors\Timestampable\Timestampable,                
         ORMBehaviors\Sluggable\Sluggable,
@@ -21,6 +21,14 @@ class Job {
 
     protected static $types = array(self::TYPE_FIXED, self::TYPE_HOURLY);
     protected static $currencies = array('USD', 'EUR');
+    protected static $time_periods = [
+        1 => '1-2 days',
+        2 => '3-5 days',
+        4 => '1-2 weeks',
+        8 => '2-4 weeks',
+        16 => '1-3 months',
+        32 => 'Ongoing',
+    ];
 
 
     /**
@@ -57,16 +65,24 @@ class Job {
     protected $currency = 'USD';
 
     /**
-     * @ORM\ManyToOne(targetEntity="JobCategory", inversedBy="jobs")
+     * @ORM\Column(type="integer")     
+     * @Assert\Choice(callback = "getTimePeriodKeys")     
+     * @Assert\NotBlank()
+     */     
+    protected $timePeriod;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="TaskCategory", inversedBy="tasks")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
+     * @Assert\NotBlank()
      *
-     * @var JobCategory $category
+     * @var TaskCategory $category
      */
     protected $category;
     
     /*
      * Trait property here:
-     * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User", inversedBy="jobs")
+     * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User", inversedBy="tasks")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      *
      * @var User $user
@@ -86,6 +102,16 @@ class Job {
     public static function getCurrencies()
     {
         return static::$currencies;
+    }
+
+    public static function getTimePeriods()
+    {
+        return static::$time_periods;
+    }
+
+    public static function getTimePeriodKeys()
+    {
+        return array_keys(static::$time_periods);
     }
 
     public function setName($value)
@@ -116,7 +142,7 @@ class Job {
     
     public function setType($type) {
         if (in_array($type, static::getTypes()) === false) {
-            throw new Exception\InvalidJobTypeException("Invalid type $type. Avilable types: ". join($this->getTypes(), ','));
+            throw new Exception\InvalidTaskTypeException("Invalid type $type. Avilable types: ". join($this->getTypes(), ','));
         }
         $this->type = $type;    
         return $this;
@@ -129,7 +155,7 @@ class Job {
     
     public function setCurrency($currency) {
         if (in_array($currency, static::getCurrencies()) === false) {
-            throw new Exception\InvalidJobCurrencyException("Invalid currency $currency. Avilable currencies: ". join($this->getCurrencies(), ','));
+            throw new Exception\InvalidTaskCurrencyException("Invalid currency $currency. Avilable currencies: ". join($this->getCurrencies(), ','));
         }
         $this->currency = $currency;    
         return $this;
@@ -157,6 +183,16 @@ class Job {
     public function getUser()
     {
         return $this->user;
+    }
+    
+    public function getTimePeriod() {
+        return $this->timePeriod;
+    }
+    
+    public function setTimePeriod($timePeriod) {
+        $this->timePeriod = $timePeriod;
+    
+        return $this;
     }
 
     public function getCategoryId()

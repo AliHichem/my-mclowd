@@ -6,9 +6,9 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use App\Entity\JobCategory;
+use App\Entity\TaskCategory;
 
-class LoadJobCategoryFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class LoadTaskCategoryFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     /**
      * @var ContainerInterface
@@ -28,7 +28,7 @@ class LoadJobCategoryFixtures extends AbstractFixture implements OrderedFixtureI
      */
     public function load(ObjectManager $manager)
     {
-        $root = new JobCategory;
+        $root = new TaskCategory;
         $root->setId(1);
         $root->setName('Root');    
         
@@ -36,7 +36,7 @@ class LoadJobCategoryFixtures extends AbstractFixture implements OrderedFixtureI
         $manager->flush();
         $id = 2;
         foreach (['Accounting', 'Bookkeeping', 'Data entry', 'Concierge', 'Tax', 'Audits'] as $name) {
-            $category = new JobCategory();
+            $category = new TaskCategory();
             $category->setId($id); // tree nodes need an id to construct path.
             $category->setChildOf($root);
             $category->setName($name);

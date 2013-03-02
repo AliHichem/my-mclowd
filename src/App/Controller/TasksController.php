@@ -1,19 +1,19 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Job;
-use App\Form\Type\NewJobType;
+use App\Entity\Task;
+use App\Form\Type\NewTaskType;
 use Doctrine\Common\Persistence\PersistentObject;
 use Symfony\Component\HttpFoundation\Request;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use App\Form\SearchType;
 
-class JobsController extends Controller
+class TasksController extends Controller
 {
 
     public function indexAction(Request $request)
     {
-        $finder = $this->get('foq_elastica.finder.mclowd_website.job');
+        $finder = $this->get('foq_elastica.finder.mclowd_website.Task');
         $form = $this
             ->createForm(new SearchType())
             ->bind($request->query->getIterator()->getArrayCopy())
@@ -90,22 +90,22 @@ class JobsController extends Controller
      */
     public function newAction(Request $request)
     {
-        $job = new Job;
-        $form = $this->createBoundObjectForm($job, 'new');
+        $task = new Task;
+        $form = $this->createBoundObjectForm($task, 'new');
 
         if ($form->isBound() && $form->isValid()) {            
-            $this->persist($job, true);
-            $this->addFlash('success', 'Job have been created');
-            return $this->redirectToRoute('app_jobs_show', array('id' => $job->getSlug()));
+            $this->persist($task, true);
+            $this->addFlash('success', 'Task have been created');
+            return $this->redirectToRoute('app_tasks_show', ['id' => $task->getId(), 'slug' => $task->getSlug()]);
         }
 
         return ['form' => $form->createView()];
     }
 
-    public function showAction(Request $request, $id)
+    public function showAction(Request $request, $id, $slug)
     {
-        $job = $this->findOr404('App\Entity\Job', array('slug' => $id));
-        return compact('job');
+        $task = $this->findOr404('App\Entity\Task', ['id' => $id, 'slug' => $slug]);
+        return compact('task');
     }
 
 }

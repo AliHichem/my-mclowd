@@ -1,7 +1,7 @@
 <?php
 namespace App\Entity;
 
-use App\Entity\Job;
+use App\Entity\Task;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
@@ -25,11 +25,11 @@ class Proposal {
 
     /**
      *
-     * @ORM\Column(name="job_id", type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\Job")
-     * @ORM\JoinColumn(name="job_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\Column(name="task_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\task")
+     * @ORM\JoinColumn(name="task_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $job;
+    protected $task;
 
     /**
      *
@@ -105,13 +105,13 @@ class Proposal {
         return $this->duration;
     }
 
-    public function setJob(Job $job) {
-        $this->job = $job;
+    public function setTask(Task $task) {
+        $this->task = $task;
         return $this;
     }
 
-    public function getJob() {
-        return $this->job;
+    public function getTask() {
+        return $this->task;
     }
 
 }

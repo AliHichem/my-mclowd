@@ -1,12 +1,12 @@
 @jobs
-Feature: Creating jobs as client
+Feature: Creating tasks as client
     As a client
-    I want to post jobs
-    So I can find contractors
+    I want to post tasks
+    So I can find contractors which im in need of
 
   Scenario: Entering creation page unauthenticated
     Given I do not follow redirects
-    When I go to "/jobs/new"    
+    When I go to "/tasks/new"    
     Then I should be redirected to "/login"
 
   Scenario: Sending form with valid data
@@ -16,11 +16,12 @@ Feature: Creating jobs as client
         | defrag        | michal.dabrowski@trisoft.ro | 12345         | client   |
     And I am logged in as "defrag" with password "12345"   
     And the default categories are in database    
-    When I am on "/jobs/new"    
+    When I am on "/tasks/new"    
         And I fill in the following:
-            | new_job[name]              | Will work for food |
-            | new_job[description]       | Tessting |
-        And I select "Accounting" from "new_job[category]"        
+            | new_task[name]              | Will work for food |
+            | new_task[description]       | Tessting |
+        And I select "Accounting" from "new_task[category]"        
+        And I select "Ongoing" from "new_task[timePeriod]"        
     And I press "Create Job"
     Then the response status code should be 200
-    And the response should contain "Job have been created"
+    And the response should contain "Task have been created"

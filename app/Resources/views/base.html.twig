@@ -62,8 +62,8 @@
                     <li><a href="{{ path('client_registration') }}">Register as client</a></li>                                
                     <li><a href="{{ path('contractor_registration') }}">Register as contractor</a></li>
                 {% endif %}
-                <li><a href="{{ path('app_jobs_new') }}">Add new job</a></li>            
-                <li><a href="{{ path('app_jobs_index') }}">Browse jobs</a></li>
+                <li><a href="{{ path('app_tasks_new') }}">Add new task</a></li>            
+                <li><a href="{{ path('app_tasks_index') }}">Browse task</a></li>
             </ul>
             {% if  app.session.flashbag.count() > 0 %}
                 <section id="flash-messages">

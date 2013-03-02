@@ -1,0 +1,18 @@
+{
+  "user":{
+    "name": "root"
+  },
+  "mysql": {
+    "server_root_password": "staging12",
+    "server_repl_password": "staging12",
+    "server_debian_password": "staging12"
+  },
+  "run_list": [
+    "role[web]",
+    "role[search]"
+  ],
+  "elasticsearch" : {
+    "cluster_name" : "mclowd_staging_elastic",
+    "mlockall"     : false
+  }
+}

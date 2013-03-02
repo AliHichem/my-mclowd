@@ -1,14 +1,41 @@
 services:
-    sonata.admin.job:
-        class: MC\AdminBundle\Admin\JobAdmin
+    sonata.admin.task:
+        class: MC\AdminBundle\Admin\TaskAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: sonata_job, label: Jobs }
-        arguments: [null, App\Entity\Job, MCAdminBundle:JobAdmin]
+            - { name: sonata.admin, manager_type: orm, group: Tasks, label: Tasks }
+        arguments: [null, App\Entity\Task, MCAdminBundle:TaskAdmin]
 
-    sonata.admin.job_category:
-        class: MC\AdminBundle\Admin\JobCategoryAdmin
+    sonata.admin.task_category:
+        class: MC\AdminBundle\Admin\TaskCategoryAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: sonata_job, label: Categories }
-        arguments: [null, App\Entity\JobCategory, MCAdminBundle:JobCategoryAdmin]
+            - { name: sonata.admin, manager_type: orm, group: Tasks, label: Categories }
+        arguments: [null, App\Entity\TaskCategory, MCAdminBundle:TaskCategoryAdmin]
         calls:
             - [ setContainer, [ @service_container ] ]
+
+    re.admin.clients: 
+        class: MC\AdminBundle\Admin\ClientAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Users, label: Clients }
+        arguments: [null, MC\UserBundle\Entity\Client, SonataAdminBundle:CRUD]
+        calls:
+            - [ setUserManager, ["@fos_user.user_manager"] ]
+            - [ setContainer, [ @service_container ] ]  
+        
+    re.admin.homeowners: 
+        class: MC\AdminBundle\Admin\ContractorAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Users, label: Contractors }
+        arguments: [null, MC\UserBundle\Entity\Contractor, SonataAdminBundle:CRUD]
+        calls:
+            - [ setUserManager, ["@fos_user.user_manager"] ]
+            - [ setContainer, [ @service_container ] ]          
+
+    re.admin.managers: 
+        class: MC\AdminBundle\Admin\ManagerAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Users, label: Managers }
+        arguments: [null, MC\UserBundle\Entity\Manager, SonataAdminBundle:CRUD]
+        calls:
+            - [ setUserManager, ["@fos_user.user_manager"] ]
+            - [ setContainer, [ @service_container ] ]          

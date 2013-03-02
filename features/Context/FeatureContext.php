@@ -13,8 +13,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Doctrine\Common\Util\Inflector;
 use Behat\MinkExtension\Context\MinkContext;
 
-use App\Entity\Job,
-    App\Entity\JobCategory,
+use App\Entity\Task,
+    App\Entity\TaskCategory,
     MC\UserBundle\Entity\User,
     MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor;
@@ -33,6 +33,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     public function usersTableIsEmpty()
     {
         $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        $em->createQuery('DELETE App:Task')->execute();
         $em->createQuery('DELETE MCUserBundle:User')->execute();
     }
 
@@ -74,10 +75,17 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         $hash = $table->getHash();
         $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
         foreach ($hash as $row) {
-            $job = new Job;
+            $job = new Task;
 
             $job->setName($row['name']);
             $job->setDescription($row['description']);
+
+            if (isset($row['timePeriod'])) {
+                $job->setTimePeriod($row['description']);
+            } else {
+                $job->setTimePeriod(1);
+            }
+
             $em->persist($job);
         }
         $em->flush();
@@ -89,8 +97,8 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     public function theDefaultCategoriesAreInDatabase()
     {
         $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
-        $em->createQuery('DELETE App:JobCategory')->execute();
-        $root = new JobCategory;
+        $em->createQuery('DELETE App:TaskCategory')->execute();
+        $root = new TaskCategory;
         $root->setId(1);
         $root->setName('Root');    
         
@@ -98,7 +106,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         $em->flush();
         $id = 2;
         foreach (['Accounting', 'Bookkeeping', 'Data entry', 'Concierge', 'Tax', 'Audits'] as $name) {
-            $category = new JobCategory();
+            $category = new TaskCategory();
             $category->setId($id); // tree nodes need an id to construct path.
             $category->setChildOf($root);
             $category->setName($name);

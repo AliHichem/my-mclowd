@@ -4,9 +4,9 @@ namespace App\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Doctrine\Common\Persistence\ObjectManager;
-use App\Entity\Job;
+use App\Entity\TaskCategory;
 
-class IntegerToJobTransformer implements DataTransformerInterface
+class IntegerToTaskCategoryTransformer implements DataTransformerInterface
 {
     /**
      * @var ObjectManager
@@ -23,23 +23,23 @@ class IntegerToJobTransformer implements DataTransformerInterface
 
     /**
      *
-     * @param  Job|null $issue
+     * @param  Task|null $issue
      * @return string
      */
-    public function transform($job)
+    public function transform($task)
     {
-        if (null === $job) {
+        if (null === $task) {
             return "";
         }
 
-        return $issue->getNumber();
+        return $task->getId();
     }
 
     /**
      * Transforms a number to an object (job).
      *
      * @param  string $number
-     * @return Job|null
+     * @return TaskCategory|null
      * @throws TransformationFailedException if object (Job) is not found.
      */
     public function reverseTransform($number)
@@ -49,13 +49,13 @@ class IntegerToJobTransformer implements DataTransformerInterface
         }
 
         $issue = $this->om
-            ->getRepository('App:Job')
+            ->getRepository('App:TaskCategory')
             ->find($number)
         ;
 
         if (null === $issue) {
             throw new TransformationFailedException(sprintf(
-                'An job with number "%s" does not exist!',
+                'An task with number "%s" does not exist!',
                 $number
             ));
         }

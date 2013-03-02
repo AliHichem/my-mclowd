@@ -18,3 +18,7 @@ parameters:
     mclowd.s3.key: AKIAIAV3H4NN5LNNXKPQ
     mclowd.s3.secret: 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
     mclowd.s3.uri_prefix: http://media.marketplace.mclowd.com/
+
+    #node.js communication
+    notifications_server: '127.0.0.1'
+    notifications_port: '6060'

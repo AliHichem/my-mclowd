@@ -9,7 +9,7 @@
 //
 
 //setup websocket
-var express = require('express')
+var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
@@ -117,7 +117,7 @@ var server4php = DNode( function (remote, conn) {
     { 
         io.sockets.emit('updatechat', 'UMUP', 'user has connected with message: '+s);
     }
-    this.pushUnreadMessages = function (room, nr)
+    this.pushNotificationsCount = function (room, nr)
     {
         io.sockets.in(room).emit('updatenotifications', nr);
     }

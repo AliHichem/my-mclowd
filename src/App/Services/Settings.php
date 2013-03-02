@@ -17,10 +17,19 @@ class Settings extends AbstractService {
      * @var Symfony\Component\Form\FormFactory
      */
     protected $_formFactory;
+    
+    protected $_node_addr;
+    protected $_node_port;
+
     protected $_settings;
 
     public function setFormFactory(FormFactory $ff) {
         $this->_formFactory = $ff;
+    }
+    
+    public function setNotificationServer($addr, $port) {
+        $this->_node_addr = $addr;
+        $this->_node_port = $port;
     }
 
     public function __construct(EntityManager $em) {
@@ -119,4 +128,11 @@ class Settings extends AbstractService {
         return $this->_settings[$name];
     }
 
+    public function getNodeAddr() {
+        return $this->_node_addr;
+    }
+    
+    public function getNodePort() {
+        return $this->_node_port;
+    }
 }

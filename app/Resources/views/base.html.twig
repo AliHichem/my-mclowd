@@ -23,8 +23,29 @@
             <link rel="stylesheet" href="{{ asset('bundles/knprad/bootstrap/css/bootstrap-responsive.min.css') }}" />
             <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
         {% endblock stylesheets %}
+            
+        {# load socket.io only if user is logged in #}
+        {% if app.user %}
+            <script src="{{ settings.getNodeAddr }}:{{ settings.getNodePort }}/socket.io/socket.io.js"></script>
+        {% endif %}            
     </head>
     <body>
+        {% if app.user %}
+        <script type="text/javascript">
+            var socket = io.connect('{{ settings.getNodeAddr }}:{{ settings.getNodePort }}');
+
+            // on connection to server, ask for user's name with an anonymous callback
+            socket.on('connect', function(){
+                // call the server-side function 'adduser' and send one parameter (value of prompt)
+                socket.emit('adduser', '{{ app.user.username }}', {{ app.user.id }},'{{ app.user.id|md5 }}', null, null);
+            });
+            
+            socket.on('updatenotifications', function (n0, n1) {
+                $(n0).html(n1); 
+            });
+        </script>
+        {% endif %}
+
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->

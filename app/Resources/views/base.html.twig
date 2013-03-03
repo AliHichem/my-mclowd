@@ -21,7 +21,8 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('bundles/knprad/bootstrap/css/bootstrap.min.css') }}" />
             <link rel="stylesheet" href="{{ asset('bundles/knprad/bootstrap/css/bootstrap-responsive.min.css') }}" />
-            <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+            {# <link rel="stylesheet" href="{{ asset('css/main.css') }}" /> #}
+            <link rel="stylesheet" href="{{ asset('bundles/knprad/h5bp/css/main.css') }}" />
         {% endblock stylesheets %}
             
         {# load socket.io only if user is logged in #}
@@ -80,6 +81,9 @@
         
             {% block content %}{% endblock content %}
         </div>
-        {% block javascripts %}{% endblock javascripts %}
+        {% block javascripts %}
+            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script tpye="text/javascript" src="{{ asset('/bundles/app/js/parseley.js/parsley.js') }}"></script>
+        {% endblock javascripts %}
     </body>
 </html>

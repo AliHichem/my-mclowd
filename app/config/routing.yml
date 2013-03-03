@@ -31,4 +31,4 @@ mc_admin:
 
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
-    prefix: /messages    
+    prefix: /messages

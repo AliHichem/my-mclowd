@@ -20,12 +20,13 @@ class TaskBudget
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
-    /**
+    /**    
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */ 
     protected $name;
 

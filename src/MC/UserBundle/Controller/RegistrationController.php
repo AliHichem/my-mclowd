@@ -9,29 +9,13 @@ use FOS\UserBundle\Controller\RegistrationController as BaseController,
 
 class RegistrationController extends BaseController
 {
+    /**
+     * @param $class string
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function register($class)
     {
-        $this->userDiscriminator->setClass($class);
-
-        $this->controller->setContainer($this->container);
-        $result = $this->controller->registerAction($this->container->get('request'));
-        if ($result instanceof RedirectResponse) {
-            return $result;
-        }
-
-        $template = $this->userDiscriminator->getTemplate('registration');
-        if (is_null($template)) {
-            $engine = $this->container->getParameter('fos_user.template.engine');
-            $template = 'FOSUserBundle:Registration:register.html.'.$engine;
-        }
-
-        $form = $this->formFactory->createForm();
-        return $this->container->get('templating')->renderResponse($template, array(
-            'form' => $form->createView(),
-        ));
-    }
-    public function registerClientAction(Request $request)
-    {
+        $request = $this->container->get('request');
         $result = $this->registerAction($request);
         if ($result instanceof RedirectResponse) {
             return $result;
@@ -39,7 +23,7 @@ class RegistrationController extends BaseController
 
         /** @var $userDiscriminator \PUGX\MultiUserBundle\Model\UserDiscriminator */
         $userDiscriminator = $this->container->get('pugx_user.manager.user_discriminator');
-        $userDiscriminator->setClass('MC\UserBundle\Entity\Client');
+        $userDiscriminator->setClass($class);
 
         $template = $userDiscriminator->getTemplate('registration');
         if (is_null($template)) {
@@ -71,21 +55,29 @@ class RegistrationController extends BaseController
         return $this->container->get('templating')->renderResponse($template, array(
             'form' => $form->createView(),
         ));
-
-        /* // this isn't flexible enough
-        return $this->container
-                    ->get('pugx_multi_user.registration_manager')
-                    ->register('MC\UserBundle\Entity\Client');
-        */
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function registerClientAction()
+    {
+        return $this->register('MC\UserBundle\Entity\Client');
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function registerContractorAction()
     {
-        return $this->container
-                    ->get('pugx_multi_user.registration_manager')
-                    ->register('MC\UserBundle\Entity\Contractor');
+        return $this->register('MC\UserBundle\Entity\Contractor');
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $what string
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function validateAction(Request $request, $what) {
         $out = array();
         /** @var $em \Doctrine\ORM\EntityManager */

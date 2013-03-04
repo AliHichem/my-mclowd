@@ -72,7 +72,7 @@ class Task {
     protected $timePeriod;
 
     /**
-     * @ORM\Column(name="hours_per_week", type="integer")     
+     * @ORM\Column(name="hours_per_week", type="integer", nullable=true)     
      */     
     protected $hoursPerWeek;
 

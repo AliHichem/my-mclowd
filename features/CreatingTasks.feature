@@ -18,10 +18,10 @@ Feature: Creating tasks as client
     And the default categories are in database    
     When I am on "/tasks/new"    
         And I fill in the following:
-            | new_task[name]              | Will work for food |
-            | new_task[description]       | Tessting |
-        And I select "Accounting" from "new_task[category]"        
-        And I select "Ongoing" from "new_task[timePeriod]"        
+            | task[name]              | Will work for food |
+            | task[description]       | Tessting |
+        And I select "Accounting" from "task[category]"        
+        And I select "Ongoing" from "task[timePeriod]"        
     And I press "Create Job"
     Then the response status code should be 200
     And the response should contain "Task have been created"

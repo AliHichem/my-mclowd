@@ -90,6 +90,15 @@ class Task {
      */
     protected $category;
     
+    /**
+     * @ORM\ManyToOne(targetEntity="TaskBudget", inversedBy="tasks")
+     * @ORM\JoinColumn(name="budget_id", referencedColumnName="id", onDelete="SET NULL")
+     * @Assert\NotBlank()
+     *
+     * @var TaskBudget $budget
+     */
+    protected $budget;
+
     /*
      * Trait property here:
      * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User", inversedBy="tasks")
@@ -182,6 +191,17 @@ class Task {
     
     public function setCategory($category) {
         $this->category = $category;    
+        return $this;
+    }
+
+
+    public function getBudget() {
+        return $this->budget;
+    }
+    
+    public function setBudget($budget) {
+        $this->budget = $budget;
+    
         return $this;
     }
 

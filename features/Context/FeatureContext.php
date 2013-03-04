@@ -15,7 +15,11 @@ use Behat\MinkExtension\Context\MinkContext;
 
 use App\Entity\Task,
     App\Entity\TaskCategory,
+<<<<<<< HEAD
     App\Entity\Country,
+=======
+    App\Entity\TaskBudget,
+>>>>>>> upstream/master
     MC\UserBundle\Entity\User,
     MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor;
@@ -114,6 +118,47 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
             ++$id;
             $em->persist($category);
         }
+        $em->flush();
+  
+    }
+
+    /**
+     * @Given /^the default budgets are in database$/
+     */
+    public function theDefaultBudgetsAreInDatabase()
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        $em->createQuery('DELETE App:TaskBudget')->execute();
+        $hourly = [
+            '$15-25 per hour',
+            '$25-30 per hour',
+            '$30-45 per hour',
+            '$45+ per hour'
+        ];
+        foreach ($hourly as $value) {
+            $tb = new TaskBudget;
+            $tb
+                ->setName($value)
+                ->setType(TaskBudget::TYPE_HOURLY)
+            ;
+            $em->persist($tb);
+        }
+
+        $fixed = [
+            'Less than $100',
+            'Between $100 and $250',
+            'Between $250 and $500',
+            '$500+'            
+        ];
+        foreach ($fixed as $value) {
+            $tb = new TaskBudget;
+            $tb
+                ->setName($value)
+                ->setType(TaskBudget::TYPE_FIXED)
+            ;
+            $em->persist($tb);
+        }
+
         $em->flush();
   
     }

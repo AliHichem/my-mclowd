@@ -19,8 +19,8 @@ class Task {
     const TYPE_FIXED = 'fixed';
     const TYPE_HOURLY = 'hourly';
 
-    protected static $types = array(self::TYPE_FIXED, self::TYPE_HOURLY);
-    protected static $currencies = array('USD', 'EUR');
+    protected static $types = [self::TYPE_FIXED, self::TYPE_HOURLY];
+    protected static $currencies = ['USD', 'EUR'];
     protected static $time_periods = [
         1 => '1-2 days',
         2 => '3-5 days',
@@ -72,6 +72,16 @@ class Task {
     protected $timePeriod;
 
     /**
+     * @ORM\Column(name="hours_per_week", type="integer", nullable=true)     
+     */     
+    protected $hoursPerWeek;
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")          
+     */     
+    protected $isActive = true;
+
+    /**
      * @ORM\ManyToOne(targetEntity="TaskCategory", inversedBy="tasks")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank()
@@ -80,6 +90,15 @@ class Task {
      */
     protected $category;
     
+    /**
+     * @ORM\ManyToOne(targetEntity="TaskBudget", inversedBy="tasks")
+     * @ORM\JoinColumn(name="budget_id", referencedColumnName="id", onDelete="SET NULL")
+     * @Assert\NotBlank()
+     *
+     * @var TaskBudget $budget
+     */
+    protected $budget;
+
     /*
      * Trait property here:
      * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User", inversedBy="tasks")
@@ -175,6 +194,17 @@ class Task {
         return $this;
     }
 
+
+    public function getBudget() {
+        return $this->budget;
+    }
+    
+    public function setBudget($budget) {
+        $this->budget = $budget;
+    
+        return $this;
+    }
+
     public function setUser($user) {
         $this->user = $user;
         return $user;
@@ -199,10 +229,25 @@ class Task {
     {
         return $this->category->getId();
     }
+    
+    public function getHoursPerWeek() {
+        return $this->hoursPerWeek;
+    }
+    
+    public function setHoursPerWeek($hoursPerWeek) {
+        $this->hoursPerWeek = $hoursPerWeek;
+    
+        return $this;
+    }
 
     public function getIsActive()
     {
-        return true;
+        return $this->isActive;
+    }
+
+    public function setIsActive($value)
+    {
+        $this->isActive = (Boolean)$value;
     }
 
 }

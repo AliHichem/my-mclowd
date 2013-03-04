@@ -25,7 +25,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
 
     public function test_default_valid()
     {
-        $errors = $this->validator->validate($this->job);           
+        $errors = $this->validator->validate($this->job);          
         $this->assertEquals(0, count($errors)); 
         return $this->job;
     }
@@ -91,7 +91,5 @@ class TaskTest extends \PHPUnit_Framework_TestCase
         }
 
     }
-
     
-
 }

@@ -18,9 +18,9 @@ php_pear "PHPUnit" do
   action :install
 end
 
-user "mclowduser" do
-  password "$1$ZmBFBR1O$/JlHtjVm0/6aZlEKWt4fF/"
-  gid "admin"
-  home "/home/mclowduser"
-  supports :manage_home => true
-end
+#user "mclowduser" do
+#  password "$1$ZmBFBR1O$/JlHtjVm0/6aZlEKWt4fF/"
+#  gid "admin"
+#  home "/home/mclowduser"
+#  supports :manage_home => true
+#end

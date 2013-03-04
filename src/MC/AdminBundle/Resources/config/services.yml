@@ -13,6 +13,12 @@ services:
         calls:
             - [ setContainer, [ @service_container ] ]
 
+    sonata.admin.task_budget:
+        class: MC\AdminBundle\Admin\TaskBudgetAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Tasks, label: Avilable Budgets }
+        arguments: [null, App\Entity\TaskBudget, SonataAdminBundle:CRUD]   
+
     re.admin.clients: 
         class: MC\AdminBundle\Admin\ClientAdmin
         tags:

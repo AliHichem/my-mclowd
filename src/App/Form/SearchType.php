@@ -4,7 +4,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use App\Entity\Job;
+use App\Entity\Task;
 
 class SearchType extends AbstractType
 {
@@ -13,18 +13,18 @@ class SearchType extends AbstractType
         $builder
             ->add('query')   
             ->add('categories', 'entity', [
-                'class' => 'App:JobCategory',
+                'class' => 'App:TaskCategory',
                 'property' => 'name',
                 'multiple' => true,
                 'expanded' => true
             ])
             ->add('type', 'choice', [
-                'choices' =>  array_combine(Job::getTypes(), Job::getTypes()),
+                'choices' =>  array_combine(Task::getTypes(), Task::getTypes()),
                 'multiple' => true,
                 'expanded' => true
             ])
             ->add('currency', 'choice', [
-                'choices' => array_combine(Job::getCurrencies(), Job::getCurrencies()),
+                'choices' => array_combine(Task::getCurrencies(), Task::getCurrencies()),
                 'multiple' => true,
                 'expanded' => true
             ])         

@@ -1,0 +1,18 @@
+#search-query {
+    text-align: center;
+}
+
+#search-button {
+    margin-bottom: 10px;
+}
+
+#search-sidebar {
+    float:left;
+    width:200px;    
+}
+
+#search-content {
+    float:left;
+    width:200px; 
+    margin-left: 20px;   
+}

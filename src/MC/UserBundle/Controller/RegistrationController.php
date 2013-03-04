@@ -15,15 +15,15 @@ class RegistrationController extends BaseController
      */
     public function register($class)
     {
+        /** @var $userDiscriminator \PUGX\MultiUserBundle\Model\UserDiscriminator */
+        $userDiscriminator = $this->container->get('pugx_user.manager.user_discriminator');
+        $userDiscriminator->setClass($class);
+
         $request = $this->container->get('request');
         $result = $this->registerAction($request);
         if ($result instanceof RedirectResponse) {
             return $result;
         }
-
-        /** @var $userDiscriminator \PUGX\MultiUserBundle\Model\UserDiscriminator */
-        $userDiscriminator = $this->container->get('pugx_user.manager.user_discriminator');
-        $userDiscriminator->setClass($class);
 
         $template = $userDiscriminator->getTemplate('registration');
         if (is_null($template)) {

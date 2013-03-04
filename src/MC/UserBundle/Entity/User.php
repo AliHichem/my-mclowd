@@ -17,6 +17,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 abstract class User extends BaseUser implements EncoderAwareInterface, ParticipantInterface
 {
+    // this is for contractors
+    // but i've added it here in case we need this functionality globally
+    const ACCOUNT_TYPE_INDIVIDUAL = 'individual';
+    const ACCOUNT_TYPE_BUSINESS = 'business';
+
+    private static $accountTypes = array(
+        self::ACCOUNT_TYPE_INDIVIDUAL => 'Individual',
+        self::ACCOUNT_TYPE_BUSINESS => 'Business'
+    );
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -74,6 +84,13 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     protected $city;
 
     /**
+     * @var string $city
+     *
+     * @ORM\Column(name="account_type", type="string", length=128, nullable=true)
+     */
+    protected $accountType = 'user';
+
+    /**
      * @var \App\Entity\Country $country
      * @ORM\ManyToOne(targetEntity="App\Entity\Country")
      * @ORM\JoinColumns({
@@ -105,9 +122,18 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     }
 
     /**
+     * @return array<string, string> $accountTypes
+     */
+    public static function getAccountTypes()
+    {
+        return self::$accountTypes;
+    }
+
+    /**
      * @return string $url
      */
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->url;
     }
 
@@ -115,39 +141,47 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      * @param $url string
      * @return User
      */
-    public function setUrl($url) {
+    public function setUrl($url)
+    {
         $this->url = $url;    
         return $this;
     }
 
-    public function getRegisteredDate() {
+    public function getRegisteredDate()
+    {
         return $this->registeredDate;
     }
     
-    public function setRegisteredDate($registeredDate) {
+    public function setRegisteredDate($registeredDate)
+    {
         $this->registeredDate = $registeredDate;    
         return $this;
     }
 
-    public function getActivationKey() {
+    public function getActivationKey()
+    {
         return $this->activationKey;
     }
     
-    public function setActivationKey($activationKey) {
+    public function setActivationKey($activationKey)
+    {
         $this->activationKey = $activationKey;    
         return $this;
     }
 
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->status;
     }
     
-    public function setStatus($status) {
+    public function setStatus($status)
+    {
         $this->status = $status;
         return $this;
     }
 
-    public function getDisplayName() {
+    public function getDisplayName()
+    {
         if ($this->displayName === null) {
             return $this->getUsername();
         } else {
@@ -155,7 +189,8 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         }        
     }
     
-    public function setDisplayName($displayName) {
+    public function setDisplayName($displayName)
+    {
         $this->displayName = $displayName;    
         return $this;
     }
@@ -166,7 +201,8 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         return $this->isLegacy;
     }
 
-    public function getIsLegacy() { //this is for twig only
+    public function getIsLegacy()
+    { //this is for twig only
         return $this->isLegacy();
     }
         
@@ -284,5 +320,28 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     public function getHearSource()
     {
         return $this->hearSource;
+    }
+
+    /**
+     * Set accountType
+     *
+     * @param string $accountType
+     * @return User
+     */
+    public function setAccountType($accountType)
+    {
+        $this->accountType = $accountType;
+    
+        return $this;
+    }
+
+    /**
+     * Get accountType
+     *
+     * @return string 
+     */
+    public function getAccountType()
+    {
+        return $this->accountType;
     }
 }

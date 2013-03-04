@@ -68,6 +68,12 @@ class RegistrationContractorFormType extends BaseType {
                 'empty_value' => false,
                 'required' => true
             ))
+            ->add('accountType', 'choice', array(
+                'choices' => \MC\UserBundle\Entity\User::getAccountTypes(),
+                'expanded' => true,
+                'multiple' => false,
+                'label' => 'How do you represent yourself to clients?'
+            ))
             ->add('displayName', 'text', array(
                 'required' => true,
                 'label' => 'Display name',

@@ -15,6 +15,7 @@ use Behat\MinkExtension\Context\MinkContext;
 
 use App\Entity\Task,
     App\Entity\TaskCategory,
+    App\Entity\Country,
     MC\UserBundle\Entity\User,
     MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor;
@@ -178,6 +179,26 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
 
         $client->followRedirects(true);
         $client->followRedirect(true);
+    }
+
+    /**
+     * @Given /^countries are loaded$/
+     */
+    public function countriesAreLoaded()
+    {
+        $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        $em->createQuery('DELETE App:Country')->execute();
+        $countriesData = file_get_contents(dirname(__FILE__).'/../../src/App/DataFixtures/DATA/countries.json');
+        $countries = json_decode($countriesData);
+        $id = 0;
+        foreach ($countries as $code => $name) {
+            $id++;
+            $c = new Country();
+            $c->setCode($code);
+            $c->setName($name);
+            $em->persist($c);
+        }
+        $em->flush();
     }
 
     /**

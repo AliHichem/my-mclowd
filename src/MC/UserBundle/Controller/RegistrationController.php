@@ -85,22 +85,30 @@ class RegistrationController extends BaseController
         switch ($what) {
             case 'username': // fos_user_registration_form%5Busername%5D
                 $data = $request->query->get('fos_user_registration_form');
-                $username = $data['username'];
-                $user = $em->getRepository('MCUserBundle:User')->findOneByUsername($username);
+                if (isset($data['username'])) {
+                    $username = $data['username'];
+                    $user = $em->getRepository('MCUserBundle:User')->findOneByUsername($username);
+                } else {
+                    $user = null;
+                }
                 if ($user === null) {
                     $out['success'] = 'Username is available.';
                 } else {
-                    $out['error'] = 'Username already in use';
+                    $out['error'] = 'Username already in use.';
                 }
                 break;
             case 'email': // fos_user_registration_form%5Bemail%5D
                 $data = $request->query->get('fos_user_registration_form');
-                $email = $data['email'];
-                $user = $em->getRepository('MCUserBundle:User')->findOneByEmail($email);
+                if (isset($data['email'])) {
+                    $email = $data['email'];
+                    $user = $em->getRepository('MCUserBundle:User')->findOneByEmail($email);
+                } else {
+                    $user = null;
+                }
                 if ($user === null) {
                     $out['success'] = 'Email is available.';
                 } else {
-                    $out['error'] = 'Email already in use';
+                    $out['error'] = 'Email already in use.';
                 }
                 break;
         }

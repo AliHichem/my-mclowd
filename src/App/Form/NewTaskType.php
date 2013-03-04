@@ -24,6 +24,7 @@ class NewTaskType extends AbstractType  implements ContainerAwareInterface
                 'empty_value' => 'Choose a time period',
                 'empty_data'  => null)
             )
+            ->add('hoursPerWeek')
             ->add(
                 $builder
                     ->create('category', 'task_category', ['empty_value' => 'Choose a category'])

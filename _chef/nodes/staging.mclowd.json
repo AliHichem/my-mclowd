@@ -13,6 +13,7 @@
   ],
   "elasticsearch" : {
     "cluster_name" : "mclowd_staging_elastic",
+    "allocated_memory": 1024,
     "mlockall"     : false
   }
 }

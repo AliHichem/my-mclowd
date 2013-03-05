@@ -14,6 +14,7 @@
   ],
   "elasticsearch" : {
     "cluster_name" : "mclowd_test_elastic",
+    "allocated_memory": 512,
     "mlockall"     : false
   }
 }

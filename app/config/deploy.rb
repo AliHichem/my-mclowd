@@ -2,27 +2,33 @@
 # Capistrano documentation: https://github.com/capistrano/capistrano/wiki
 
 # Be more verbose by uncommenting the following line
-# logger.level = Logger::MAX_LEVEL
+logger.level = Logger::MAX_LEVEL
 
-set :application, ""
-set :domain,      ""
-set :deploy_to,   ""
-set :app_path,    ""
-set :user,        ""
+set :stages, %w(staging production)
+set :stage_dir, 'app/config/deploy' # needed for Symfony2 only
+set :default_stage, "staging"
+require 'capistrano/ext/multistage'
 
-role :web,        domain
-role :app,        domain
-role :db,         domain, :primary => true
+
+set :application, "mclowd"
+
+set :app_path,    "app"
+set :user,        "root"
+
+
+#role :web,        domain
+#role :app,        domain
+#role :db,         domain, :primary => true
 
 set :scm,         :git
-set :repository,  ""
-set :branch,      ""
+set :repository,  "git@github.com:tsslabs/mclowd-marketplace.git"
+set :branch,      "master"
 set :deploy_via,  :remote_cache
 
 ssh_options[:forward_agent] = true
 
 set :use_composer,   true
-set :update_vendors, true
+#set :update_vendors, true
 
 set :writable_dirs,     ["app/cache", "app/logs"]
 set :webserver_user,    "www-data"

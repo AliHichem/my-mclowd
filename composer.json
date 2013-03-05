@@ -35,14 +35,18 @@
         "knplabs/knp-paginator-bundle": "2.3.*@dev",
         "sonata-project/admin-bundle": "dev-master",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
-        "tss/assets-install-windows-bundle": "dev-master"
-    },
-    "require-dev": {
+        "tss/assets-install-windows-bundle": "dev-master",
+
+
+        
         "behat/behat": "2.4.*",
         "behat/symfony2-extension": "*",
         "behat/mink-extension": "*",
         "behat/mink-browserkit-driver": "*",
         "phpspec/phpspec2": "dev-develop"
+    },
+    "require-dev": {
+        
     },
     "minimum-stability": "dev",
     "config": {

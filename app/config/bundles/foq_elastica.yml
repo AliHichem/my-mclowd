@@ -16,7 +16,7 @@ foq_elastica:
                         isActive: {type: boolean}
                     persistence:
                         driver: orm # orm, mongodb, propel are available
-                        model: App\Entity\Job
+                        model: App\Entity\Task
                         provider: ~    
                         finder: ~
                         listener: ~

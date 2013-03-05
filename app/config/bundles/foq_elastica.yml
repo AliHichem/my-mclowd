@@ -5,7 +5,7 @@ foq_elastica:
         mclowd_website:
             client: default    
             types:
-                job:
+                task:
                     mappings:
                         name: { boost: 5, analyzer: snowball }
                         description: { boost: 2, analyzer: snowball }
@@ -16,7 +16,7 @@ foq_elastica:
                         isActive: {type: boolean}
                     persistence:
                         driver: orm # orm, mongodb, propel are available
-                        model: App\Entity\Job
+                        model: App\Entity\Task
                         provider: ~    
                         finder: ~
                         listener: ~

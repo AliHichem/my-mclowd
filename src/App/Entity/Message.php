@@ -15,7 +15,6 @@ use FOS\MessageBundle\Model\MessageMetadata as ModelMessageMetadata;
  */
 class Message extends BaseMessage
 {
-
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

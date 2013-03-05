@@ -24,6 +24,17 @@ class TaskCategory implements ORMBehaviors\Tree\NodeInterface, \ArrayAccess
      */ 
     protected $name;
 
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="category")
+     */
+    protected $tasks;
+
+    public function __construct()
+    {
+        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     public function setId($id)
     {
         $this->id = $id;

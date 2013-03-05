@@ -5,3 +5,7 @@ client_registration:
 contractor_registration:
     pattern:  /register/contractor
     defaults: { _controller: MCUserBundle:Registration:registerContractor }
+
+registration_validation:
+    pattern: /register/validate/{what}
+    defaults: { _controller: MCUserBundle:Registration:validate }

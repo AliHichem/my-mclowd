@@ -18,6 +18,7 @@ GEM
       capistrano (>= 1.0.0)
     capistrano-maintenance (0.0.2)
       capistrano (>= 2.0.0)
+    capistrano_colors (0.5.5)
     chef (10.18.2)
       bunny (>= 0.6.0, < 0.8.0)
       erubis
@@ -116,6 +117,7 @@ PLATFORMS
 DEPENDENCIES
   capifony
   capistrano-ext
+  capistrano_colors
   ffi
   json (~> 1.5.1)
   knife-solo

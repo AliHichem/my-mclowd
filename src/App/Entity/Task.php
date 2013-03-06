@@ -255,4 +255,8 @@ class Task {
         return $this->getBudget()->getId();
     }
 
+    public function getUserName()
+    {
+        return (String)$this->getUser();
+    }
 }

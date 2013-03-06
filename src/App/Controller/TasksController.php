@@ -86,7 +86,7 @@ class TasksController extends Controller
     }
 
     /**
-     * @Secure(roles="IS_AUTHENTICATED_FULLY")
+     * @Secure(roles="ROLE_CLIENT")
      */
     public function newAction(Request $request)
     {

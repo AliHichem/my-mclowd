@@ -34,12 +34,17 @@
         <h3>Search results</h3>
         {% for task in paginator %}
 
-            <div>
-                <h5>{{ task.name }}</h5>
-                <p>{{ task.description }}</p>
-                {% if task.category %}
-                    <small>{{ task.category }}</small>
-                {% endif %}
+            <div style="width:100%">
+                <h5><a href="{{ path('app_tasks_show', {'id': task.id, 'slug': task.slug }) }}">
+                    {{ task.name }}</a>
+                    {% if task.category %}
+                        <small>{{ task.category }}</small>
+                    {% endif %}
+                </h5>
+                <p><a href="{{ path('app_tasks_show', {'id': task.id, 'slug': task.slug }) }}">{{ task.description }}</a></p>
+                
+                <p><small>Posted by {{ task.userName }} on {{ task.createdAt|date }}</small></p>
+                <hr/>
             </div>
         {% else %}
             <p>No results</p>

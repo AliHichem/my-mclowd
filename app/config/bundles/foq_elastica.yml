@@ -12,8 +12,11 @@ foq_elastica:
                         type: { analyzer: keyword }
                         currency: {analyzer: keyword}
                         categoryId: ~
+                        budgetId: ~
                         createdAt: {type: date}
                         isActive: {type: boolean}
+                        timePeriod: {analyzer: keyword}
+
                     persistence:
                         driver: orm # orm, mongodb, propel are available
                         model: App\Entity\Task

@@ -4,7 +4,7 @@
 require 'rubygems'
 require 'bundler'
 
-Bundler.require
+#Bundler.require
 require 'multi_json'
 
 Vagrant::Config.run do |config|

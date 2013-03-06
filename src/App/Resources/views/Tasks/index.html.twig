@@ -21,11 +21,6 @@
         <h6>Categories</h6>
         {{ form_widget(form.categories) }}
 
-{% for task in paginator %}
-
-    <div>
-        <h5>{{ task.name }}</h5>
-        <p>{{ task.description }}</p>
         <h6>Type</h6>
         {{ form_widget(form.type) }}
 
@@ -37,13 +32,13 @@
 
     <div id="search-content">
         <h3>Search results</h3>
-        {% for job in paginator %}
+        {% for task in paginator %}
 
             <div>
-                <h5>{{ job.name }}</h5>
-                <p>{{ job.description }}</p>
-                {% if job.category %}
-                    <small>{{ job.category }}</small>
+                <h5>{{ task.name }}</h5>
+                <p>{{ task.description }}</p>
+                {% if task.category %}
+                    <small>{{ task.category }}</small>
                 {% endif %}
             </div>
         {% else %}

@@ -116,6 +116,7 @@ PLATFORMS
 
 DEPENDENCIES
   capifony
+  capistrano
   capistrano-ext
   capistrano_colors
   ffi

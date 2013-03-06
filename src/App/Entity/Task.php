@@ -250,4 +250,9 @@ class Task {
         $this->isActive = (Boolean)$value;
     }
 
+    public function getBudgetId()
+    {
+        return $this->getBudget()->getId();
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use App\Entity\Task;
+use Doctrine\ORM\EntityRepository;
 
 class SearchType extends AbstractType
 {
@@ -16,7 +17,7 @@ class SearchType extends AbstractType
                 'class' => 'App:TaskCategory',
                 'property' => 'name',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true               
             ])
             ->add('type', 'choice', [
                 'choices' =>  array_combine(Task::getTypes(), Task::getTypes()),

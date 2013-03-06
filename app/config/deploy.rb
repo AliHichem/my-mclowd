@@ -28,7 +28,7 @@ set :webserver_user,    "www-data"
 set :permission_method, :acl
 
 set :shared_files,    ["app/config/parameters.yml", "web/.htaccess", "web/robots.txt"]
-set :shared_children, ["app/logs", "app/spool", "vendor"]
+set :shared_children, ["app/logs", "app/spool"]
 
 
 set :model_manager, "doctrine"

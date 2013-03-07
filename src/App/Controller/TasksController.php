@@ -103,6 +103,27 @@ class TasksController extends Controller
 
         return ['form' => $form->createView()];
     }
+
+    /**
+     * @Secure(roles="ROLE_CLIENT")
+     */
+    public function editAction(Request $request, $id)
+    {
+        $task = $this->findOr404('App\Entity\Task',[
+            'id' => $id,
+            'user' => $this->getSecurity()->getToken()->getUser() 
+        ]);
+
+        $form = $this->createBoundObjectForm($task, 'edit');
+
+        if ($form->isBound() && $form->isValid()) {            
+            $this->persist($task, true);
+            $this->addFlash('success', 'Task have been updated');
+            return $this->redirectToRoute('app_tasks_my');
+        }
+
+        return ['form' => $form->createView(), 'task' => $task];
+    }
     
     public function myAction(Request $request)
     {

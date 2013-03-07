@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<h3>Editing task {{ task.name }}</h3>
+
+<form action="{{ path('app_tasks_update', {'id': task.id}) }}" method="POST">
+    <input type="hidden" name="_method" value="PUT" />
+    {{ form_widget(form) }}
+
+    <input type="submit" value="Update task" /> 
+
+</form>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    
+    {% javascripts
+        'js/tasks.js.coffee'        
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    
+{% endblock %}

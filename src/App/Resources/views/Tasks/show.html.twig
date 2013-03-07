@@ -6,7 +6,10 @@
 
 <p>{{ task.description }}</p>
 
-<p>User: {{ task.user.username }}</p>
+<p><small>Posted by {{ task.userName }} on {{ task.createdAt|date }}</small></p>
+
+<p>Type: {{ task.type }}</p>
+<p>Budget: {{ task.budget }}</p>
 
 <a href="{{ path('app_proposals_new', {'task': task.id }) }}">Make Proposal</a>
 

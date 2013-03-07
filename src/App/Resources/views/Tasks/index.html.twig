@@ -44,6 +44,7 @@
                 <p><a href="{{ path('app_tasks_show', {'id': task.id, 'slug': task.slug }) }}">{{ task.description }}</a></p>
                 
                 <p><small>Posted by {{ task.userName }} on {{ task.createdAt|date }}</small></p>
+                <p>Type: {{ task.type }} | Budget: {{ task.budget }}</p>
                 <hr/>
             </div>
         {% else %}

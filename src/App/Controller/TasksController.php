@@ -32,6 +32,8 @@ class TasksController extends Controller
         return ['form' => $form->createView(), 'paginator' => $paginator];
     }
 
+
+    //TODO: move this into service
     protected function getSearchQuery($params) 
     {
         $q_string = '*';
@@ -100,6 +102,16 @@ class TasksController extends Controller
         }
 
         return ['form' => $form->createView()];
+    }
+
+    /**
+     * @Secure(roles="ROLE_CLIENT")
+     */
+    public function myAction(Request $request)
+    {
+        
+
+        return [];
     }
 
     public function showAction(Request $request, $id, $slug)

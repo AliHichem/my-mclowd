@@ -6,7 +6,7 @@ use App\Exception;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="TaskRepository")
  * @ORM\Table(name="tasks")
  */
 class Task {
@@ -227,7 +227,10 @@ class Task {
 
     public function getCategoryId()
     {
-        return $this->category->getId();
+        if ($this->category !== null) {
+            return $this->category->getId();
+        }
+        return null;
     }
     
     public function getHoursPerWeek() {
@@ -252,7 +255,10 @@ class Task {
 
     public function getBudgetId()
     {
-        return $this->getBudget()->getId();
+        if ($this->budget !== null) {
+            return $this->budget->getId();    
+        }
+        return null;
     }
 
     public function getUserName()

@@ -15,11 +15,8 @@ use Behat\MinkExtension\Context\MinkContext;
 
 use App\Entity\Task,
     App\Entity\TaskCategory,
-<<<<<<< HEAD
     App\Entity\Country,
-=======
     App\Entity\TaskBudget,
->>>>>>> upstream/master
     MC\UserBundle\Entity\User,
     MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor;

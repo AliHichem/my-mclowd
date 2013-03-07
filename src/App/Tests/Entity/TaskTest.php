@@ -18,6 +18,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
             ->setName('Will work for food')
             ->setDescription('sample desc')
             ->setCategory(new TaskCategory)
+            ->setBudget('12')
             ->setTimePeriod(1)
         ;
         $this->validator = Validation::createValidatorBuilder()->enableAnnotationMapping()->getValidator();

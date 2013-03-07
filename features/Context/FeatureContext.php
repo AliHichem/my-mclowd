@@ -2,16 +2,12 @@
 
 namespace Context;
 
-use Behat\Behat\Exception\PendingException;
-use Behat\Gherkin\Node\PyStringNode;
+use Behat\Behat\Exception\BehaviorException;
+use Behat\Behat\Exception\UndefinedException;
 use Behat\Gherkin\Node\TableNode;
-
-use Behat\MinkExtension\Context\RawMinkContext;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
-
-use Symfony\Component\HttpKernel\KernelInterface;
-use Doctrine\Common\Util\Inflector;
 use Behat\MinkExtension\Context\MinkContext;
+use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Doctrine\Common\Util\Inflector;
 
 use App\Entity\Task,
     App\Entity\TaskCategory,
@@ -22,6 +18,10 @@ use App\Entity\Task,
     MC\UserBundle\Entity\Contractor;
 
 use Behat\Behat\Exception\Exception;
+
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
+
 
 
 class FeatureContext extends MinkContext implements KernelAwareInterface
@@ -58,7 +58,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
                     break;
 
                 default:
-                    throw new Exception("User type not supported");
+                    throw new UndefinedException("User type not supported");
                     break;
             }
             $user->setUsername($row['username']);
@@ -167,7 +167,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     public function iAmLoggedInSystem()
     {
         if ($this->getContainer()->get('security.context')->getToken()->getUser() instanceof User !== true) {
-            throw new Exception("Security token is:\n" . $this->output);
+            throw new BehaviorException("Security token is:\n" . $this->output);
         }
     }
 
@@ -216,7 +216,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         ;
 
         if ($redirectComponents['path'] !== $location) {
-            throw new Exception("Redirecting to ". $redirectComponents['path'] . ". Expected $location");
+            throw new BehaviorException("Redirecting to ". $redirectComponents['path'] . ". Expected $location");
         }
 
         $client->followRedirects(true);
@@ -268,7 +268,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
      *
      * @param string  $route
      * @param array   $parameters
-     * @param Boolean $absolute
+     * @param boolean $absolute
      *
      * @return string
      */

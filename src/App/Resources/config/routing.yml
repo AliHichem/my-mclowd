@@ -13,7 +13,7 @@ App:Tasks:
         show: 
             pattern: /{id}/{slug}
 
-    collections: [index, new, my]
+App:Tasks:my: /tasks/my
 
 App:Proposals: ~
 App:Settings: ~

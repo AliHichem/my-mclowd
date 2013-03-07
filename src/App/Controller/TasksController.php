@@ -103,13 +103,12 @@ class TasksController extends Controller
 
         return ['form' => $form->createView()];
     }
-
-    /**
-     * @Secure(roles="ROLE_CLIENT")
-     */
+    
     public function myAction(Request $request)
     {
-        
+        if (!$this->isGranted("ROLE_CLIENT")) {
+            return $this->redirectToRoute('homepage');
+        }   
 
         return [];
     }

@@ -18,6 +18,13 @@
         
         <p><small>Posted on {{ task.createdAt|date }}</small></p>
         <p>Type: {{ task.type }} | Budget: {{ task.budget }}</p>
+        <p>Status: 
+            {% if task.isActive %}
+                <span class="label label-success">Active</span>
+            {% else %}
+                <span class="label label-important">Inactive</span>
+            {% endif %}                        
+        </p>
         <hr/>
     </div>
 {% else %}

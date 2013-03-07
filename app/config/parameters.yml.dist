@@ -6,10 +6,11 @@ parameters:
     database_user:     root
     database_password: mclowd1
 
-    mailer_transport:  ~
-    mailer_host:       ~
-    mailer_user:       ~
-    mailer_password:   ~
+    mailer_transport:  smtp
+    mailer_host:       smtp.mandrillapp.com
+    mailer_user:       adam@mclowd.com
+    mailer_password:   wxQtSpa1RJFqEh0-xLThDw
+    mailer_port : 587
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt

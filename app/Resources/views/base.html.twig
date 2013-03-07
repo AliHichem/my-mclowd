@@ -52,7 +52,7 @@
 
          <div class="container">
 
-            <h2>Mclowd Markretplace</h2>
+            <h2>Mclowd Marketplace</h2>
 
             <ul class="nav nav-pills">
                 {% if is_granted("IS_AUTHENTICATED_FULLY") %}     
@@ -63,7 +63,12 @@
                     <li><a href="{{ path('contractor_registration') }}">Register as contractor</a></li>
                 {% endif %}
                 <li><a href="{{ path('app_tasks_new') }}">Add new task</a></li>            
-                <li><a href="{{ path('app_tasks_index') }}">Browse task</a></li>
+                <li><a href="{{ path('app_tasks_index') }}">Browse tasks</a></li>
+                
+                {% if is_granted("ROLE_CLIENT") %}     
+                    <li><a href="{{ path('app_tasks_my') }}">My tasks</a></li>    
+                {% endif %}
+
             </ul>
             {% if  app.session.flashbag.count() > 0 %}
                 <section id="flash-messages">
@@ -83,6 +88,11 @@
         {% block javascripts %}
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
             <script tpye="text/javascript" src="{{ asset('/bundles/app/js/parseley.js/parsley.js') }}"></script>
+            {% javascripts
+                'js/remote_links.js.coffee'        
+            %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
         {% endblock javascripts %}
     </body>
 </html>

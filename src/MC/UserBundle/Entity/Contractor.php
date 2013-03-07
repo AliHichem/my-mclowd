@@ -18,4 +18,10 @@ class Contractor extends User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    public function getRoles()
+    {
+        $roles = parent::getRoles();
+        return array_merge($roles, ['ROLE_CONTRACTOR']);
+    }
 }

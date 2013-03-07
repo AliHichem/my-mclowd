@@ -2,21 +2,26 @@
 
 namespace Context;
 
-use App\Entity\Country;
-use App\Entity\Task;
-use App\Entity\TaskBudget;
-use App\Entity\TaskCategory;
 use Behat\Behat\Exception\BehaviorException;
 use Behat\Behat\Exception\UndefinedException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareInterface;
 use Doctrine\Common\Util\Inflector;
-use MC\UserBundle\Entity\Client;
-use MC\UserBundle\Entity\Contractor;
-use MC\UserBundle\Entity\User;
+
+use App\Entity\Task,
+    App\Entity\TaskCategory,
+    App\Entity\Country,
+    App\Entity\TaskBudget,
+    MC\UserBundle\Entity\User,
+    MC\UserBundle\Entity\Client,
+    MC\UserBundle\Entity\Contractor;
+
+use Behat\Behat\Exception\Exception;
+
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
+
 
 
 class FeatureContext extends MinkContext implements KernelAwareInterface

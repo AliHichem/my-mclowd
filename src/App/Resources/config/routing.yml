@@ -8,10 +8,9 @@ settings:
     pattern: /admin/settings
     defaults: { _controller: App:Settings:list, template: 'App:Settings:list.html.twig'}
 
-App:Tasks: 
-    resources:
-        show: 
-            pattern: /{id}/{slug}
+App:Tasks: ~
+App:Tasks:my: /tasks/my
+App:Tasks:show: /tasks/{id}/{slug}
 
 App:Proposals: ~
 App:Settings: ~

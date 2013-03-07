@@ -32,6 +32,8 @@ class TasksController extends Controller
         return ['form' => $form->createView(), 'paginator' => $paginator];
     }
 
+
+    //TODO: move this into service
     protected function getSearchQuery($params) 
     {
         $q_string = '*';
@@ -86,7 +88,7 @@ class TasksController extends Controller
     }
 
     /**
-     * @Secure(roles="IS_AUTHENTICATED_FULLY")
+     * @Secure(roles="ROLE_CLIENT")
      */
     public function newAction(Request $request)
     {
@@ -100,6 +102,64 @@ class TasksController extends Controller
         }
 
         return ['form' => $form->createView()];
+    }
+
+    /**
+     * @Secure(roles="ROLE_CLIENT")
+     */
+    public function editAction(Request $request, $id)
+    {
+        $task = $this->findOr404('App\Entity\Task',[
+            'id' => $id,
+            'user' => $this->getSecurity()->getToken()->getUser() 
+        ]);
+
+        $form = $this->createBoundObjectForm($task, 'edit');
+
+        if ($form->isBound() && $form->isValid()) {            
+            $this->persist($task, true);
+            $this->addFlash('success', 'Task have been updated');
+            return $this->redirectToRoute('app_tasks_my');
+        }
+
+        return ['form' => $form->createView(), 'task' => $task];
+    }
+
+    /**
+     * @Secure(roles="ROLE_CLIENT")
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $task = $this->findOr404('App\Entity\Task',[
+            'id' => $id,
+            'user' => $this->getSecurity()->getToken()->getUser() 
+        ]);
+
+        $this->remove($task);
+        $this->flush();
+
+        $this->addFlash('success', 'Task have been removed');
+        return $this->redirectToRoute('app_tasks_my');
+    }
+    
+    public function myAction(Request $request)
+    {
+        if (!$this->isGranted("ROLE_CLIENT")) {
+            return $this->redirectToRoute('homepage');
+        }   
+
+        $query  = $this->get('app.entity.task_repository')->findByUserQueryBuilder(
+            $this
+                ->getSecurity()
+                ->getToken()
+                ->getUser()
+        );
+        $pagination = $this->get('knp_paginator')->paginate(
+            $query,
+            $request->query->get('page', 1)
+        );
+
+        return ['pagination' => $pagination];
     }
 
     public function showAction(Request $request, $id, $slug)

@@ -110,7 +110,18 @@ class TasksController extends Controller
             return $this->redirectToRoute('homepage');
         }   
 
-        return [];
+        $query  = $this->get('app.entity.task_repository')->findByUserQueryBuilder(
+            $this
+                ->getSecurity()
+                ->getToken()
+                ->getUser()
+        );
+        $pagination = $this->get('knp_paginator')->paginate(
+            $query,
+            $request->query->get('page', 1)
+        );
+
+        return ['pagination' => $pagination];
     }
 
     public function showAction(Request $request, $id, $slug)

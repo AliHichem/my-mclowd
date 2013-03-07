@@ -4,4 +4,26 @@
 
 <h3>My tasks</h3>
 
+{% for task in pagination %}
+
+    <div style="width:100%">
+        <h5><a href="{{ path('app_tasks_show', {'id': task.id, 'slug': task.slug }) }}">
+            {{ task.name }}</a>
+            {% if task.category %}
+                <small>{{ task.category }}</small>
+            {% endif %}
+            <p><a href="{{ path('app_tasks_edit', {'id': task.id }) }}">Edit</a></p>
+        </h5>
+        
+        
+        <p><small>Posted on {{ task.createdAt|date }}</small></p>
+        <p>Type: {{ task.type }} | Budget: {{ task.budget }}</p>
+        <hr/>
+    </div>
+{% else %}
+    <p>You didn't add any tasks yet. <a href="{{ path('app_tasks_new') }}">Create one.</a></p>
+{% endfor %} 
+
+{{ knp_pagination_render(pagination) }}
+
 {% endblock %}

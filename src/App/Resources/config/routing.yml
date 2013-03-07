@@ -14,3 +14,5 @@ App:Tasks:show: /tasks/{id}/{slug}
 
 App:Proposals: ~
 App:Settings: ~
+
+App:Profile: [index]

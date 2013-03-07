@@ -6,6 +6,7 @@ default:
     extensions:
         Behat\MinkExtension\Extension:
             default_session: symfony2
+            base_url: http://localhost:8000/
 
             # If you want MinkExtension to open browser
             # with last response page every time you have

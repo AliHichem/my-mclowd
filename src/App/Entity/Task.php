@@ -227,6 +227,9 @@ class Task {
 
     public function getCategoryId()
     {
+        if (is_null($this->category)) {
+            return NULL;
+        }
         return $this->category->getId();
     }
     
@@ -252,6 +255,9 @@ class Task {
 
     public function getBudgetId()
     {
+        if (is_null($this->getBudget())) {
+            return NULL;
+        }
         return $this->getBudget()->getId();
     }
 

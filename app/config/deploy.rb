@@ -28,7 +28,7 @@ set :webserver_user,    "www-data"
 set :permission_method, :acl
 
 set :shared_files,    ["app/config/parameters.yml", "web/.htaccess", "web/robots.txt"]
-set :shared_children, ["app/logs", "app/spool"]
+set :shared_children, ["app/logs", "app/spool", "vendor"]
 
 
 set :model_manager, "doctrine"
@@ -37,18 +37,9 @@ set :use_sudo,    false
 
 set :keep_releases, 3
 
-before 'symfony:composer:install', 'symfony:copy_vendors'
+set :dump_assetic_assets, true
 
 namespace :symfony do
-  desc "Copy vendors from previous release"
-  task :copy_vendors, :except => { :no_release => true } do
-    if Capistrano::CLI.ui.agree("Do you want to copy last release vendor dir then do composer install ?: (y/N)")
-      capifony_pretty_print "--> Copying vendors from previous release"
-
-      run "cp -a #{previous_release}/vendor #{latest_release}/"
-      capifony_puts_ok
-    end
-  end
 
   namespace :composer do
     

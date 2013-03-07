@@ -28,7 +28,19 @@ class SearchType extends AbstractType
                 'choices' => array_combine(Task::getCurrencies(), Task::getCurrencies()),
                 'multiple' => true,
                 'expanded' => true
+            ])    
+            ->add('timePeriod', 'choice', [
+                'choices' => array_combine(Task::getTimePeriods(), Task::getTimePeriods()),
+                'multiple' => true,
+                'expanded' => true
             ])         
+            ->add('budget', 'entity', [
+                    'class' => 'App\Entity\TaskBudget',
+                    'group_by' => 'type',
+                    'multiple' => true,
+                    'expanded' => true                
+                ]
+            )
         ;
     }
 

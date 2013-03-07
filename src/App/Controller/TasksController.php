@@ -7,20 +7,20 @@ use Doctrine\Common\Persistence\PersistentObject;
 use Symfony\Component\HttpFoundation\Request;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use App\Form\SearchType;
+use App\Model\TaskSearch;
 
 class TasksController extends Controller
 {
 
     public function indexAction(Request $request)
     {
-        $finder = $this->get('foq_elastica.finder.mclowd_website.Task');
+        $finder = $this->get('foq_elastica.finder.mclowd_website.Task');        
         $form = $this
-            ->createForm(new SearchType())
+            ->createForm(new SearchType(), new TaskSearch)
             ->bind($request->query->getIterator()->getArrayCopy())
-        ;
-        
-        $query = $this->getSearchQuery($request->query);
+        ;        
 
+        $query = $this->getSearchQuery($request->query);
         $paginator = $this->get('knp_paginator')
             ->paginate(
                 $finder->createPaginatorAdapter($query),
@@ -28,7 +28,6 @@ class TasksController extends Controller
             )
         ;
         
-
         return ['form' => $form->createView(), 'paginator' => $paginator];
     }
 
@@ -74,6 +73,18 @@ class TasksController extends Controller
         if ($params->get('currency')) {
             $es['filter']['and'][] = [
                 'terms' => ['currency' => $params->get('currency')]
+            ];
+        }
+
+        if ($params->get('timePeriod')) {
+            $es['filter']['and'][] = [
+                'terms' => ['timePeriod' => $params->get('timePeriod')]
+            ];
+        }
+
+        if ($params->get('budget')) {
+            $es['filter']['and'][] = [
+                'terms' => ['budgetId' => $params->get('budget')]
             ];
         }
              

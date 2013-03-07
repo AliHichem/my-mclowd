@@ -124,6 +124,23 @@ class TasksController extends Controller
 
         return ['form' => $form->createView(), 'task' => $task];
     }
+
+    /**
+     * @Secure(roles="ROLE_CLIENT")
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $task = $this->findOr404('App\Entity\Task',[
+            'id' => $id,
+            'user' => $this->getSecurity()->getToken()->getUser() 
+        ]);
+
+        $this->remove($task);
+        $this->flush();
+
+        $this->addFlash('success', 'Task have been removed');
+        return $this->redirectToRoute('app_tasks_my');
+    }
     
     public function myAction(Request $request)
     {

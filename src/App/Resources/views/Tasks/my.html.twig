@@ -12,7 +12,10 @@
             {% if task.category %}
                 <small>{{ task.category }}</small>
             {% endif %}
-            <p><a href="{{ path('app_tasks_edit', {'id': task.id }) }}">Edit</a></p>
+            <p>
+                <a href="{{ path('app_tasks_edit', {'id': task.id }) }}">edit</a> |
+                <a href="{{ path('app_tasks_delete', {'id': task.id }) }}" data-method="delete" data-confirm="Are You sure do You want to delete this Task?">delete</a>
+            </p>
         </h5>
         
         

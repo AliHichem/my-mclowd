@@ -76,6 +76,18 @@ class TasksController extends Controller
                 'terms' => ['currency' => $params->get('currency')]
             ];
         }
+
+        if ($params->get('timePeriod')) {
+            $es['filter']['and'][] = [
+                'terms' => ['timePeriod' => $params->get('timePeriod')]
+            ];
+        }
+
+        if ($params->get('budget')) {
+            $es['filter']['and'][] = [
+                'terms' => ['budgetId' => $params->get('budget')]
+            ];
+        }
              
         
         $es['facets'] = [

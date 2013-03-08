@@ -41,18 +41,34 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% if app.request.isMethod('post') %}
-        {#
-            if a normal post request is validated and a user is created,
-            this will not be rendered since the user would be redirected
-            to the welcome page
-        #}
-        <script type="text/javascript">
-            $(function () {
-                $('form .help-inline').remove();
-                $('form .error').removeClass('error');
-                $('form').parsley('validate');
+    <script type="text/javascript">
+        $(function () {
+            {% if app.request.isMethod('post') %}
+            {#
+                if a normal post request is validated and a user is created,
+                this will not be rendered since the user would be redirected
+                to the welcome page
+            #}
+            $('form .help-inline').remove();
+            $('form .error').removeClass('error');
+            $('form').parsley('validate');
+            {% endif %}
+            // this will fix the blocking requests while also forcing 1 request at a time
+            var activeRequests = {};
+            $.ajaxSetup({
+                beforeSend: function(jqXHR, options) {
+                    var url = options.url;
+                    if (url.match(/\/register\/validate\/\w+\?fos_user_registration_form/gi) !== null) {
+                        url = url.split('=', 2)[0];
+                        if (url in activeRequests) {
+                            activeRequests[url].abort();
+                            delete activeRequests[url];
+                        }
+                        activeRequests[url] = jqXHR;
+                        options.async = true;
+                    }
+                }
             });
-        </script>
-    {% endif %}
+        });
+    </script>
 {% endblock %}

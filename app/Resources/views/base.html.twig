@@ -87,9 +87,10 @@
         </div>
         {% block javascripts %}
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-            <script tpye="text/javascript" src="{{ asset('/bundles/app/js/parseley.js/parsley.js') }}"></script>
             {% javascripts
-                'js/remote_links.js.coffee'        
+                'js/remote_links.js.coffee'
+                '@App/Resources/public/js/parsley.js/parsley.js'
+                '@App/Resources/public/js/parsley.js/parsley.extra.js'
             %}
                 <script src="{{ asset_url }}"></script>
             {% endjavascripts %}

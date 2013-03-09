@@ -15,4 +15,7 @@ App:Tasks:show: /tasks/{id}/{slug}
 App:Proposals: ~
 App:Settings: ~
 
-App:Profile: [index]
+App:Profile:
+    collections:
+        index:
+            requirements: {_method: "GET|POST"}

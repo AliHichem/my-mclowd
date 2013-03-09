@@ -3,7 +3,10 @@
 {% block content %}
 
 <div id="profile">
-    {{ dump(client.fullName, "client.country.name", client.city) }}
+    <form action="{{ path('app_profile_index') }}" method="POST">
+        {{ form_widget(form) }}
+        <input type="submit" value="Save" />
+    </form>
 </div>
 <div id="stats">
     {{ dump(stats) }}

@@ -17,8 +17,6 @@ use App\Entity\Task,
     MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor;
 
-use Behat\Behat\Exception\Exception;
-
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 

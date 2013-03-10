@@ -3,7 +3,8 @@
 {% block content %}
 
 <div id="profile">
-    <form action="{{ path('app_profile_index') }}" method="POST">
+    <img src="{{ asset(client.pictureWebPath) }}" alt="" />
+    <form action="{{ path('app_profile_index') }}" method="POST" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <input type="submit" value="Save" />
     </form>

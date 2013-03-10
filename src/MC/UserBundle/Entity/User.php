@@ -1,17 +1,23 @@
 <?php
+
+/*
+ *
+ */
+
 namespace MC\UserBundle\Entity;
 
-use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\AdvancedEncoderBundle\Security\Encoder\EncoderAwareInterface;
 use FOS\MessageBundle\Model\ParticipantInterface;
+use FOS\UserBundle\Entity\User as BaseUser;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_users")
  * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"client" = "Client", "contractor" = "Contractor", "manager" = "Manager"})
  */
@@ -115,10 +121,83 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      */
     protected $hearSource;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    protected $pictureFilename;
+
+    /**
+     * @var UploadedFile
+     * @Assert\File(maxSize="5000000")
+     */
+    protected $picture;
 
     public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * @param UploadedFile $file
+     */
+    public function setPicture(UploadedFile $file=null)
+    {
+        $this->picture = $file;
+        if (null !== $this->picture) {
+            $this->pictureFilename = $this->getUsername()
+                .'.'.$this->picture->guessExtension();
+        }
+    }
+
+    /**
+     * 
+     * @return UploadedFile
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function uploadPicture()
+    {
+        if (null === $this->picture) {
+            return;
+        }
+        $this->picture->move($this->getWebRootDir().'/'.$this->getPictureDir(),
+                $this->pictureFilename);
+        unset($this->picture);
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removePicture()
+    {
+        if ($this->getPicturePath()) {
+            unlink($this->getPicturePath());
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getPicturePath()
+    {
+        return null === $this->getPictureWebPath()
+            ? null
+            : $this->getWebRootDir().'/'.$this->getPictureWebPath();
+    }
+
+    public function getPictureWebPath()
+    {
+        return null === $this->pictureFilename
+            ? null
+            : $this->getPictureDir().'/'.$this->pictureFilename;
     }
 
     /**
@@ -344,4 +423,21 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     {
         return $this->accountType;
     }
+
+    /** base web path for profile pictures
+     * @return string
+     */
+    private function getPictureDir()
+    {
+        return 'uploads/pictures';
+    }
+
+    /** filesystem path of web root
+     * @return string
+     */
+    private function getWebRootDir()
+    {
+        return __DIR__.'/../../../../web';
+    }
+
 }

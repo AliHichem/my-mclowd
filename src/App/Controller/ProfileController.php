@@ -23,7 +23,7 @@ class ProfileController extends Controller
         }
         $form = $this->createBoundObjectForm($client, 'profile');
         if ($form->isBound() && $form->isValid()) {
-            $this->persist($client, true);
+            $this->getEntityManager()->flush();
             $this->addFlash('success', 'Profile has been updated');
             return $this->redirectToRoute('app_profile_index');
         }

@@ -19,44 +19,27 @@ class ProfileClientType extends AbstractType implements ContainerAwareInterface
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-//        $em = $this->container->get('doctrine')->getEntityManager();
-//        $modelTransformer = new IntegerToTaskCategoryTransformer($em);
         $builder
-            ->add('fullName', 'text', array(
+            ->add('picture', null, [])
+            ->add('fullName', 'text', [
                 'required' => true,
                 'label' => 'Full name',
-                'attr' => array(
+                'attr' => [
                     'data-required' => 'true',
                     'data-trigger' => 'keyup'
-                )
-            ))
-            ->add('city', 'text', array(
+                ]
+            ])
+            ->add('city', 'text', [
                 'required' => true ,
-                'attr' => array(
+                'attr' => [
                     'data-required' => 'true',
                     'data-trigger' => 'keyup'
-                )
-            ))
-            ->add('country', null, array(
+                ]
+            ])
+            ->add('country', null, [
                 'empty_value' => false,
                 'required' => true
-            ))
-//            ->add('type', 'choice', [
-//                'choices' =>  array_combine(Task::getTypes(), Task::getTypes()),
-//                'expanded' => true
-//            ])
-//            ->add('budget', 'entity', [
-//                    'class' => 'App\Entity\TaskBudget',
-//                    'group_by' => 'type',
-//                    'required'  => true,
-//                    'empty_value' => 'Select budget'
-//                ]
-//            )
-//            ->add(
-//                $builder
-//                    ->create('category', 'task_category', ['empty_value' => 'Choose a category'])
-//                    ->addModelTransformer($modelTransformer)
-//            )
+            ])
         ;
 
     }

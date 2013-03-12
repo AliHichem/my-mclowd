@@ -2,9 +2,11 @@
 
 {% block content %}
 
-<div id="profile">
-    <img src="{{ asset(client.pictureWebPath) }}" alt="" />
-    <form action="{{ path('app_profile_index') }}" method="POST" {{ form_enctype(form) }}>
+<div id="profile" class="row">
+    <form
+            id="user_profile"
+            action="{{ path('app_profile_index') }}"
+            method="POST" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <input type="submit" value="Save" />
     </form>
@@ -40,3 +42,37 @@
     {#{ dump(app.user, app.security, app.request, app.session, app.environment, app.debug) }#}
 
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts 'bundles/app/js/profile.js.coffee' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+
+{% form_theme form _self %}
+
+{% use 'form_div_layout.html.twig' %}
+
+{% block form_rows %}
+        <div class="span4">
+            {% if form.vars.data.pictureWebPath is not null %}
+            <img id="profile-image"
+                    src="{{ asset(form.vars.data.pictureWebPath) }}"
+                    alt="" width="300" height="300" />
+            {% endif %}
+            {{ form_row(form['picture']) }}
+        </div>
+        <div class="span8">
+            <div class="overlay">
+                <p>{{ form.vars.data.fullName }}</p>
+                <p>{{ form.vars.data.city }}, {{ form.vars.data.country }}</p>
+            </div>
+            <div class="hidden-fields invisible">
+                {{ form_row(form['fullName']) }}
+                {{ form_row(form['country']) }}
+                {{ form_row(form['city']) }}
+            </div>
+        </div>
+{% endblock form_rows %}

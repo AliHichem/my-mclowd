@@ -127,6 +127,8 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      */
     protected $pictureFilename;
 
+    private $oldPictureFilename;
+
     /**
      * @var UploadedFile
      * @Assert\File(maxSize="5000000")
@@ -145,8 +147,16 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     {
         $this->picture = $file;
         if (null !== $this->picture) {
+            if (isset($this->pictureFilename)) {
+                $this->oldPictureFilename = $this->pictureFilename;
+            }
             $this->pictureFilename = $this->getUsername()
                 .'.'.$this->picture->guessExtension();
+            if ($this->pictureFilename === $this->oldPictureFilename) {
+                // if the filename didn't change the model may not get
+                // updated, but we still need to upload the new picture
+                $this->uploadPicture();
+            }
         }
     }
 
@@ -167,6 +177,14 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     {
         if (null === $this->picture) {
             return;
+        }
+        if (isset($this->oldPictureFilename)) {
+            $oldPicturePath = implode('/', [
+                $this->getWebRootDir(), 
+                $this->getPictureDir(),
+                $this->oldPictureFilename
+            ]);
+            unlink($oldPicturePath);
         }
         $this->picture->move($this->getWebRootDir().'/'.$this->getPictureDir(),
                 $this->pictureFilename);

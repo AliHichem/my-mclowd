@@ -108,6 +108,9 @@ class Task {
      */
     protected $user;
 
+
+    public $assets;
+
     public function getId()
     {
         return $this->id;

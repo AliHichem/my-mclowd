@@ -1,0 +1,11 @@
+parameters:
+    mc.asset.form.type.class: MC\AssetBundle\Form\Type\UploadType
+    mc.asset.entity_class:    MC\AssetBundle\Entity\Asset
+
+services:
+    form.type.upload:
+        class: %mc.asset.form.type.class%        
+        tags:
+            - { name: form.type, alias: upload }
+        calls:
+            - [ setContainer, [ @service_container ] ]

@@ -1,0 +1,5 @@
+defrag_plupload:
+    pattern:   /_upload
+    defaults:  { _controller: MCAssetBundle:Upload:upload }
+    requirements:
+        _method:  POST

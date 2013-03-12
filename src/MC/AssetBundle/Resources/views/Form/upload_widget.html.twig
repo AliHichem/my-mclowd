@@ -1,0 +1,19 @@
+{% form_theme form _self %}
+
+{% block upload_widget %}
+{% spaceless %}
+
+
+    <a id="mc-asset-choose-files" href="#">{{ 'Select files'|trans({}, 'MCAssetBundle') }}</a> 
+    
+    <div id="mc-asset-attachments">      
+        {% for item in data %}
+            <div>{{ item }}</div>
+            <input type="hidden" value="{{ item.id }}" name="'{{ full_name }}[]'" />
+        {% endfor %}
+    </div>
+
+
+   
+{% endspaceless %}
+{% endblock %}

@@ -39,6 +39,7 @@ class NewTaskType extends AbstractType  implements ContainerAwareInterface
                     ->create('category', 'task_category', ['empty_value' => 'Choose a category'])
                     ->addModelTransformer($modelTransformer)
             )
+            ->add('assets', 'upload')
         ;        
 
     }

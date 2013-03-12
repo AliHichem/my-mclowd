@@ -46,6 +46,7 @@ class AppKernel extends Kernel
             #local
             new MC\UserBundle\MCUserBundle(),
             new MC\AdminBundle\MCAdminBundle(),
+            new MC\AssetBundle\MCAssetBundle(),
             new App\App(),
         );
 

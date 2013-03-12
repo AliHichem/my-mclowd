@@ -1,7 +1,9 @@
 <?php
 namespace MC\AssetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
-
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use MC\AssetBundle\Behaviours\Uploadable; 
+   
 /**
  * @ORM\Table(name="assets")
  * @ORM\Entity
@@ -9,6 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Asset
 {
     
+    use Uploadable,
+        ORMBehaviors\Timestampable\Timestampable
+    ;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

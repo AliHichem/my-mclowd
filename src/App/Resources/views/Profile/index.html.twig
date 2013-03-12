@@ -56,23 +56,38 @@
 {% use 'form_div_layout.html.twig' %}
 
 {% block form_rows %}
-        <div class="span4">
-            {% if form.vars.data.pictureWebPath is not null %}
-            <img id="profile-image"
-                    src="{{ asset(form.vars.data.pictureWebPath) }}"
-                    alt="" width="300" height="300" />
-            {% endif %}
-            {{ form_row(form['picture']) }}
-        </div>
-        <div class="span8">
+        <div class="span4 image-field">
             <div class="overlay">
-                <p>{{ form.vars.data.fullName }}</p>
-                <p>{{ form.vars.data.city }}, {{ form.vars.data.country }}</p>
+                {% if form.vars.data.pictureWebPath is not null %}
+                    <img id="profile-image"
+                         src="{{ asset(form.vars.data.pictureWebPath) }}"
+                         alt="" width="300" height="300" />
+                {% endif %}
             </div>
             <div class="hidden-fields invisible">
-                {{ form_row(form['fullName']) }}
-                {{ form_row(form['country']) }}
-                {{ form_row(form['city']) }}
+                {{ form_row(form['picture']) }}
+            </div>
+            <div class="btn edit-button">Edit</div>
+        </div>
+        <div class="span8">
+            <div class="name-field">
+                <div class="overlay">
+                    <p>{{ form.vars.data.fullName }}</p>
+                </div>
+                <div class="hidden-fields invisible">
+                    {{ form_row(form['fullName']) }}
+                </div>
+                <div class="btn edit-button">Edit</div>
+            </div>
+            <div class="location-fields">
+                <div class="overlay">
+                    <p>{{ form.vars.data.city }}, {{ form.vars.data.country }}</p>
+                </div>
+                <div class="hidden-fields invisible">
+                    {{ form_row(form['country']) }}
+                    {{ form_row(form['city']) }}
+                </div>
+                <div class="btn edit-button">Edit</div>
             </div>
         </div>
 {% endblock form_rows %}

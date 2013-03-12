@@ -175,7 +175,7 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      */
     public function uploadPicture()
     {
-        if (null === $this->picture) {
+        if (!isset ($this->picture)) {
             return;
         }
         if (isset($this->oldPictureFilename)) {

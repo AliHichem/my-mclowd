@@ -9,7 +9,7 @@
     <div id="mc-asset-attachments">      
         {% for item in data %}
             <div>{{ item }}</div>
-            <input type="hidden" value="{{ item.id }}" name="'{{ full_name }}[]'" />
+            <input type="hidden" value="{{ item.id }}" name="'assets[]'" />
         {% endfor %}
     </div>
 

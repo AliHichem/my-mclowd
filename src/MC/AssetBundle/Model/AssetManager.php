@@ -33,18 +33,11 @@ class AssetManager implements UploaderInterface {
         $asset = new Asset;
         $asset->createAssetFromUploadedFile($file);
          
-        $this->em->persist($a);
-        $this->em->flush();
-
-        //$name = $a->createUploadPath();     
-        //$a->createDirectoryPath();
-        $this->em->persist($a);
+        $this->em->persist($asset);
         $this->em->flush();
         
-        //$this->fs->write($name, file_get_contents($file->getPathname()));
-
         $src = new LocalStream($file->getPathname());
-        $dst = $this->fs->createStream($name);
+        $dst = $this->fs->createStream($asset->getFilename());
 
         $src->open(new StreamMode('rb+'));
         $dst->open(new StreamMode('ab+'));

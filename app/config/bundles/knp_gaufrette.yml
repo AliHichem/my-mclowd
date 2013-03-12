@@ -2,7 +2,7 @@ knp_gaufrette:
     adapters:
         asset_adapter:
             local:
-                directory: %kernel.root_dir%/../web/assets
+                directory: %kernel.root_dir%/../web/uploads/assets
 
     filesystems:
         asset_fs:

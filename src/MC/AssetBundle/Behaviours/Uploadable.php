@@ -16,7 +16,7 @@ trait Uploadable
      *
      * @ORM\Column(name="directory_path", type="string", length=255, nullable=true)
      */
-    protected $directoryPath;
+    protected $directoryPath = "/uploads/assets/";
 
     /**
      *
@@ -127,6 +127,11 @@ trait Uploadable
     public function __toString()
     {
         return (String)$this->getOriginalFileName();
+    }
+
+    public function getPath()
+    {
+        return $this->directoryPath . $this->fileName;
     }
 
     public function createAssetFromUploadedFile(\Symfony\Component\HttpFoundation\File\UploadedFile $file)

@@ -33,6 +33,8 @@ class AppKernel extends Kernel
             new Knp\RadBundle\KnpRadBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
+
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             
 

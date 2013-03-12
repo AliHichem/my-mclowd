@@ -7,6 +7,7 @@ imports:
     - { resource: bundles/pugx_multi_user.yml }
     - { resource: bundles/foq_elastica.yml }
     - { resource: bundles/sonata.yml }
+    - { resource: bundles/knp_gaufrette.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
 
 framework:

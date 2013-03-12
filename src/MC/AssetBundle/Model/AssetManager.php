@@ -30,17 +30,32 @@ class AssetManager implements UploaderInterface {
 
     public function upload(UploadedFile $file)
     {   
-        $a = $this->createAssetFromUploadedFile($file);     
+        $asset = new Asset;
+        $asset->createAssetFromUploadedFile($file);
+         
         $this->em->persist($a);
         $this->em->flush();
 
-        $name = $a->createUploadPath();     
-        $a->createDirectoryPath();
+        //$name = $a->createUploadPath();     
+        //$a->createDirectoryPath();
         $this->em->persist($a);
         $this->em->flush();
         
-        $this->fs->write($name, file_get_contents($file->getPathname()));
+        //$this->fs->write($name, file_get_contents($file->getPathname()));
 
+        $src = new LocalStream($file->getPathname());
+        $dst = $this->fs->createStream($name);
+
+        $src->open(new StreamMode('rb+'));
+        $dst->open(new StreamMode('ab+'));
+
+        while (!$src->eof()) {
+            $data = $src->read(100000);
+            $written = $dst->write($data);
+        }
+
+        $dst->close();
+        $src->close();
 
         return array(
             'id' => $a->getId(), 
@@ -59,19 +74,6 @@ class AssetManager implements UploaderInterface {
     public function processThumbnails(Asset $asset)
     {
         //TODO: apply thumbnail processing
-    }
-
-    protected function createAssetFromUploadedFile(UploadedFile $file)
-    {
-        $a = new Asset();
-        $a
-            ->setOriginalFileName($file->getClientOriginalName())
-            ->setContentType($file->getClientMimeType())
-            ->setFileSize($file->getClientSize())
-            ->setExtension($file->guessExtension())
-            ->createFileName()
-        ;   
-        return $a;
     }
 
 }

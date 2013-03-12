@@ -3,7 +3,6 @@
 
 namespace MC\AssetBundle\Behaviours;
 
-
 trait Uploadable
 {
 
@@ -42,6 +41,7 @@ trait Uploadable
      * @ORM\Column(name="extension", type="string", length=10)
      */
     protected $extension;
+
 
     public function getFileName()
     {
@@ -127,6 +127,18 @@ trait Uploadable
     public function __toString()
     {
         return (String)$this->getOriginalFileName();
+    }
+
+    public function createAssetFromUploadedFile(\Symfony\Component\HttpFoundation\File\UploadedFile $file)
+    {
+        $this
+            ->setOriginalFileName($file->getClientOriginalName())
+            ->setContentType($file->getClientMimeType())
+            ->setFileSize($file->getClientSize())
+            ->setExtension($file->guessExtension())
+            ->createFileName()
+        ;   
+        return $this;
     }
 
 }

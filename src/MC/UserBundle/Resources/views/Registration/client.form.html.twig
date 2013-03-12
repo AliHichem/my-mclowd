@@ -37,21 +37,3 @@
     </form>
 </div>
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {% if app.request.isMethod('post') %}
-    {#
-        if a normal post request is validated and a user is created,
-        this will not be rendered since the user would be redirected
-        to the welcome page
-    #}
-    <script type="text/javascript">
-        $(function () {
-            $('form .help-inline').remove();
-            $('form .error').removeClass('error');
-            $('form').parsley('validate');
-        });
-    </script>
-    {% endif %}
-{% endblock %}

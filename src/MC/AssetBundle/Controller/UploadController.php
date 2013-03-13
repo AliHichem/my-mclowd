@@ -17,15 +17,12 @@ class UploadController extends Controller
         $file = $this->get('request')->files->get('qqfile');
         if (!$file instanceof UploadedFile || !$file->isValid()) {
             return new Response(json_encode(array(
-                'event' => 'uploader:error',
-                'data'  => array(
-                    'message' => 'Missing file.',
-                ),
+                'error' => 'Could not save uploader file'                
             )));
         }
 
         $return = $this->get('mc.asset_manager')->upload($file);
-
+        $return['success'] = true;
         return new Response(
             json_encode($return)
         );

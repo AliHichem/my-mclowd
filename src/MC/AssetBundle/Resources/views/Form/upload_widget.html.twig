@@ -6,10 +6,14 @@
     <div id="mc-fine-uploader"></div>
     
     
-    <div id="mc-asset-attachments">      
-        {% for item in data %}
-            <input type="hidden" value="{{ item.id }}" name="{{ full_name }}[]" />
-        {% endfor %}
+    <div id="mc-asset-attachments" style="display:none;">      
+        {% if multiple and expanded %}
+            {% for item in data %}
+                <input type="hidden" value="{{ item.id }}" name="{{ full_name }}[]" />
+            {% endfor %}
+        {% else %}
+            <input type="hidden" value="{{ item.id }}" name="{{ full_name }}" />
+        {% endif %}
     </div>
 
 
@@ -19,8 +23,7 @@
                 element: document.getElementById('mc-fine-uploader'),
                 request: {
                     endpoint: "{{ path('mc_fineupload') }}"
-                },
-                autoUpload: true,
+                },                
                 callbacks: {
                     onComplete: function(id, fileName, responseJSON) {
                         if (responseJSON.success) {                        
@@ -32,7 +35,11 @@
                             document.getElementById("mc-asset-attachments").appendChild(input);
                         }
                     }
-                }
+                },
+{% for key, option in options %}
+                {{ key }}: '{{ option }}'{% if not loop.last %},{% endif %}
+{% endfor %}
+
             });
              
         });

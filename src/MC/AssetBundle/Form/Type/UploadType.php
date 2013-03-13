@@ -23,7 +23,8 @@ class UploadType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        
+        $builder
+            ->setAttribute('options', $options['options']);
     }
 
     /**
@@ -32,6 +33,9 @@ class UploadType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         
+        $view->vars = array_replace($view->vars, array(
+            'options'         => $form->getAttribute('options'),
+        ));
         return parent::buildView($view, $form, $options);
     }
 
@@ -44,6 +48,7 @@ class UploadType extends AbstractType
             'class'    => $this->_container->getParameter('mc.asset.entity_class'),
             'expanded' => true,
             'multiple' => true,
+            'options'  => array('autoUpload' => true)
         ));
     }
 

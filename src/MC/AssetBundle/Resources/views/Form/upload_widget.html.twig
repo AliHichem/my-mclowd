@@ -8,8 +8,7 @@
     
     <div id="mc-asset-attachments">      
         {% for item in data %}
-            <div>{{ item }}</div>
-            <input type="hidden" value="{{ item.id }}" name="'assets[]'" />
+            <input type="hidden" value="{{ item.id }}" name="{{ full_name }}[]" />
         {% endfor %}
     </div>
 
@@ -21,7 +20,19 @@
                 request: {
                     endpoint: "{{ path('mc_fineupload') }}"
                 },
-                autoUpload: true
+                autoUpload: true,
+                callbacks: {
+                    onComplete: function(id, fileName, responseJSON) {
+                        if (responseJSON.success) {                        
+                            time = new Date().getTime();
+                            var input = document.createElement("input");
+                            input.setAttribute("type", "hidden");
+                            input.setAttribute("name", "{{ full_name }}[]");
+                            input.setAttribute("value", responseJSON.id);
+                            document.getElementById("mc-asset-attachments").appendChild(input);
+                        }
+                    }
+                }
             });
              
         });

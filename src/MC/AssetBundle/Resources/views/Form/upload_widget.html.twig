@@ -3,8 +3,8 @@
 {% block upload_widget %}
 {% spaceless %}
 
-
-    <a id="mc-asset-choose-files" href="#">{{ 'Select files'|trans({}, 'MCAssetBundle') }}</a> 
+    <div id="mc-fine-uploader"></div>
+    
     
     <div id="mc-asset-attachments">      
         {% for item in data %}
@@ -13,6 +13,19 @@
         {% endfor %}
     </div>
 
+
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var uploader = new qq.FineUploader({
+                element: document.getElementById('mc-fine-uploader'),
+                request: {
+                    endpoint: "{{ path('mc_fineupload') }}"
+                },
+                autoUpload: true
+            });
+             
+        });
+    </script>
 
    
 {% endspaceless %}

@@ -1,4 +1,4 @@
-defrag_plupload:
+mc_fineupload:
     pattern:   /_upload
     defaults:  { _controller: MCAssetBundle:Upload:upload }
     requirements:

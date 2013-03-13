@@ -92,7 +92,15 @@
                 '@App/Resources/public/js/parsley.js/parsley.js'
                 '@App/Resources/public/js/parsley.js/parsley.extra.js'
             %}
-                <script src="{{ asset_url }}"></script>
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
+            {% javascripts                
+                '@MCAssetBundle/Resources/public/js/header.js'                
+                '@MCAssetBundle/Resources/public/js/util.js'
+                '@MCAssetBundle/Resources/public/js/*'
+            %}
+            <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock javascripts %}
     </body>

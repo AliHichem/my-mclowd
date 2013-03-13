@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-use Gaufrette\FileStream\Local;      
+use Gaufrette\Stream\Local;      
 use Gaufrette\StreamMode;
 
 use MC\AssetBundle\Entity\Asset;
@@ -36,7 +36,7 @@ class AssetManager implements UploaderInterface {
         $this->em->persist($asset);
         $this->em->flush();
         
-        $src = new LocalStream($file->getPathname());
+        $src = new Local($file->getPathname());
         $dst = $this->fs->createStream($asset->getFilename());
 
         $src->open(new StreamMode('rb+'));
@@ -51,9 +51,9 @@ class AssetManager implements UploaderInterface {
         $src->close();
 
         return array(
-            'id' => $a->getId(), 
-            'originalFileName' => $a->getOriginalFileName(), 
-            'path' => $a->getPath()
+            'id' => $asset->getId(), 
+            'originalFileName' => $asset->getOriginalFileName(), 
+            'path' => $asset->getPath()
         );
 
         

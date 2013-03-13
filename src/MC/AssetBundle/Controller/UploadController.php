@@ -28,4 +28,21 @@ class UploadController extends Controller
         );
         
     }
+
+    public function testMultiuploadAction()
+    {
+        $form = $this->createForm(new \MC\AssetBundle\Form\Type\TestType(), new \MC\AssetBundle\Entity\Test);
+        $request = $this->get('request');
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $data = $form->getData();
+                var_dump($data); die();
+            }            
+        }
+        return $this->render('MCAssetBundle:Upload:testMultiupload.html.twig', array(
+            'form' => $form->createView(),
+        ));        
+    }
 }

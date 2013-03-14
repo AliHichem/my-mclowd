@@ -19,6 +19,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded',function(){
+            var multiple = {{ multiple and expanded }};
             var uploader = new qq.FineUploader({
                 element: document.getElementById('mc-fine-uploader'),
                 request: {
@@ -30,7 +31,12 @@
                             time = new Date().getTime();
                             var input = document.createElement("input");
                             input.setAttribute("type", "hidden");
-                            input.setAttribute("name", "{{ full_name }}[]");
+                            if (multiple) {
+                                input.setAttribute("name", "{{ full_name }}[]");    
+                            } else {
+                                input.setAttribute("name", "{{ full_name }}");    
+                            }
+                            
                             input.setAttribute("value", responseJSON.id);
                             document.getElementById("mc-asset-attachments").appendChild(input);
                         }

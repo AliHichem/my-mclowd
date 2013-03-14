@@ -10,8 +10,7 @@ Feature: Creating tasks as client
     Then I should be redirected to "/login"
 
   Scenario: Sending form with valid data
-    Given users table is empty        
-    And the following people exist:
+    Given the following people exist:
         | username      | email                       | password      | type     |
         | defrag        | michal.dabrowski@trisoft.ro | 12345         | client   |
     And I am logged in as "defrag" with password "12345"   

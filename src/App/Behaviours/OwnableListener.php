@@ -64,7 +64,7 @@ class OwnableListener implements EventSubscriber
 
             $oldValue = $entity->getUser();
 
-            if ($sc->getToken()->getUser() instanceof UserInterface) {
+            if ($sc->getToken() && $sc->getToken()->getUser() instanceof UserInterface) {
 
                 $entity->setUser($sc->getToken()->getUser());                
 

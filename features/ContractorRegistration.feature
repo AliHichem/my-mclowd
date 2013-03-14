@@ -5,7 +5,6 @@ Feature: Contractor Registration
     So I can search for jobs
 
   Scenario: Sending form with valid data
-    Given users table is empty
     Given countries are loaded
     When I am on "/register/contractor"
      And I fill in the following:

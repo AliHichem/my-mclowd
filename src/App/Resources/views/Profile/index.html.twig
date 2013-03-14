@@ -1,0 +1,93 @@
+{% extends "::base.html.twig" %}
+
+{% block content %}
+
+<div id="profile" class="row">
+    <form
+            id="user_profile"
+            action="{{ path('app_profile_index') }}"
+            method="POST" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <input type="submit" value="Save" />
+    </form>
+</div>
+<div id="stats">
+    {{ dump(stats) }}
+</div>
+<div id="tasks">
+    <h3>Tasks</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th><!--Contractor-->id/slug</th>
+                <th>Status</th>
+                <th>Cost</th>
+                <th>Task Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ dump(task.timeperiod) }}</td>
+                <td>{{ dump(task.id~'/'~task.slug) }}</td>
+                <td>{{ dump(task.isactive) }}</td>
+                <td>{#{ dump(task.budget.name) }#}</td>
+                <td>{{ dump(task.name) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    {#{ dump(app.user, app.security, app.request, app.session, app.environment, app.debug) }#}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts 'bundles/app/js/profile.js.coffee' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+
+{% form_theme form _self %}
+
+{% use 'form_div_layout.html.twig' %}
+
+{% block form_rows %}
+        <div class="span4 image-field">
+            <div class="overlay">
+                {% if form.vars.data.pictureWebPath is not null %}
+                    <img id="profile-image"
+                         src="{{ asset(form.vars.data.pictureWebPath) }}"
+                         alt="" width="300" height="300" />
+                {% endif %}
+            </div>
+            <div class="hidden-fields invisible">
+                {{ form_row(form['picture']) }}
+            </div>
+            <div class="btn edit-button">Edit</div>
+        </div>
+        <div class="span8">
+            <div class="name-field">
+                <div class="overlay">
+                    <p>{{ form.vars.data.fullName }}</p>
+                </div>
+                <div class="hidden-fields invisible">
+                    {{ form_row(form['fullName']) }}
+                </div>
+                <div class="btn edit-button">Edit</div>
+            </div>
+            <div class="location-fields">
+                <div class="overlay">
+                    <p>{{ form.vars.data.city }}, {{ form.vars.data.country }}</p>
+                </div>
+                <div class="hidden-fields invisible">
+                    {{ form_row(form['country']) }}
+                    {{ form_row(form['city']) }}
+                </div>
+                <div class="btn edit-button">Edit</div>
+            </div>
+        </div>
+{% endblock form_rows %}

@@ -5,7 +5,6 @@ Feature: Login to system
 
   Background:   
     Given I am on "/login"
-    And users table is empty
     And the following people exist:
         | username      | email                       | password      | type     |
         | defrag        | michal.dabrowski@trisoft.ro | 12345         | client   |

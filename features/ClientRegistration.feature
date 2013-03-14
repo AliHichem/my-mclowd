@@ -5,7 +5,6 @@ Feature: Client Registration
   So I can search for contractors and post jobs
 
   Scenario: Sending form with valid data
-    Given users table is empty
     Given countries are loaded
     When I am on "/register/client"
      And I fill in the following:

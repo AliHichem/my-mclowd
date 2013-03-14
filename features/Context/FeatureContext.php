@@ -17,28 +17,64 @@ use App\Entity\Task,
     MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor;
 
-use Behat\Behat\Exception\Exception;
-
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-
-
 class FeatureContext extends MinkContext implements KernelAwareInterface
 {
-    private $kernel;
 
+    /**
+     *
+     * @var KernelInterface
+     */
+    private $kernel;
 
     /**
      * @Given /^users table is empty$/
      */
     public function usersTableIsEmpty()
     {
-        $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+    }
+
+    /**
+     * @BeforeScenario
+     */
+    public function clearUsers()
+    {
+        $em = $this->getEM();
+        $em->createQuery('DELETE App:ThreadMetadata')->execute();
+        $em->createQuery('DELETE App:Thread')->execute();
         $em->createQuery('DELETE App:Task')->execute();
         $em->createQuery('DELETE MCUserBundle:User')->execute();
     }
 
+    /**
+     * @Given /^the following tasks exist:$/
+     */
+    public function theFollowingTasksExist(TableNode $table)
+    {
+        $hash = $table->getHash();
+        $em = $this->getEM();
+        foreach ($hash as $row) {
+            $task = new Task();
+            foreach ($row as $field => $value) {
+                $setter = 'set'.ucfirst($field);
+                switch ($field) {
+                    case 'user':
+                       $value = $this->findUserByName($value);
+                }
+                $task->$setter($value);
+            }
+            if (!$task->getDescription()) {
+                $task->setDescription('default description');
+            }
+            if (!$task->getTimePeriod()) {
+                $task->setTimePeriod('test');
+            }
+            $em->persist($task);
+        }
+        $em->flush();
+    }
 
     /**
      * @Given /^the following people exist:$/
@@ -47,26 +83,32 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     {
         $hash = $table->getHash();
         foreach ($hash as $row) {
-            $user = null;
-            switch ($row['type']) {
-                case 'client':
-                    $user = new Client;
-                    break;
-
-                case 'contractor':
-                    $user = new Contractor;
-                    break;
-
-                default:
-                    throw new UndefinedException("User type not supported");
-                    break;
-            }
-            $user->setUsername($row['username']);
-            $user->setEmail($row['email']);
-            $user->setPlainPassword($row['password']);
-            $user->setEnabled(true);
-            $this->getContainer()->get('fos_user.user_manager')->updateUser($user);
+            $this->addUser($row);
         }
+    }
+
+    /**
+     * @Given /^I am logged in as ([^"]*) with:$/
+     */
+    public function iAmLoggedInAsWith($type, TableNode $table)
+    {
+        $fields = $table->getHash()[0];
+        $fields['type'] = $type;
+        if (!isset($fields['username'])) {
+            $fields['username'] = implode('', explode(' ', $fields['fullName']));
+        }
+        if (!isset($fields['email'])) {
+            $fields['email'] = $fields['username'].'@default.com';
+        }
+        if (!isset($fields['password'])) {
+            $fields['password'] = 'defaultpassword';
+        }
+        if ($user = $this->getCurrentUser()) {
+            $this->updateUser($user);
+        } else {
+            $user = $this->addUser($fields);
+        }
+        $this->iAmLoggedInAsWithPassword($user->getUsername(), $fields['password']);
     }
 
     /**
@@ -75,7 +117,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     public function theFollowingJobsExist(TableNode $table)
     {
         $hash = $table->getHash();
-        $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        $em = $this->getEM();
         foreach ($hash as $row) {
             $job = new Task;
 
@@ -98,7 +140,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
      */
     public function theDefaultCategoriesAreInDatabase()
     {
-        $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        $em = $this->getEM();
         $em->createQuery('DELETE App:TaskCategory')->execute();
         $root = new TaskCategory;
         $root->setId(1);
@@ -124,7 +166,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
      */
     public function theDefaultBudgetsAreInDatabase()
     {
-        $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        $em = $this->getEM();
         $em->createQuery('DELETE App:TaskBudget')->execute();
         $hourly = [
             '$15-25 per hour',
@@ -160,14 +202,13 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
   
     }
 
-
     /**
      * @Then /^I am logged in system$/
      */
     public function iAmLoggedInSystem()
     {
-        if ($this->getContainer()->get('security.context')->getToken()->getUser() instanceof User !== true) {
-            throw new BehaviorException("Security token is:\n" . $this->output);
+        if ($this->getCurrentUser() instanceof User !== true) {
+            throw new BehaviorException('user not logged in');
         }
     }
 
@@ -178,7 +219,6 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     {
         $this->visit('/logout');
     }
-
 
     /**
      * @Given /^I am logged in as "([^"]*)" with password "([^"]*)"$/
@@ -228,7 +268,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
      */
     public function countriesAreLoaded()
     {
-        $em = $this->kernel->getContainer()->get('doctrine')->getEntityManager();
+        $em = $this->getEM();
         $em->createQuery('DELETE App:Country')->execute();
         $countriesData = file_get_contents(dirname(__FILE__).'/../../src/App/DataFixtures/DATA/countries.json');
         $countries = json_decode($countriesData);
@@ -302,5 +342,75 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         return $this->getMinkParameter('base_url').$this->generateUrl($route, $parameters);
     }
 
+    /**
+     *
+     * @return \Doctrine\ORM\EntityManager
+     */
+    private function getEM()
+    {
+        return $this->getContainer()->get('doctrine')->getEntityManager();
+    }
+
+    /**
+     *
+     * @return User
+     */
+    private function getCurrentUser()
+    {
+        if (is_object($token = $this->getContainer()->get('security.context')->getToken())) {
+            return $token->getUser();
+        }
+    }
+
+    /**
+     *
+     * @param array $fields
+     * @return \MC\UserBundle\Entity\User
+     * @throws UndefinedException
+     */
+    private function addUser(array $fields)
+    {
+        $user = null;
+        switch ($fields['type']) {
+            case 'client':
+                $user = new Client();
+                break;
+            case 'contractor':
+                $user = new Contractor();
+                break;
+            default:
+                throw new UndefinedException('User type not supported');
+        }
+        unset($fields['type']);
+        if (!isset($fields['enabled'])) {
+            $fields['enabled'] = true;
+        }
+        return $this->updateUser($user, $fields);
+    }
+
+    /**
+     *
+     * @param \MC\UserBundle\Entity\User $user
+     * @param array $fields
+     * @return \MC\UserBundle\Entity\User
+     */
+    private function updateUser(User $user, array $fields)
+    {
+        foreach ($fields as $field => $value) {
+            if ($field == 'password') {
+                $setter = 'setPlainPassword';
+            } else {
+                $setter = 'set'.ucfirst($field);
+            }
+            $user->$setter($value);
+        }
+        $this->getContainer()->get('fos_user.user_manager')->updateUser($user);
+        return $user;
+    }
+
+    private function findUserByName($name)
+    {
+        return $this->getEM()->getRepository(get_class(new Client))->findOneBy(['username' => $name]);
+    }
 
 }

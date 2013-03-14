@@ -1,0 +1,9 @@
+mc_fineupload:
+    pattern:   /_upload
+    defaults:  { _controller: MCAssetBundle:Upload:upload }
+    requirements:
+        _method:  POST
+
+_mc_test_multiupload:   
+    pattern:   /_upload/test-multi
+    defaults:  { _controller: MCAssetBundle:Upload:testMultiupload }

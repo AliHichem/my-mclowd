@@ -1,0 +1,16 @@
+parameters:
+    mc.asset.form.type.class: MC\AssetBundle\Form\Type\UploadType
+    mc.asset.entity_class:    MC\AssetBundle\Entity\Asset
+
+services:
+    form.type.upload:
+        class: %mc.asset.form.type.class%        
+        tags:
+            - { name: form.type, alias: upload }
+        calls:
+            - [ setContainer, [ @service_container ] ]
+
+    mc.asset_manager:
+        class: MC\AssetBundle\Model\AssetManager
+        arguments: [ "@knp_gaufrette.filesystem_map", "@doctrine.orm.entity_manager", "@event_dispatcher", "asset_fs" ]
+

@@ -36,7 +36,7 @@
         "sonata-project/admin-bundle": "dev-master",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "tss/assets-install-windows-bundle": "dev-master",
-
+        "knplabs/knp-gaufrette-bundle": "dev-master",
 
         
         "behat/behat": "2.4.*",

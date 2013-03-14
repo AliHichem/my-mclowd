@@ -10,7 +10,7 @@ _sonata_admin:
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix:   /connect
-    
+
 app:
     resource: "@App/Resources/config/routing.yml"
     type:     "rad_convention"
@@ -28,6 +28,9 @@ mc_user:
 mc_admin:
     resource: '@MCAdminBundle/Resources/config/routing.yml'
     prefix: /admin
+
+mc_asset:
+    resource: '@MCAssetBundle/Resources/config/routing/routing.yml'
 
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"

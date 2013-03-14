@@ -22,8 +22,9 @@
             <link rel="stylesheet" href="{{ asset('bundles/knprad/bootstrap/css/bootstrap.min.css') }}" />
             <link rel="stylesheet" href="{{ asset('bundles/knprad/bootstrap/css/bootstrap-responsive.min.css') }}" />
             <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/mcasset/css/fineuploader.css') }}" />
         {% endblock stylesheets %}
-            
+                
         {# load socket.io only if user is logged in #}
         {% if app.user %}
             <script src="{{ settings.getNodeAddr }}:{{ settings.getNodePort }}/socket.io/socket.io.js"></script>
@@ -92,7 +93,15 @@
                 '@App/Resources/public/js/parsley.js/parsley.js'
                 '@App/Resources/public/js/parsley.js/parsley.extra.js'
             %}
-                <script src="{{ asset_url }}"></script>
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
+            {% javascripts                
+                '@MCAssetBundle/Resources/public/js/header.js'                
+                '@MCAssetBundle/Resources/public/js/util.js'
+                '@MCAssetBundle/Resources/public/js/*'
+            %}
+            <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock javascripts %}
     </body>

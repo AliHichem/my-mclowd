@@ -1,0 +1,56 @@
+{% form_theme form _self %}
+
+{% block upload_widget %}
+{% spaceless %}
+
+    <div id="mc-fine-uploader"></div>
+    
+    
+    <div id="mc-asset-attachments" style="display:none;">      
+        {% if multiple and expanded %}
+            {% for item in data %}
+                <input type="hidden" value="{{ item.id }}" name="{{ full_name }}[]" />
+            {% endfor %}
+        {% else %}
+            <input type="hidden" value="{{ item.id }}" name="{{ full_name }}" />
+        {% endif %}
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var multiple = {{ multiple and expanded }};
+            var uploader = new qq.FineUploader({
+                element: document.getElementById('mc-fine-uploader'),
+                request: {
+                    endpoint: "{{ path('mc_fineupload') }}"
+                },                
+                callbacks: {
+                    onComplete: function(id, fileName, responseJSON) {
+                        if (responseJSON.success) {                        
+                            time = new Date().getTime();
+                            var input = document.createElement("input");
+                            input.setAttribute("type", "hidden");
+                            if (multiple) {
+                                input.setAttribute("name", "{{ full_name }}[]");    
+                            } else {
+                                input.setAttribute("name", "{{ full_name }}");    
+                            }
+                            
+                            input.setAttribute("value", responseJSON.id);
+                            document.getElementById("mc-asset-attachments").appendChild(input);
+                        }
+                    }
+                },
+{% for key, option in options %}
+                {{ key }}: '{{ option }}'{% if not loop.last %},{% endif %}
+{% endfor %}
+
+            });
+             
+        });
+    </script>
+
+   
+{% endspaceless %}
+{% endblock %}

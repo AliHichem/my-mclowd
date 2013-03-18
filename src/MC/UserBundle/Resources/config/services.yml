@@ -1,0 +1,7 @@
+services:
+    mc_user.contractor_template_listener:
+        class: MC\UserBundle\EventListener\ContractorTemplateListener        
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 1 }
+        calls:
+            - [setContainer, ["@service_container"]]

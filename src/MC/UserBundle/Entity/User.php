@@ -12,6 +12,7 @@ use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use MC\AssetBundle\Entity\Asset;
 
 /**
  * @ORM\Entity
@@ -120,104 +121,28 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      * })
      */
     protected $hearSource;
+ 
+    /**
+     * @ORM\ManyToOne(targetEntity="Mc\AssetBundle\Entity\Asset")
+     * @ORM\JoinColumn(name="avatar_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $avatar = null;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @var string
-     */
-    protected $pictureFilename;
-
-    private $oldPictureFilename;
-
-    /**
-     * @var UploadedFile
-     * @Assert\File(maxSize="5000000")
-     */
-    protected $picture;
+     * Not persisted, used for updates of avatar only
+     * @Assert\File(
+     *     maxSize="1M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
+     * */
+    public $uploadedAvatar = null;
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    /**
-     * @param UploadedFile $file
-     */
-    public function setPicture(UploadedFile $file=null)
-    {
-        $this->picture = $file;
-        if (null !== $this->picture) {
-            if (isset($this->pictureFilename)) {
-                $this->oldPictureFilename = $this->pictureFilename;
-            }
-            $this->pictureFilename = $this->getUsername()
-                .'.'.$this->picture->guessExtension();
-            if ($this->pictureFilename === $this->oldPictureFilename) {
-                // if the filename didn't change the model may not get
-                // updated, but we still need to upload the new picture
-                $this->uploadPicture();
-            }
-        }
-    }
-
-    /**
-     * 
-     * @return UploadedFile
-     */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-    public function uploadPicture()
-    {
-        if (!isset ($this->picture)) {
-            return;
-        }
-        if (isset($this->oldPictureFilename)) {
-            $oldPicturePath = implode('/', [
-                $this->getWebRootDir(), 
-                $this->getPictureDir(),
-                $this->oldPictureFilename
-            ]);
-            unlink($oldPicturePath);
-        }
-        $this->picture->move($this->getWebRootDir().'/'.$this->getPictureDir(),
-                $this->pictureFilename);
-        unset($this->picture);
-    }
-
-    /**
-     * @ORM\PostRemove()
-     */
-    public function removePicture()
-    {
-        if ($this->getPicturePath()) {
-            unlink($this->getPicturePath());
-        }
-    }
-
-    /**
-     * @return string
-     */
-    public function getPicturePath()
-    {
-        return null === $this->getPictureWebPath()
-            ? null
-            : $this->getWebRootDir().'/'.$this->getPictureWebPath();
-    }
-
-    public function getPictureWebPath()
-    {
-        return null === $this->pictureFilename
-            ? null
-            : $this->getPictureDir().'/'.$this->pictureFilename;
-    }
-
+    
     /**
      * @return array<string, string> $accountTypes
      */
@@ -315,7 +240,6 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
             return null;
         }      
     }
-
 
     /**
      * Get id
@@ -441,21 +365,20 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     {
         return $this->accountType;
     }
+   
 
-    /** base web path for profile pictures
-     * @return string
-     */
-    private function getPictureDir()
+    
+    public function getAvatar() 
     {
-        return 'uploads/pictures';
+        return $this->avatar;
     }
-
-    /** filesystem path of web root
-     * @return string
-     */
-    private function getWebRootDir()
+    
+    
+    public function setAvatar(Asset $avatar) 
     {
-        return __DIR__.'/../../../../web';
+        $this->avatar = $avatar;
+    
+        return $this;
     }
 
 }

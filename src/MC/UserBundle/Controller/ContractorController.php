@@ -8,6 +8,8 @@ use App\Controller\Controller as BaseController,
     Symfony\Component\HttpFoundation\JsonResponse;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use MC\UserBundle\Form\Type\ContractorEditFormType;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 class ContractorController extends BaseController
 {
@@ -19,13 +21,16 @@ class ContractorController extends BaseController
 
 
     /**
+     * 
+     * @Secure(roles="ROLE_CONTRACTOR")
      * @Template()
      * */
     public function editAction(Request $request)
     {
         $user = $this->getSecurity()->getToken()->getUser();
 
-        return ['user' => $user];
+        $form = $this->createForm(new ContractorEditFormType(), $user);
+        return ['user' => $user, 'form' => $form->createView()];
     }
 
 }

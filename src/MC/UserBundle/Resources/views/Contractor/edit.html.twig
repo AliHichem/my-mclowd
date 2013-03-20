@@ -4,7 +4,18 @@
 
 <h3>{{ user }}</h3>
 
-{{ form_widget(form.uploadedAvatar) }}
+<form action="{{ path('contractor_edit') }}" method="POST" {{ form_enctype(avatarForm) }} />
+    
+    {% if user.avatar %}
+        <img src="{{ user.avatar.path('medium') }}" />
+    {% endif %}
 
+    {{ form_errors(avatarForm) }}
+    {{ form_widget(avatarForm.uploadedAvatar) }}
+    {{ form_errors(avatarForm.uploadedAvatar) }}
+    {{ form_rest(avatarForm) }}
+    <input type="submit" value="Upload new avatar" name="avatar" />
+
+</form>
 
 {% endblock %}

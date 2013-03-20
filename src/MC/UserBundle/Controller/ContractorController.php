@@ -29,8 +29,33 @@ class ContractorController extends BaseController
     {
         $user = $this->getSecurity()->getToken()->getUser();
 
+        $avatarForm = $this
+            ->createFormBuilder($user)
+            ->add('uploadedAvatar', 'file', ['required' => false])
+            ->getForm()
+        ;
         $form = $this->createForm(new ContractorEditFormType(), $user);
-        return ['user' => $user, 'form' => $form->createView()];
+
+        /**
+         * Handle avatar change
+         */
+        if ($request->request->has("avatar"))
+        {
+            $avatarForm->bind($request);
+            if ($avatarForm->isValid()) {
+                $data = $avatarForm->getData();                
+                $return = $this->get('mc.asset_manager')->upload(
+                    $data->uploadedAvatar, true
+                );
+                $user->setAvatar($return['object']);                                                
+                $this->persist($user, true);     
+                $this->addFlash('success', 'Avatar has been updated');
+                return $this->redirectToRoute('contractor_edit');       
+                                        
+            }
+        }
+
+        return ['user' => $user, 'form' => $form->createView(), 'avatarForm' => $avatarForm->createView()];
     }
 
 }

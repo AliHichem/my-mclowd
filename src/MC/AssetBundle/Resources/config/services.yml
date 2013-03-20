@@ -14,3 +14,8 @@ services:
         class: MC\AssetBundle\Model\AssetManager
         arguments: [ "@knp_gaufrette.filesystem_map", "@doctrine.orm.entity_manager", "@event_dispatcher", "asset_fs" ]
 
+    mc.asset.asset_thumbnails_listener:
+        class:     MC\AssetBundle\EventListener\AssetThumbnailsEventListener
+        arguments: ["@imagine", "@imagine.filter.manager", "%imagine.filters%", "%kernel.root_dir%/../web"]
+        tags:
+            - { name:kernel.event_listener, event: mc.asset.events.asset_uploaded, method: onAssetUploadedEvent }

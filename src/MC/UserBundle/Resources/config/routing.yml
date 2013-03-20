@@ -9,3 +9,7 @@ contractor_registration:
 registration_validation:
     pattern: /register/validate/{what}
     defaults: { _controller: MCUserBundle:Registration:validate }
+
+contractor_edit:
+    pattern:  /contractor/edit
+    defaults: { _controller: MCUserBundle:Contractor:edit }

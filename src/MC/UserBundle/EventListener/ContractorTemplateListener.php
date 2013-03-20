@@ -13,9 +13,9 @@ class ContractorTemplateListener extends ContainerAware
     {
 
         $context = $this->container->get('security.context');
-        if ($context->isGranted('ROLE_CONTRACTOR') && !$context->getToken()->getUser()->hasSelectedTemplate()) {
-            var_dump('no template'); die();
-        }
+        //if ($context->isGranted('ROLE_CONTRACTOR') && !$context->getToken()->getUser()->hasSelectedTemplate()) {
+            //var_dump('no template'); die();
+        //}
 
         
     }

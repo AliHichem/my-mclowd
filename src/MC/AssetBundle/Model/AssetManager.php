@@ -11,6 +11,7 @@ use Gaufrette\Stream\Local;
 use Gaufrette\StreamMode;
 
 use MC\AssetBundle\Entity\Asset;
+use MC\AssetBundle\Event\AssetUploadedEvent;
 
 
 class AssetManager implements UploaderInterface {
@@ -28,7 +29,7 @@ class AssetManager implements UploaderInterface {
         $this->eventDispacher = $eventDispacher;    
     }
 
-    public function upload(UploadedFile $file)
+    public function upload(UploadedFile $file, $returnObject = false)
     {   
         $asset = new Asset;
         $asset->createAssetFromUploadedFile($file);
@@ -50,12 +51,19 @@ class AssetManager implements UploaderInterface {
         $dst->close();
         $src->close();
 
-        return array(
+        $arr = array(
             'id' => $asset->getId(), 
             'originalFileName' => $asset->getOriginalFileName(), 
             'path' => $asset->getPath()
         );
 
+        if ($returnObject === true) {
+            $arr['object'] = $asset;
+        }
+
+        $this->eventDispacher->dispatch('mc.asset.events.asset_uploaded', new AssetUploadedEvent($asset));
+
+        return $arr;
         
     }
     

@@ -20,6 +20,7 @@
         "symfony/swiftmailer-bundle": "2.1.*",
         "symfony/monolog-bundle": "2.1.*",
         "sensio/distribution-bundle": "2.1.*",
+        "sensio/framework-extra-bundle": "2.1.*",
         "mopa/bootstrap-bundle": "dev-master",
         "knplabs/rad-bundle": "dev-develop",
         "friendsofsymfony/user-bundle": "*",
@@ -37,6 +38,7 @@
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "tss/assets-install-windows-bundle": "dev-master",
         "knplabs/knp-gaufrette-bundle": "dev-master",
+        "avalanche123/imagine-bundle": "v2.1",
 
         
         "behat/behat": "2.4.*",

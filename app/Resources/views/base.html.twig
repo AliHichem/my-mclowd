@@ -70,6 +70,10 @@
                     <li><a href="{{ path('app_tasks_my') }}">My tasks</a></li>    
                 {% endif %}
 
+                {% if is_granted("ROLE_CONTRACTOR") %}     
+                    <li><a href="{{ path('contractor_edit') }}">Edit profile</a></li>    
+                {% endif %}
+
             </ul>
             {% if  app.session.flashbag.count() > 0 %}
                 <section id="flash-messages">

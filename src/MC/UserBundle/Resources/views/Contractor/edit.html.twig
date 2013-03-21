@@ -42,7 +42,7 @@
 
         <ul>
             <li ng-repeat="task in profile.tasks">
-                {{ task.name }} : {{ task.amount + '$' }}
+                {{ task.name }} : {{ task.amount + '$' }} <button class="btn btn-danger" ng-click="removeTask(task)">Remove</button>
             </li>
         </ul>
     </div>

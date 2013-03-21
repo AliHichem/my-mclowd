@@ -14,6 +14,10 @@ function ContractorEditCtrl($scope) {
 
         $scope.newTask = {name: '', amount: ''};
     };
+
+    $scope.removeTask = function (task) {
+        $scope.profile.tasks.splice($scope.profile.tasks.indexOf(task), 1);
+    };
 }
 
 mcApp.directive('placeholder', function() {

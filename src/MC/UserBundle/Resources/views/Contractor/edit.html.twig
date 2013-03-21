@@ -4,18 +4,28 @@
 
 <h3>{{ user }}</h3>
 
-<form action="{{ path('contractor_edit') }}" method="POST" {{ form_enctype(avatarForm) }} />
-    
-    {% if user.avatar %}
-        <img src="{{ user.avatar.path('medium') }}" />
-    {% endif %}
 
-    {{ form_errors(avatarForm) }}
-    {{ form_widget(avatarForm.uploadedAvatar) }}
-    {{ form_errors(avatarForm.uploadedAvatar) }}
-    {{ form_rest(avatarForm) }}
-    <input type="submit" value="Upload new avatar" name="avatar" />
+<div ng-controller="ContractorEditCtrl">
 
-</form>
+    <form action="{{ path('contractor_edit') }}" method="POST" {{ form_enctype(avatarForm) }} />        
+        {% if user.avatar %}
+            <img src="{{ user.avatar.path('medium') }}" />
+        {% endif %}
 
+        {{ form_errors(avatarForm) }}
+        {{ form_widget(avatarForm.uploadedAvatar) }}
+        {{ form_errors(avatarForm.uploadedAvatar) }}
+        {{ form_rest(avatarForm) }}
+        <input type="submit" value="Upload new avatar" name="avatar" />
+    </form>
+
+    {% raw %}
+    <small>{{ profile.fullname }}</small>
+
+    <input ng-model="profile.tagLine" placeholder="Specify tag line" />
+    <small>{{ profile.tagLine }}</small>
+
+    {% endraw %}
+
+</div>
 {% endblock %}

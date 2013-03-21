@@ -4,6 +4,7 @@
 
 <h3>{{ user }}</h3>
 
+{{ form_widget(form) }}
 
 <div ng-controller="ContractorEditCtrl">
 
@@ -49,7 +50,7 @@
 
      <div class="well">
         <input ng-model="profile.city" placeholder="Specify your city" />
-        <small>{{ profile.city }}</small>
+        <button class="btn" ng-click="save(profile)" ng-show="changed.city">Confirm</button>
     </div>
 
 

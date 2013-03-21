@@ -39,7 +39,7 @@ class ContractorController extends BaseController
         /**
          * Handle avatar change
          */
-        if ($request->request->has("avatar"))
+        if ($request->request->has("uploadedAvatar"))
         {
             $avatarForm->bind($request);
             if ($avatarForm->isValid()) {
@@ -52,6 +52,17 @@ class ContractorController extends BaseController
                 $this->addFlash('success', 'Avatar has been updated');
                 return $this->redirectToRoute('contractor_edit');       
                                         
+            }
+        } elseif ($request->request->has("id")) {
+            /**
+             * Handle submission of values from angular
+             */
+            $form->bind($request);
+            var_dump($form->getErrors());die();
+            if ($form->isValid()) {                
+                $this->persist($user, true);     
+            } else {
+
             }
         }
 

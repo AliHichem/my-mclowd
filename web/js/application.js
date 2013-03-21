@@ -1,7 +1,13 @@
 var mcApp = angular.module('Marketplace', []);
 
-function ContractorEditCtrl($scope) {
+function ContractorEditCtrl($scope, $http) {
     $scope.newTask = {name: '', amount: ''};
+    $scope.changed = {city: false};
+
+    $scope.$watch('profile.city', function(newValue, oldValue){
+        $scope.changed.city = true;
+        
+    });
 
     $scope.addTask = function () {
         if (!$scope.newTask.name.length) {
@@ -17,6 +23,12 @@ function ContractorEditCtrl($scope) {
 
     $scope.removeTask = function (task) {
         $scope.profile.tasks.splice($scope.profile.tasks.indexOf(task), 1);
+    };
+
+    $scope.save = function(task) {
+        console.log('saving');
+
+        $.post('/app_dev.php/contractor/edit', task);
     };
 }
 

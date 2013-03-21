@@ -11,20 +11,23 @@ class ContractorEditFormType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('uploadedAvatar', 'file', ['required' => false])
+            ->add('city')
         ;
     }
 
+    
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
-            'data_class' => 'MC\UserBundle\Entity\Contractor'            
-        );
+        $resolver->setDefaults(array(
+            'csrf_protection'   => false,
+            'data_class' => 'MC\UserBundle\Entity\Contractor',
+        ));
     }
 
+    
     public function getName()
     {
-        return 'contractor_edit';
+        return null;
     }
 
 }

@@ -3,11 +3,10 @@ var mcApp = angular.module('Marketplace', []);
 
 function ContractorEditCtrl($scope, $http) {
     $scope.newTask = {name: '', amount: ''};
-    $scope.changed = {city: false};
+    $scope.changed = {city: 0};
 
     $scope.$watch('profile.city', function(newValue, oldValue){
-        $scope.changed.city = true;
-        
+        $scope.changed.city++;
     });
 
     $scope.addTask = function () {

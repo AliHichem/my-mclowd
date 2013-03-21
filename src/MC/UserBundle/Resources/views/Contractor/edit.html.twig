@@ -7,7 +7,8 @@
 
 <div ng-controller="ContractorEditCtrl">
 
-     <div ng-init='profile={{ userJson|raw }}'></div>
+    <div ng-init='profile={{ userJson|raw }}'></div>
+    <div ng-init='originalProfile={{ userJson|raw }}'></div>
 
     <form action="{{ path('contractor_edit') }}" method="POST" {{ form_enctype(avatarForm) }} />        
         {% if user.avatar %}
@@ -49,7 +50,7 @@
 
      <div class="well">
         <input ng-model="profile.city" placeholder="Specify your city" />
-        <button class="btn" ng-click="save(profile)" ng-show="changed.city">Confirm</button>
+        <button class="btn" ng-click="save(profile)" ng-show="profile.city != originalProfile.city">Confirm</button>
     </div>
 
 

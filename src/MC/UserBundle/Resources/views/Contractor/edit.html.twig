@@ -22,12 +22,40 @@
     </form>
 
     {% raw %}
-    <small>{{ profile.fullname }}</small>
+    <div class="well">
+        <input ng-model="profile.fullname" placeholder="Specify your name" />
+        <small>{{ profile.fullname }}</small>
+    </div>
 
-    <input ng-model="profile.tagLine" placeholder="Specify tag line" />
-    <small>{{ profile.tagLine }}</small>
+    <div class="well">
+        <input ng-model="profile.tagLine" placeholder="Specify tag line" />
+        <small>{{ profile.tagLine }}</small>
+    </div>
+
+    <div class="well">
+        <h5>Set prices for tasks</h5>
+        <form id="task-form" ng-submit="addTask()">
+            <input placeholder="Enter a task" ng-model="newTask.name" />
+            <input placeholder="Enter amount" ng-model="newTask.amount" />
+            <input type="submit" value="Add new task" />
+        </form>
+
+        <ul>
+            <li ng-repeat="task in profile.tasks">
+                {{ task.name }} : {{ task.amount + '$' }}
+            </li>
+        </ul>
+    </div>
+
+     <div class="well">
+        <input ng-model="profile.city" placeholder="Specify your city" />
+        <small>{{ profile.city }}</small>
+    </div>
+
 
     {% endraw %}
+
+
 
 </div>
 {% endblock %}

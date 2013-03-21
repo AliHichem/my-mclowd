@@ -1,7 +1,19 @@
 var mcApp = angular.module('Marketplace', []);
 
 function ContractorEditCtrl($scope) {
+    $scope.newTask = {name: '', amount: ''};
 
+    $scope.addTask = function () {
+        if (!$scope.newTask.name.length) {
+            return;
+        }
+        if (typeof $scope.profile.tasks === "undefined") {
+            $scope.profile.tasks = []
+        }        
+        $scope.profile.tasks.push($scope.newTask);
+
+        $scope.newTask = {name: '', amount: ''};
+    };
 }
 
 mcApp.directive('placeholder', function() {

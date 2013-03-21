@@ -4,11 +4,10 @@
 
 <h3>{{ user }}</h3>
 
-{{ form_widget(form) }}
 
 <div ng-controller="ContractorEditCtrl">
 
-     <div ng-init='profile={{ user|serialize|raw }}'></div>
+     <div ng-init='profile={{ userJson|raw }}'></div>
 
     <form action="{{ path('contractor_edit') }}" method="POST" {{ form_enctype(avatarForm) }} />        
         {% if user.avatar %}
@@ -19,7 +18,7 @@
         {{ form_widget(avatarForm.uploadedAvatar) }}
         {{ form_errors(avatarForm.uploadedAvatar) }}
         {{ form_rest(avatarForm) }}
-        <input type="submit" value="Upload new avatar" name="avatar" />
+        <input type="submit" value="Upload new avatar" name="uploadingAvatar" />
     </form>
 
     {% raw %}

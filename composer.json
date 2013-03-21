@@ -39,14 +39,14 @@
         "tss/assets-install-windows-bundle": "dev-master",
         "knplabs/knp-gaufrette-bundle": "dev-master",
         "avalanche123/imagine-bundle": "v2.1",
+        "jms/serializer-bundle": "0.9",
 
         
         "behat/behat": "2.4.*",
         "behat/symfony2-extension": "*",
         "behat/mink-extension": "*",
         "behat/mink-browserkit-driver": "*",
-        "phpspec/phpspec2": "dev-develop",
-        "jms/serializer-bundle": "0.9"
+        "phpspec/phpspec2": "dev-develop"
     },
     "require-dev": {
         

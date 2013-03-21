@@ -1,3 +1,4 @@
+
 var mcApp = angular.module('Marketplace', []);
 
 function ContractorEditCtrl($scope, $http) {
@@ -27,8 +28,9 @@ function ContractorEditCtrl($scope, $http) {
 
     $scope.save = function(task) {
         console.log('saving');
-
-        $.post('/app_dev.php/contractor/edit', task);
+        console.log(task)
+        $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+        $http.post('/app_dev.php/contractor/edit', $.param(task));
     };
 }
 

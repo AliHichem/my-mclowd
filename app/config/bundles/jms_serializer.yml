@@ -1,0 +1,6 @@
+jms_serializer:
+    metadata:
+        directories:
+            FOSUserBundle:
+                namespace_prefix: FOS\UserBundle
+                path: "@MCUserBundle/Resources/config/serializer/fos"

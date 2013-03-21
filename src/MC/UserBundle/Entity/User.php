@@ -13,6 +13,7 @@ use FOS\UserBundle\Entity\User as BaseUser;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use MC\AssetBundle\Entity\Asset;
+use JMS\SerializerBundle\Annotation as Rest;
 
 /**
  * @ORM\Entity
@@ -87,6 +88,8 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      * @var string $city
      *
      * @ORM\Column(name="city", type="string", length=128, nullable=true)
+     * @Rest\Expose
+     * @Rest\Groups({"profileForm"})
      */
     protected $city;
 

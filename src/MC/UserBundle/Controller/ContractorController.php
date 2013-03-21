@@ -10,7 +10,6 @@ use App\Controller\Controller as BaseController,
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use MC\UserBundle\Form\Type\ContractorEditFormType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
-
 class ContractorController extends BaseController
 {
     
@@ -28,6 +27,8 @@ class ContractorController extends BaseController
     public function editAction(Request $request)
     {
         $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+        $serializer->setGroups(['profileForm']);
 
         $avatarForm = $this
             ->createFormBuilder($user)
@@ -36,10 +37,11 @@ class ContractorController extends BaseController
         ;
         $form = $this->createForm(new ContractorEditFormType(), $user);
 
+        //var_dump($request);die();
         /**
          * Handle avatar change
          */
-        if ($request->request->has("uploadedAvatar"))
+        if ($request->request->has("uploadingAvatar"))
         {
             $avatarForm->bind($request);
             if ($avatarForm->isValid()) {
@@ -53,20 +55,24 @@ class ContractorController extends BaseController
                 return $this->redirectToRoute('contractor_edit');       
                                         
             }
-        } elseif ($request->request->has("id")) {
+        } elseif ($request->request->has("city")) {            
             /**
              * Handle submission of values from angular
              */
             $form->bind($request);
-            var_dump($form->getErrors());die();
             if ($form->isValid()) {                
                 $this->persist($user, true);     
+                $resp = $serializer->serialize($user, 'json');
             } else {
-
+                $resp = json_encode($form->getErrors());
             }
+
+            $response = new JsonResponse($resp);
+            return $response;
         }
 
-        return ['user' => $user, 'form' => $form->createView(), 'avatarForm' => $avatarForm->createView()];
+        
+        return ['user' => $user, 'userJson' => $serializer->serialize($user, 'json'), 'form' => $form->createView(), 'avatarForm' => $avatarForm->createView()];
     }
 
 }

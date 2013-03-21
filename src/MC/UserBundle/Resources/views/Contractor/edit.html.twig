@@ -7,6 +7,8 @@
 
 <div ng-controller="ContractorEditCtrl">
 
+     <div ng-init='profile={{ user|serialize|raw }}'></div>
+
     <form action="{{ path('contractor_edit') }}" method="POST" {{ form_enctype(avatarForm) }} />        
         {% if user.avatar %}
             <img src="{{ user.avatar.path('medium') }}" />

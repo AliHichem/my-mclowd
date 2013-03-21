@@ -45,7 +45,8 @@
         "behat/symfony2-extension": "*",
         "behat/mink-extension": "*",
         "behat/mink-browserkit-driver": "*",
-        "phpspec/phpspec2": "dev-develop"
+        "phpspec/phpspec2": "dev-develop",
+        "jms/serializer-bundle": "0.9"
     },
     "require-dev": {
         

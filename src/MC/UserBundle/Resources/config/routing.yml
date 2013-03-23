@@ -13,3 +13,21 @@ registration_validation:
 contractor_edit:
     pattern:  /contractor/edit
     defaults: { _controller: MCUserBundle:Contractor:edit }
+
+contractor_update_city:
+    pattern:  /contractor/update-city
+    defaults: { _controller: MCUserBundle:Contractor:updateCity }
+    requirements:
+        _method:  POST
+
+contractor_update_tag_line:
+    pattern:  /contractor/update-tag-line
+    defaults: { _controller: MCUserBundle:Contractor:updateTagLine }
+    requirements:
+        _method:  POST
+
+contractor_update_fullname:
+    pattern:  /contractor/update-fullname
+    defaults: { _controller: MCUserBundle:Contractor:updateFullname }
+    requirements:
+        _method:  POST

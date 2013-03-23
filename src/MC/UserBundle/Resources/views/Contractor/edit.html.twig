@@ -4,6 +4,7 @@
 
 <h3>{{ user }}</h3>
 
+{{ form_widget(test_form) }}
 
 <div ng-controller="ContractorEditCtrl">
 
@@ -24,13 +25,16 @@
 
     {% raw %}
     <div class="well">
-        <input ng-model="profile.fullname" placeholder="Specify your name" />
-        <small>{{ profile.fullname }}</small>
+        <input ng-model="profile.full_name" placeholder="Specify your name" />
+        <small>{{ profile.full_name }}</small>
+        <button class="btn" ng-click="saveFullname(profile)" ng-show="profile.full_name != originalProfile.full_name">Confirm</button>
+
     </div>
 
     <div class="well">
-        <input ng-model="profile.tagLine" placeholder="Specify tag line" />
+        <input ng-model="profile.tag_line" placeholder="Specify tag line" />
         <small>{{ profile.tagLine }}</small>
+        <button class="btn" ng-click="saveTagLine(profile)" ng-show="profile.tag_line != originalProfile.tag_line">Confirm</button>
     </div>
 
     <div class="well">
@@ -50,7 +54,7 @@
 
      <div class="well">
         <input ng-model="profile.city" placeholder="Specify your city" />
-        <button class="btn" ng-click="save(profile)" ng-show="profile.city != originalProfile.city">Confirm</button>
+        <button class="btn" ng-click="saveCity(profile)" ng-show="profile.city != originalProfile.city">Confirm</button>
     </div>
 
 

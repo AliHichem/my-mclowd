@@ -81,6 +81,8 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      * @var string $fullName
      *
      * @ORM\Column(name="full_name", type="string", length=250, nullable=true)
+     * @Rest\Expose
+     * @Rest\Groups({"profileForm"})
      */
     protected $fullName;
 

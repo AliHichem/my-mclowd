@@ -18,7 +18,6 @@ class ContractorController extends BaseController
         
     }
 
-
     /**
      * 
      * @Secure(roles="ROLE_CONTRACTOR")
@@ -37,7 +36,6 @@ class ContractorController extends BaseController
         ;
         $form = $this->createForm(new ContractorEditFormType(), $user);
 
-        //var_dump($request);die();
         /**
          * Handle avatar change
          */
@@ -55,24 +53,94 @@ class ContractorController extends BaseController
                 return $this->redirectToRoute('contractor_edit');       
                                         
             }
-        } elseif ($request->request->has("city")) {            
-            /**
-             * Handle submission of values from angular
-             */
-            $form->bind($request);
-            if ($form->isValid()) {                
-                $this->persist($user, true);     
-                $resp = $serializer->serialize($user, 'json');
-            } else {
-                $resp = json_encode($form->getErrors());
-            }
+        }    
+        $test_form = $this
+            ->createFormBuilder($user, ['csrf_protection' => false])
+            ->add('fullName')->getForm()
+        ;
+        return ['user' => $user, 
+                'userJson' => $serializer->serialize($user, 'json'), 
+                'form' => $form->createView(), 
+                'avatarForm' => $avatarForm->createView()
+        ];
+    }
 
-            $response = new JsonResponse($resp);
-            return $response;
+    /**
+     * 
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function updateCityAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+
+        $form = $this
+            ->createFormBuilder($user, ['csrf_protection' => false])
+            ->add('city')->getForm()
+        ;
+        $form->bind($request);
+        if ($form->isValid()) {                
+            $this->persist($user, true);     
+            $resp = $serializer->serialize($user, 'json');
+        } else {
+            $resp = json_encode($form->getErrors());
         }
 
-        
-        return ['user' => $user, 'userJson' => $serializer->serialize($user, 'json'), 'form' => $form->createView(), 'avatarForm' => $avatarForm->createView()];
+        $response = new JsonResponse($resp);
+        return $response;
+
+    }
+
+    /**
+     * 
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function updateTagLinection(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+
+        $form = $this
+            ->createFormBuilder($user, ['csrf_protection' => false])
+            ->add('tagLine')->getForm()
+        ;
+        $form->bind($request);
+        if ($form->isValid()) {                
+            $this->persist($user, true);     
+            $resp = $serializer->serialize($user, 'json');
+        } else {
+            $resp = json_encode($form->getErrors());
+        }
+
+        $response = new JsonResponse($resp);
+        return $response;
+
+    }
+
+    /**
+     * 
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function updateFullnameAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+
+        $form = $this
+            ->createFormBuilder($user, ['csrf_protection' => false])
+            ->add('fullName')->getForm()
+        ;
+        $form->bind($request);
+        if ($form->isValid()) {             
+            $this->persist($user, true);     
+            $resp = $serializer->serialize($user, 'json');
+        } else {
+            $resp = json_encode($form->getErrors());
+        }
+
+        $response = new JsonResponse($resp);
+        return $response;
+
     }
 
 }

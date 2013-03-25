@@ -5,6 +5,7 @@ function ContractorEditCtrl($scope, $http) {
     $scope.newTask = {name: '', amount: ''};
     $scope.newQualification = {name: ''};
     $scope.changed = {city: 0};
+    $scope.newEducation = {institution_name: '', degree: ''};
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
     $scope.$watch('profile.city', function(newValue, oldValue){
@@ -36,12 +37,30 @@ function ContractorEditCtrl($scope, $http) {
         $scope.newQualification = {name: ''};
     };
 
+    $scope.addEducation = function () {
+        console.log('sss')
+        if (!$scope.newEducation.institution_name.length) {
+            return;
+        }
+        if (typeof $scope.profile.educations === "undefined") {
+            $scope.profile.educations = [];
+        }        
+        $scope.profile.educations.push($scope.newEducation);
+        console.log($scope.profile.educations);
+
+        $scope.newEducation = {institution_name: '', degree: ''};
+    };
+
     $scope.removeTask = function (task) {
         $scope.profile.tasks.splice($scope.profile.tasks.indexOf(task), 1);
     };
 
     $scope.removeQualification = function (qualification) {
         $scope.profile.qualifications.splice($scope.profile.qualifications.indexOf(qualification), 1);
+    };
+
+    $scope.removeEducation = function (education) {
+        $scope.profile.educations.splice($scope.profile.educations.indexOf(education), 1);
     };
 
     $scope.saveCity = function(task) {

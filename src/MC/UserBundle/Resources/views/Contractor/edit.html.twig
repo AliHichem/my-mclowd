@@ -4,6 +4,8 @@
 
 <h3>{{ user }}</h3>
 
+{{ form_widget(helperForm) }}
+
 
 <div ng-controller="ContractorEditCtrl">
 
@@ -71,7 +73,24 @@
 
         <ul>
             <li ng-repeat="qualification in profile.qualifications">
-                {{ qualification.name }} <button class="btn btn-danger" ng-click="removeQualification(task)">Remove</button>
+                {{ qualification.name }} <button class="btn btn-danger" ng-click="removeQualification(qualification)">Remove</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="well">
+        <h5>Education</h5>
+        <form id="education-form" ng-submit="addEducation()">
+            <div><input placeholder="Institution Name" ng-model="newEducation.institution_name" /></div>
+            <div><input placeholder="Name and Type of Degree" ng-model="newEducation.degree" /></div>
+            <div><textarea ng-model="education.description" placeholder="Description (optional)"></textarea></div>
+            <input type="submit" value="Add education" />
+        </form>
+
+        <ul>
+            <li ng-repeat="education in profile.educations">
+                {{ education.institution_name }} <small>({{ education.degree }})</small> 
+                <button class="btn btn-danger" ng-click="removeEducation(education)">Remove</button>
             </li>
         </ul>
     </div>

@@ -10,6 +10,8 @@ use App\Controller\Controller as BaseController,
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use MC\UserBundle\Form\Type\ContractorEditFormType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use DateTime;
+
 class ContractorController extends BaseController
 {
     
@@ -54,14 +56,16 @@ class ContractorController extends BaseController
                                         
             }
         }    
-        $test_form = $this
-            ->createFormBuilder($user, ['csrf_protection' => false])
-            ->add('fullName')->getForm()
+        $helperForm = $this
+            ->createFormBuilder(['simple_date' => new DateTime])
+            ->add('simple_date', 'date', ['format' => 'yyyy-MM-dd'])
+            ->getForm()
         ;
         return ['user' => $user, 
                 'userJson' => $serializer->serialize($user, 'json'), 
                 'form' => $form->createView(), 
-                'avatarForm' => $avatarForm->createView()
+                'avatarForm' => $avatarForm->createView(),
+                'helperForm' => $helperForm->createView()
         ];
     }
 

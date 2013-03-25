@@ -1,5 +1,5 @@
 
-var mcApp = angular.module('Marketplace', []);
+var mcApp = angular.module('Marketplace', ['ngResource']);
 
 function ContractorEditCtrl($scope, $http) {
     $scope.newTask = {name: '', amount: ''};

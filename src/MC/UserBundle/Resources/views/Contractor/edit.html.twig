@@ -83,7 +83,7 @@
         <form id="education-form" ng-submit="addEducation()">
             <div><input placeholder="Institution Name" ng-model="newEducation.institution_name" /></div>
             <div><input placeholder="Name and Type of Degree" ng-model="newEducation.degree" /></div>
-            <div><textarea ng-model="education.description" placeholder="Description (optional)"></textarea></div>
+            <div><textarea ng-model="newEducation.description" placeholder="Description (optional)"></textarea></div>
             <input type="submit" value="Add education" />
         </form>
 
@@ -91,6 +91,23 @@
             <li ng-repeat="education in profile.educations">
                 {{ education.institution_name }} <small>({{ education.degree }})</small> 
                 <button class="btn btn-danger" ng-click="removeEducation(education)">Remove</button>
+            </li>
+        </ul>
+    </div>
+
+     <div class="well">
+        <h5>Emplyment</h5>
+        <form id="employment-form" ng-submit="addEmployment()">
+            <div><input placeholder="Company Name" ng-model="newEmployment.company_name" /></div>
+            <div><input placeholder="Position" ng-model="newEmployment.position" /></div>
+            <div><textarea ng-model="newEmployment.description" placeholder="Description (optional)"></textarea></div>
+            <input type="submit" value="Add add employment" />
+        </form>
+
+        <ul>
+            <li ng-repeat="employment in profile.employment_history">
+                {{ employment.company_name }} <small>({{ employment.position }})</small> 
+                <button class="btn btn-danger" ng-click="removeEmployment(employment)">Remove</button>
             </li>
         </ul>
     </div>

@@ -14,7 +14,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use MC\AssetBundle\Entity\Asset;
 use JMS\SerializerBundle\Annotation as Rest;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use ArrayIterator;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_users")
@@ -152,6 +153,18 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     protected $avatar = null;
 
     /**
+     * @ORM\OneToMany(targetEntity="Education", mappedBy="user", cascade={"persist"})
+     * @ORM\OrderBy({"startYear" = "ASC"})
+     */
+    protected $educationHistory;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Education", mappedBy="user", cascade={"persist"})
+     * @ORM\OrderBy({"startYear" = "ASC"})
+     */
+    protected $employmentHistory;
+
+    /**
      * Not persisted, used for updates of avatar only
      * @Assert\File(
      *     maxSize="1M",
@@ -163,6 +176,8 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     public function __construct()
     {
         parent::__construct();
+        $this->educationHistory = new ArrayCollection;
+        $this->employmentHistory = new ArrayCollection;
     }
 
     
@@ -431,6 +446,43 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         $this->avatar = $avatar;
     
         return $this;
+    }
+
+
+    public function getEmploymentHistory() 
+    {
+        return $this->employmentHistory;
+    }
+    
+    
+    public function setEmploymentHistory(ArrayIterator $employmentHistory) 
+    {
+        $this->employmentHistory = $employmentHistory;        
+        return $this;
+    }
+
+    public function addEmployment(Employment $employment)
+    {
+        $employment->setUser($this);
+        $this->employmentHistory->add($employment);
+    }
+
+    public function getEducationHistory() {
+        return $this->educationHistory;
+    }
+    
+
+    public function setEducationHistory(ArrayIterator $educationHistory) 
+    {
+        $this->educationHistory = $educationHistory;
+    
+        return $this;
+    }
+
+    public function addEducation(Education $education)
+    {
+        $education->setUser($this);
+        $this->educationHistory->add($education);
     }
 
 }

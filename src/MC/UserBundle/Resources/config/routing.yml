@@ -31,3 +31,9 @@ contractor_update_fullname:
     defaults: { _controller: MCUserBundle:Contractor:updateFullname }
     requirements:
         _method:  POST
+
+contractor_update_overview:
+    pattern:  /contractor/update-overview
+    defaults: { _controller: MCUserBundle:Contractor:updateOverview }
+    requirements:
+        _method:  POST

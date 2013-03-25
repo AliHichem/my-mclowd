@@ -143,4 +143,30 @@ class ContractorController extends BaseController
 
     }
 
+    /**
+     * 
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function updateOverviewAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+
+        $form = $this
+            ->createFormBuilder($user, ['csrf_protection' => false])
+            ->add('overview')->getForm()
+        ;
+        $form->bind($request);
+        if ($form->isValid()) {             
+            $this->persist($user, true);     
+            $resp = $serializer->serialize($user, 'json');
+        } else {
+            $resp = json_encode($form->getErrors());
+        }
+
+        $response = new JsonResponse($resp);
+        return $response;
+
+    }
+
 }

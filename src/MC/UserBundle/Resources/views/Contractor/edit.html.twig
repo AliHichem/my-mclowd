@@ -51,11 +51,30 @@
         </ul>
     </div>
 
-     <div class="well">
+    <div class="well">
         <input ng-model="profile.city" placeholder="Specify your city" />
         <button class="btn" ng-click="saveCity(profile)" ng-show="profile.city != originalProfile.city">Confirm</button>
     </div>
 
+    <div class="well">
+        <textarea ng-model="profile.overview" placeholder="Specify your overview"></textarea>
+        <button class="btn" ng-click="saveOverview(profile)" ng-show="profile.overview != originalProfile.overview">Confirm</button>
+    </div>
+
+
+    <div class="well">
+        <h5>Licences and qualifications</h5>
+        <form id="licence-form" ng-submit="addQualification()">
+            <input placeholder="Enter licence or qualification" ng-model="newQualification.name" />
+            <input type="submit" value="Add new qualification" />
+        </form>
+
+        <ul>
+            <li ng-repeat="qualification in profile.qualifications">
+                {{ qualification.name }} <button class="btn btn-danger" ng-click="removeQualification(task)">Remove</button>
+            </li>
+        </ul>
+    </div>
 
     {% endraw %}
 

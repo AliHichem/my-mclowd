@@ -104,6 +104,15 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      */
     protected $tagLine = null;
 
+     /**
+     * @var string $tagLine
+     *
+     * @ORM\Column(name="overview", type="text", nullable=true)
+     * @Rest\Expose
+     * @Rest\Groups({"profileForm"})
+     */
+    protected $overview = null;
+
     /**
      * @var string $city
      *
@@ -345,6 +354,20 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     public function setTagLine($tagLine) 
     {
         $this->tagLine = $tagLine;
+    
+        return $this;
+    }
+
+
+    public function getOverview() 
+    {
+        return $this->overview;
+    }
+    
+    
+    public function setOverview($overview) 
+    {
+        $this->overview = $overview;
     
         return $this;
     }

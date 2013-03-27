@@ -166,7 +166,8 @@ class ContractorController extends BaseController
         $form = $this->createForm(new EmploymentFormType(), $employment);        
         $form->bind($request);
         if ($form->isValid()) {             
-            $this->persist($employment, true);     
+            $user->addEmployment($employment);
+            $this->persist($user, true);     
             $resp = $serializer->serialize($employment, 'json');
         } else {
             $resp = json_encode([

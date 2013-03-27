@@ -3,6 +3,8 @@
 namespace MC\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\SerializerBundle\Annotation as Rest;
 
 /**
  * Education
@@ -23,7 +25,7 @@ class Employment
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="company_name", type="string", length=255)
      */
     protected $companyName;
@@ -55,7 +57,7 @@ class Employment
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="position", type="string", length=255)
      */
     protected $position;

@@ -70,6 +70,16 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
         $scope.newEducation = {institution_name: '', degree: ''};
     };
 
+    $scope.addEmployment = function () {                
+        if (typeof $scope.profile.employment_history === "undefined") {
+            $scope.profile.employment_history = [];
+        }        
+        $scope.profile.employment_history.push($scope.newEducation);        
+        var e = new Employment($scope.newEmployment);
+        e.$save();
+        $scope.newEmployment = {};
+    };
+
     $scope.removeTask = function (task) {
         $scope.profile.tasks.splice($scope.profile.tasks.indexOf(task), 1);
     };

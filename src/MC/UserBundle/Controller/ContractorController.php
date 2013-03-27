@@ -7,9 +7,10 @@ use App\Controller\Controller as BaseController,
     Symfony\Component\HttpFoundation\RedirectResponse,
     Symfony\Component\HttpFoundation\JsonResponse;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use MC\UserBundle\Form\Type\ContractorEditFormType;
-use JMS\SecurityExtraBundle\Annotation\Secure;
+use MC\UserBundle\Form\Type\EmploymentFormType;
 use DateTime;
 use MC\UserBundle\Entity\Education;
 use MC\UserBundle\Entity\Employment;
@@ -143,7 +144,9 @@ class ContractorController extends BaseController
             $this->persist($user, true);     
             $resp = $serializer->serialize($user, 'json');
         } else {
-            $resp = json_encode($form->getErrors());
+            $resp = json_encode([
+                'error' => $this->_getErrorMessages($form)
+            ]);
         }
 
         $response = new JsonResponse($resp);
@@ -158,17 +161,17 @@ class ContractorController extends BaseController
     {
         $user = $this->getSecurity()->getToken()->getUser();
         $serializer = $this->get('serializer');
+        $employment = new Employment;
 
-        $form = $this
-            ->createFormBuilder($user, ['csrf_protection' => false])
-            ->add('employment_history')->getForm()
-        ;
+        $form = $this->createForm(new EmploymentFormType(), $employment);        
         $form->bind($request);
         if ($form->isValid()) {             
-            $this->persist($user, true);     
-            $resp = $serializer->serialize($user, 'json');
+            $this->persist($employment, true);     
+            $resp = $serializer->serialize($employment, 'json');
         } else {
-            $resp = json_encode($form->getErrors());
+            $resp = json_encode([
+                'error' => $this->_getErrorMessages($form)
+            ]);
         }
 
         $response = new JsonResponse($resp);
@@ -196,7 +199,9 @@ class ContractorController extends BaseController
             $this->persist($user, true);     
             $resp = $serializer->serialize($user, 'json');
         } else {
-            $resp = json_encode($form->getErrors());
+            $resp = json_encode([
+                'error' => $this->_getErrorMessages($form)
+            ]);
         }
 
         $response = new JsonResponse($resp);

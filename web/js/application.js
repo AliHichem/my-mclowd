@@ -1,7 +1,24 @@
 
 var mcApp = angular.module('Marketplace', ['ngResource']);
+mcApp.factory('Employment', function($resource) {
+    return $resource(Mclowd.url('/contractor/employment/:id'), {id: '@id'}, {
 
-function ContractorEditCtrl($scope, $http) {
+    });
+});
+
+mcApp.factory('Education', function($resource) {
+    return $resource(Mclowd.url('/contractor/education/:id'), {id: '@id'}, {
+
+    });
+});
+
+mcApp.factory('Qualification', function($resource) {
+    return $resource(Mclowd.url('/contractor/qualification/:id'), {id: '@id'}, {
+
+    });
+});
+
+function ContractorEditCtrl($scope, $http, Qualification, Employment, Education) {
     $scope.newTask = {name: '', amount: ''};
     $scope.newQualification = {name: ''};
     $scope.changed = {city: 0};
@@ -33,21 +50,23 @@ function ContractorEditCtrl($scope, $http) {
             $scope.profile.qualifications = [];
         }        
         $scope.profile.qualifications.push($scope.newQualification);
+        var qualification = new Qualification($scope.newQualification);
+        qualification.$save();
 
         $scope.newQualification = {name: ''};
     };
 
-    $scope.addEducation = function () {
-        console.log('sss')
+    $scope.addEducation = function () {        
         if (!$scope.newEducation.institution_name.length) {
             return;
         }
         if (typeof $scope.profile.educations === "undefined") {
             $scope.profile.educations = [];
         }        
-        $scope.profile.educations.push($scope.newEducation);
-        console.log($scope.profile.educations);
 
+        $scope.profile.educations.push($scope.newEducation);        
+        var e = new Education($scope.newEducation);
+        e.$save();
         $scope.newEducation = {institution_name: '', degree: ''};
     };
 

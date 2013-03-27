@@ -32,6 +32,28 @@
         {% endif %}            
     </head>
     <body>
+
+        <script type="text/javascript">
+            window.Mclowd = {
+
+                /* {# api path depending app environment, prepend api path with app_dev.php for non production env #} */
+                resource_path: "{% if app.environment != 'prod' %}/app_dev.php{% endif %}",
+
+                /* {# return resource path by resource name (prepend resource name with base path) #} */
+                url: function (resource) {
+                    return (this.resource_path + resource);
+                },
+
+                /* {# generate URL #} */
+                path: function (route, params) {
+                    return Routing.generate(route, params);
+                },
+                              
+
+                current_user: {{ app.user|serialize|raw }}
+            }
+        </script>
+
         {% if app.user %}
         <script type="text/javascript">
             /*var socket = io.connect('{{ settings.getNodeAddr }}:{{ settings.getNodePort }}');
@@ -96,6 +118,7 @@
             <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
             
             {% javascripts
+                'js/vendor/angular-resource.min.js'
                 'js/remote_links.js.coffee'
                 '@App/Resources/public/js/parsley.js/parsley.js'
                 '@App/Resources/public/js/parsley.js/parsley.extra.js'

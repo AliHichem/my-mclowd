@@ -11,6 +11,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use MC\UserBundle\Form\Type\ContractorEditFormType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use DateTime;
+use MC\UserBundle\Entity\Education;
+use MC\UserBundle\Entity\Employment;
 
 class ContractorController extends BaseController
 {
@@ -76,23 +78,12 @@ class ContractorController extends BaseController
     public function updateCityAction(Request $request)
     {
         $user = $this->getSecurity()->getToken()->getUser();
-        $serializer = $this->get('serializer');
-
         $form = $this
             ->createFormBuilder($user, ['csrf_protection' => false])
             ->add('city')->getForm()
         ;
-        $form->bind($request);
-        if ($form->isValid()) {                
-            $this->persist($user, true);     
-            $resp = $serializer->serialize($user, 'json');
-        } else {
-            $resp = json_encode($form->getErrors());
-        }
 
-        $response = new JsonResponse($resp);
-        return $response;
-
+        return $this->processForm($request, $form);        
     }
 
     /**
@@ -102,22 +93,12 @@ class ContractorController extends BaseController
     public function updateTagLinection(Request $request)
     {
         $user = $this->getSecurity()->getToken()->getUser();
-        $serializer = $this->get('serializer');
 
         $form = $this
             ->createFormBuilder($user, ['csrf_protection' => false])
             ->add('tagLine')->getForm()
         ;
-        $form->bind($request);
-        if ($form->isValid()) {                
-            $this->persist($user, true);     
-            $resp = $serializer->serialize($user, 'json');
-        } else {
-            $resp = json_encode($form->getErrors());
-        }
-
-        $response = new JsonResponse($resp);
-        return $response;
+        return $this->processForm($request, $form);        
 
     }
 
@@ -128,11 +109,59 @@ class ContractorController extends BaseController
     public function updateFullnameAction(Request $request)
     {
         $user = $this->getSecurity()->getToken()->getUser();
-        $serializer = $this->get('serializer');
 
         $form = $this
             ->createFormBuilder($user, ['csrf_protection' => false])
             ->add('fullName')->getForm()
+        ;
+        return $this->processForm($request, $form); 
+
+    }
+
+    /**
+     * 
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function updateOverviewAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+
+        $form = $this
+            ->createFormBuilder($user, ['csrf_protection' => false])
+            ->add('overview')->getForm()
+        ;
+        return $this->processForm($request, $form); 
+
+    }
+
+    protected function processForm(Request $request, $form)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+        $form->bind($request);
+        if ($form->isValid()) {                
+            $this->persist($user, true);     
+            $resp = $serializer->serialize($user, 'json');
+        } else {
+            $resp = json_encode($form->getErrors());
+        }
+
+        $response = new JsonResponse($resp);
+        return $response;
+    }
+
+    /**
+     * 
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function addEmploymentAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+
+        $form = $this
+            ->createFormBuilder($user, ['csrf_protection' => false])
+            ->add('employment_history')->getForm()
         ;
         $form->bind($request);
         if ($form->isValid()) {             
@@ -151,14 +180,16 @@ class ContractorController extends BaseController
      * 
      * @Secure(roles="ROLE_CONTRACTOR")
      * */
-    public function updateOverviewAction(Request $request)
+    public function addEducationAction(Request $request)
     {
         $user = $this->getSecurity()->getToken()->getUser();
         $serializer = $this->get('serializer');
 
         $form = $this
-            ->createFormBuilder($user, ['csrf_protection' => false])
-            ->add('overview')->getForm()
+            ->createFormBuilder(new Education, ['csrf_protection' => false])
+            ->add('institutionName')
+            ->add('degree')
+            ->getForm()
         ;
         $form->bind($request);
         if ($form->isValid()) {             

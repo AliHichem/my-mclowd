@@ -3,7 +3,6 @@ FOS\UserBundle\Model\User:
   properties:
     id:
       expose: true
-      groups: [details]
     username:
       expose: true
       groups: [details]

@@ -37,3 +37,15 @@ contractor_update_overview:
     defaults: { _controller: MCUserBundle:Contractor:updateOverview }
     requirements:
         _method:  POST
+
+contrator_add_employment:
+    pattern:  /contractor/employment
+    defaults: { _controller: MCUserBundle:Contractor:addEmployment }
+    requirements:
+        _method:  POST
+
+contrator_add_education:
+    pattern:  /contractor/education
+    defaults: { _controller: MCUserBundle:Contractor:addEducation }
+    requirements:
+        _method:  POST

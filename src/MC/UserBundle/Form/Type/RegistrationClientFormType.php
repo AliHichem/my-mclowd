@@ -71,7 +71,8 @@ class RegistrationClientFormType extends BaseType {
             ))
             ->add('hearSource', null, array(
                 'required' => false,
-                'label' => 'Where did you hear about the Mclowd Marketplace?'
+                'label' => 'Where did you hear about the Mclowd Marketplace?',
+                'compound' => true
             ))
         ;
     }

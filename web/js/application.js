@@ -1,5 +1,9 @@
 
 var mcApp = angular.module('Marketplace', ['ngResource']);
+mcApp.config(function($httpProvider) {
+    //$httpProvider.defaults.headers.post  = {'Content-Type': 'application/x-www-form-urlencoded'};
+});
+
 mcApp.factory('Employment', function($resource) {
     return $resource(Mclowd.url('/contractor/employment/:id'), {id: '@id'}, {
 
@@ -23,7 +27,7 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
     $scope.newQualification = {name: ''};
     $scope.changed = {city: 0};
     $scope.newEducation = {institution_name: '', degree: ''};
-    $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+    //$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
     $scope.$watch('profile.city', function(newValue, oldValue){
         $scope.changed.city++;
@@ -70,7 +74,7 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
         $scope.newEducation = {institution_name: '', degree: ''};
     };
 
-    $scope.addEmployment = function () {                
+    $scope.addEmployment = function () {    
         if (typeof $scope.profile.employment_history === "undefined") {
             $scope.profile.employment_history = [];
         }        
@@ -90,6 +94,10 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
 
     $scope.removeEducation = function (education) {
         $scope.profile.educations.splice($scope.profile.educations.indexOf(education), 1);
+    };
+
+    $scope.removeEmployment = function (employmet) {
+        $scope.profile.employmentHistory.splice($scope.profile.employmentHistory.indexOf(employmet), 1);
     };
 
     $scope.saveCity = function(task) {

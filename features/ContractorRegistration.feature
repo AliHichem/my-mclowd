@@ -6,6 +6,7 @@ Feature: Contractor Registration
 
   Scenario: Sending form with valid data
     Given countries are loaded
+    And hearsources are loaded
     When I am on "/register/contractor"
      And I fill in the following:
       | fos_user_registration_form[fullName]              | Full Name                   |
@@ -16,8 +17,8 @@ Feature: Contractor Registration
       | fos_user_registration_form[city]                  | Sidney                      |
       | fos_user_registration_form[accountType]           | individual                  |
       | fos_user_registration_form[displayName]           | Display Name                |
-     And I select "Google" from "Where did you hear about the Mclowd Marketplace?"
-     And I select "Australia" from "Country"
-     And I press "Register"
+     And I select "Google" from "fos_user_registration_form[hearSource]"
+     And I select "Australia" from "fos_user_registration_form[country]"
+     And I press "contractor-register-submit"
     Then the response status code should be 200
      And the response should contain "Congratulations"

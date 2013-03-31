@@ -13,7 +13,7 @@ use FOS\UserBundle\Entity\User as BaseUser;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use MC\AssetBundle\Entity\Asset;
-use JMS\SerializerBundle\Annotation as Rest;
+use JMS\Serializer\Annotation as Rest;
 use Doctrine\Common\Collections\ArrayCollection;
 use ArrayIterator;
 /**

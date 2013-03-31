@@ -23,7 +23,7 @@
         "sensio/framework-extra-bundle": "2.2.*",
         "sensio/generator-bundle": "2.2.*",
         "mopa/bootstrap-bundle": "dev-master",
-        "knplabs/rad-bundle": "dev-develop",
+        "knplabs/rad-bundle": "dev-develop#c272b287bc5b9f39ca549b230e581348dd974608",
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "friendsofsymfony/advanced-encoder-bundle": "dev-master",
         "pugx/multi-user-bundle": "dev-master",

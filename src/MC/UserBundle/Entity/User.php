@@ -147,7 +147,7 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     protected $hearSource;
  
     /**
-     * @ORM\ManyToOne(targetEntity="Mc\AssetBundle\Entity\Asset")
+     * @ORM\ManyToOne(targetEntity="MC\AssetBundle\Entity\Asset")
      * @ORM\JoinColumn(name="avatar_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $avatar = null;

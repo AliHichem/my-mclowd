@@ -91,7 +91,7 @@ class Task {
     protected $category;
     
     /**
-     * @ORM\ManyToOne(targetEntity="TaskBudget", inversedBy="tasks")
+     * @ORM\ManyToOne(targetEntity="TaskBudget")
      * @ORM\JoinColumn(name="budget_id", referencedColumnName="id", onDelete="SET NULL")
      * @Assert\NotBlank()
      *

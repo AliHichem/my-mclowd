@@ -1,5 +1,5 @@
 {
-    "hash": "1bd94549a890122d18996b7247e12976",
+    "hash": "007b5c855117e9d9582e2458759f4eeb",
     "packages": [
         {
             "name": "avalanche123/imagine-bundle",
@@ -2457,12 +2457,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpRadBundle.git",
-                "reference": "c272b287bc5b9f39ca549b230e581348dd974608"
+                "reference": "42bc82d98f3f3fab465761d317ff6233cd04f6d3"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/KnpLabs/KnpRadBundle/zipball/152576f96f7c8104737d394881bf3735d28645f0",
-                "reference": "c272b287bc5b9f39ca549b230e581348dd974608",
+                "reference": "42bc82d98f3f3fab465761d317ff6233cd04f6d3",
                 "shasum": ""
             },
             "require": {
@@ -2503,7 +2503,7 @@
             ],
             "description": "The \"KnpLabs Rad Edition\" bundle",
             "homepage": "http://rad.knplabs.com",
-            "time": "2013-02-15 22:01:41"
+            "time": "2013-03-25 08:51:21"
         },
         {
             "name": "kriswallsmith/assetic",

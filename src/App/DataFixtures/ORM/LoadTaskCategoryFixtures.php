@@ -38,14 +38,13 @@ class LoadTaskCategoryFixtures extends AbstractFixture implements OrderedFixture
         foreach (['Accounting', 'Bookkeeping', 'Data entry', 'Concierge', 'Tax', 'Audits'] as $name) {
             $category = new TaskCategory();
             $category->setId($id); // tree nodes need an id to construct path.
-            $category->isChildNodeOf($root);
-            $category->setName($name);
+            $category->setChildNodeOf($root);
+            $category->setName($name);            
             ++$id;
             $manager->persist($category);
+            $manager->flush();
+            
         }
-
-
-        $manager->flush();
         
     }
 

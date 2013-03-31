@@ -157,8 +157,8 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
             $category->setName($name);
             ++$id;
             $em->persist($category);
+            $em->flush();
         }
-        $em->flush();
   
     }
 

@@ -16,6 +16,6 @@ Feature: Client Registration
       | fos_user_registration_form[city]                  | Sidney                      |
      And I select "Google" from "fos_user_registration_form[hearSource]"
      And I select "Australia" from "fos_user_registration_form[country]"
-     And I press "client-register-submit"
+     And I press "Register as client"
     Then the response status code should be 200
      And the response should contain "Congratulations"

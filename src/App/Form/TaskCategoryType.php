@@ -15,8 +15,7 @@ class TaskCategoryType extends AbstractType implements ContainerAwareInterface
     {
 
         $root = $this->container->get('app.entity.task_category_repository')->getTree();
-        $choices = [];
-        foreach ($root->getChildNodes() as $item) {
+        foreach ($root->getChildNodes() as $item) {            
             $choices[$item->getId()] = $item->getName();                        
         }
         $resolver->setDefaults([

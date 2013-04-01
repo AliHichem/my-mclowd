@@ -23,8 +23,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\AdvancedEncoderBundle\FOSAdvancedEncoderBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
-
-            new FOQ\ElasticaBundle\FOQElasticaBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
+            
 
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),

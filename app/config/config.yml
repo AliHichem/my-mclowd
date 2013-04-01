@@ -5,7 +5,7 @@ imports:
     - { resource: bundles/fos_user.yml }
     - { resource: bundles/fos_message.yml }
     - { resource: bundles/pugx_multi_user.yml }
-    - { resource: bundles/foq_elastica.yml }
+    - { resource: bundles/fos_elastica.yml }
     - { resource: bundles/sonata.yml }
     - { resource: bundles/knp_gaufrette.yml }
     - { resource: bundles/avalanche_imagine.yml }

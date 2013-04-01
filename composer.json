@@ -34,7 +34,7 @@
         "friendsofsymfony/message-bundle": "dev-master",
         "knplabs/doctrine-behaviors": "dev-master",
         "hwi/oauth-bundle": "*",
-        "exercise/elastica-bundle": "dev-master",
+        "friendsofsymfony/elastica-bundle": "2.0.*@dev",
         "knplabs/knp-paginator-bundle": "2.3.*@dev",
         "sonata-project/admin-bundle": "2.2.*@dev",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",

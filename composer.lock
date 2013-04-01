@@ -1,5 +1,5 @@
 {
-    "hash": "007b5c855117e9d9582e2458759f4eeb",
+    "hash": "e6bb02504b13824235a347567493f2aa",
     "packages": [
         {
             "name": "avalanche123/imagine-bundle",
@@ -1108,76 +1108,6 @@
             "time": "2013-03-24 20:43:58"
         },
         {
-            "name": "exercise/elastica-bundle",
-            "version": "dev-master",
-            "target-dir": "FOQ/ElasticaBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Exercise/FOQElasticaBundle.git",
-                "reference": "40fa2e7c29cbf49a44bc3fd6dd312eaea31da8e4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Exercise/FOQElasticaBundle/zipball/40fa2e7c29cbf49a44bc3fd6dd312eaea31da8e4",
-                "reference": "40fa2e7c29cbf49a44bc3fd6dd312eaea31da8e4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "ruflin/elastica": "0.19.8",
-                "symfony/console": ">=2.1.0,<2.3-dev",
-                "symfony/form": ">=2.1.0,<2.3-dev",
-                "symfony/framework-bundle": ">=2.1.0,<2.3-dev"
-            },
-            "require-dev": {
-                "doctrine/mongodb-odm": "1.0.*@dev",
-                "doctrine/orm": ">=2.2,<2.5-dev",
-                "propel/propel1": "1.6.*"
-            },
-            "suggest": {
-                "doctrine/mongodb-odm": "1.0.*@dev",
-                "doctrine/orm": ">=2.2,<2.5-dev",
-                "propel/propel1": "1.6.*"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "FOQ\\ElasticaBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Thibault Duplessis",
-                    "email": "thibault.duplessis@gmail.com",
-                    "homepage": "http://ornicar.github.com"
-                },
-                {
-                    "name": "Jeremy Mikola",
-                    "email": "jmikola@gmail.com",
-                    "homepage": "http://jmikola.net"
-                },
-                {
-                    "name": "Richard Miller",
-                    "email": "richard.miller@limethinking.co.uk"
-                }
-            ],
-            "description": "Elasticsearch PHP integration for your Symfony2 project using Elastica",
-            "homepage": "https://github.com/Exercise/FOQElasticaBundle",
-            "keywords": [
-                "doctrine2",
-                "elastica",
-                "elasticsearch",
-                "mongodb",
-                "propel",
-                "search"
-            ],
-            "time": "2013-03-27 17:22:56"
-        },
-        {
             "name": "friendsofsymfony/advanced-encoder-bundle",
             "version": "dev-master",
             "target-dir": "FOS/AdvancedEncoderBundle",
@@ -1221,6 +1151,81 @@
                 "security"
             ],
             "time": "2013-01-12 11:56:19"
+        },
+        {
+            "name": "friendsofsymfony/elastica-bundle",
+            "version": "2.0.x-dev",
+            "target-dir": "FOS/ElasticaBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
+                "reference": "55920a3397b62bc25e653eddc3de324975068748"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/55920a3397b62bc25e653eddc3de324975068748",
+                "reference": "55920a3397b62bc25e653eddc3de324975068748",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "ruflin/elastica": "0.19.8",
+                "symfony/console": ">=2.1.0,<2.3.0-dev",
+                "symfony/form": ">=2.1.0,<2.3.0-dev",
+                "symfony/framework-bundle": ">=2.1.0,<2.3.0-dev"
+            },
+            "require-dev": {
+                "doctrine/mongodb-odm": "1.0.*@dev",
+                "doctrine/orm": ">=2.2,<2.5-dev",
+                "knplabs/knp-components": "1.2.*",
+                "pagerfanta/pagerfanta": "1.0.*@dev",
+                "propel/propel1": "1.6.*"
+            },
+            "suggest": {
+                "doctrine/mongodb-odm": "1.0.*@dev",
+                "doctrine/orm": ">=2.2,<2.5-dev",
+                "knplabs/knp-components": "1.2.*",
+                "pagerfanta/pagerfanta": "1.0.*@dev",
+                "propel/propel1": "1.6.*",
+                "symfony/property-access": "2.2.*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "FOS\\ElasticaBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com",
+                    "homepage": "http://ornicar.github.com"
+                },
+                {
+                    "name": "Jeremy Mikola",
+                    "email": "jmikola@gmail.com",
+                    "homepage": "http://jmikola.net"
+                },
+                {
+                    "name": "Richard Miller",
+                    "email": "richard.miller@limethinking.co.uk"
+                }
+            ],
+            "description": "Elasticsearch PHP integration for your Symfony2 project using Elastica",
+            "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle",
+            "keywords": [
+                "doctrine2",
+                "elastica",
+                "elasticsearch",
+                "mongodb",
+                "propel",
+                "search"
+            ],
+            "time": "2013-03-28 20:36:46"
         },
         {
             "name": "friendsofsymfony/message-bundle",
@@ -1526,12 +1531,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jdorn/sql-formatter.git",
-                "reference": "fa92df63b164d001a37db5bf1460ef8ce3271a11"
+                "reference": "e38ea8a0cbd943ac78014d07f42441cd51d537db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jdorn/sql-formatter/zipball/fa92df63b164d001a37db5bf1460ef8ce3271a11",
-                "reference": "fa92df63b164d001a37db5bf1460ef8ce3271a11",
+                "url": "https://api.github.com/repos/jdorn/sql-formatter/zipball/e38ea8a0cbd943ac78014d07f42441cd51d537db",
+                "reference": "e38ea8a0cbd943ac78014d07f42441cd51d537db",
                 "shasum": ""
             },
             "require": {
@@ -1568,7 +1573,7 @@
                 "highlight",
                 "sql"
             ],
-            "time": "2013-03-21 04:18:34"
+            "time": "2013-03-31 22:29:24"
         },
         {
             "name": "jms/aop-bundle",
@@ -3328,12 +3333,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensio/SensioGeneratorBundle.git",
-                "reference": "0f35f2003420f1dc28e80be256c4dc3d0bddd5c6"
+                "reference": "2b1e1cd06c4d41f960f5278812fe6ccc420ba1a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensio/SensioGeneratorBundle/zipball/0f35f2003420f1dc28e80be256c4dc3d0bddd5c6",
-                "reference": "0f35f2003420f1dc28e80be256c4dc3d0bddd5c6",
+                "url": "https://api.github.com/repos/sensio/SensioGeneratorBundle/zipball/2b1e1cd06c4d41f960f5278812fe6ccc420ba1a2",
+                "reference": "2b1e1cd06c4d41f960f5278812fe6ccc420ba1a2",
                 "shasum": ""
             },
             "require": {
@@ -3367,7 +3372,7 @@
                 }
             ],
             "description": "This bundle generates code for you",
-            "time": "2013-03-21 16:38:44"
+            "time": "2013-04-01 08:02:30"
         },
         {
             "name": "sonata-project/admin-bundle",
@@ -3900,12 +3905,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "92501eb0affead8b06cc8c762583fa08c3c98539"
+                "reference": "50822015a6ec0e4893a2c39950a63c8b39fa3753"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/92501eb0affead8b06cc8c762583fa08c3c98539",
-                "reference": "92501eb0affead8b06cc8c762583fa08c3c98539",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/50822015a6ec0e4893a2c39950a63c8b39fa3753",
+                "reference": "50822015a6ec0e4893a2c39950a63c8b39fa3753",
                 "shasum": ""
             },
             "require": {
@@ -3991,7 +3996,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-03-28 17:35:23"
+            "time": "2013-04-01 08:06:05"
         },
         {
             "name": "tss/assets-install-windows-bundle",
@@ -4089,12 +4094,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "e8991cc2f9c84b2b5c782203904898717d46e56a"
+                "reference": "399916916533589c95dc04e1afd4aeefa34928ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/e8991cc2f9c84b2b5c782203904898717d46e56a",
-                "reference": "e8991cc2f9c84b2b5c782203904898717d46e56a",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/399916916533589c95dc04e1afd4aeefa34928ad",
+                "reference": "399916916533589c95dc04e1afd4aeefa34928ad",
                 "shasum": ""
             },
             "require": {
@@ -4130,7 +4135,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-03-25 07:43:31"
+            "time": "2013-04-01 08:27:18"
         }
     ],
     "packages-dev": [
@@ -4149,7 +4154,7 @@
         "pugx/multi-user-bundle": 20,
         "knplabs/doctrine-behaviors": 20,
         "friendsofsymfony/message-bundle": 20,
-        "exercise/elastica-bundle": 20,
+        "friendsofsymfony/elastica-bundle": 20,
         "knplabs/knp-paginator-bundle": 20,
         "sonata-project/admin-bundle": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20,

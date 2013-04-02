@@ -16,6 +16,7 @@ use MC\AssetBundle\Entity\Asset;
 use JMS\Serializer\Annotation as Rest;
 use Doctrine\Common\Collections\ArrayCollection;
 use ArrayIterator;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_users")
@@ -83,6 +84,7 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      *
      * @ORM\Column(name="full_name", type="string", length=250, nullable=true)
      * @Rest\Expose
+     * @Rest\SerializedName("fullName")
      * @Rest\Groups({"profileForm"})
      */
     protected $fullName;
@@ -101,6 +103,7 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      *
      * @ORM\Column(name="tag_line", type="string", length=128, nullable=true)
      * @Rest\Expose
+     * @Rest\SerializedName("tagLine")
      * @Rest\Groups({"profileForm"})
      */
     protected $tagLine = null;
@@ -117,6 +120,7 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     /**
      * @var string $city
      *
+     * @Rest\SerializedName("accountType")
      * @ORM\Column(name="account_type", type="string", length=128, nullable=true)
      */
     protected $accountType = 'user';
@@ -153,13 +157,15 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     protected $avatar = null;
 
     /**
+     * @Rest\SerializedName("educationHistory")
      * @ORM\OneToMany(targetEntity="Education", mappedBy="user", cascade={"persist"})
      * @ORM\OrderBy({"startYear" = "ASC"})
      */
     protected $educationHistory;
 
     /**
-     * @ORM\OneToMany(targetEntity="Education", mappedBy="user", cascade={"persist"})
+     * @Rest\SerializedName("employmentHistory")
+     * @ORM\OneToMany(targetEntity="Employment", mappedBy="user", cascade={"persist"})
      * @ORM\OrderBy({"startYear" = "ASC"})
      */
     protected $employmentHistory;

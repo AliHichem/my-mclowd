@@ -26,7 +26,6 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
     $scope.newTask = {name: '', amount: ''};
     $scope.newQualification = {name: ''};
     $scope.changed = {city: 0};
-    $scope.newEducation = {institution_name: '', degree: ''};
     //$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
     $scope.$watch('profile.city', function(newValue, oldValue){
@@ -76,9 +75,9 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
 
     $scope.addEmployment = function () {    
         if (typeof $scope.profile.employment_history === "undefined") {
-            $scope.profile.employment_history = [];
+            $scope.profile.employmentHistory = [];
         }        
-        $scope.profile.employment_history.push($scope.newEducation);        
+        $scope.profile.employmentHistory.push($scope.newEducation);        
         var e = new Employment($scope.newEmployment);
         e.$save();
         $scope.newEmployment = {};
@@ -101,18 +100,18 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
     };
 
     $scope.saveCity = function(task) {
-        $http.post('/app_dev.php/contractor/update-city', $.param({form: {city: task.city}}));
+        $http.post('/app_dev.php/contractor/update-city', {form: {city: task.city}});
     };
 
     $scope.saveTagLine = function(task) {
-        $http.post('/app_dev.php/contractor/update-tag-line', $.param({form: {tagLine: task.tag_line}}));
+        $http.post('/app_dev.php/contractor/update-tag-line', {form: {tagLine: task.tagLine}});
     };
 
     $scope.saveFullname = function(task) {
-        $http.post('/app_dev.php/contractor/update-fullname', $.param({form: {fullName: task.full_name}}));
+        $http.post('/app_dev.php/contractor/update-fullname', {form: {fullName: task.fullName}});
     };
 
     $scope.saveOverview = function(task) {
-        $http.post('/app_dev.php/contractor/update-overview', $.param({form: {overview: task.overview}}));
+        $http.post('/app_dev.php/contractor/update-overview', {form: {overview: task.overview}});
     };
 }

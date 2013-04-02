@@ -87,7 +87,7 @@ class Employment
      */
     public function setCompanyName($companyName)
     {
-        $this->companyName = $name;
+        $this->companyName = $companyName;
     
         return $this;
     }

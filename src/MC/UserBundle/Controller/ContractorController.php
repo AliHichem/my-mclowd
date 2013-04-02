@@ -17,7 +17,7 @@ use DateTime;
 use MC\UserBundle\Entity\Education;
 use MC\UserBundle\Entity\Employment;
 
-
+// SerializationContext::create()->setGroups(['profileForm'])
 class ContractorController extends BaseController
 {
     use RestableController;
@@ -68,7 +68,7 @@ class ContractorController extends BaseController
             ->getForm()
         ;
         return ['user' => $user, 
-                'userJson' => $serializer->serialize($user, 'json', SerializationContext::create()->setGroups(['profileForm'])), 
+                'userJson' => $serializer->serialize($user, 'json'), 
                 'form' => $form->createView(), 
                 'avatarForm' => $avatarForm->createView(),
                 'helperForm' => $helperForm->createView()

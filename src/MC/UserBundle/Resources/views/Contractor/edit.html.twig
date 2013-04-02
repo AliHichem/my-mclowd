@@ -26,16 +26,16 @@
 
     {% raw %}
     <div class="well">
-        <input ng-model="profile.full_name" placeholder="Specify your name" />
-        <small>{{ profile.full_name }}</small>
-        <button class="btn" ng-click="saveFullname(profile)" ng-show="profile.full_name != originalProfile.full_name">Confirm</button>
+        <input ng-model="profile.fullName" placeholder="Specify your name" />
+        <small>{{ profile.fullName }}</small>
+        <button class="btn" ng-click="saveFullname(profile)" ng-show="profile.fullName != originalProfile.fullName">Confirm</button>
 
     </div>
 
     <div class="well">
-        <input ng-model="profile.tag_line" placeholder="Specify tag line" />
+        <input ng-model="profile.tagLine" placeholder="Specify tag line" />
         <small>{{ profile.tagLine }}</small>
-        <button class="btn" ng-click="saveTagLine(profile)" ng-show="profile.tag_line != originalProfile.tag_line">Confirm</button>
+        <button class="btn" ng-click="saveTagLine(profile)" ng-show="profile.tagLine != originalProfile.tagLine">Confirm</button>
     </div>
 
     <div class="well">
@@ -81,7 +81,7 @@
     <div class="well">
         <h5>Education</h5>
         <form id="education-form" ng-submit="addEducation()">
-            <div><input placeholder="Institution Name" ng-model="newEducation.institution_name" /></div>
+            <div><input placeholder="Institution Name" ng-model="newEducation.institutionName" /></div>
             <div><input placeholder="Name and Type of Degree" ng-model="newEducation.degree" /></div>
             <div><textarea ng-model="newEducation.description" placeholder="Description (optional)"></textarea></div>
             <input type="submit" value="Add education" />
@@ -96,7 +96,7 @@
     </div>
 
      <div class="well">
-        <h5>Emplyment</h5>
+        <h5>Employment</h5>
         <form id="employment-form" ng-submit="addEmployment()">
             <div><input placeholder="Company Name" ng-model="newEmployment.companyName" /></div>
             <div><input placeholder="Position" ng-model="newEmployment.position" /></div>
@@ -105,7 +105,7 @@
         </form>
 
         <ul>
-            <li ng-repeat="employment in profile.employment_history">
+            <li ng-repeat="companyName in profile.employmentHistory">
                 {{ employment.company_name }} <small>({{ employment.position }})</small> 
                 <button class="btn btn-danger" ng-click="removeEmployment(employment)">Remove</button>
             </li>

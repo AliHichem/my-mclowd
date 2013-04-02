@@ -13,6 +13,7 @@ use App\Entity\Task,
     App\Entity\TaskCategory,
     App\Entity\Country,
     App\Entity\TaskBudget,
+    App\Entity\HearSource,
     MC\UserBundle\Entity\User,
     MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor;
@@ -152,12 +153,12 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
         foreach (['Accounting', 'Bookkeeping', 'Data entry', 'Concierge', 'Tax', 'Audits'] as $name) {
             $category = new TaskCategory();
             $category->setId($id); // tree nodes need an id to construct path.
-            $category->setChildOf($root);
+            $category->isChildNodeOf($root);
             $category->setName($name);
             ++$id;
             $em->persist($category);
+            $em->flush();
         }
-        $em->flush();
   
     }
 
@@ -284,6 +285,33 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
     }
 
     /**
+     * @Given /^hearsources are loaded$/
+     */
+    public function hearsourcesAreLoaded()
+    {
+        $manager = $this->getEM();
+        $manager->createQuery('DELETE App:HearSource')->execute();
+
+        $sources = array(
+            'Google',
+            'Yahoo!',
+            'Bing',
+            'Other search engine',
+            'A friend',
+            'A coworker',
+            'Internet ad',
+            'TV ad',
+            'Radio ad'
+        );
+        foreach ($sources as $name) {
+            $source = new HearSource();
+            $source->setName($name);
+            $manager->persist($source);
+        }
+        $manager->flush();
+    }
+
+    /**
      * Sets Kernel instance.
      *
      * @param KernelInterface $kernel HttpKernel instance
@@ -348,7 +376,7 @@ class FeatureContext extends MinkContext implements KernelAwareInterface
      */
     private function getEM()
     {
-        return $this->getContainer()->get('doctrine')->getEntityManager();
+        return $this->getContainer()->get('doctrine')->getManager();
     }
 
     /**

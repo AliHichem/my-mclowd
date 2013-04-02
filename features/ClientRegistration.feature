@@ -14,8 +14,8 @@ Feature: Client Registration
       | fos_user_registration_form[plainPassword][first]  | 123456                      |
       | fos_user_registration_form[plainPassword][second] | 123456                      |
       | fos_user_registration_form[city]                  | Sidney                      |
-     And I select "Google" from "Where did you hear about the Mclowd Marketplace?"
-     And I select "Australia" from "Country"
-     And I press "Register"
+     And I select "Google" from "fos_user_registration_form[hearSource]"
+     And I select "Australia" from "fos_user_registration_form[country]"
+     And I press "Register as client"
     Then the response status code should be 200
      And the response should contain "Congratulations"

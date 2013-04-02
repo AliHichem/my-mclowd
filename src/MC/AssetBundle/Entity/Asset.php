@@ -26,4 +26,6 @@ class Asset
     {
         return $this->id;
     }
+
+
 }

@@ -9,3 +9,51 @@ contractor_registration:
 registration_validation:
     pattern: /register/validate/{what}
     defaults: { _controller: MCUserBundle:Registration:validate }
+
+contractor_edit:
+    pattern:  /contractor/edit
+    defaults: { _controller: MCUserBundle:Contractor:edit }
+
+contractor_update_city:
+    pattern:  /contractor/update-city
+    defaults: { _controller: MCUserBundle:Contractor:updateCity }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+
+contractor_update_tag_line:
+    pattern:  /contractor/update-tag-line
+    defaults: { _controller: MCUserBundle:Contractor:updateTagLine }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+
+contractor_update_fullname:
+    pattern:  /contractor/update-fullname
+    defaults: { _controller: MCUserBundle:Contractor:updateFullname }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+
+contractor_update_overview:
+    pattern:  /contractor/update-overview
+    defaults: { _controller: MCUserBundle:Contractor:updateOverview }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+
+contrator_add_employment:
+    pattern:  /contractor/employment
+    defaults: { _controller: MCUserBundle:Contractor:addEmployment }
+    requirements:
+        _method:  POST
+
+contrator_add_education:
+    pattern:  /contractor/education
+    defaults: { _controller: MCUserBundle:Contractor:addEducation }
+    requirements:
+        _method:  POST

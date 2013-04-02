@@ -12,6 +12,10 @@ use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use MC\AssetBundle\Entity\Asset;
+use JMS\Serializer\Annotation as Rest;
+use Doctrine\Common\Collections\ArrayCollection;
+use ArrayIterator;
 
 /**
  * @ORM\Entity
@@ -79,6 +83,9 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      * @var string $fullName
      *
      * @ORM\Column(name="full_name", type="string", length=250, nullable=true)
+     * @Rest\Expose
+     * @Rest\SerializedName("fullName")
+     * @Rest\Groups({"profileForm"})
      */
     protected $fullName;
 
@@ -86,12 +93,34 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      * @var string $city
      *
      * @ORM\Column(name="city", type="string", length=128, nullable=true)
+     * @Rest\Expose
+     * @Rest\Groups({"profileForm"})
      */
     protected $city;
 
     /**
+     * @var string $tagLine
+     *
+     * @ORM\Column(name="tag_line", type="string", length=128, nullable=true)
+     * @Rest\Expose
+     * @Rest\SerializedName("tagLine")
+     * @Rest\Groups({"profileForm"})
+     */
+    protected $tagLine = null;
+
+     /**
+     * @var string $tagLine
+     *
+     * @ORM\Column(name="overview", type="text", nullable=true)
+     * @Rest\Expose
+     * @Rest\Groups({"profileForm"})
+     */
+    protected $overview = null;
+
+    /**
      * @var string $city
      *
+     * @Rest\SerializedName("accountType")
      * @ORM\Column(name="account_type", type="string", length=128, nullable=true)
      */
     protected $accountType = 'user';
@@ -120,104 +149,44 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      * })
      */
     protected $hearSource;
+ 
+    /**
+     * @ORM\ManyToOne(targetEntity="MC\AssetBundle\Entity\Asset")
+     * @ORM\JoinColumn(name="avatar_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $avatar = null;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @var string
+     * @Rest\SerializedName("educationHistory")
+     * @ORM\OneToMany(targetEntity="Education", mappedBy="user", cascade={"persist"})
+     * @ORM\OrderBy({"startYear" = "ASC"})
      */
-    protected $pictureFilename;
-
-    private $oldPictureFilename;
+    protected $educationHistory;
 
     /**
-     * @var UploadedFile
-     * @Assert\File(maxSize="5000000")
+     * @Rest\SerializedName("employmentHistory")
+     * @ORM\OneToMany(targetEntity="Employment", mappedBy="user", cascade={"persist"})
+     * @ORM\OrderBy({"startYear" = "ASC"})
      */
-    protected $picture;
+    protected $employmentHistory;
+
+    /**
+     * Not persisted, used for updates of avatar only
+     * @Assert\File(
+     *     maxSize="1M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
+     * )
+     * */
+    public $uploadedAvatar = null;
 
     public function __construct()
     {
         parent::__construct();
+        $this->educationHistory = new ArrayCollection;
+        $this->employmentHistory = new ArrayCollection;
     }
 
-    /**
-     * @param UploadedFile $file
-     */
-    public function setPicture(UploadedFile $file=null)
-    {
-        $this->picture = $file;
-        if (null !== $this->picture) {
-            if (isset($this->pictureFilename)) {
-                $this->oldPictureFilename = $this->pictureFilename;
-            }
-            $this->pictureFilename = $this->getUsername()
-                .'.'.$this->picture->guessExtension();
-            if ($this->pictureFilename === $this->oldPictureFilename) {
-                // if the filename didn't change the model may not get
-                // updated, but we still need to upload the new picture
-                $this->uploadPicture();
-            }
-        }
-    }
-
-    /**
-     * 
-     * @return UploadedFile
-     */
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-    public function uploadPicture()
-    {
-        if (!isset ($this->picture)) {
-            return;
-        }
-        if (isset($this->oldPictureFilename)) {
-            $oldPicturePath = implode('/', [
-                $this->getWebRootDir(), 
-                $this->getPictureDir(),
-                $this->oldPictureFilename
-            ]);
-            unlink($oldPicturePath);
-        }
-        $this->picture->move($this->getWebRootDir().'/'.$this->getPictureDir(),
-                $this->pictureFilename);
-        unset($this->picture);
-    }
-
-    /**
-     * @ORM\PostRemove()
-     */
-    public function removePicture()
-    {
-        if ($this->getPicturePath()) {
-            unlink($this->getPicturePath());
-        }
-    }
-
-    /**
-     * @return string
-     */
-    public function getPicturePath()
-    {
-        return null === $this->getPictureWebPath()
-            ? null
-            : $this->getWebRootDir().'/'.$this->getPictureWebPath();
-    }
-
-    public function getPictureWebPath()
-    {
-        return null === $this->pictureFilename
-            ? null
-            : $this->getPictureDir().'/'.$this->pictureFilename;
-    }
-
+    
     /**
      * @return array<string, string> $accountTypes
      */
@@ -316,7 +285,6 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         }      
     }
 
-
     /**
      * Get id
      *
@@ -396,6 +364,35 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         return $this->city;
     }
 
+
+
+    public function getTagLine() 
+    {
+        return $this->tagLine;
+    }
+    
+    
+    public function setTagLine($tagLine) 
+    {
+        $this->tagLine = $tagLine;
+    
+        return $this;
+    }
+
+
+    public function getOverview() 
+    {
+        return $this->overview;
+    }
+    
+    
+    public function setOverview($overview) 
+    {
+        $this->overview = $overview;
+    
+        return $this;
+    }
+
     /**
      * Set hearSource
      *
@@ -441,21 +438,57 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     {
         return $this->accountType;
     }
+   
 
-    /** base web path for profile pictures
-     * @return string
-     */
-    private function getPictureDir()
+    
+    public function getAvatar() 
     {
-        return 'uploads/pictures';
+        return $this->avatar;
+    }
+    
+    
+    public function setAvatar(Asset $avatar) 
+    {
+        $this->avatar = $avatar;
+    
+        return $this;
     }
 
-    /** filesystem path of web root
-     * @return string
-     */
-    private function getWebRootDir()
+
+    public function getEmploymentHistory() 
     {
-        return __DIR__.'/../../../../web';
+        return $this->employmentHistory;
+    }
+    
+    
+    public function setEmploymentHistory(ArrayIterator $employmentHistory) 
+    {
+        $this->employmentHistory = $employmentHistory;        
+        return $this;
+    }
+
+    public function addEmployment(Employment $employment)
+    {
+        $employment->setUser($this);
+        $this->employmentHistory->add($employment);
+    }
+
+    public function getEducationHistory() {
+        return $this->educationHistory;
+    }
+    
+
+    public function setEducationHistory(ArrayIterator $educationHistory) 
+    {
+        $this->educationHistory = $educationHistory;
+    
+        return $this;
+    }
+
+    public function addEducation(Education $education)
+    {
+        $education->setUser($this);
+        $this->educationHistory->add($education);
     }
 
 }

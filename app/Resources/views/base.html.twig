@@ -13,7 +13,8 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" ng-app="Marketplace"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -31,9 +32,31 @@
         {% endif %}            
     </head>
     <body>
+
+        <script type="text/javascript">
+            window.Mclowd = {
+
+                /* {# api path depending app environment, prepend api path with app_dev.php for non production env #} */
+                resource_path: "{% if app.environment != 'prod' %}/app_dev.php{% endif %}",
+
+                /* {# return resource path by resource name (prepend resource name with base path) #} */
+                url: function (resource) {
+                    return (this.resource_path + resource);
+                },
+
+                /* {# generate URL #} */
+                path: function (route, params) {
+                    return Routing.generate(route, params);
+                },
+                              
+
+                current_user: {{ app.user|serialize|raw }}
+            }
+        </script>
+
         {% if app.user %}
         <script type="text/javascript">
-            var socket = io.connect('{{ settings.getNodeAddr }}:{{ settings.getNodePort }}');
+            /*var socket = io.connect('{{ settings.getNodeAddr }}:{{ settings.getNodePort }}');
 
             // on connection to server, ask for user's name with an anonymous callback
             socket.on('connect', function(){
@@ -43,7 +66,7 @@
             
             socket.on('updatenotifications', function (n0, n1) {
                 $(n0).html(n1); 
-            });
+            });*/
         </script>
         {% endif %}
 
@@ -70,6 +93,10 @@
                     <li><a href="{{ path('app_tasks_my') }}">My tasks</a></li>    
                 {% endif %}
 
+                {% if is_granted("ROLE_CONTRACTOR") %}     
+                    <li><a href="{{ path('contractor_edit') }}">Edit profile</a></li>    
+                {% endif %}
+
             </ul>
             {% if  app.session.flashbag.count() > 0 %}
                 <section id="flash-messages">
@@ -88,10 +115,16 @@
         </div>
         {% block javascripts %}
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
+            <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            
             {% javascripts
+                'js/vendor/angular-resource.min.js'
                 'js/remote_links.js.coffee'
                 '@App/Resources/public/js/parsley.js/parsley.js'
                 '@App/Resources/public/js/parsley.js/parsley.extra.js'
+                'js/application.js'
             %}
             <script src="{{ asset_url }}"></script>
             {% endjavascripts %}

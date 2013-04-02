@@ -3,11 +3,13 @@
 namespace MC\UserBundle\Controller;
 
 use App\Controller\Controller as BaseController,
+    App\Behaviours\RestableController,
     Symfony\Component\HttpFoundation\Request,
     Symfony\Component\HttpFoundation\RedirectResponse,
     Symfony\Component\HttpFoundation\JsonResponse;
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use MC\UserBundle\Form\Type\ContractorEditFormType;
 use MC\UserBundle\Form\Type\EmploymentFormType;
@@ -15,9 +17,11 @@ use DateTime;
 use MC\UserBundle\Entity\Education;
 use MC\UserBundle\Entity\Employment;
 
+
 class ContractorController extends BaseController
 {
-    
+    use RestableController;
+
     public function setTemplateAction(Request $request)
     {
         
@@ -32,7 +36,6 @@ class ContractorController extends BaseController
     {
         $user = $this->getSecurity()->getToken()->getUser();
         $serializer = $this->get('serializer');
-        $serializer->setGroups(['profileForm']);
 
         $avatarForm = $this
             ->createFormBuilder($user)
@@ -65,7 +68,7 @@ class ContractorController extends BaseController
             ->getForm()
         ;
         return ['user' => $user, 
-                'userJson' => $serializer->serialize($user, 'json'), 
+                'userJson' => $serializer->serialize($user, 'json', SerializationContext::create()->setGroups(['profileForm'])), 
                 'form' => $form->createView(), 
                 'avatarForm' => $avatarForm->createView(),
                 'helperForm' => $helperForm->createView()

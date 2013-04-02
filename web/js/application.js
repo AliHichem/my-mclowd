@@ -23,10 +23,6 @@ mcApp.factory('Qualification', function($resource) {
 });
 
 function ContractorEditCtrl($scope, $http, Qualification, Employment, Education) {
-    $scope.newTask = {name: '', amount: ''};
-    $scope.newQualification = {name: ''};
-    $scope.changed = {city: 0};
-    //$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
     $scope.$watch('profile.city', function(newValue, oldValue){
         $scope.changed.city++;
@@ -41,7 +37,7 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
         }        
         $scope.profile.tasks.push($scope.newTask);
 
-        $scope.newTask = {name: '', amount: ''};
+        $scope.newTask = {};
     };
 
 
@@ -56,7 +52,7 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
         var qualification = new Qualification($scope.newQualification);
         qualification.$save();
 
-        $scope.newQualification = {name: ''};
+        $scope.newQualification = {};
     };
 
     $scope.addEducation = function () {        
@@ -70,7 +66,7 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
         $scope.profile.educations.push($scope.newEducation);        
         var e = new Education($scope.newEducation);
         e.$save();
-        $scope.newEducation = {institution_name: '', degree: ''};
+        $scope.newEducation = {};
     };
 
     $scope.addEmployment = function () {    
@@ -108,7 +104,7 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
     };
 
     $scope.saveFullname = function(task) {
-        $http.post(Mclowd.path('contractor_update_full_name'), {form: {fullName: task.fullName}});
+        $http.post(Mclowd.path('contractor_update_fullname'), {form: {fullName: task.fullName}});
     };
 
     $scope.saveOverview = function(task) {

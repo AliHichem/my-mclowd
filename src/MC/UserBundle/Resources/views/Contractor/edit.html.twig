@@ -4,8 +4,6 @@
 
 <h3>{{ user }}</h3>
 
-{{ form_widget(helperForm) }}
-
 
 <div ng-controller="ContractorEditCtrl">
 
@@ -101,6 +99,11 @@
             <div><input placeholder="Company Name" ng-model="newEmployment.companyName" /></div>
             <div><input placeholder="Position" ng-model="newEmployment.position" /></div>
             <div><textarea ng-model="newEmployment.description" placeholder="Description (optional)"></textarea></div>
+
+            <div>Start:
+                <mc-month-select ng-model="newEmployment.startMonth"></mc-month-select>
+            </div>
+
             <input type="submit" value="Add add employment" />
         </form>
 

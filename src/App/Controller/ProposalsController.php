@@ -7,6 +7,8 @@ use App\Form\Type\NewProposalType;
 use Doctrine\Common\Persistence\PersistentObject;
 use Symfony\Component\HttpFoundation\Request;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ProposalsController extends Controller
 {
@@ -16,18 +18,75 @@ class ProposalsController extends Controller
      */
     public function newAction(Request $request)
     {
+        $em = $this->getDoctrine()->getEntityManager();
+        //$serializer = $this->get('serializer');
+        
+        //print_r($postForm);
+        //echo 'tu';
+        //die();
+        
         $proposal = new Proposal;
-        $form = $this->createObjectForm($proposal, 'new', array('em' => $this->getDoctrine()->getEntityManager()));
+        $form = $this->createForm(new \App\Form\NewProposalType(), $proposal, array('em' => $em));
+        
+        if ($request->isXmlHttpRequest()) {
+            
+            
+            $postForm = $this->get('request')->request->get('form');
+            
+            $form->bind($postForm);
+            if ($form->isValid()) {
+                $task = $em->find('App:Task', $postForm['task']);
+                $proposal->setTask($task);
+                $this->persist($proposal, true);
+                
+                $resp = json_encode($proposal);
+                return new JsonResponse($resp);
+            }
+            else {
+                $errors = $this->get('validator')->validate($proposal);
 
-        if ($form->isBound() && $form->isValid()) {
-            $proposal->setTask($this->getEntityManager()->getReference('App:Task', $form->getData->get('task')));
-            $this->persist($proposal, true);
-            $this->addFlash('success', 'Proposal has been sent');
-            return $this->redirectToRoute('app_proposals_show', array('id' => $proposal->getTask()->getId()));
+                // iterate on it
+                foreach( $errors as $error )
+                {
+                    $resp[$error->getPropertyPath()] = $error->getMessage(); 
+                    //echo $error->getPropertyPath();
+                    //echo $error->getMessage();
+                }
+                $resp = json_encode($resp);
+                
+                return new JsonResponse($resp);
+            }
         }
+        else {
+            $query = $em->createQuery('SELECT p FROM App\Entity\Proposal p WHERE p.task = :taskId');
+            $query->setParameter('taskId', $request->query->get('task'));
+            $results = $query->getArrayResult(); // shortcut for $query->getResult(Query::HYDRATE_ARRAY);
+            
+            $results = json_encode($results);
+            
+            print_r($results);
+            //die();
+            
+            return ['form' => $form->createView(), 
+                    'task' => $request->query->get('task'),
+                    'proposalsJson' => $results];
+        }
+        
+        
 
-        return ['form' => $form->createView()];
+        
+        //die();
+        
+//         if ($form->isBound() && $form->isValid()) {
+//             $proposal->setTask($this->getEntityManager()->getReference('App:Task', $form->getData->get('task')));
+//             $this->persist($proposal, true);
+//             $this->addFlash('success', 'Proposal has been sent');
+//             return $this->redirectToRoute('app_proposals_show', array('id' => $proposal->getTask()->getId()));
+//         }
+
+        
     }
+    
 
     public function showAction(Request $request, $id)
     {

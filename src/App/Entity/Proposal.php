@@ -15,6 +15,11 @@ class Proposal {
     use ORMBehaviors\Timestampable\Timestampable,
         \App\Behaviours\Ownable
     ;
+    
+    public static $durationOptions = [
+        1 => '1-2 days',
+        2 => '3-4 days'
+    ];
 
     /**
      * @ORM\Id
@@ -25,7 +30,7 @@ class Proposal {
 
     /**
      *
-     * @ORM\Column(name="task_id", type="integer")
+     * @ORM\Column(name="task_id")
      * @ORM\ManyToOne(targetEntity="App\Entity\task")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id", onDelete="CASCADE")
      */

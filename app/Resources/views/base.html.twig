@@ -31,8 +31,32 @@
         {% endif %}            
     </head>
     <body>
+    
+        <script type="text/javascript">
+            window.Mclowd = {
+
+                /* {# api path depending app environment, prepend api path with app_dev.php for non production env #} */
+                resource_path: "{% if app.environment != 'prod' %}/app_dev.php{% endif %}",
+
+                /* {# return resource path by resource name (prepend resource name with base path) #} */
+                url: function (resource) {
+                    return (this.resource_path + resource);
+                },
+
+                /* {# generate URL #} */
+                path: function (route, params) {
+                    return Routing.generate(route, params);
+                },
+                              
+                {#
+                current_user: {{ app.user|serialize|raw }}
+                #}
+            }
+        </script>
+        
         {% if app.user %}
         <script type="text/javascript">
+            /*
             var socket = io.connect('{{ settings.getNodeAddr }}:{{ settings.getNodePort }}');
 
             // on connection to server, ask for user's name with an anonymous callback
@@ -44,6 +68,8 @@
             socket.on('updatenotifications', function (n0, n1) {
                 $(n0).html(n1); 
             });
+
+            */
         </script>
         {% endif %}
 
@@ -52,7 +78,6 @@
         <![endif]-->
 
          <div class="container">
-
             <h2>Mclowd Marketplace</h2>
 
             <ul class="nav nav-pills">
@@ -88,8 +113,11 @@
         </div>
         {% block javascripts %}
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
             {% javascripts
-                'js/remote_links.js.coffee'
+                '@App/Resources/public/js/angular-1.0.5/angular-resource.min.js'
+
+                '@App/Resources/public/js/controllers.js'
                 '@App/Resources/public/js/parsley.js/parsley.js'
                 '@App/Resources/public/js/parsley.js/parsley.extra.js'
             %}

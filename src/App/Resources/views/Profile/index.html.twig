@@ -58,14 +58,10 @@
 {% block form_rows %}
         <div class="span4 image-field">
             <div class="overlay">
-                {% if form.vars.data.pictureWebPath is not null %}
-                    <img id="profile-image"
-                         src="{{ asset(form.vars.data.pictureWebPath) }}"
-                         alt="" width="300" height="300" />
-                {% endif %}
+                
             </div>
             <div class="hidden-fields invisible">
-                {{ form_row(form['picture']) }}
+                
             </div>
             <div class="btn edit-button">Edit</div>
         </div>

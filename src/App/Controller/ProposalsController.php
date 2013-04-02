@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProposalsController extends Controller
 {
@@ -19,7 +20,7 @@ class ProposalsController extends Controller
     public function newAction(Request $request)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        //$serializer = $this->get('serializer');
+        $serializer = $this->get('serializer');
         
         //print_r($postForm);
         //echo 'tu';
@@ -30,19 +31,22 @@ class ProposalsController extends Controller
         
         if ($request->isXmlHttpRequest()) {
             
+            echo 'tu';
+            die();
             
             $postForm = $this->get('request')->request->get('form');
             unset($postForm['$$hashKey']);
-            
+
             $form->bind($postForm);
             if ($form->isValid()) {
+
                 $task = $em->find('App:Task', $postForm['task']);
                 $proposal->setTask($task);
                 $this->persist($proposal, true);
-                
-                $resp = json_encode(['id' => $proposal->getId()]);
-                //print_r($resp);
-                return new JsonResponse($resp);
+   
+                $response = new Response($serializer->serialize($proposal, 'json'));
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
             }
             else {
                 $errors = $this->get('validator')->validate($proposal);
@@ -50,13 +54,19 @@ class ProposalsController extends Controller
                 // iterate on it
                 foreach( $errors as $error )
                 {
-                    $resp[$error->getPropertyPath()] = $error->getMessage(); 
-                    echo $error->getPropertyPath();
-                    echo $error->getMessage();
+                    //$resp[$error->getPropertyPath()] = $error->getMessage(); 
+                    //echo $error->getPropertyPath();
+                    //echo $error->getMessage();
                 }
                 
-                $resp = json_encode($resp);
-                return new JsonResponse($resp);
+                //die();
+                $resp = json_encode([
+                    'error' => $this->_getErrorMessages($form)
+                ]);
+
+                $response = new Response($resp);
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
             }
         }
         else {

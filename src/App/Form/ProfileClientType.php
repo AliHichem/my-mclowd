@@ -20,7 +20,6 @@ class ProfileClientType extends AbstractType implements ContainerAwareInterface
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('picture', null, [])
             ->add('fullName', 'text', [
                 'required' => true,
                 'label' => 'Full name',

@@ -49,7 +49,7 @@ class RegistrationController extends BaseController
                 ->getManager()
                 ->getRepository('App:Country')
                 ->findOneByCode('AU');
-            $form['country']->setData($australia);
+            //$form['country']->setData($australia);
         }
 
         return $this->container->get('templating')->renderResponse($template, array(

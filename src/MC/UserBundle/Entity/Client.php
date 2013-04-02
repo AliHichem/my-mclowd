@@ -19,7 +19,7 @@ class Client extends User
      */
     protected $id;
 
-        public function getRoles()
+    public function getRoles()
     {
         $roles = parent::getRoles();
         return array_merge($roles, ['ROLE_CLIENT']);

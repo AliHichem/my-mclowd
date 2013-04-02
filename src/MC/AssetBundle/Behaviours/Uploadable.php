@@ -129,10 +129,6 @@ trait Uploadable
         return (String)$this->getOriginalFileName();
     }
 
-    public function getPath()
-    {
-        return $this->directoryPath . $this->fileName;
-    }
 
     public function createAssetFromUploadedFile(\Symfony\Component\HttpFoundation\File\UploadedFile $file)
     {
@@ -146,4 +142,23 @@ trait Uploadable
         return $this;
     }
 
+    public function isImage()
+    {
+        return in_array($this->contentType, array(
+            'image/jpeg',
+            'image/jpg',
+            'image/png',
+            'image/gif'
+        ));
+    }
+
+    public function getPath($version = '')
+    {
+        if ($version === '') {
+            return $this->directoryPath . $this->fileName;    
+        } else {
+            return preg_replace('@\.([^\.]*)$@', '.' . $version . '.\1', $this->getPath());            
+        }
+        
+    }
 }

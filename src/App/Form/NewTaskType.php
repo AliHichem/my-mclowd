@@ -14,7 +14,7 @@ class NewTaskType extends AbstractType  implements ContainerAwareInterface
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $em = $this->container->get('doctrine')->getEntityManager();
+        $em = $this->container->get('doctrine')->getManager();
         $modelTransformer = new IntegerToTaskCategoryTransformer($em);
         $builder
             ->add('name')

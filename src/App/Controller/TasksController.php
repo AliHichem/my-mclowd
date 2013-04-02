@@ -14,7 +14,7 @@ class TasksController extends Controller
 
     public function indexAction(Request $request)
     {
-        $finder = $this->get('foq_elastica.finder.mclowd_website.Task');        
+        $finder = $this->get('fos_elastica.finder.mclowd_website.Task');        
         $form = $this
             ->createForm(new SearchType(), new TaskSearch)
             ->bind($request->query->getIterator()->getArrayCopy())

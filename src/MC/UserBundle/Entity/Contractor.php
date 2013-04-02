@@ -19,9 +19,28 @@ class Contractor extends User
      */
     protected $id;
 
+
+    /**
+     * @ORM\Column(name="has_selected_template", type="boolean")
+     */
+    protected $hasSelectedTemplate = false;
+
     public function getRoles()
     {
         $roles = parent::getRoles();
         return array_merge($roles, ['ROLE_CONTRACTOR']);
+    }
+
+
+    public function hasSelectedTemplate() 
+    {
+        return $this->hasSelectedTemplate;
+    }
+    
+    
+    public function setHasSelectedTemplate($hasSelectedTemplate) 
+    {
+        $this->hasSelectedTemplate = $hasSelectedTemplate;
+        return $this;
     }
 }

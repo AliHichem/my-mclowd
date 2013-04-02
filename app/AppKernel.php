@@ -17,16 +17,21 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+
+
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\AdvancedEncoderBundle\FOSAdvancedEncoderBundle(),
             new FOS\MessageBundle\FOSMessageBundle(),
-
-            new FOQ\ElasticaBundle\FOQElasticaBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
-
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
+            
             new PUGX\MultiUserBundle\PUGXMultiUserBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
 
@@ -37,6 +42,8 @@ class AppKernel extends Kernel
 
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             
+            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
+
 
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\jQueryBundle\SonatajQueryBundle(),

@@ -32,6 +32,7 @@ class ProposalsController extends Controller
             
             
             $postForm = $this->get('request')->request->get('form');
+            unset($postForm['$$hashKey']);
             
             $form->bind($postForm);
             if ($form->isValid()) {
@@ -39,7 +40,8 @@ class ProposalsController extends Controller
                 $proposal->setTask($task);
                 $this->persist($proposal, true);
                 
-                $resp = json_encode($proposal);
+                $resp = json_encode(['id' => $proposal->getId()]);
+                //print_r($resp);
                 return new JsonResponse($resp);
             }
             else {
@@ -49,11 +51,11 @@ class ProposalsController extends Controller
                 foreach( $errors as $error )
                 {
                     $resp[$error->getPropertyPath()] = $error->getMessage(); 
-                    //echo $error->getPropertyPath();
-                    //echo $error->getMessage();
+                    echo $error->getPropertyPath();
+                    echo $error->getMessage();
                 }
-                $resp = json_encode($resp);
                 
+                $resp = json_encode($resp);
                 return new JsonResponse($resp);
             }
         }
@@ -64,25 +66,10 @@ class ProposalsController extends Controller
             
             $results = json_encode($results);
             
-            print_r($results);
-            //die();
-            
             return ['form' => $form->createView(), 
                     'task' => $request->query->get('task'),
                     'proposalsJson' => $results];
         }
-        
-        
-
-        
-        //die();
-        
-//         if ($form->isBound() && $form->isValid()) {
-//             $proposal->setTask($this->getEntityManager()->getReference('App:Task', $form->getData->get('task')));
-//             $this->persist($proposal, true);
-//             $this->addFlash('success', 'Proposal has been sent');
-//             return $this->redirectToRoute('app_proposals_show', array('id' => $proposal->getTask()->getId()));
-//         }
 
         
     }

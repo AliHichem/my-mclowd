@@ -17,13 +17,27 @@ function ProposalCtrl($scope, $http, Proposal) {
 	];
 	
     $scope.addProposal = function () {
-        if (typeof $scope.proposals.proposal_history === "undefined") {
-            $scope.proposals.proposal_history = [];
+        if (typeof $scope.proposals === "undefined") {
+            $scope.proposals = [];
         }
-        $scope.proposals.proposal_history.push($scope.newProposal);
+        
 //        var e = new Proposal($scope.newProposal);
-    	$http.post(Mclowd.url('/proposals/'), $.param({form: $scope.newProposal}));
-    	$scope.newProposal = {};
+    	$http.post(Mclowd.url('/proposals/'), $.param({form: $scope.newProposal})).success(function(data, status) {
+            $scope.status = status;
+            $scope.data = data;
+            $scope.newProposal.id = data.id
+            $scope.proposals.push($scope.newProposal);
+            
+            var taskId = $scope.newProposal.task;
+            $scope.newProposal = {};
+            $scope.newProposal.task = taskId;
+            
+        }).
+        error(function(data, status) {
+            $scope.data = data || "Request failed";
+            $scope.status = status;         
+        });;
+
     	
 
     	

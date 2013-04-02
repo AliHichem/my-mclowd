@@ -100,18 +100,18 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
     };
 
     $scope.saveCity = function(task) {
-        $http.post('/app_dev.php/contractor/update-city', {form: {city: task.city}});
+        $http.post(Mclowd.path('contractor_update_city'), {form: {city: task.city}});
     };
 
     $scope.saveTagLine = function(task) {
-        $http.post('/app_dev.php/contractor/update-tag-line', {form: {tagLine: task.tagLine}});
+        $http.post(Mclowd.path('contractor_update_tag_line'), {form: {tagLine: task.tagLine}});
     };
 
     $scope.saveFullname = function(task) {
-        $http.post('/app_dev.php/contractor/update-fullname', {form: {fullName: task.fullName}});
+        $http.post(Mclowd.path('contractor_update_full_name'), {form: {fullName: task.fullName}});
     };
 
     $scope.saveOverview = function(task) {
-        $http.post('/app_dev.php/contractor/update-overview', {form: {overview: task.overview}});
+        $http.post(Mclowd.path('contractor_update_overview'), {form: {overview: task.overview}});
     };
 }

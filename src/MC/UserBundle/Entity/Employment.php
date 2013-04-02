@@ -32,12 +32,13 @@ class Employment
 
     /**
      *
+     * @Assert\NotBlank()
      * @ORM\Column(name="start_month", type="integer")
      */
     protected $startMonth;
 
     /**
-     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="start_year", type="integer")
      */
     protected $startYear;

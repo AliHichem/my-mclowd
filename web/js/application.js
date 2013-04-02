@@ -24,9 +24,6 @@ mcApp.factory('Qualification', function($resource) {
 
 function ContractorEditCtrl($scope, $http, Qualification, Employment, Education) {
 
-    $scope.$watch('profile.city', function(newValue, oldValue){
-        $scope.changed.city++;
-    });
 
     $scope.addTask = function () {
         if (!$scope.newTask.name.length) {
@@ -111,3 +108,5 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
         $http.post(Mclowd.path('contractor_update_overview'), {form: {overview: task.overview}});
     };
 }
+
+window.mcApp = mcApp;

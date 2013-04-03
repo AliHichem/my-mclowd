@@ -32,7 +32,7 @@ class Proposal {
     /**
      *
      * @ORM\Column(name="task_id")
-     * @ORM\ManyToOne(targetEntity="App\Entity\task", inversedBy="proposals")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Task", inversedBy="proposals")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $task;

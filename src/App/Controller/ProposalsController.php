@@ -67,8 +67,8 @@ class ProposalsController extends Controller
             $proposals = $task->getProposals();
             //var_dump($proposals);
             //die();
-            foreach ($proposals as $prop) {
-                echo $prop->getId();
+            foreach ($proposals as $key => $val) {
+                //echo $prop->getId();
             }
             die();
             

@@ -22,20 +22,12 @@ class ProposalsController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $serializer = $this->get('serializer');
         
-        //print_r($postForm);
-        //echo 'tu';
-        //die();
-        
         $proposal = new Proposal;
         $form = $this->createForm(new \App\Form\NewProposalType(), $proposal, array('em' => $em));
         
         if ($request->isXmlHttpRequest()) {
             
-            echo 'tu';
-            die();
-            
             $postForm = $this->get('request')->request->get('form');
-            unset($postForm['$$hashKey']);
 
             $form->bind($postForm);
             if ($form->isValid()) {
@@ -49,15 +41,15 @@ class ProposalsController extends Controller
                 return $response;
             }
             else {
-                $errors = $this->get('validator')->validate($proposal);
+//                 $errors = $this->get('validator')->validate($proposal);
 
-                // iterate on it
-                foreach( $errors as $error )
-                {
-                    //$resp[$error->getPropertyPath()] = $error->getMessage(); 
-                    //echo $error->getPropertyPath();
-                    //echo $error->getMessage();
-                }
+//                 // iterate on it
+//                 foreach( $errors as $error )
+//                 {
+//                     $resp[$error->getPropertyPath()] = $error->getMessage(); 
+//                     echo $error->getPropertyPath();
+//                     echo $error->getMessage();
+//                 }
                 
                 //die();
                 $resp = json_encode([
@@ -70,14 +62,22 @@ class ProposalsController extends Controller
             }
         }
         else {
-            $query = $em->createQuery('SELECT p FROM App\Entity\Proposal p WHERE p.task = :taskId');
-            $query->setParameter('taskId', $request->query->get('task'));
-            $results = $query->getArrayResult(); // shortcut for $query->getResult(Query::HYDRATE_ARRAY);
             
-            $results = json_encode($results);
+            $task = $em->find('App\Entity\Task', $request->query->get('task'));
+            $proposals = $task->getProposals();
+            //var_dump($proposals);
+            //die();
+            foreach ($proposals as $prop) {
+                echo $prop->getId();
+            }
+            die();
+            
+            //$results = $em->getRepository('App\Entity\Proposal')->getProposalsByTask($task->getId());
+            //$results = json_encode($results);
             
             return ['form' => $form->createView(), 
-                    'task' => $request->query->get('task'),
+                    'task' => $task->getId(),
+                    'taskType' => $task->getType(),
                     'proposalsJson' => $results];
         }
 

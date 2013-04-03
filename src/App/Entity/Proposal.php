@@ -9,6 +9,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * @ORM\Entity
  * @ORM\Table(name="proposals")
+ * @ORM\Entity(repositoryClass="App\Entity\ProposalRepository")
  */
 class Proposal {
 
@@ -31,7 +32,7 @@ class Proposal {
     /**
      *
      * @ORM\Column(name="task_id")
-     * @ORM\ManyToOne(targetEntity="App\Entity\task")
+     * @ORM\ManyToOne(targetEntity="App\Entity\task", inversedBy="proposals")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $task;
@@ -106,8 +107,13 @@ class Proposal {
         return $this;
     }
 
-    public function getduration() {
+    public function getDuration() {
         return $this->duration;
+    }
+    
+    public function getTextDuration()
+    {
+        return self::$durationOptions[$this->getDuration()];
     }
 
     public function setTask(Task $task) {

@@ -66,6 +66,13 @@ class Employment
      */
     protected $position;
     
+
+    /**
+     * @var string
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    protected $description;
+
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="employment_history")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
@@ -201,4 +208,15 @@ class Employment
         return $this;
     }
 
+    public function getDescription() 
+    {
+        return $this->description;
+    }
+    
+    public function setDescription($description) 
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
 }

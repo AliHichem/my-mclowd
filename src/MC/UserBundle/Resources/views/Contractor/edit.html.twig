@@ -101,8 +101,8 @@
         </form>
 
         <ul>
-            <li ng-repeat="education in profile.educations">
-                {{ education.institution_name }} <small>({{ education.degree }})</small> 
+            <li ng-repeat="education in profile.educationHistory">
+                {{ education.institutionName }} <small>({{ education.degree }})</small> 
                 <button class="btn btn-danger" ng-click="removeEducation(education)">Remove</button>
             </li>
         </ul>

@@ -60,6 +60,12 @@ class Education
      * @ORM\Column(name="degree", type="string", length=255)
      */
     protected $degree;
+
+    /**
+     * @var string
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    protected $description;
     
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="education_history")
@@ -201,4 +207,15 @@ class Education
         return $this;
     }
 
+    public function getDescription() 
+    {
+        return $this->description;
+    }
+    
+    public function setDescription($description) 
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
 }

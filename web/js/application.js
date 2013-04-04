@@ -53,18 +53,17 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
     };
 
     $scope.addEducation = function () {        
-        if (!$scope.newEducation.institution_name.length) {
+        if (!$scope.newEducation.institutionName.length) {
             return;
         }
-        if (typeof $scope.profile.educations === "undefined") {
-            $scope.profile.educations = [];
+        if (typeof $scope.profile.educationHistory === "undefined") {
+            $scope.profile.educationHistory = [];
         }        
 
-        $scope.profile.educations.push($scope.newEducation);        
         var e = new Education($scope.newEducation);
         e.$save();
         e.$save(function(data) {
-            $scope.profile.educations.push(e);  
+            $scope.profile.educationHistory.push($scope.newEducation);  
             $scope.newEducation = {};
         });
     };
@@ -76,7 +75,7 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
         
         var e = new Employment($scope.newEmployment);        
         e.$save(function(data) {
-            $scope.profile.employmentHistory.push(e);  
+            $scope.profile.employmentHistory.push($scope.newEmployment);  
             $scope.newEmployment = {};
         });
         

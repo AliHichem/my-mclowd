@@ -13,6 +13,7 @@ use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use MC\UserBundle\Form\Type\ContractorEditFormType;
 use MC\UserBundle\Form\Type\EmploymentFormType;
+use MC\UserBundle\Form\Type\EducationFormType;
 use DateTime;
 use MC\UserBundle\Entity\Education;
 use MC\UserBundle\Entity\Employment;
@@ -168,7 +169,7 @@ class ContractorController extends BaseController
         $employment = new Employment;
 
         $form = $this->createForm(new EmploymentFormType(), $employment);        
-        $form->bind($request);
+        $form->bind($request);        
         if ($form->isValid()) {             
             $user->addEmployment($employment);
             $this->persist($user, true);     
@@ -186,12 +187,7 @@ class ContractorController extends BaseController
         $user = $this->getSecurity()->getToken()->getUser();
         $serializer = $this->get('serializer');
         $education = new Education;
-        $form = $this
-            ->createFormBuilder($education, ['csrf_protection' => false])
-            ->add('institutionName')
-            ->add('degree')
-            ->getForm()
-        ;
+        $form = $this->createForm(new EducationFormType(), $education);        
         $form->bind($request);
         if ($form->isValid()) {             
             $this->persist($user, true);    

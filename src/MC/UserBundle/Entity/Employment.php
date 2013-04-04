@@ -4,7 +4,7 @@ namespace MC\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\SerializerBundle\Annotation as Rest;
+use JMS\Serializer\Annotation as Rest;
 
 /**
  * Education
@@ -26,6 +26,7 @@ class Employment
     /**
      * @var string
      * @Assert\NotBlank()
+     * @Rest\SerializedName("companyName")
      * @ORM\Column(name="company_name", type="string", length=255)
      */
     protected $companyName;
@@ -33,24 +34,26 @@ class Employment
     /**
      *
      * @Assert\NotBlank()
+     * @Rest\SerializedName("startMonth")
      * @ORM\Column(name="start_month", type="integer")
      */
     protected $startMonth;
 
     /**
      * @Assert\NotBlank()
+     * @Rest\SerializedName("startYear")
      * @ORM\Column(name="start_year", type="integer")
      */
     protected $startYear;
     
     /**
-     *
+     * @Rest\SerializedName("endMonth")
      * @ORM\Column(name="end_month", type="integer", nullable=true)
      */
     protected $endMonth;    
 
-    /**
-     *
+    /**     
+     * @Rest\SerializedName("endYear")
      * @ORM\Column(name="end_year", type="integer", nullable=true)
      */
     protected $endYear;

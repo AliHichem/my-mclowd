@@ -23,6 +23,7 @@ use FOS\RestBundle\Routing\ClassResourceInterface;
 
 trait RestableController
 {
+    
     /**
      * Create a view
      *

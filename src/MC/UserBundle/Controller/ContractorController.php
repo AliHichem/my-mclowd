@@ -20,8 +20,6 @@ use MC\UserBundle\Entity\Employment;
 // SerializationContext::create()->setGroups(['profileForm'])
 class ContractorController extends BaseController
 {
-    use RestableController;
-
     public function setTemplateAction(Request $request)
     {
         
@@ -152,9 +150,7 @@ class ContractorController extends BaseController
             $this->persist($user, true);     
             $resp = $serializer->serialize($user, 'json');
         } else {
-            $resp = json_encode([
-                'error' => $this->_getErrorMessages($form)
-            ]);
+            return $this->view($this->_getErrorMessages($form), self::INVALID_DATA);            
         }
 
         $response = new JsonResponse($resp);
@@ -176,45 +172,34 @@ class ContractorController extends BaseController
         if ($form->isValid()) {             
             $user->addEmployment($employment);
             $this->persist($user, true);     
-            $resp = $serializer->serialize($employment, 'json');
+            return new JsonResponse($serializer->serialize($employment, 'json'));
         } else {
-            $resp = json_encode([
-                'error' => $this->_getErrorMessages($form)
-            ]);
-        }
-
-        $response = new JsonResponse($resp);
-        return $response;
-
+           return new JsonResponse($this->_getErrorMessages($form), self::INVALID_DATA);
+        }        
     }
 
     /**
-     * 
      * @Secure(roles="ROLE_CONTRACTOR")
      * */
     public function addEducationAction(Request $request)
     {
         $user = $this->getSecurity()->getToken()->getUser();
         $serializer = $this->get('serializer');
-
+        $education = new Education;
         $form = $this
-            ->createFormBuilder(new Education, ['csrf_protection' => false])
+            ->createFormBuilder($education, ['csrf_protection' => false])
             ->add('institutionName')
             ->add('degree')
             ->getForm()
         ;
         $form->bind($request);
         if ($form->isValid()) {             
-            $this->persist($user, true);     
-            $resp = $serializer->serialize($user, 'json');
+            $this->persist($user, true);    
+            return new JsonResponse($serializer->serialize($education, 'json'));            
         } else {
-            $resp = json_encode([
-                'error' => $this->_getErrorMessages($form)
-            ]);
+            return new JsonResponse($this->_getErrorMessages($form), self::INVALID_DATA);
         }
 
-        $response = new JsonResponse($resp);
-        return $response;
 
     }
 

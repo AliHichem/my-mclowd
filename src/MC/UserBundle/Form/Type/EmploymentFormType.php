@@ -13,6 +13,10 @@ class EmploymentFormType extends AbstractType {
         $builder
             ->add('companyName')
             ->add('position')
+            ->add('startMonth')
+            ->add('startYear')
+            ->add('endMonth')
+            ->add('endYear')
         ;
     }
 

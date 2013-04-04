@@ -48,12 +48,14 @@ contractor_update_overview:
 
 contrator_add_employment:
     pattern:  /contractor/employment
-    defaults: { _controller: MCUserBundle:Contractor:addEmployment }
+    defaults: { _controller: MCUserBundle:Contractor:addEmployment, _format: json }
     requirements:
         _method:  POST
+        _format:  json
 
 contrator_add_education:
     pattern:  /contractor/education
-    defaults: { _controller: MCUserBundle:Contractor:addEducation }
+    defaults: { _controller: MCUserBundle:Contractor:addEducation, _format: json }
     requirements:
         _method:  POST
+        _format:  json

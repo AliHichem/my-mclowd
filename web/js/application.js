@@ -63,18 +63,23 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
         $scope.profile.educations.push($scope.newEducation);        
         var e = new Education($scope.newEducation);
         e.$save();
-        $scope.newEducation = {};
+        e.$save(function(data) {
+            $scope.profile.educations.push(e);  
+            $scope.newEducation = {};
+        });
     };
 
     $scope.addEmployment = function () {    
-        if (typeof $scope.profile.employment_history === "undefined") {
+        if (typeof $scope.profile.employmentHistory === "undefined") {
             $scope.profile.employmentHistory = [];
         }        
-        $scope.profile.employmentHistory.push($scope.newEducation);        
-        var e = new Employment($scope.newEmployment);
-        console.log(e)
-        e.$save();
-        $scope.newEmployment = {};
+        
+        var e = new Employment($scope.newEmployment);        
+        e.$save(function(data) {
+            $scope.profile.employmentHistory.push(e);  
+            $scope.newEmployment = {};
+        });
+        
     };
 
     $scope.removeTask = function (task) {

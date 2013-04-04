@@ -64,16 +64,16 @@ class ProposalsController extends Controller
         else {
             
             $task = $em->find('App\Entity\Task', $request->query->get('task'));
-            $proposals = $task->getProposals();
+            //$proposals = $task->getProposals();
             //var_dump($proposals);
             //die();
-            foreach ($proposals as $key => $val) {
+            //foreach ($proposals as $key => $val) {
                 //echo $prop->getId();
-            }
-            die();
+            //}
+            //die();
             
-            //$results = $em->getRepository('App\Entity\Proposal')->getProposalsByTask($task->getId());
-            //$results = json_encode($results);
+            $results = $em->getRepository('App\Entity\Proposal')->getProposalsByTask($task->getId());
+            $results = json_encode($results);
             
             return ['form' => $form->createView(), 
                     'task' => $task->getId(),

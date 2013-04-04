@@ -176,6 +176,8 @@ class TasksController extends Controller
     public function showAction(Request $request, $id, $slug)
     {
         $task = $this->findOr404('App\Entity\Task', ['id' => $id, 'slug' => $slug]);
+        
+        
         return compact('task');
     }
 

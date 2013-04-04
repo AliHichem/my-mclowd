@@ -154,6 +154,9 @@ function ProposalCtrl($scope, $http, Proposal) {
             }
             else {
 	            $scope.newProposal.id = data.id;
+	            
+	            var _duration = data.duration
+	            $scope.newProposal.duration = data.duration_options[_duration];
 	            $scope.proposals.push($scope.newProposal);
 	            
 	            var taskId = $scope.newProposal.task;

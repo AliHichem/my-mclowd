@@ -67,11 +67,16 @@ class ContractorController extends BaseController
             ->add('simple_date', 'date', ['format' => 'yyyy-MM-dd'])
             ->getForm()
         ;
+
+        $years = array_combine(range(1920, date('Y')), range(1920, date('Y')));
+
         return ['user' => $user, 
                 'userJson' => $serializer->serialize($user, 'json'), 
                 'form' => $form->createView(), 
                 'avatarForm' => $avatarForm->createView(),
-                'helperForm' => $helperForm->createView()
+                'helperForm' => $helperForm->createView(),
+                'years' => $years,
+                'months' => $this->getMonths()
         ];
     }
 
@@ -211,6 +216,16 @@ class ContractorController extends BaseController
         $response = new JsonResponse($resp);
         return $response;
 
+    }
+
+
+    protected function getMonths()
+    {
+        $months = [];
+        for ($m=1; $m<=12; $m++) {
+            $months[$m] = date('M', mktime(0,0,0,$m));
+        }
+        return $months;
     }
 
 }

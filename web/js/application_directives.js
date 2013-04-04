@@ -19,7 +19,8 @@ window.mcApp.directive('mcMonthSelect', function () {
             '<option value="10">Oct</option>' +
             '<option value="11">Nov</option>' +
             '<option value="12">Dec</option>' +
-            '</select>'
+            '</select>',
+        replace: true
         
     };
 });

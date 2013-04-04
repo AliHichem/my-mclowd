@@ -98,7 +98,7 @@
                 {% endif %}
 
             </ul>
-            {% if  app.session.flashbag.count() > 0 %}
+            {% if  app.session.flashbag.all()|length > 0 %}
                 <section id="flash-messages">
                 {% for type, flashMessages in app.session.flashbag.all() %}
                     {% for flashMessage in flashMessages %}

@@ -9,6 +9,8 @@
 
     <div ng-init='profile={{ userJson|raw }}'></div>
     <div ng-init='originalProfile={{ userJson|raw }}'></div>
+    <div ng-init='years={{ years|json_encode|raw }}'></div>
+    <div ng-init='months={{ months|json_encode|raw }}'></div>
 
     <form action="{{ path('contractor_edit') }}" method="POST" {{ form_enctype(avatarForm) }} />        
         {% if user.avatar %}
@@ -82,6 +84,19 @@
             <div><input placeholder="Institution Name" ng-model="newEducation.institutionName" /></div>
             <div><input placeholder="Name and Type of Degree" ng-model="newEducation.degree" /></div>
             <div><textarea ng-model="newEducation.description" placeholder="Description (optional)"></textarea></div>
+
+           
+            <div>
+                Start:
+                <select ng-model="newEducation.startMonth" ng-options="key as value for (key , value) in months"></select>
+                <select ng-model="newEducation.startYear" ng-options="key as value for (key , value) in years"></select>
+            </div>
+            <div>
+                Start:
+                <select ng-model="newEducation.endMonth" ng-options="key as value for (key , value) in months"></select>
+                <select ng-model="newEducation.endYear" ng-options="key as value for (key , value) in years"></select>
+            </div>
+
             <input type="submit" value="Add education" />
         </form>
 
@@ -100,15 +115,23 @@
             <div><input placeholder="Position" ng-model="newEmployment.position" /></div>
             <div><textarea ng-model="newEmployment.description" placeholder="Description (optional)"></textarea></div>
 
-            <div>Start:
-                <mc-month-select ng-model="newEmployment.startMonth"></mc-month-select>
+            <div>
+                Start:
+                <select ng-model="newEmployment.startMonth" ng-options="key as value for (key , value) in months"></select>
+                <select ng-model="newEmployment.startYear" ng-options="key as value for (key , value) in years"></select>
             </div>
+            <div>
+                Start:
+                <select ng-model="newEmployment.endMonth" ng-options="key as value for (key , value) in months"></select>
+                <select ng-model="newEmployment.endYear" ng-options="key as value for (key , value) in years"></select>
+            </div>
+            
 
             <input type="submit" value="Add add employment" />
         </form>
 
         <ul>
-            <li ng-repeat="companyName in profile.employmentHistory">
+            <li ng-repeat="employment in profile.employmentHistory">
                 {{ employment.companyName }} <small>({{ employment.position }})</small> 
                 <button class="btn btn-danger" ng-click="removeEmployment(employment)">Remove</button>
             </li>

@@ -72,6 +72,7 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
         }        
         $scope.profile.employmentHistory.push($scope.newEducation);        
         var e = new Employment($scope.newEmployment);
+        console.log(e)
         e.$save();
         $scope.newEmployment = {};
     };

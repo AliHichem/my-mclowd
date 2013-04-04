@@ -98,7 +98,7 @@ class ContractorController extends BaseController
      * 
      * @Secure(roles="ROLE_CONTRACTOR")
      * */
-    public function updateTagLinection(Request $request)
+    public function updateTagLineAction(Request $request)
     {
         $user = $this->getSecurity()->getToken()->getUser();
 

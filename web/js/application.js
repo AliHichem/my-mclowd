@@ -61,7 +61,6 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
         }        
 
         var e = new Education($scope.newEducation);
-        e.$save();
         e.$save(function(data) {
             $scope.profile.educationHistory.push($scope.newEducation);  
             $scope.newEducation = {};

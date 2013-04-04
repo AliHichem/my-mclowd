@@ -190,7 +190,8 @@ class ContractorController extends BaseController
         $form = $this->createForm(new EducationFormType(), $education);        
         $form->bind($request);
         if ($form->isValid()) {             
-            $this->persist($user, true);    
+            $user->addEducation($education);
+            $this->persist($user, true);   
             return new JsonResponse($serializer->serialize($education, 'json'));            
         } else {
             return new JsonResponse($this->_getErrorMessages($form), self::INVALID_DATA);

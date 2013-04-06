@@ -18,4 +18,8 @@ services:
         class:      "App\Services\Notifications"
         public:     true
         arguments: ['%notifications_server%','%notifications_port%']
-            
+
+    app.services.mailer:
+        class:      "App\Services\MailerService"
+        public:     true
+        arguments: ['@mailer', '@twig', '%mailer_from%']

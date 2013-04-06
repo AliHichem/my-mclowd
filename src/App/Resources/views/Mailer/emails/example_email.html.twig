@@ -1,0 +1,21 @@
+{% extends "App:Mailer:layout.html.twig" %}
+
+{% block subject_content %}
+{% autoescape false %}
+Here is example subject
+{% endautoescape %}
+{% endblock %}
+
+{% block html_content %}
+{% autoescape false %}
+<p style="margin: 20px; padding: 0; font-family: Arial; font-size: 14px; color: #000000;">
+    Here is HTML mime part
+</p>
+{% endautoescape %}
+{% endblock %}
+
+{% block text_content %}
+{% autoescape false %}
+Here is text mime part
+{% endautoescape %}
+{% endblock %}

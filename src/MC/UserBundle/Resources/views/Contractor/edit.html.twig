@@ -14,6 +14,7 @@
     <div ng-init='initEmployments()'></div>
     <div ng-init='initEducations()'></div>
     <div ng-init='initTasks()'></div>
+    <div ng-init='initQualifications()'></div>
     
     <form action="{{ path('contractor_edit') }}" method="POST" {{ form_enctype(avatarForm) }} />        
         {% if user.avatar %}
@@ -75,7 +76,7 @@
         </form>
 
         <ul>
-            <li ng-repeat="qualification in profile.qualifications">
+            <li ng-repeat="qualification in data.qualifications">
                 {{ qualification.name }} <button class="btn btn-danger" ng-click="removeQualification(qualification)">Remove</button>
             </li>
         </ul>

@@ -15,10 +15,14 @@ use MC\UserBundle\Form\Type\ContractorEditFormType;
 use MC\UserBundle\Form\Type\EmploymentFormType;
 use MC\UserBundle\Form\Type\EducationFormType;
 use MC\UserBundle\Form\Type\ContractorTaskFormType;
+use MC\UserBundle\Form\Type\QualificationFormType;
+
 use DateTime;
 use MC\UserBundle\Entity\Education;
 use MC\UserBundle\Entity\Employment;
 use MC\UserBundle\Entity\ContractorTask;
+use MC\UserBundle\Entity\Qualification;
+
 use Symfony\Component\HttpFoundation\Response;
 // SerializationContext::create()->setGroups(['profileForm'])
 class ContractorController extends BaseController
@@ -232,6 +236,28 @@ class ContractorController extends BaseController
     /**
      * @Secure(roles="ROLE_CONTRACTOR")
      * */
+    public function addQualificationAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+        $q = new Qualification;
+        $form = $this->createForm(new QualificationFormType(), $q);        
+        $form->bind($request);
+        if ($form->isValid()) {             
+            $user->addQualification($q);
+            $this->persist($user, true);   
+            $r =  new Response($serializer->serialize($q, 'json'));
+            $r->headers->set('Content-Type', 'application/json');            
+            return $r;        
+        } else {
+            return new JsonResponse($this->_getErrorMessages($form), self::INVALID_DATA);
+        }
+
+    }
+
+    /**
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
     public function removeEducationAction(Request $request, $id)
     {
         $user = $this->getSecurity()->getToken()->getUser();
@@ -263,13 +289,30 @@ class ContractorController extends BaseController
 
     }
 
-     /**
+    /**
      * @Secure(roles="ROLE_CONTRACTOR")
      * */
     public function removeContractorTaskAction(Request $request, $id)
     {
         $user = $this->getSecurity()->getToken()->getUser();
         $education = $this->findOr404('MC\UserBundle\Entity\ContractorTask',[
+            'id' => $id,
+            'user' => $this->getSecurity()->getToken()->getUser() 
+        ]);
+        
+        $this->remove($education);
+        $this->flush();
+        return new JsonResponse('success');
+
+    }
+
+    /**
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function removeQualificationAction(Request $request, $id)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $education = $this->findOr404('MC\UserBundle\Entity\Qualification',[
             'id' => $id,
             'user' => $this->getSecurity()->getToken()->getUser() 
         ]);

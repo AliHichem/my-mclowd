@@ -88,3 +88,17 @@ contrator_remove_contractor_task:
     requirements:
         _method:  DELETE
         _format:  json
+
+contrator_add_qualification:
+    pattern:  /contractor/qualification
+    defaults: { _controller: MCUserBundle:Contractor:addQualification, _format: json }
+    requirements:
+        _method:  POST
+        _format:  json
+
+contrator_remove_qualification:
+    pattern:  /contractor/qualification/{id}
+    defaults: { _controller: MCUserBundle:Contractor:removeQualification, _format: json }
+    requirements:
+        _method:  DELETE
+        _format:  json

@@ -13,6 +13,7 @@
     <div ng-init='months={{ months|json_encode|raw }}'></div>
     <div ng-init='initEmployments()'></div>
     <div ng-init='initEducations()'></div>
+    <div ng-init='initTasks()'></div>
     
     <form action="{{ path('contractor_edit') }}" method="POST" {{ form_enctype(avatarForm) }} />        
         {% if user.avatar %}
@@ -44,13 +45,13 @@
         <h5>Set prices for tasks</h5>
         <form id="task-form" ng-submit="addTask()">
             <input placeholder="Enter a task" ng-model="newTask.name" />
-            <input placeholder="Enter amount" ng-model="newTask.amount" />
+            <input placeholder="Enter amount" ng-model="newTask.price" />
             <input type="submit" value="Add new task" />
         </form>
 
         <ul>
-            <li ng-repeat="task in profile.tasks">
-                {{ task.name }} : {{ task.amount + '$' }} <button class="btn btn-danger" ng-click="removeTask(task)">Remove</button>
+            <li ng-repeat="task in data.contractorTasks">
+                {{ task.name }} : {{ task.price + '$' }} <button class="btn btn-danger" ng-click="removeTask(task)">Remove</button>
             </li>
         </ul>
     </div>

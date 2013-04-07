@@ -74,3 +74,17 @@ contrator_remove_education:
     requirements:
         _method:  DELETE
         _format:  json
+
+contrator_add_contractor_task:
+    pattern:  /contractor/contractor-tasks
+    defaults: { _controller: MCUserBundle:Contractor:addContractorTask, _format: json }
+    requirements:
+        _method:  POST
+        _format:  json
+
+contrator_remove_contractor_task:
+    pattern:  /contractor/contractor-tasks/{id}
+    defaults: { _controller: MCUserBundle:Contractor:removeContractorTask, _format: json }
+    requirements:
+        _method:  DELETE
+        _format:  json

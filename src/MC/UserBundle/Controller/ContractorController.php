@@ -14,9 +14,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use MC\UserBundle\Form\Type\ContractorEditFormType;
 use MC\UserBundle\Form\Type\EmploymentFormType;
 use MC\UserBundle\Form\Type\EducationFormType;
+use MC\UserBundle\Form\Type\ContractorTaskFormType;
 use DateTime;
 use MC\UserBundle\Entity\Education;
 use MC\UserBundle\Entity\Employment;
+use MC\UserBundle\Entity\ContractorTask;
 use Symfony\Component\HttpFoundation\Response;
 // SerializationContext::create()->setGroups(['profileForm'])
 class ContractorController extends BaseController
@@ -208,6 +210,28 @@ class ContractorController extends BaseController
     /**
      * @Secure(roles="ROLE_CONTRACTOR")
      * */
+    public function addContractorTaskAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+        $task = new ContractorTask;
+        $form = $this->createForm(new ContractorTaskFormType(), $task);        
+        $form->bind($request);
+        if ($form->isValid()) {             
+            $user->addContractorTask($education);
+            $this->persist($user, true);   
+            $r =  new Response($serializer->serialize($task, 'json'));
+            $r->headers->set('Content-Type', 'application/json');            
+            return $r;        
+        } else {
+            return new JsonResponse($this->_getErrorMessages($form), self::INVALID_DATA);
+        }
+
+    }
+
+    /**
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
     public function removeEducationAction(Request $request, $id)
     {
         $user = $this->getSecurity()->getToken()->getUser();
@@ -239,6 +263,22 @@ class ContractorController extends BaseController
 
     }
 
+     /**
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function removeContractorTaskAction(Request $request, $id)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $education = $this->findOr404('MC\UserBundle\Entity\ContractorTask',[
+            'id' => $id,
+            'user' => $this->getSecurity()->getToken()->getUser() 
+        ]);
+        
+        $this->remove($education);
+        $this->flush();
+        return new JsonResponse('success');
+
+    }
 
     protected function getMonths()
     {

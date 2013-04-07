@@ -42,19 +42,21 @@ mcApp.factory('Qualification', function($resource) {
     });
 });
 
-function ContractorEditCtrl($scope, $http, Qualification, Employment, Education) {
+mcApp.factory('ContractorTask', function($resource) {
+    return $resource(Mclowd.url('/contractor/contractor-tasks/:id'), {id: '@id'}, {
+
+    });
+});
+
+function ContractorEditCtrl($scope, $http, Qualification, Employment, Education, ContractorTask) {
     $scope.data = {};
 
     $scope.addTask = function () {
-        if (!$scope.newTask.name.length) {
-            return;
-        }
-        if (typeof $scope.profile.tasks === "undefined") {
-            $scope.profile.tasks = [];
-        }        
-        $scope.profile.tasks.push($scope.newTask);
-
-        $scope.newTask = {};
+        var t = new ContractorTask($scope.newTask);
+        t.$save(function(data) {
+            $scope.data.contractorTasks.push(t);  
+            $scope.newTask = {};
+        });
     };
 
 
@@ -133,6 +135,13 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education)
         $scope.data.educationHistory = [];
         for (i in $scope.profile.educationHistory) {
             $scope.data.educationHistory.push(new Education($scope.profile.educationHistory[i]));
+        }
+    };
+
+     $scope.initTasks = function() {
+        $scope.data.contractorTasks = [];
+        for (i in $scope.profile.contractorTasks) {
+            $scope.data.contractorTasks.push(new ContractorTask($scope.profile.contractorTasks[i]));
         }
     };
 }

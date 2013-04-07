@@ -4,12 +4,13 @@ namespace MC\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\SerializerBundle\Annotation as Rest;
+use JMS\Serializer\Annotation as Rest;
 
 /**
  * Education
  *
  * @ORM\Table(name="employments")
+ * @Rest\ExclusionPolicy("all")
  * @ORM\Entity
  */
 class Employment
@@ -20,36 +21,46 @@ class Employment
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Rest\Expose()
      */
     protected $id;
 
     /**
      * @var string
      * @Assert\NotBlank()
+     * @Rest\SerializedName("companyName")
+     * @Rest\Expose()
      * @ORM\Column(name="company_name", type="string", length=255)
      */
     protected $companyName;
 
     /**
      *
+     * @Assert\NotBlank()
+     * @Rest\SerializedName("startMonth")
+     * @Rest\Expose()
      * @ORM\Column(name="start_month", type="integer")
      */
     protected $startMonth;
 
     /**
-     *
+     * @Assert\NotBlank()
+     * @Rest\SerializedName("startYear")
+     * @Rest\Expose()
      * @ORM\Column(name="start_year", type="integer")
      */
     protected $startYear;
     
     /**
-     *
+     * @Rest\SerializedName("endMonth")
+     * @Rest\Expose()
      * @ORM\Column(name="end_month", type="integer", nullable=true)
      */
     protected $endMonth;    
 
-    /**
-     *
+    /**     
+     * @Rest\SerializedName("endYear")
+     * @Rest\Expose()
      * @ORM\Column(name="end_year", type="integer", nullable=true)
      */
     protected $endYear;
@@ -58,10 +69,19 @@ class Employment
     /**
      * @var string
      * @Assert\NotBlank()
+     * @Rest\Expose()
      * @ORM\Column(name="position", type="string", length=255)
      */
     protected $position;
     
+
+    /**
+     * @var string
+     * @Rest\Expose()
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    protected $description;
+
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="employment_history")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
@@ -197,4 +217,15 @@ class Employment
         return $this;
     }
 
+    public function getDescription() 
+    {
+        return $this->description;
+    }
+    
+    public function setDescription($description) 
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
 }

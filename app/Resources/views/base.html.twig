@@ -88,7 +88,8 @@
                 {% endif %}
                 <li><a href="{{ path('app_tasks_new') }}">Add new task</a></li>            
                 <li><a href="{{ path('app_tasks_index') }}">Browse tasks</a></li>
-                
+                <li><a href="{{ path('contractor_index') }}">Browse contractors</a></li>
+                    
                 {% if is_granted("ROLE_CLIENT") %}     
                     <li><a href="{{ path('app_tasks_my') }}">My tasks</a></li>    
                 {% endif %}
@@ -98,7 +99,7 @@
                 {% endif %}
 
             </ul>
-            {% if  app.session.flashbag.count() > 0 %}
+            {% if  app.session.flashbag.all()|length > 0 %}
                 <section id="flash-messages">
                 {% for type, flashMessages in app.session.flashbag.all() %}
                     {% for flashMessage in flashMessages %}
@@ -120,11 +121,12 @@
             <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
             
             {% javascripts
-                'js/vendor/angular-resource.min.js'
-                'js/remote_links.js.coffee'
+                '@App/Resources/public/js/vendor/angular-resource.min.js'
+                '@App/Resources/public/js/remote_links.js.coffee'
                 '@App/Resources/public/js/parsley.js/parsley.js'
                 '@App/Resources/public/js/parsley.js/parsley.extra.js'
-                'js/application.js'
+                '@App/Resources/public/js/application.js'                
+                '@App/Resources/public/js/controllers/*'
             %}
             <script src="{{ asset_url }}"></script>
             {% endjavascripts %}

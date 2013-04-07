@@ -4,18 +4,19 @@ namespace MC\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\SerializerBundle\Annotation as Rest;
+use JMS\Serializer\Annotation as Rest;
 /**
  * Education
  *
  * @ORM\Table(name="educations")
+ * @Rest\ExclusionPolicy("all")
  * @ORM\Entity
  */
 class Education
 {
     /**
      * @var integer
-     *
+     * @Rest\Expose()
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -25,18 +26,24 @@ class Education
     /**
      * @var string
      * @Assert\NotBlank()
+     * @Rest\SerializedName("institutionName")
+     * @Rest\Expose()
      * @ORM\Column(name="institution_name", type="string", length=255)
      */
     protected $institutionName;
 
     /**
-     *
+     * @Rest\SerializedName("startMonth")
+     * @Rest\Expose()
+     * @Assert\NotBlank()
      * @ORM\Column(name="start_month", type="integer")
      */
     protected $startMonth;
 
     /**
-     *
+     * @Rest\SerializedName("startYear")
+     * @Rest\Expose()
+     * @Assert\NotBlank()
      * @ORM\Column(name="start_year", type="integer")
      */
     protected $startYear;
@@ -57,9 +64,17 @@ class Education
     /**
      * @var string
      * @Assert\NotBlank()
+     * @Rest\Expose()
      * @ORM\Column(name="degree", type="string", length=255)
      */
     protected $degree;
+
+    /**
+     * @var string
+     * @Rest\Expose()
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    protected $description;
     
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="education_history")
@@ -201,4 +216,15 @@ class Education
         return $this;
     }
 
+    public function getDescription() 
+    {
+        return $this->description;
+    }
+    
+    public function setDescription($description) 
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
 }

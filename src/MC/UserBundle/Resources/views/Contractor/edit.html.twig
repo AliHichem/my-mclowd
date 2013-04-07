@@ -11,7 +11,8 @@
     <div ng-init='originalProfile={{ userJson|raw }}'></div>
     <div ng-init='years={{ years|json_encode|raw }}'></div>
     <div ng-init='months={{ months|json_encode|raw }}'></div>
-
+    <div ng-init='initEmployments()'></div>
+    
     <form action="{{ path('contractor_edit') }}" method="POST" {{ form_enctype(avatarForm) }} />        
         {% if user.avatar %}
             <img src="{{ user.avatar.path('medium') }}" />
@@ -101,7 +102,7 @@
         </form>
 
         <ul>
-            <li ng-repeat="education in profile.educationHistory">
+            <li ng-repeat="education in data.educationHistory">
                 {{ education.institutionName }} <small>({{ education.degree }})</small> 
                 <button class="btn btn-danger" ng-click="removeEducation(education)">Remove</button>
             </li>
@@ -131,7 +132,7 @@
         </form>
 
         <ul>
-            <li ng-repeat="employment in profile.employmentHistory">
+            <li ng-repeat="employment in data.employmentHistory">
                 {{ employment.companyName }} <small>({{ employment.position }})</small> 
                 <button class="btn btn-danger" ng-click="removeEmployment(employment)">Remove</button>
             </li>

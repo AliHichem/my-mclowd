@@ -120,12 +120,11 @@
             <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
             
             {% javascripts
-                'js/vendor/angular-resource.min.js'
-                'js/remote_links.js.coffee'
+                '@App/Resources/public/js/vendor/angular-resource.min.js'
+                '@App/Resources/public/js/remote_links.js.coffee'
                 '@App/Resources/public/js/parsley.js/parsley.js'
                 '@App/Resources/public/js/parsley.js/parsley.extra.js'
-                'js/application.js'
-                'js/application_directives.js'
+                '@App/Resources/public/js/application.js'                
             %}
             <script src="{{ asset_url }}"></script>
             {% endjavascripts %}

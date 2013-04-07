@@ -5,6 +5,7 @@ app/SymfonyRequirements.php
 app/cache/*
 app/logs/*
 web/bundles/*
+web/js/*
 web/info.php
 vendor/*
 web/uploads

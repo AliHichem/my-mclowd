@@ -53,9 +53,24 @@ contrator_add_employment:
         _method:  POST
         _format:  json
 
+contrator_remove_employment:
+    pattern:  /contractor/employment/{id}
+    defaults: { _controller: MCUserBundle:Contractor:removeEmployment, _format: json }
+    requirements:
+        _method:  DELETE
+        _format:  json
+
+
 contrator_add_education:
     pattern:  /contractor/education
     defaults: { _controller: MCUserBundle:Contractor:addEducation, _format: json }
     requirements:
         _method:  POST
+        _format:  json
+
+contrator_remove_education:
+    pattern:  /contractor/education/{id}
+    defaults: { _controller: MCUserBundle:Contractor:removeEducation, _format: json }
+    requirements:
+        _method:  DELETE
         _format:  json

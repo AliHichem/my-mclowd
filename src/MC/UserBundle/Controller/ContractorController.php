@@ -17,7 +17,7 @@ use MC\UserBundle\Form\Type\EducationFormType;
 use DateTime;
 use MC\UserBundle\Entity\Education;
 use MC\UserBundle\Entity\Employment;
-
+use Symfony\Component\HttpFoundation\Response;
 // SerializationContext::create()->setGroups(['profileForm'])
 class ContractorController extends BaseController
 {
@@ -173,7 +173,11 @@ class ContractorController extends BaseController
         if ($form->isValid()) {             
             $user->addEmployment($employment);
             $this->persist($user, true);     
-            return new JsonResponse($serializer->serialize($employment, 'json'));
+
+            $r =  new Response($serializer->serialize($employment, 'json'));
+            $r->headers->set('Content-Type', 'application/json');            
+            return $r;
+
         } else {
            return new JsonResponse($this->_getErrorMessages($form), self::INVALID_DATA);
         }        
@@ -197,6 +201,39 @@ class ContractorController extends BaseController
             return new JsonResponse($this->_getErrorMessages($form), self::INVALID_DATA);
         }
 
+    }
+
+    /**
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function removeEducationAction(Request $request, $id)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $education = $this->findOr404('MC\UserBundle\Entity\Education',[
+            'id' => $id,
+            'user' => $this->getSecurity()->getToken()->getUser() 
+        ]);
+        
+        $this->remove($education);
+        $this->flush();
+        return new JsonResponse('success');
+
+    }
+
+    /**
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function removeEmploymentAction(Request $request, $id)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $employment = $this->findOr404('MC\UserBundle\Entity\Employment',[
+            'id' => $id,
+            'user' => $this->getSecurity()->getToken()->getUser() 
+        ]);
+        
+        $this->remove($employment);
+        $this->flush();
+        return new JsonResponse('success');
 
     }
 

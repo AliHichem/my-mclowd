@@ -27,6 +27,26 @@ use Symfony\Component\HttpFoundation\Response;
 // SerializationContext::create()->setGroups(['profileForm'])
 class ContractorController extends BaseController
 {
+    
+    /**
+     * @Template()
+     */
+    public function indexAction(Request $request)
+    {
+        $contractors = $this->getRepository('MC\UserBundle\Entity\Contractor')->findAll();
+        return compact('contractors');
+    }
+
+    /**
+     * @Template()
+     */
+    public function profileAction(Request $request, $id)
+    {
+        $contractor = $this->findOr404('MC\UserBundle\Entity\Contractor', ['id' => $id]);
+        return compact('contractor');
+    }
+
+
     public function setTemplateAction(Request $request)
     {
         

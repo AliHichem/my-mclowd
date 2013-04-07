@@ -1,3 +1,11 @@
+contractor_index:
+    pattern:  /contractors
+    defaults: { _controller: MCUserBundle:Contractor:index }
+
+contractor_profile:
+    pattern:  /contractors/{id}
+    defaults: { _controller: MCUserBundle:Contractor:profile }
+
 client_registration:
     pattern:  /register/client
     defaults: { _controller: MCUserBundle:Registration:registerClient }

@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <h3>{{contractor}}</h3>
+    {% if contractor.avatar %}
+        <img src="{{ contractor.avatar.path('medium') }}" />
+    {% endif %}
+
+    <p>Name: {{contractor.fullName}}</p>
+    <p>City: {{contractor.city}}</p>
+    <p>Tag line: {{contractor.tagLine}}</p>
+    <p>Overview: {{contractor.overview}}</p>
+
+    <h4>Education</h4>
+    {% for education in contractor.educationHistory %}
+        <div>
+            {{ education.institutionName }} - {{ education.degree }}
+        </div>
+    {% endfor %}
+
+    <h4>Employment</h4>
+    {% for employment in contractor.employmentHistory %}
+        <div>
+            {{ employment.companyName }} - {{ employment.position }}
+        </div>
+    {% endfor %}
+
+    <h4>Qualifications</h4>
+    {% for qualification in contractor.qualifications %}
+        <div>
+            {{ qualification.name }}
+        </div>
+    {% endfor %}
+
+{% endblock %}

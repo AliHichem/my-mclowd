@@ -1,0 +1,16 @@
+{# use this layout file to define look and feel for emails, like layout for HTML message part, copyright info and etc. #}
+{% block text %}
+    {% block text_content %}{% endblock %}
+{% endblock %}
+
+{% block html %}
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head><title></title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+    <body><table style="width: 550px; border: 0;" cellspacing="0" cellpadding="0">
+        <tr><td style="border-collapse: collapse;">
+                <h1 style="margin: 0 20px; padding: 0; font-family: Arial, sans-serif; font-size: 24px; color: #00a2a1;">{% block subject %}{% block subject_content %}{% endblock %}{% endblock %}</h1>
+                {% block html_content %}{% endblock %}
+        </td></tr>
+    </table></body></html>
+{% endblock %}

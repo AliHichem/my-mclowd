@@ -11,6 +11,13 @@
     <p>Tag line: {{contractor.tagLine}}</p>
     <p>Overview: {{contractor.overview}}</p>
 
+    <h4>Tasks</h4>
+    {% for task in contractor.contractorTasks %}
+        <div>
+            {{ task.name }} - {{ task.price + '$' }}
+        </div>
+    {% endfor %}
+
     <h4>Education</h4>
     {% for education in contractor.educationHistory %}
         <div>

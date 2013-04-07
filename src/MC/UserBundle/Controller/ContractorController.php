@@ -196,7 +196,9 @@ class ContractorController extends BaseController
         if ($form->isValid()) {             
             $user->addEducation($education);
             $this->persist($user, true);   
-            return new JsonResponse($serializer->serialize($education, 'json'));            
+            $r =  new Response($serializer->serialize($education, 'json'));
+            $r->headers->set('Content-Type', 'application/json');            
+            return $r;        
         } else {
             return new JsonResponse($this->_getErrorMessages($form), self::INVALID_DATA);
         }

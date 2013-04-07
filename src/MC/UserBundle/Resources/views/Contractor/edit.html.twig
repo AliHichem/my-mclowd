@@ -12,6 +12,7 @@
     <div ng-init='years={{ years|json_encode|raw }}'></div>
     <div ng-init='months={{ months|json_encode|raw }}'></div>
     <div ng-init='initEmployments()'></div>
+    <div ng-init='initEducations()'></div>
     
     <form action="{{ path('contractor_edit') }}" method="POST" {{ form_enctype(avatarForm) }} />        
         {% if user.avatar %}

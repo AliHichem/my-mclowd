@@ -260,16 +260,7 @@ class ContractorController extends BaseController
      * */
     public function removeEducationAction(Request $request, $id)
     {
-        $user = $this->getSecurity()->getToken()->getUser();
-        $education = $this->findOr404('MC\UserBundle\Entity\Education',[
-            'id' => $id,
-            'user' => $this->getSecurity()->getToken()->getUser() 
-        ]);
-        
-        $this->remove($education);
-        $this->flush();
-        return new JsonResponse('success');
-
+        return $this->restRemoveById('MC\UserBundle\Entity\Education', $id);
     }
 
     /**
@@ -277,16 +268,7 @@ class ContractorController extends BaseController
      * */
     public function removeEmploymentAction(Request $request, $id)
     {
-        $user = $this->getSecurity()->getToken()->getUser();
-        $employment = $this->findOr404('MC\UserBundle\Entity\Employment',[
-            'id' => $id,
-            'user' => $this->getSecurity()->getToken()->getUser() 
-        ]);
-        
-        $this->remove($employment);
-        $this->flush();
-        return new JsonResponse('success');
-
+        return $this->restRemoveById('MC\UserBundle\Entity\Employment', $id);        
     }
 
     /**
@@ -294,16 +276,7 @@ class ContractorController extends BaseController
      * */
     public function removeContractorTaskAction(Request $request, $id)
     {
-        $user = $this->getSecurity()->getToken()->getUser();
-        $education = $this->findOr404('MC\UserBundle\Entity\ContractorTask',[
-            'id' => $id,
-            'user' => $this->getSecurity()->getToken()->getUser() 
-        ]);
-        
-        $this->remove($education);
-        $this->flush();
-        return new JsonResponse('success');
-
+        return $this->restRemoveById('MC\UserBundle\Entity\ContractorTask', $id);
     }
 
     /**
@@ -311,16 +284,7 @@ class ContractorController extends BaseController
      * */
     public function removeQualificationAction(Request $request, $id)
     {
-        $user = $this->getSecurity()->getToken()->getUser();
-        $education = $this->findOr404('MC\UserBundle\Entity\Qualification',[
-            'id' => $id,
-            'user' => $this->getSecurity()->getToken()->getUser() 
-        ]);
-        
-        $this->remove($education);
-        $this->flush();
-        return new JsonResponse('success');
-
+        return $this->restRemoveById('MC\UserBundle\Entity\Qualification', $id);
     }
 
     protected function getMonths()

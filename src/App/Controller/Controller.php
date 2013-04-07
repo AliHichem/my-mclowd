@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Form\Form;
 use FOS\RestBundle\View\View;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 abstract class Controller extends BaseController
 {
@@ -70,5 +71,18 @@ abstract class Controller extends BaseController
     protected function view($data = null, $statusCode = null, array $headers = array())
     {
         return View::create($data, $statusCode, $headers);
+    }
+
+    protected function restRemoveById($entityName, $id)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $entity = $this->findOr404($entityName,[
+            'id' => $id,
+            'user' => $this->getSecurity()->getToken()->getUser() 
+        ]);
+        
+        $this->remove($entity);
+        $this->flush();
+        return new JsonResponse('success');
     }
 }

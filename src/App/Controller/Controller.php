@@ -7,9 +7,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Form\Form;
+use FOS\RestBundle\View\View;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 abstract class Controller extends BaseController
 {
+
+    const OK           = 200; // OK, the response should contain an entity corresponding to the requested resource
+    const CREATED      = 201;
+    const NO_CONTENT   = 204; // The server successfully processed the request, but is not returning any content
+    const BAD_REQUEST  = 400;
+    const FORBIDDEN    = 403;
+    const NOT_FOUND    = 404;
+    const INVALID_DATA = 422; // Validation is failed
+
     /**
      * @param Form $form
      * @return string
@@ -55,5 +66,23 @@ abstract class Controller extends BaseController
             }
         }
         return false;
+    }
+
+    protected function view($data = null, $statusCode = null, array $headers = array())
+    {
+        return View::create($data, $statusCode, $headers);
+    }
+
+    protected function restRemoveById($entityName, $id)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $entity = $this->findOr404($entityName,[
+            'id' => $id,
+            'user' => $this->getSecurity()->getToken()->getUser() 
+        ]);
+        
+        $this->remove($entity);
+        $this->flush();
+        return new JsonResponse('success');
     }
 }

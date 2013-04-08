@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <h3>Listing contractors</h3>
+
+    {% for contractor in contractors %}
+        <a href="{{ path('contractor_profile', {id: contractor.id}) }}">{{ contractor }}</a>
+    {% endfor %}
+
+{% endblock %}

@@ -6,13 +6,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractType;
 
-class EmploymentFormType extends AbstractType {
+class EducationFormType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('companyName')
-            ->add('position')
+            ->add('institutionName')
+            ->add('degree')
             ->add('description')
             ->add('startMonth')
             ->add('startYear')
@@ -26,7 +26,7 @@ class EmploymentFormType extends AbstractType {
     {
         $resolver->setDefaults(array(
             'csrf_protection'   => false,
-            'data_class' => 'MC\UserBundle\Entity\Employment',
+            'data_class' => 'MC\UserBundle\Entity\Education',
         ));
     }
 

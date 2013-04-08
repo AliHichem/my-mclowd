@@ -171,6 +171,13 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     protected $employmentHistory;
 
     /**
+     * @Rest\SerializedName("qualifications")
+     * @ORM\OneToMany(targetEntity="Qualification", mappedBy="user", cascade={"persist"})
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    protected $qualifications;
+
+    /**
      * Not persisted, used for updates of avatar only
      * @Assert\File(
      *     maxSize="1M",
@@ -184,6 +191,7 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         parent::__construct();
         $this->educationHistory = new ArrayCollection;
         $this->employmentHistory = new ArrayCollection;
+        $this->qualifications = new ArrayCollection;
     }
 
     
@@ -473,7 +481,8 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         $this->employmentHistory->add($employment);
     }
 
-    public function getEducationHistory() {
+    public function getEducationHistory() 
+    {
         return $this->educationHistory;
     }
     
@@ -490,5 +499,25 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         $education->setUser($this);
         $this->educationHistory->add($education);
     }
+
+    public function setQualifications(ArrayIterator $q) 
+    {
+        $this->qualifications = $q;
+    
+        return $this;
+    }
+
+    public function addQualification(Qualification $q)
+    {
+        $q->setUser($this);
+        $this->qualifications->add($q);
+    }
+
+
+    public function getQualifications() 
+    {
+        return $this->qualifications;
+    }
+    
 
 }

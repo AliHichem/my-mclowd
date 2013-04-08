@@ -23,3 +23,6 @@ parameters:
     #node.js communication
     notifications_server: '127.0.0.1'
     notifications_port: '6060'
+
+    #mailer
+    mailer_from: noreply@trisoft.ro

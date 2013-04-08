@@ -5,3 +5,10 @@ services:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 1 }
         calls:
             - [setContainer, ["@service_container"]]
+
+    mc_user.user_provider.facebook:
+        class: MC\UserBundle\Security\User\Provider\FacebookProvider
+        arguments:
+            facebook: "@fos_facebook.api"
+            userManager: "@fos_user.user_manager"
+            validator: "@validator"

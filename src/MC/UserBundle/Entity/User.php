@@ -108,7 +108,7 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      */
     protected $tagLine = null;
 
-     /**
+    /**
      * @var string $tagLine
      *
      * @ORM\Column(name="overview", type="text", nullable=true)
@@ -129,7 +129,7 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      * @var \App\Entity\Country $country
      * @ORM\ManyToOne(targetEntity="App\Entity\Country")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="country_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="country_id", referencedColumnName="id", onDelete="SET NULL")
      * })
      */
     protected $country;
@@ -145,11 +145,11 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      * @var \App\Entity\HearSource $hearSource
      * @ORM\ManyToOne(targetEntity="\App\Entity\HearSource", inversedBy="users")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="hear_source_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="hear_source_id", referencedColumnName="id")
      * })
      */
     protected $hearSource;
- 
+
     /**
      * @ORM\ManyToOne(targetEntity="MC\AssetBundle\Entity\Asset")
      * @ORM\JoinColumn(name="avatar_id", referencedColumnName="id", onDelete="SET NULL")
@@ -186,6 +186,13 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      * */
     public $uploadedAvatar = null;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebookId", type="string", length=255)
+     */
+    protected $facebookId;
+
     public function __construct()
     {
         parent::__construct();
@@ -194,7 +201,7 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         $this->qualifications = new ArrayCollection;
     }
 
-    
+
     /**
      * @return array<string, string> $accountTypes
      */
@@ -217,7 +224,8 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      */
     public function setUrl($url)
     {
-        $this->url = $url;    
+        $this->url = $url;
+
         return $this;
     }
 
@@ -225,10 +233,11 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     {
         return $this->registeredDate;
     }
-    
+
     public function setRegisteredDate($registeredDate)
     {
-        $this->registeredDate = $registeredDate;    
+        $this->registeredDate = $registeredDate;
+
         return $this;
     }
 
@@ -236,10 +245,11 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     {
         return $this->activationKey;
     }
-    
+
     public function setActivationKey($activationKey)
     {
-        $this->activationKey = $activationKey;    
+        $this->activationKey = $activationKey;
+
         return $this;
     }
 
@@ -247,10 +257,11 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     {
         return $this->status;
     }
-    
+
     public function setStatus($status)
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -259,13 +270,14 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         if ($this->displayName === null) {
             return $this->getUsername();
         } else {
-            return $this->displayName;    
-        }        
+            return $this->displayName;
+        }
     }
-    
+
     public function setDisplayName($displayName)
     {
-        $this->displayName = $displayName;    
+        $this->displayName = $displayName;
+
         return $this;
     }
 
@@ -279,24 +291,27 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     { //this is for twig only
         return $this->isLegacy();
     }
-        
-    public function setIsLegacy($isLegacy) {
-        $this->isLegacy = $isLegacy;    
+
+    public function setIsLegacy($isLegacy)
+    {
+        $this->isLegacy = $isLegacy;
+
         return $this;
     }
 
-    public function getEncoderName() {
+    public function getEncoderName()
+    {
         if ($this->isLegacy()) {
             return "wp_encoder";
         } else {
             return null;
-        }      
+        }
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -312,14 +327,14 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     public function setFullName($fullName)
     {
         $this->fullName = $fullName;
-    
+
         return $this;
     }
 
     /**
      * Get fullName
      *
-     * @return string 
+     * @return string
      */
     public function getFullName()
     {
@@ -335,14 +350,14 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     public function setCountry(\App\Entity\Country $country = null)
     {
         $this->country = $country;
-    
+
         return $this;
     }
 
     /**
      * Get country
      *
-     * @return \App\Entity\Country 
+     * @return \App\Entity\Country
      */
     public function getCountry()
     {
@@ -358,14 +373,14 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     public function setCity($city)
     {
         $this->city = $city;
-    
+
         return $this;
     }
 
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -373,31 +388,30 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     }
 
 
-
-    public function getTagLine() 
+    public function getTagLine()
     {
         return $this->tagLine;
     }
-    
-    
-    public function setTagLine($tagLine) 
+
+
+    public function setTagLine($tagLine)
     {
         $this->tagLine = $tagLine;
-    
+
         return $this;
     }
 
 
-    public function getOverview() 
+    public function getOverview()
     {
         return $this->overview;
     }
-    
-    
-    public function setOverview($overview) 
+
+
+    public function setOverview($overview)
     {
         $this->overview = $overview;
-    
+
         return $this;
     }
 
@@ -410,14 +424,14 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     public function setHearSource(\App\Entity\HearSource $hearSource = null)
     {
         $this->hearSource = $hearSource;
-    
+
         return $this;
     }
 
     /**
      * Get hearSource
      *
-     * @return \App\Entity\HearSource 
+     * @return \App\Entity\HearSource
      */
     public function getHearSource()
     {
@@ -433,45 +447,45 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     public function setAccountType($accountType)
     {
         $this->accountType = $accountType;
-    
+
         return $this;
     }
 
     /**
      * Get accountType
      *
-     * @return string 
+     * @return string
      */
     public function getAccountType()
     {
         return $this->accountType;
     }
-   
 
-    
-    public function getAvatar() 
+
+    public function getAvatar()
     {
         return $this->avatar;
     }
-    
-    
-    public function setAvatar(Asset $avatar) 
+
+
+    public function setAvatar(Asset $avatar)
     {
         $this->avatar = $avatar;
-    
+
         return $this;
     }
 
 
-    public function getEmploymentHistory() 
+    public function getEmploymentHistory()
     {
         return $this->employmentHistory;
     }
-    
-    
-    public function setEmploymentHistory(ArrayIterator $employmentHistory) 
+
+
+    public function setEmploymentHistory(ArrayIterator $employmentHistory)
     {
-        $this->employmentHistory = $employmentHistory;        
+        $this->employmentHistory = $employmentHistory;
+
         return $this;
     }
 
@@ -481,16 +495,16 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         $this->employmentHistory->add($employment);
     }
 
-    public function getEducationHistory() 
+    public function getEducationHistory()
     {
         return $this->educationHistory;
     }
-    
 
-    public function setEducationHistory(ArrayIterator $educationHistory) 
+
+    public function setEducationHistory(ArrayIterator $educationHistory)
     {
         $this->educationHistory = $educationHistory;
-    
+
         return $this;
     }
 
@@ -500,10 +514,10 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         $this->educationHistory->add($education);
     }
 
-    public function setQualifications(ArrayIterator $q) 
+    public function setQualifications(ArrayIterator $q)
     {
         $this->qualifications = $q;
-    
+
         return $this;
     }
 
@@ -514,10 +528,57 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     }
 
 
-    public function getQualifications() 
+    public function getQualifications()
     {
         return $this->qualifications;
     }
-    
+
+
+    public function serialize()
+    {
+        return serialize(array($this->facebookId, parent::serialize()));
+    }
+
+    public function unserialize($data)
+    {
+        list($this->facebookId, $parentData) = unserialize($data);
+        parent::unserialize($parentData);
+    }
+
+    /**
+     * @param string $facebookId
+     * @return void
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+        $this->setUsername($facebookId);
+        $this->salt = '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * @param Array
+     */
+    public function setFBData($fbdata)
+    {
+        if (isset($fbdata['id'])) {
+            $this->setFacebookId($fbdata['id']);
+            $this->addRole('ROLE_CLIENT');
+        }
+        if (isset($fbdata['first_name'])) {
+            $this->setFullName($fbdata['first_name'].' '.$fbdata['last_name']);
+        }
+        if (isset($fbdata['email'])) {
+            $this->setEmail($fbdata['email']);
+        }
+    }
 
 }

@@ -110,3 +110,11 @@ contrator_remove_qualification:
     requirements:
         _method:  DELETE
         _format:  json
+
+
+# fos_facebook integration
+_fos_facebook_security_check:
+  pattern:  /login_facebook_check
+
+_fos_facebook_security_logout:
+  pattern:  /logout

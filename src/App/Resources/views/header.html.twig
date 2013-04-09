@@ -1,0 +1,52 @@
+<div class="navbar navbar-fixed-top hidden-desktop">
+    <div class="navbar-inner topNavContainer">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="nav-collapse collapse">
+                {% include('App::menu.html.twig') %}
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+<header class="header">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="logo"><a rel="home" title="Free SMSF Accounting | SMSF" href="http://www.mclowd.com/">Free SMSF Accounting | SMSF</a></div>
+            <div class="toolbar pull-right">
+                <div id="loginLink" class="open"><a target="_blank" href="https://app.mclowd.com/">Log into Mclowd</a></div>
+                <!--<div class="loginBox">
+                    <form method="post" action="">
+                        <input type="email" name="username" id="username" placeholder="Email address">
+                        <input type="password" name="password" id="password" placeholder="Password">
+                        <input type="submit" class="submit" id="login" name="login" value="Log In &gt;">
+                        <input type="checkbox" name="rememberme" id="rememberme"><label for="rememberme" class="rememberme">Remember Me</label>
+                        <a href="forgot-password.html">Forgot password</a>
+                    </form>
+                </div>-->
+                <a class="getStarted" target="_blank" href="https://app.mclowd.com/sign-up">Get Started</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="topNav hidden-desktop header-sepparator"></div>
+
+<div id="primaryMenu" class="topNav navbar visible-desktop">
+    <div class="navbar-inner topNavContainer">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="nav-collapse collapse">
+                {% include('App::menu.html.twig') %}
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>

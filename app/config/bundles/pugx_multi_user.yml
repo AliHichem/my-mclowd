@@ -27,3 +27,6 @@ pugx_multi_user:
     manager:
         entity: 
           class: MC\UserBundle\Entity\Manager
+    social:
+        entity:
+          class: MC\UserBundle\Entity\Social

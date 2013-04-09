@@ -23,7 +23,7 @@ use ArrayIterator;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\HasLifecycleCallbacks
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({"client" = "Client", "contractor" = "Contractor", "manager" = "Manager"})
+ * @ORM\DiscriminatorMap({"client" = "Client", "contractor" = "Contractor", "manager" = "Manager", "social" = "Social"})
  */
 abstract class User extends BaseUser implements EncoderAwareInterface, ParticipantInterface
 {
@@ -571,7 +571,6 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     {
         if (isset($fbdata['id'])) {
             $this->setFacebookId($fbdata['id']);
-            $this->addRole('ROLE_CLIENT');
         }
         if (isset($fbdata['first_name'])) {
             $this->setFullName($fbdata['first_name'].' '.$fbdata['last_name']);

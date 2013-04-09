@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use \BaseFacebook;
 use \FacebookApiException;
+use PUGX\MultiUserBundle\Model\UserDiscriminator;
 
 class FacebookProvider implements UserProviderInterface
 {
@@ -17,12 +18,15 @@ class FacebookProvider implements UserProviderInterface
     protected $facebook;
     protected $userManager;
     protected $validator;
+    /** @var \PUGX\MultiUserBundle\Model\UserDiscriminator */
+    protected $discriminator;
 
-    public function __construct(BaseFacebook $facebook, $userManager, $validator)
+    public function __construct(BaseFacebook $facebook, $userManager, $validator, UserDiscriminator $discriminator)
     {
         $this->facebook = $facebook;
         $this->userManager = $userManager;
         $this->validator = $validator;
+        $this->discriminator = $discriminator;
     }
 
     public function supportsClass($class)
@@ -47,6 +51,7 @@ class FacebookProvider implements UserProviderInterface
 
         if (!empty($fbdata)) {
             if (empty($user)) {
+                $this->discriminator->setClass('MC\UserBundle\Entity\Social');
                 $user = $this->userManager->createUser();
                 $user->setEnabled(true);
                 $user->setPassword('');

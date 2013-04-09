@@ -111,6 +111,18 @@ contrator_remove_qualification:
         _method:  DELETE
         _format:  json
 
+social_register_choose_account:
+    pattern: /social/choose_account
+    defaults: { _controller: MCUserBundle:SocialRegistration:chooseAccountType }
+
+social_register_client_account:
+    pattern: /social/client
+    defaults: { _controller: MCUserBundle:SocialRegistration:registerClientAccount }
+
+social_register_contractor_account:
+    pattern: /social/contractor
+    defaults: { _controller: MCUserBundle:SocialRegistration:registerContractorAccount }
+
 
 # fos_facebook integration
 _fos_facebook_security_check:

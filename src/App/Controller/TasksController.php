@@ -55,7 +55,7 @@ class TasksController extends Controller
         ];
 
         $es['filter']['and'][] = ['term' => ['isActive' => true]];
-        //$es['query']['filtered']['filter']['and'][] = array('term' => array('isActive' => true));
+        $es['query']['filtered']['filter']['and'][] = array('term' => array('isActive' => true));
 
 
         if ($params->get('categories')) {

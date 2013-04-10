@@ -99,7 +99,7 @@
                 {% endif %}
 
             </ul>
-            {% if  app.session.flashbag.all()|length > 0 %}
+            {% if app.session.flashbag.all()|length > 0 %}
                 <section id="flash-messages">
                 {% for type, flashMessages in app.session.flashbag.all() %}
                     {% for flashMessage in flashMessages %}
@@ -114,6 +114,20 @@
         
             {% block content %}{% endblock content %}
         </div>
+
+        <div id="error-modal" class="modal hide fade" tabindex="-1" role="dialog"  aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Following error prohivited record from being saved:</h3>
+          </div>
+          <div class="modal-body">
+            <p>One fine body…</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>            
+          </div>
+        </div>
+
         {% block javascripts %}
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
             <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
@@ -122,6 +136,7 @@
             
             {% javascripts
                 '@App/Resources/public/js/vendor/angular-resource.min.js'
+                '@App/Resources/public/js/vendor/bootstrap.js'
                 '@App/Resources/public/js/remote_links.js.coffee'
                 '@App/Resources/public/js/parsley.js/parsley.js'
                 '@App/Resources/public/js/parsley.js/parsley.extra.js'

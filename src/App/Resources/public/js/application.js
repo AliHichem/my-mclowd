@@ -4,10 +4,6 @@ var mcApp = angular.module('Marketplace', ['ngResource'], function($provide, $ht
 
 })
 
-mcApp.config(function($httpProvider) {
-    //$httpProvider.defaults.headers.post  = {'Content-Type': 'application/x-www-form-urlencoded'};
-});
-
 mcApp.factory('Employment', function($resource) {
     return $resource(Mclowd.url('/contractor/employment/:id'), {id: '@id'}, {
 
@@ -31,7 +27,6 @@ mcApp.factory('ContractorTask', function($resource) {
 
     });
 });
-
 
 mcApp.factory('ResponseHandler', function() {
     return {
@@ -59,7 +54,28 @@ mcApp.factory('ResponseHandler', function() {
         },
 
         handle422: function(response) {
-            if (this.enabled) {                
+            console.log(response);
+            if (this.enabled) {   
+                $mbody = $('#error-modal .modal-body');
+                $mbody.html('');
+                $.each(response.data, function( field, error ) {
+                    var i = 0;
+                    var tranformedField = '';
+                    while (i <= field.length){
+                        character = field.charAt(i);                        
+                        if (character === character.toUpperCase()) {
+                            tranformedField += ' '+ character.toLowerCase();
+                        } else if(i === 0) {
+                            tranformedField += character.toUpperCase();
+                        } else {
+                            tranformedField += character;
+                        }
+                        i++;
+                    }
+                                        
+                    $mbody.append('<div class="modal-error-field"><strong>'+ tranformedField + '</strong>: ' + error+'</div>');                    
+                });                
+                $('#error-modal').modal('show');
                 //Modal.showMessages('Fix the following errors', response.data.errors);
             }
         },
@@ -74,15 +90,14 @@ mcApp.factory('ResponseHandler', function() {
 mcApp.config(function($httpProvider) {
     var interceptor = function(ResponseHandler, $rootScope, $q) {
 
-        function intercept(response) {
-            // handle response
+        function intercept(response) {            
             ResponseHandler.handle(response);
-
             return response;
         }
 
         return function(promise) {
             return promise.then(intercept, function(response) {
+                intercept(response)
                 return $q.reject(response)
             });
         }
@@ -90,6 +105,5 @@ mcApp.config(function($httpProvider) {
     };
     $httpProvider.responseInterceptors.push(interceptor);
 });
-
 
 window.mcApp = mcApp;

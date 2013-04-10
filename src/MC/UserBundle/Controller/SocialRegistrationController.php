@@ -9,8 +9,8 @@ use MC\UserBundle\Form\Type\SocialRegistrationChooseTypeFormType;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use MC\UserBundle\Form\Type\SocialRegistrationClientFormType;
+use MC\UserBundle\Form\Type\SocialRegistrationContractorFormType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
 
 class SocialRegistrationController extends BaseController
 {
@@ -67,6 +67,27 @@ class SocialRegistrationController extends BaseController
         return array('form' => $form->createView());
     }
 
+    /**
+     * @Template()
+     */
+    public function registerContractorAccountAction()
+    {
+        $user = $this->getUser();
+        /** @var $user Social */
+        $user->setDisplayName($user->getFullName());
+        $form = $this->createForm(new SocialRegistrationContractorFormType('MC\UserBundle\Entity\Social'), $user);
+
+        if ($this->getRequest()->isMethod('POST')) {
+            $form->bind($this->getRequest());
+            if ($form->isValid()) {
+                $this->switchCurrentUserType('MC\UserBundle\Entity\Contractor');
+                return $this->redirectToRoute('homepage');
+            }
+        }
+
+        return array('form' => $form->createView());
+    }
+
     protected function switchCurrentUserType($class)
     {
         /** @var $user Social */
@@ -89,6 +110,8 @@ class SocialRegistrationController extends BaseController
         $newUser->setCity($user->getCity());
         $newUser->setCountry($user->getCountry());
         $newUser->setHearSource($user->getHearSource());
+        $newUser->setAccountType($user->getAccountType());
+        $newUser->setDisplayName($user->getDisplayName());
 
         $newUser->setPassword('');
         $newUser->setEnabled(true);
@@ -99,5 +122,6 @@ class SocialRegistrationController extends BaseController
         $eManager->flush();
         $eManager->persist($newUser);
         $eManager->flush();
+        $userManager->updateUser($newUser);
     }
 }

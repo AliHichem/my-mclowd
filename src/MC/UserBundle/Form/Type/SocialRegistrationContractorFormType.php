@@ -1,11 +1,11 @@
 <?php
 namespace MC\UserBundle\Form\Type;
 
-use MC\UserBundle\Form\Type\RegistrationClientFormType;
 use Symfony\Component\Form\FormBuilderInterface;
+use MC\UserBundle\Form\Type\RegistrationContractorFormType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SocialRegistrationClientFormType extends RegistrationClientFormType
+class SocialRegistrationContractorFormType extends RegistrationContractorFormType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

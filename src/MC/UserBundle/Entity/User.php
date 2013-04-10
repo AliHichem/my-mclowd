@@ -11,11 +11,13 @@ use FOS\AdvancedEncoderBundle\Security\Encoder\EncoderAwareInterface;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\UserBundle\Entity\User as BaseUser;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use MC\AssetBundle\Entity\Asset;
 use JMS\Serializer\Annotation as Rest;
 use Doctrine\Common\Collections\ArrayCollection;
 use ArrayIterator;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
@@ -25,7 +27,7 @@ use ArrayIterator;
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"client" = "Client", "contractor" = "Contractor", "manager" = "Manager", "social" = "Social"})
  */
-abstract class User extends BaseUser implements EncoderAwareInterface, ParticipantInterface
+abstract class User extends BaseUser implements EncoderAwareInterface, ParticipantInterface, EquatableInterface
 {
     // this is for contractors
     // but i've added it here in case we need this functionality globally
@@ -580,4 +582,24 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         }
     }
 
+    /**
+     * This meant to refresh user roles if they don't match expected
+     *
+     * @param UserInterface $user
+     * @return Boolean
+     */
+    public function isEqualTo(UserInterface $user)
+    {
+        if ($user instanceof Client || $user instanceof Contractor) {
+            $isEqual = count($this->getRoles()) == count($user->getRoles());
+            if ($isEqual) {
+                foreach ($this->getRoles() as $role) {
+                    $isEqual = $isEqual && in_array($role, $user->getRoles());
+                }
+            }
+            return $isEqual;
+        }
+
+        return false;
+    }
 }

@@ -38,3 +38,4 @@ mc_asset:
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
     prefix: /messages
+

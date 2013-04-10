@@ -24,9 +24,19 @@ class ProposalRepository extends EntityRepository
             $resArray[$i]['hours'] = $res->getHours();
             $resArray[$i]['duration'] = $res->getTextDuration();
             $resArray[$i]['rate'] = $res->getRate();
+            $resArray[$i]['taskId'] = $taskId;
             $i++;
         }
 
         return $resArray;
+    }
+    
+    public function updateByTaskIdProposalId($taskId, $proposalId)
+    {
+        $query = $this->getEntityManager()->createQuery('UPDATE App\Entity\Proposal p SET p.isAccepted = 1 WHERE p.task = :taskId AND p.id = :proposalId');
+        $query->setParameter('taskId', $taskId);
+        $query->setParameter('proposalId', $proposalId);
+        
+        $query->execute();
     }
 }

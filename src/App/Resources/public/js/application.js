@@ -32,5 +32,11 @@ mcApp.factory('ContractorTask', function($resource) {
     });
 });
 
+mcApp.factory('AcceptProposal', function($resource) {
+    return $resource(Mclowd.url('/task/accept_proposal'), {}, {
+
+    });
+});
+
 
 window.mcApp = mcApp;

@@ -58,6 +58,11 @@ class Proposal {
      * @Assert\NotBlank()
      */
     protected $rate;
+    
+    /**
+     * @ORM\Column(name="is_accepted", type="smallint", options={"default" = 0})
+     */
+    protected $isAccepted;
 
     /**
      * Trait property here:
@@ -121,6 +126,17 @@ class Proposal {
 
     public function getTask() {
         return $this->task;
+    }
+    
+    public function setIsAccepted($accepted)
+    {
+        $this->isAccepted = $accepted;
+        return $this;
+    }
+    
+    public function getIsAccepted()
+    {
+        return $this->isAccepted;
     }
 
 }

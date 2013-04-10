@@ -1,6 +1,6 @@
-function ProposalCtrl($scope, $http) {
+function ProposalCtrl($scope, $http, AcceptProposal) {
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-	
+    
 	$scope.durationOptions = [
 	    {"value": "1",
 		"name": "1-2 days"},
@@ -50,6 +50,18 @@ function ProposalCtrl($scope, $http) {
             $scope.data = data || "Request failed";
             $scope.status = status;         
         });
+    };
+    
+    $scope.acceptProposal = function(taskId, proposalId) {   
+        var ap = new AcceptProposal(); 
+        ap.task_id = taskId;
+        ap.proposal_id = proposalId;
+        
+        console.log(ap);
+        ap.$save(function(data) {
+        	
+        });
+        return false;
     };
     
 }

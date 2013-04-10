@@ -7,6 +7,13 @@ homepage:
 settings:
     pattern: /admin/settings
     defaults: { _controller: App:Settings:list, template: 'App:Settings:list.html.twig'}
+    
+accept_proposal:
+    pattern: /task/accept_proposal
+    defaults: { _controller: App:Tasks:acceptProposal }
+    requirements:
+        _method:  POST
+        _format:  json
 
 App:Tasks: ~
 App:Tasks:my: /tasks/my
@@ -19,3 +26,5 @@ App:Profile:
     collections:
         index:
             requirements: {_method: "GET|POST"}
+            
+

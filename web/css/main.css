@@ -1,3 +1,5 @@
+body.wait, body.wait * {cursor: wait !important;}
+
 #search-query {
     text-align: center;
 }

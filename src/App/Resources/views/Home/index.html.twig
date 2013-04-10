@@ -1,0 +1,130 @@
+{% extends '::main_layout.html.twig' %}
+
+{% block headers%}
+    <title>&mdash; Mclowd</title>
+{% endblock %}
+
+{% block subtitle 'Homepage' %}
+
+{% block content %}
+    <div class="hero-unit">
+        <h1>Mclowd Marketplace</h1>
+
+        <div class="pull-right gray-button-holder">
+            <a href="#" class="special-button-gray-with-arrow">Register</a>
+            <a href="#" class="special-button-gray-with-arrow">Log In</a>
+        </div>
+
+        <div class="hero-content clearfix">
+            <img src="/bundles/app/images/hero-unit-image.jpg" alt="The Mclowd Marketplace community" width="720" height="211">
+
+            <div class="mclowd-work">
+                <div class="special-button-holder">
+                    <a href="#" class="special-button-blue-with-arrow">Want some work?</a>
+                </div>
+                <div class="special-button-holder">
+                    <a href="#" class="special-button-blue-with-arrow">Need work done?&nbsp;</a>
+                </div>
+            </div>
+
+            <div class="benefits">
+                <h2>Find and hire <span>Qualified Professionals</span><br/>for you SMSF tasks at a click!</h2>
+
+                <ul class="benefits-list">
+                    <li>Save huge amounts of costs and stay flexible by hiring contractors online.</li>
+                    <li>There are SMSF professionals ready to start work today.</li>
+                    <li>Pay online, only when you get the task done.</li>
+                </ul>
+            </div>
+
+            <form action="" class="search-contractor clearfix">
+                <label for="search">Start Searching</label>
+                <input type="text" name="search" id="search" class="search" placeholder="Search for a skilled contractor by task required">
+                <button class="search-button"><b>Search</b><span class="search-glass"></span></button>
+            </form>
+        </div>
+
+        <img class="big-shadow" src="/bundles/app/images/big-shadow.png" alt="Big Shadow" width="722" height="35" />
+    </div>
+    <div class="row-fluid">
+        <div class="span6 get-started">
+            <div class="wrapper">
+                <h2>Have a service to offer?</h2>
+                <ul class="starting-steps">
+                    <li class="clearfix">
+                        <div class="img-circle">1</div>
+                        <div class="step">
+                            <p>Create an outstanding profile and promote yourself to clients.</p>
+                            <span class="step-icon service-offer-step1"></span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="img-circle">2</div>
+                        <div class="step">
+                            <p>Submit proposals and get hired.</p>
+                            <span class="step-icon service-offer-step2"></span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="img-circle">3</div>
+                        <div class="step">
+                            <p>Complete the agreed task or work the agreed hours.</p>
+                            <span class="step-icon service-offer-step3"></span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="img-circle">4</div>
+                        <div class="step">
+                            <p>Get paid!</p>
+                            <span class="step-icon service-offer-step4"></span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="special-button-holder">
+                    <a class="special-button-blue-with-text start-earning-button" href="#" title="Start Earning | Create your free profile">Create your free profile</a>
+                </div>
+            </div>
+            <img class="small-shadow" src="/bundles/app/images/small-shadow.png" alt="Small Shadow" width="347" height="24" />
+        </div><!--/span-->
+
+        <div class="span6 get-started">
+            <div class="wrapper">
+                <h2>Get help with your SMSF</h2>
+                <ul class="starting-steps">
+                    <li class="clearfix">
+                        <div class="img-circle">1</div>
+                        <div class="step">
+                            <p>Search for a contractor or post a task.</p>
+                            <span class="step-icon smsf-help-step1"></span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="img-circle">2</div>
+                        <div class="step">
+                            <p>Compare and select a contractor, agree on task and price.</p>
+                            <span class="step-icon smsf-help-step2"></span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="img-circle">3</div>
+                        <div class="step">
+                            <p>Contractor completes project or works agreed hours.</p>
+                            <span class="step-icon smsf-help-step3"></span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <div class="img-circle">4</div>
+                        <div class="step">
+                            <p>Review work or hours and pay for work you approve.</p>
+                            <span class="step-icon smsf-help-step4"></span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="special-button-holder">
+                    <a class="special-button-blue-with-text get-started-button" href="#" title="Get Started | Post Your Task for free">Post Your Task for free</a>
+                </div>
+            </div>
+            <img class="small-shadow" src="/bundles/app/images/small-shadow.png" alt="Small Shadow" width="347" height="24" />
+        </div><!--/span-->
+    </div><!--/row-->
+{% endblock %}

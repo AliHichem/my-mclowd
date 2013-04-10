@@ -31,7 +31,7 @@
             <script src="{{ settings.getNodeAddr }}:{{ settings.getNodePort }}/socket.io/socket.io.js"></script>
         {% endif %}            
     </head>
-    <body>
+    <body ng-controller="RootController" ng-class="{wait: show_spinner==true}">
 
         <script type="text/javascript">
             window.Mclowd = {

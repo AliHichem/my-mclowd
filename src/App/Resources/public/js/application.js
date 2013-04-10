@@ -28,6 +28,13 @@ mcApp.factory('ContractorTask', function($resource) {
     });
 });
 
+mcApp.controller('RootController', function ($rootScope) {
+
+    /* ajax spinner flag */
+    $rootScope.show_spinner = false;
+
+});
+
 mcApp.factory('ResponseHandler', function() {
     return {
         enabled: true,
@@ -54,7 +61,6 @@ mcApp.factory('ResponseHandler', function() {
         },
 
         handle422: function(response) {
-            console.log(response);
             if (this.enabled) {   
                 $mbody = $('#error-modal .modal-body');
                 $mbody.html('');
@@ -76,7 +82,6 @@ mcApp.factory('ResponseHandler', function() {
                     $mbody.append('<div class="modal-error-field"><strong>'+ tranformedField + '</strong>: ' + error+'</div>');                    
                 });                
                 $('#error-modal').modal('show');
-                //Modal.showMessages('Fix the following errors', response.data.errors);
             }
         },
 
@@ -91,11 +96,14 @@ mcApp.config(function($httpProvider) {
     var interceptor = function(ResponseHandler, $rootScope, $q) {
 
         function intercept(response) {            
+            $('body').removeClass('wait');
             ResponseHandler.handle(response);
             return response;
         }
 
         return function(promise) {
+            $rootScope.show_spinner = true;
+            $('body').addClass('wait');
             return promise.then(intercept, function(response) {
                 intercept(response)
                 return $q.reject(response)
@@ -105,5 +113,6 @@ mcApp.config(function($httpProvider) {
     };
     $httpProvider.responseInterceptors.push(interceptor);
 });
+
 
 window.mcApp = mcApp;

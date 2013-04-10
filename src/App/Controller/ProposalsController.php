@@ -41,17 +41,7 @@ class ProposalsController extends Controller
                 return $response;
             }
             else {
-//                 $errors = $this->get('validator')->validate($proposal);
-
-//                 // iterate on it
-//                 foreach( $errors as $error )
-//                 {
-//                     $resp[$error->getPropertyPath()] = $error->getMessage(); 
-//                     echo $error->getPropertyPath();
-//                     echo $error->getMessage();
-//                 }
-                
-                //die();
+                                
                 $resp = json_encode([
                     'error' => $this->_getErrorMessages($form)
                 ]);
@@ -63,15 +53,7 @@ class ProposalsController extends Controller
         }
         else {
             
-            $task = $em->find('App\Entity\Task', $request->query->get('task'));
-            //$proposals = $task->getProposals();
-            //var_dump($proposals);
-            //die();
-            //foreach ($proposals as $key => $val) {
-                //echo $prop->getId();
-            //}
-            //die();
-            
+            $task = $em->find('App\Entity\Task', $request->query->get('task'));            
             $results = $em->getRepository('App\Entity\Proposal')->getProposalsByTask($task->getId());
             $results = json_encode($results);
             
@@ -84,7 +66,6 @@ class ProposalsController extends Controller
         
     }
     
-
     public function showAction(Request $request, $id)
     {
         $proposal = $this->findOr404('App\Entity\Proposal', array('id' => $id));

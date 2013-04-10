@@ -13,36 +13,74 @@
                 
                 <p>Type: {{ task.type }}</p>
                 <p>Budget: {{ task.budget }}</p>
-                
+                <!-- 
                 <a href="{{ path('app_proposals_new', {'task': task.id }) }}">Make Proposal</a>
+                 -->
             </div>
         </div>
         <div class="row-fluid" ng-controller="ProposalCtrl">
-            <div ng-init='proposals={{ proposalsJson|raw }}'></div>
-            {%  raw %}
             <div class="span12">
+                {% if is_granted('ROLE_CONTRACTOR') %}
+                <div class="row-fluid">
+                    <div class="span12"> 
+                        {% raw %}
+                        
+                        <div>
+                            <div ng-repeat="(key,val) in errors" class="alert alert-error {{ key }}">
+                                        {{ key }}: {{ val }}
+                                        <button data-dismiss="alert" class="close" type="button">x</button>
+                            </div>
+                    
+                        </div>
+                        
+                        <form id="proposal-form" class="form-horizontal" ng-submit="addProposal()">
+                            <fieldset>
+                                <legend>Legend</legend>
+                                <div class="control-group">
+                                {% endraw %}
+                                    <label class="control-label" for="description">{% trans from "app" %}Description{% endtrans %}</label>
+                                {% raw %}
+                                    <div class="controls">
+                                        <textarea id="description" placeholder="Description" ng-model="newProposal.description"></textarea>
+                                    </div>
+                                </div>
+                                {% endraw %}
+                                
+                                {% if taskType == 'hourly' %}
+                                    {% include "App:Proposals:new_hourly.html.twig" with { taskType: taskType } %}
+                                {% endif %}
+                                {% if taskType == 'fixed' %}
+                                    {% include "App:Proposals:new_fixed.html.twig" with { taskType: taskType } %}
+                                {% endif %}
+                                
+                                {% raw %}
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="hidden" ng-model="newProposal.task" ng-init="newProposal.task='{% endraw %}{{ task }}{% raw %}'" />
+                                        <input type="submit" class="btn" value="Make proposal" />
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+                {% endraw %}
+                {% endif %}
                 
-                <table class="table table-striped">
-                    <tr>
-                        <th>id</th>
-                        <th>description</th>
-                        <th>hours</th>
-                        <th>duration</th>
-                        <th>rate</th>
-                        <th>action</th>
-                    </tr>
-                    <tr ng-repeat="proposal in proposals">
-                        <td>{{ proposal.id }}</td>
-                        <td>{{ proposal.description }}</td>
-                        <td>{{ proposal.hours }}</td>
-                        <td>{{ proposal.duration }}</td>
-                        <td>{{ proposal.rate }}</td>
-                        <td><a ng-click="acceptProposal(proposal.taskId, proposal.id)" class="btn btn-success" >accept</a></td>
-                    </tr>
-                </table>
+                <div class="row-fluid">
+                    <div ng-init='proposals={{ proposalsJson|raw }}'></div>
+                    {% raw %}
+                    <div class="span12">
+                    {% endraw %}
+                        {% include "App:Proposals:list_hourly.html.twig" %}
+                    {% raw %}
+                    </div>
+                </div>
+                {% endraw %}
+                
             </div>
-            {% endraw %}
-        </div>
+    
+</div>
+        
     </div>
 </div>
 

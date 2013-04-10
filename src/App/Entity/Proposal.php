@@ -6,10 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
+use Symfony\Component\Validator\ExecutionContext;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="proposals")
  * @ORM\Entity(repositoryClass="App\Entity\ProposalRepository")
+ * 
+ * @Assert\Callback(methods={"validateHourlyOptions", "validateFixedOptions"})
+ * 
  */
 class Proposal {
 
@@ -18,8 +23,8 @@ class Proposal {
     ;
     
     public static $durationOptions = [
-        1 => '1-2 days',
-        2 => '3-4 days'
+        1 => '1-2 weeks',
+        2 => '3-4 weeks'
     ];
 
     /**
@@ -34,6 +39,11 @@ class Proposal {
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id", onDelete="CASCADE")
      */
     public $task;
+    
+    /**
+    * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="proposal", cascade={"persist", "remove"})
+    **/
+    public $milestones;
 
     /**
      *
@@ -43,21 +53,34 @@ class Proposal {
     protected $description;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank(groups="hourly_group")
      */
     protected $hours;
+    
+    /**
+     * @ORM\Column(name="finish_date", type="datetime")
+     * @Assert\NotBlank(groups="fixed_group")
+     */
+    protected $finishDate;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank(groups="hourly_group")
      */
     protected $duration;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(name="contractor_rate", type="float")
      * @Assert\NotBlank()
      */
-    protected $rate;
+    protected $contractorRate;
+    
+    /**
+     * @ORM\Column(name="final_rate", type="float")
+     * @Assert\NotBlank()
+     */
+    protected $finalRate;
     
     /**
      * @ORM\Column(name="is_accepted", type="smallint", options={"default" = 0})
@@ -72,6 +95,27 @@ class Proposal {
      * @var User $user
      */
     protected $user;
+    
+    public function __construct()
+    {
+        $this->milestones = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    public function validateHourlyOptions(ExecutionContext $ec)
+    {
+        if ($this->getTask() != null && $this->getTask()->getType() == 'hourly')
+        {
+            $ec->validate($this, '', 'hourly_group', true); 
+        }
+    }
+    
+    public function validateFixedOptions(ExecutionContext $ec)
+    {
+        if ($this->getTask() != null && $this->getTask()->getType() == 'fixed')
+        {
+            $ec->validate($this, '', 'fixed_group', true);
+        }
+    }
 
     public function getId()
     {
@@ -87,13 +131,22 @@ class Proposal {
         return $this;
     }
 
-    public function setRate($rate) {
-        $this->rate = $rate;
+    public function setContractorRate($rate) {
+        $this->contractorRate = $rate;
         return $this;
     }
 
-    public function getRate() {
-        return $this->rate;
+    public function getContractorRate() {
+        return $this->contractorRate;
+    }
+    
+    public function setFinalRate($finalRate) {
+        $this->finalRate = $finalRate;
+        return $this;
+    }
+    
+    public function getFinalRate() {
+        return $this->finalRate;
     }
 
     public function setHours($hours) {
@@ -119,6 +172,17 @@ class Proposal {
         return self::$durationOptions[$this->getDuration()];
     }
 
+    public function setFinishDate($finishDate)
+    {
+        $this->finishDate = $finishDate;
+        return $this;
+    }
+    
+    public function getFinishDate()
+    {
+        return $this->finishDate;
+    }
+    
     public function setTask(Task $task) {
         $this->task = $task;
         return $this;

@@ -2,7 +2,7 @@
 
 var mcApp = angular.module('Marketplace', ['ngResource'], function($provide, $httpProvider) {
 
-})
+});
 
 mcApp.factory('Employment', function($resource) {
     return $resource(Mclowd.url('/contractor/employment/:id'), {id: '@id'}, {
@@ -31,7 +31,7 @@ mcApp.factory('ContractorTask', function($resource) {
 
 mcApp.factory('AcceptProposal', function($resource) {
     return $resource(Mclowd.url('/task/accept_proposal'), {}, {
-
+    });
 });
 
 mcApp.controller('RootController', function ($rootScope) {
@@ -95,7 +95,7 @@ mcApp.factory('ResponseHandler', function() {
             alert('Opps, an error appeared. Pls refresh page and try again.');
         }
     }
-})
+});
 
 
 mcApp.config(function($httpProvider) {

@@ -1,12 +1,12 @@
 function ProposalCtrl($scope, $http, AcceptProposal) {
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     
-	$scope.durationOptions = [
-	    {"value": "1",
-		"name": "1-2 days"},
-		{"value": "2",
-		"name": "3-4 days"}
-	];
+//	$scope.durationOptions = [
+//	    {"value": "1",
+//		"name": "1-2 days"},
+//		{"value": "2",
+//		"name": "3-4 days"}
+//	];
 
 	$scope.ngObjFixHack = function(ngObj) {
 	    var output;
@@ -37,8 +37,9 @@ function ProposalCtrl($scope, $http, AcceptProposal) {
             else {
 	            $scope.newProposal.id = data.id;
 	            
-	            var _duration = data.duration
-	            $scope.newProposal.duration = data.duration_options[_duration];
+	            //var _duration = data.duration
+	            //$scope.newProposal.duration = data.duration_options[_duration];
+	            $scope.newProposal.username = data.user.username;
 	            $scope.proposals.push($scope.newProposal);
 	            
 	            var taskId = $scope.newProposal.task;

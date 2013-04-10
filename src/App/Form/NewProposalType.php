@@ -18,10 +18,10 @@ class NewProposalType extends AbstractType
         $builder
             ->add('description')
             ->add('hours')
-            ->add('duration', 'choice', ['choices' => Proposal::$durationOptions, 
-                    'empty_value' => 'Choose days',
-                    'empty_data'  => null])
-            ->add('rate')
+            ->add('duration')
+            ->add('finishDate')
+            ->add('contractorRate')
+            ->add('finalRate')
             ->add(
                     $builder->create('task', 'hidden')
                     ->addModelTransformer($modelTransformer)

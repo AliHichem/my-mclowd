@@ -34,6 +34,7 @@ class ProposalsController extends Controller
 
                 $task = $em->find('App:Task', $postForm['task']);
                 $proposal->setTask($task);
+                $proposal->setIsAccepted(false);
                 $this->persist($proposal, true);
    
                 $response = new Response($serializer->serialize($proposal, 'json'));

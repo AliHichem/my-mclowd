@@ -23,8 +23,9 @@ class ProposalRepository extends EntityRepository
             $resArray[$i]['description'] = $res->getDescription();
             $resArray[$i]['hours'] = $res->getHours();
             $resArray[$i]['duration'] = $res->getTextDuration();
-            $resArray[$i]['rate'] = $res->getRate();
+            $resArray[$i]['contractorRate'] = $res->getContractorRate();
             $resArray[$i]['taskId'] = $taskId;
+            $resArray[$i]['username'] = $res->getUser()->getUsername();
             $i++;
         }
 

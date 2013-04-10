@@ -98,6 +98,11 @@ class Task {
      * @var TaskBudget $budget
      */
     protected $budget;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Proposal", mappedBy="task")
+     **/
+    protected $proposals;
 
     /*
      * Trait property here:
@@ -107,6 +112,11 @@ class Task {
      * @var User $user
      */
     protected $user;
+    
+    public function __construct()
+    {
+        $this->proposals = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function getId()
     {
@@ -264,5 +274,31 @@ class Task {
     public function getUserName()
     {
         return (String)$this->getUser();
+    }
+    
+    public function getProposals()
+    {
+        return $this->proposals;
+    }
+    
+    public function addProposal($proposal)
+    {
+        $this->proposals[] = $proposal;
+        return $this;
+    }
+    
+    public function setProposals($proposals)
+    {
+        $this->proposals = $proposals;
+        return $this;
+    }
+    
+    public function removeProposal($proposal)
+    {
+        $this->proposals->removeElement($proposal);
+    }
+    
+    public function __toString() {
+        return strval($this->id);
     }
 }

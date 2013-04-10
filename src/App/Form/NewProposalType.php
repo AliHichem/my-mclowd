@@ -18,7 +18,9 @@ class NewProposalType extends AbstractType
         $builder
             ->add('description')
             ->add('hours')
-            ->add('duration')
+            ->add('duration', 'choice', ['choices' => Proposal::$durationOptions, 
+                    'empty_value' => 'Choose days',
+                    'empty_data'  => null])
             ->add('rate')
             ->add(
                     $builder->create('task', 'hidden')
@@ -28,10 +30,11 @@ class NewProposalType extends AbstractType
 
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
-
+    public function setDefaultOptions(OptionsResolverInterface $resolver) 
+    {
         $resolver->setDefaults(array(
-            'data_class' => 'App\Entity\Proposal'
+            'data_class' => 'App\Entity\Proposal',
+            'csrf_protection' => false
         ));
 
         $resolver->setRequired(array(
@@ -42,9 +45,14 @@ class NewProposalType extends AbstractType
             'em' => 'Doctrine\Common\Persistence\ObjectManager',
         ));
     }
+    
+    public function getDefaultOptions(array $options) 
+    {
+        return ['csrf_protection' => false];
+    }
 
     public function getName()
     {
-        return 'new_proposal';
+        return null;
     }
 }

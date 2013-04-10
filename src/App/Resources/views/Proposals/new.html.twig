@@ -2,11 +2,109 @@
 
 {% block content %}
 
-<form action="{{ path('app_proposals_create') }}" method="POST">
+
+
+<div class="row-fluid" ng-controller="ProposalCtrl">
+    <div class="span12">
+        <div class="row-fluid">
+            <div class="span12">
+                <div ng-init='proposals={{ proposalsJson|raw }}'></div>
+                {% raw %}
+                
+                <div>
+                    <div ng-repeat="(key,val) in errors" class="alert alert-error {{ key }}">
+                                {{ key }}: {{ val }}
+                                <button data-dismiss="alert" class="close" type="button">x</button>
+                    </div>
+            
+                </div>
+                
+                <form id="proposal-form" class="form-horizontal" ng-submit="addProposal()">
+                    <fieldset>
+                        <legend>Legend</legend>
+                        <div class="control-group">
+                        {% endraw %}
+                            <label class="control-label" for="description">{% trans from "app" %}Description{% endtrans %}</label>
+                        {% raw %}
+                            <div class="controls">
+                                <textarea id="description" placeholder="Description" ng-model="newProposal.description"></textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                        {% endraw %}
+                            <label class="control-label" for="hours">{% trans from "app" %}Hours{% endtrans %}</label>
+                        {% raw %}
+                            <div class="controls">
+                                <input id="hours" type="text" placeholder="hours" ng-model="newProposal.hours" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                        {% endraw %}
+                            <label class="control-label" for="duration">{% trans from "app" %}Duration{% endtrans %}</label>
+                        {% raw %}
+                            <div class="controls">
+                                <select ng-model="newProposal.duration">
+                                    <option ng-repeat="v in durationOptions" 
+                                            value="{{v.value}}" 
+                                            title="{{v.name}}" 
+                                            ng-selected="v.value == newProposal.duration">{{v.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        {% endraw %}
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="rate">{% trans from "app" %}Rate{% endtrans %}</label>
+                        {% raw %}
+                            <div class="controls">
+                                <input id="rate" type="text" placeholder="Rate" ng-model="newProposal.rate" /> {% endraw %}{{ taskType }}{% raw %}
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="hidden" ng-model="newProposal.task" ng-init="newProposal.task='{% endraw %}{{ task }}{% raw %}'" />
+                                <input type="submit" class="btn" value="Make proposal" />
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <table class="table table-striped">
+                    <tr>
+                        <th>id</th>
+                        <th>description</th>
+                        <th>hours</th>
+                        <th>duration</th>
+                        <th>rate</th>
+                    </tr>
+                    <tr ng-repeat="proposal in proposals">
+                        <td>{{ proposal.id }}</td>
+                        <td>{{ proposal.description }}</td>
+                        <td>{{ proposal.hours }}</td>
+                        <td>{{ proposal.duration }}</td>
+                        <td>{{ proposal.rate }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        {% endraw %}
+        
+    </div>
+    
+</div>
+
+
+{#
+<form action="{{ path('app_proposals_create') }}" method="post" >
+
     {{ form_widget(form) }}
 
     <input type="submit" value="Make Proposal" />
 
 </form>
+#}
 
 {% endblock %}
+

@@ -9,12 +9,18 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * @ORM\Entity
  * @ORM\Table(name="proposals")
+ * @ORM\Entity(repositoryClass="App\Entity\ProposalRepository")
  */
 class Proposal {
 
     use ORMBehaviors\Timestampable\Timestampable,
         \App\Behaviours\Ownable
     ;
+    
+    public static $durationOptions = [
+        1 => '1-2 days',
+        2 => '3-4 days'
+    ];
 
     /**
      * @ORM\Id
@@ -24,12 +30,10 @@ class Proposal {
     protected $id;
 
     /**
-     *
-     * @ORM\Column(name="task_id", type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\task")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Task", inversedBy="proposals")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $task;
+    public $task;
 
     /**
      *
@@ -101,8 +105,13 @@ class Proposal {
         return $this;
     }
 
-    public function getduration() {
+    public function getDuration() {
         return $this->duration;
+    }
+    
+    public function getTextDuration()
+    {
+        return self::$durationOptions[$this->getDuration()];
     }
 
     public function setTask(Task $task) {

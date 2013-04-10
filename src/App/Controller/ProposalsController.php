@@ -7,6 +7,9 @@ use App\Form\Type\NewProposalType;
 use Doctrine\Common\Persistence\PersistentObject;
 use Symfony\Component\HttpFoundation\Request;
 use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProposalsController extends Controller
 {
@@ -16,18 +19,71 @@ class ProposalsController extends Controller
      */
     public function newAction(Request $request)
     {
+        $em = $this->getDoctrine()->getEntityManager();
+        $serializer = $this->get('serializer');
+        
         $proposal = new Proposal;
-        $form = $this->createObjectForm($proposal, 'new', array('em' => $this->getDoctrine()->getEntityManager()));
+        $form = $this->createForm(new \App\Form\NewProposalType(), $proposal, array('em' => $em));
+        
+        if ($request->isXmlHttpRequest()) {
+            
+            $postForm = $this->get('request')->request->get('form');
 
-        if ($form->isBound() && $form->isValid()) {
-            $proposal->setTask($this->getEntityManager()->getReference('App:Task', $form->getData->get('task')));
-            $this->persist($proposal, true);
-            $this->addFlash('success', 'Proposal has been sent');
-            return $this->redirectToRoute('app_proposals_show', array('id' => $proposal->getTask()->getId()));
+            $form->bind($postForm);
+            if ($form->isValid()) {
+
+                $task = $em->find('App:Task', $postForm['task']);
+                $proposal->setTask($task);
+                $this->persist($proposal, true);
+   
+                $response = new Response($serializer->serialize($proposal, 'json'));
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
+            }
+            else {
+//                 $errors = $this->get('validator')->validate($proposal);
+
+//                 // iterate on it
+//                 foreach( $errors as $error )
+//                 {
+//                     $resp[$error->getPropertyPath()] = $error->getMessage(); 
+//                     echo $error->getPropertyPath();
+//                     echo $error->getMessage();
+//                 }
+                
+                //die();
+                $resp = json_encode([
+                    'error' => $this->_getErrorMessages($form)
+                ]);
+
+                $response = new Response($resp);
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
+            }
+        }
+        else {
+            
+            $task = $em->find('App\Entity\Task', $request->query->get('task'));
+            //$proposals = $task->getProposals();
+            //var_dump($proposals);
+            //die();
+            //foreach ($proposals as $key => $val) {
+                //echo $prop->getId();
+            //}
+            //die();
+            
+            $results = $em->getRepository('App\Entity\Proposal')->getProposalsByTask($task->getId());
+            $results = json_encode($results);
+            
+            return ['form' => $form->createView(), 
+                    'task' => $task->getId(),
+                    'taskType' => $task->getType(),
+                    'proposalsJson' => $results];
         }
 
-        return ['form' => $form->createView()];
+        
     }
+    
 
     public function showAction(Request $request, $id)
     {

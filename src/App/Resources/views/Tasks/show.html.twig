@@ -1,16 +1,48 @@
 {% extends '::base.html.twig' %}
 
 {% block content %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>{{ task.name }}</h3>
+                
+                <p>{{ task.description }}</p>
+                
+                <p><small>Posted by {{ task.userName }} on {{ task.createdAt|date }}</small></p>
+                
+                <p>Type: {{ task.type }}</p>
+                <p>Budget: {{ task.budget }}</p>
+                
+                <a href="{{ path('app_proposals_new', {'task': task.id }) }}">Make Proposal</a>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <table class="table table-striped">
+                    <tr>
+                        <th>id</th>
+                        <th>description</th>
+                        <th>hours</th>
+                        <th>duration</th>
+                        <th>rate</th>
+                    </tr>
+                    {% for prop in task.proposals %}
+                    <tr>
+                        <td>{{ prop.id }}</td>
+                        <td>{{ prop.description }}</td>
+                        <td>{{ prop.hours }}</td>
+                        <td>{{ prop.textDuration }}</td>
+                        <td>{{ prop.rate }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h3>{{ task.name }}</h3>
 
-<p>{{ task.description }}</p>
-
-<p><small>Posted by {{ task.userName }} on {{ task.createdAt|date }}</small></p>
-
-<p>Type: {{ task.type }}</p>
-<p>Budget: {{ task.budget }}</p>
-
-<a href="{{ path('app_proposals_new', {'task': task.id }) }}">Make Proposal</a>
+   
 
 {% endblock %}

@@ -50,7 +50,8 @@
         "behat/mink-browserkit-driver": "*",
         "phpspec/phpspec2": "dev-develop",
         "friendsofsymfony/rest-bundle": "dev-master",
-        "friendsofsymfony/jsrouting-bundle": "1.1.4"
+        "friendsofsymfony/jsrouting-bundle": "1.1.4",
+        "friendsofsymfony/facebook-bundle": "1.1.*"
     },
     "require-dev": {
         

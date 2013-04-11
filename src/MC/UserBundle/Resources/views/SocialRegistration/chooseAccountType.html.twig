@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <form  class="shared-form" class="form-wrap" action="{{ path('social_register_choose_account') }}" {{ form_enctype(form) }} method="POST">
+            <fieldset>
+                <legend>Choose account type</legend>
+                <div class="span6">
+                    {{ form_errors(form) }}
+                    {{ form_widget(form) }}
+                    <div span="6">
+                        <input class="submit" id="choose_type_submit"  type="submit" value="Next" />
+                    </div>
+                    {{ form_rest(form) }}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}

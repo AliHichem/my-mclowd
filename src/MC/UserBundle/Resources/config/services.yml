@@ -5,3 +5,21 @@ services:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 1 }
         calls:
             - [setContainer, ["@service_container"]]
+
+    mc_user.user_provider.facebook:
+        class: MC\UserBundle\Security\User\Provider\FacebookProvider
+        arguments:
+            facebook: "@fos_facebook.api"
+            userManager: "@fos_user.user_manager"
+            validator: "@validator"
+            discriminator: "@pugx_user_discriminator"
+
+    mc_user.social_account_listener:
+        class: MC\UserBundle\EventListener\SocialAccountListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 1 }
+        arguments:
+            container: "@service_container"
+            router: "@router"
+            whitelist: [social_register_client_account, social_register_contractor_account, social_register_choose_account]
+            redirect: social_register_choose_account

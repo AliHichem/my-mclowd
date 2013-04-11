@@ -59,7 +59,7 @@ class Proposal {
     protected $hours;
     
     /**
-     * @ORM\Column(name="finish_date", type="datetime")
+     * @ORM\Column(name="finish_date", type="datetime", nullable=true)
      * @Assert\NotBlank(groups="fixed_group")
      */
     protected $finishDate;
@@ -174,7 +174,7 @@ class Proposal {
 
     public function setFinishDate($finishDate)
     {
-        $this->finishDate = $finishDate;
+        $this->finishDate = new \DateTime(date($finishDate));
         return $this;
     }
     

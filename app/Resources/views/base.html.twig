@@ -24,6 +24,8 @@
             <link rel="stylesheet" href="{{ asset('bundles/knprad/bootstrap/css/bootstrap-responsive.min.css') }}" />
             <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
             <link rel="stylesheet" href="{{ asset('bundles/mcasset/css/fineuploader.css') }}" />
+            <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+                    <link rel="stylesheet" href="{{ asset('bundles/app/css/bootstrap-datetimepicker.min.css') }}" />
         {% endblock stylesheets %}
                 
         {# load socket.io only if user is logged in #}
@@ -147,6 +149,7 @@
 
         {% block javascripts %}
             <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
             <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
             <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
@@ -154,6 +157,7 @@
             {% javascripts
                 '@App/Resources/public/js/vendor/angular-resource.min.js'
                 '@App/Resources/public/js/vendor/bootstrap.js'
+                '@App/Resources/public/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js'
                 '@App/Resources/public/js/remote_links.js.coffee'
                 '@App/Resources/public/js/parsley.js/parsley.js'
                 '@App/Resources/public/js/parsley.js/parsley.extra.js'

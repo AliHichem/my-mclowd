@@ -28,8 +28,15 @@ class ProposalsController extends Controller
         if ($request->isXmlHttpRequest()) {
             
             $postForm = $this->get('request')->request->get('form');
+            
+            //print_r($postForm);
+            
+            //$finishDate = new \DateTime($postForm['finishDate']);
+            //$postForm['finishDate'] = $finishDate;
 
             $form->bind($postForm);
+            
+            
             if ($form->isValid()) {
 
                 $task = $em->find('App:Task', $postForm['task']);

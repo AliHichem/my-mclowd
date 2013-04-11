@@ -71,7 +71,12 @@
                     {% raw %}
                     <div class="span12">
                     {% endraw %}
-                        {% include "App:Proposals:list_hourly.html.twig" %}
+                    {% if taskType == 'hourly' %}
+                        {% include "App:Proposals:list_hourly.html.twig" with { task: task } %}
+                    {% endif %}
+                    {% if taskType == 'fixed' %}
+                        {% include "App:Proposals:list_fixed.html.twig"  with { task: task } %}
+                    {% endif %}                        
                     {% raw %}
                     </div>
                 </div>

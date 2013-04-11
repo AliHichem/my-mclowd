@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use App\Form\SearchType;
 use App\Model\TaskSearch;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class TasksController extends Controller
 {
@@ -178,7 +181,7 @@ class TasksController extends Controller
         $task = $this->getEntityManager()->find('App\Entity\Task', $id);
         $results = $this->getEntityManager()->getRepository('App\Entity\Proposal')->getProposalsByTask($task->getId());
         $results = json_encode($results);
-            
+        
         return [ 
                 'task' => $task,
                 'taskType' => $task->getType(),
@@ -190,14 +193,18 @@ class TasksController extends Controller
      */
     public function acceptProposalAction(Request $request)
     {
+        $serializer = $this->get('serializer');
+        
         $data = json_decode($this->getRequest()->getContent());
         $taskId = $data->{'task_id'};
         $proposalId = $data->{'proposal_id'};
-        echo $proposalId;
         
-        $this->getEntityManager()->getRepository('App\Entity\Proposal')->updateByTaskIdProposalId($taskId, $proposalId);
+        $res = $this->getEntityManager()->getRepository('App\Entity\Proposal')->acceptByTaskIdProposalId($taskId, $proposalId);
         
-        die();
+        $response = new Response($serializer->serialize($res, 'json'));
+        $response->headers->set('Content-Type', 'application/json');
+        //die();
+        return $response;
     }
 
 }

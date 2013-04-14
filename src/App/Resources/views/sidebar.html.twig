@@ -44,18 +44,25 @@
         <li><a href="#">Marketplace FAQ's</a></li>
     </ul>
 
-    <form class="log-in-form">
-        <h4>Log in to Mclowd Marcketplace</h4>
-        <input type="email" class="email" placeholder="email address">
-        <input type="password" class="password" placeholder="password">
-        <label class="checkbox">
-            <input type="checkbox" checked> remember me
-        </label>
-        <p>Already using Mclowd?</p>
-        <p>Please use your log in details.</p>
-        <a class="small" href="#">Forgotten your log in details?</a>
-        <div class="button-wrapper">
-            <button type="submit" class="special-button-gray-with-arrow">Sign up to the Marketplace</button>
-        </div>
-    </form>
+    {% if app.user %}
+        {# Display something for authenticated user #}
+    {% else %}
+        <form class="log-in-form" action="{{ path('fos_user_security_check') }}" method="POST">
+            <h4>Log in to Mclowd Marcketplace</h4>
+            <input type="text" id="username" name="_username" required="required" placeholder="email address"/>
+            <input type="password" id="password" name="_password" required="required" placeholder="password"/>
+            <label class="checkbox">
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> remember me
+            </label>
+            <p>Already using Mclowd?</p>
+            <p>Please use your log in details.</p>
+            <a class="small" href="#">Forgotten your log in details?</a>
+            <div class="button-wrapper">
+                <button type="submit" class="special-button-gray-with-arrow">Sign up to the Marketplace</button>
+            </div>
+        </form>
+        <br />
+        <br />
+        {{ facebook_login_button() }}
+    {% endif %}
 </div><!-- /sidebar-nav -->

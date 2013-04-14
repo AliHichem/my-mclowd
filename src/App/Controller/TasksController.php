@@ -178,14 +178,29 @@ class TasksController extends Controller
 
     public function showAction(Request $request, $id, $slug)
     {
+        $accepted = false;
+        
         $task = $this->getEntityManager()->find('App\Entity\Task', $id);
         $results = $this->getEntityManager()->getRepository('App\Entity\Proposal')->getProposalsByTask($task->getId());
         $results = json_encode($results);
         
+        $proposals = $task->getProposals();
+        
+        if (!empty($proposals)) {
+            foreach ($proposals as $proposal) {
+                if ($proposal->getIsAccepted()) {
+                    $accepted = true;
+                    break;
+                }
+            }
+        }
+        
         return [ 
                 'task' => $task,
                 'taskType' => $task->getType(),
-                'proposalsJson' => $results];
+                'proposalsJson' => $results,
+                'accepted' => $accepted
+        ];
     }
     
     /**

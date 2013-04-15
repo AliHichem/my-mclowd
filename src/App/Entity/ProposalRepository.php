@@ -28,6 +28,7 @@ class ProposalRepository extends EntityRepository
             $resArray[$i]['taskId'] = $taskId;
             $resArray[$i]['username'] = $res->getUser()->getUsername();
             $resArray[$i]['accepted'] = $res->getIsAccepted();
+            $resArray[$i]['milestones'] = $res->getMilestones();
             $i++;
         }
 

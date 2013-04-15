@@ -202,5 +202,22 @@ class Proposal {
     {
         return $this->isAccepted;
     }
+    
+    public function setMilestones($milestones)
+    {
+        $this->milestones = $milestones;
+        return $this;
+    }
+    
+    public function getMilestones()
+    {
+        return $this->milestones;
+    }
+    
+    public function addMilestones($milestone)
+    {
+        $this->milestones[] = $milestones;
+        return $this;
+    }
 
 }

@@ -27,6 +27,10 @@ class NewProposalType extends AbstractType
                     ->addModelTransformer($modelTransformer)
                     )
         ;
+        
+        if ($options['taskType'] == 'fixed') {
+            $builder->add('milestones', 'text');
+        }
 
     }
 
@@ -34,7 +38,8 @@ class NewProposalType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'App\Entity\Proposal',
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'taskType' => ''    
         ));
 
         $resolver->setRequired(array(

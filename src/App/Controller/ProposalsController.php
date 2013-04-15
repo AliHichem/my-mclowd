@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Milestone;
+
 use App\Entity\Task;
 use App\Entity\Proposal;
 use App\Form\Type\NewProposalType;
@@ -19,26 +21,45 @@ class ProposalsController extends Controller
      */
     public function newAction(Request $request)
     {
+        $taskType = null;
         $em = $this->getDoctrine()->getEntityManager();
         $serializer = $this->get('serializer');
         
-        $proposal = new Proposal;
-        $form = $this->createForm(new \App\Form\NewProposalType(), $proposal, array('em' => $em));
+        $postForm = $this->get('request')->request->get('form');
+        $taskType = $postForm['taskType'];
+
+        $milestonesNames = $postForm['milestones'];
+        
+        //print_r($milestonesNames);
+        
+        unset($postForm['milestones']);
+        unset($postForm['taskType']);
+        
+        
+        foreach($milestonesNames as $key => $value) {
+            //$m = new Milestone();
+            //$m->setName($value['name']);
+            $postForm['milestones'][$key] = $value['name'];
+            //$postForm['milestones']['name_'.$key] = $m;
+        }
+        
+        $proposal = new Proposal();
+        $form = $this->createForm(new \App\Form\NewProposalType(), $proposal, array('em' => $em, 'taskType' => $taskType));
         
         if ($request->isXmlHttpRequest()) {
             
-            $postForm = $this->get('request')->request->get('form');
-            
-            //print_r($postForm);
+            print_r($postForm);
             
             //$finishDate = new \DateTime($postForm['finishDate']);
             //$postForm['finishDate'] = $finishDate;
-
+            //die();
             $form->bind($postForm);
-            
             
             if ($form->isValid()) {
 
+                echo 'tu';
+                die();
+                
                 $task = $em->find('App:Task', $postForm['task']);
                 $proposal->setTask($task);
                 $proposal->setIsAccepted(false);

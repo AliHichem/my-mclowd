@@ -1,6 +1,7 @@
 function ProposalCtrl($scope, $http, AcceptProposal) {
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     
+    $scope.newProposal = {};
 //	$scope.durationOptions = [
 //	    {"value": "1",
 //		"name": "1-2 days"},
@@ -17,6 +18,12 @@ function ProposalCtrl($scope, $http, AcceptProposal) {
 	    return output;
 	}
 	
+	$scope.newProposal.milestones = [{ name: ''}];
+	
+	$scope.addMilestone = function() {
+		$scope.newProposal.milestones.push( { name: '' } ); //-- i can use either $scope or this to reference the array and works.
+	}
+	
     $scope.addProposal = function () {
         if (typeof $scope.proposals === "undefined") {
             $scope.proposals = [];
@@ -27,9 +34,9 @@ function ProposalCtrl($scope, $http, AcceptProposal) {
         //var prop = new Proposal($scope.newProposal);
         //prop.$save();
         
-        console.log($scope.newProposal);
-        
         var postData = $scope.ngObjFixHack($scope.newProposal);
+        
+        console.log(postData);
         
     	$http.post(Mclowd.url('/proposals/'), $.param({ form: postData })).success(function(data, status) {
             $scope.status = status;

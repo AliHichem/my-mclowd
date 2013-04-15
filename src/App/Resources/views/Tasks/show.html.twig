@@ -56,6 +56,7 @@
                                 {% raw %}
                                 <div class="control-group">
                                     <div class="controls">
+                                        <input type="hidden" ng-model="newProposal.taskType" ng-init="newProposal.taskType='{% endraw %}{{ taskType }}{% raw %}'">
                                         <input type="hidden" ng-model="newProposal.task" ng-init="newProposal.task='{% endraw %}{{ task }}{% raw %}'" />
                                         <input type="submit" class="btn" value="Make proposal" />
                                     </div>

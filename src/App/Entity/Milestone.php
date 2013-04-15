@@ -6,7 +6,7 @@ use App\Exception;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * @ORM\Entity(repositoryClass="MilestoneRepository")
+ * @ORM\Entity(repositoryClass="App\Entity\MilestoneRepository")
  * @ORM\Table(name="milestones")
  */
 class Milestone {

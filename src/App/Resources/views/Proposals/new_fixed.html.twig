@@ -13,6 +13,20 @@
         <input id="finalRate" type="text" placeholder="Billed to client" ng-model="newProposal.finalRate" /> 
     </div>
 </div>
+{% endraw %}
+<div class="control-group">
+    <label class="control-label" for="milestones">{% trans from "app" %}Milestones{% endtrans %}</label>
+    {% raw %}
+    <div style="float: left">
+        <ul>
+            <li ng-repeat="milestone in newProposal.milestones">
+                <input id="" type="text" ng-model="milestone.name" >
+                
+            </li>
+        </ul>
+        <a href ng-click="addMilestone()">add</a>
+    </div>
+</div>
                                 
 <div class="control-group">
 {% endraw %}
@@ -29,4 +43,6 @@
     </div>
     {% endraw %}
 </div>
+
+
 

@@ -29,6 +29,9 @@ class ProposalsController extends Controller
         
         if (isset($postForm['taskType'])) {
             $taskType = $postForm['taskType'];
+            if ($taskType == 'hourly') {
+                unset($postForm['milestones']);
+            }
             unset($postForm['taskType']);
         }
         

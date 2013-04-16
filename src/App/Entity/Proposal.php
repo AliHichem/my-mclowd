@@ -174,7 +174,8 @@ class Proposal {
 
     public function setFinishDate($finishDate)
     {
-        $this->finishDate = new \DateTime(date($finishDate));
+        if ($finishDate != '')
+            $this->finishDate = new \DateTime(date($finishDate));
         return $this;
     }
     

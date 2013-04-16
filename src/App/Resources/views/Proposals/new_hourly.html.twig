@@ -1,0 +1,38 @@
+<div class="control-group">
+    <label class="control-label" for="rate">{% trans from "app" %}My cost{% endtrans %}</label>
+    {% raw %}
+    <div class="controls">
+        <input id="contractorRate" type="text" placeholder="My cost" ng-model="newProposal.contractorRate" /> 
+        {% endraw %}{% trans from "app" %}per hour{% endtrans %}{% raw %}
+    </div>
+</div>
+{% endraw %}
+<div class="control-group">
+    <label class="control-label" for="finalRate">{% trans from "app" %}Billed to client{% endtrans %}</label>
+    {% raw %}
+    <div class="controls">
+        <input id="finalRate" type="text" placeholder="Billed to client" ng-model="newProposal.finalRate" /> 
+        {% endraw %}{% trans from "app" %}per hour{% endtrans %}{% raw %}
+    </div>
+</div>
+                                
+<div class="control-group">
+{% endraw %}
+    <label class="control-label" for="hours">{% trans from "app" %}Hours{% endtrans %}</label>
+    {% raw %}
+    <div class="controls">
+        <input id="hours" type="text" placeholder="hours" ng-model="newProposal.hours" />
+        {% endraw %}{% trans from "app" %}per week{% endtrans %}{% raw %}
+    </div>
+</div>
+
+<div class="control-group">
+{% endraw %}
+    <label class="control-label" for="duration">{% trans from "app" %}Estimated duration{% endtrans %}</label>
+{% raw %}
+    <div class="controls">
+        <input id="duration" type="text" placeholder="duration" ng-model="newProposal.duration" />
+        {% endraw %}{% trans from "app" %}weeks{% endtrans %}{% raw %}
+    </div>
+{% endraw %}
+</div>

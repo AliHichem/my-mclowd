@@ -1,0 +1,33 @@
+{% raw %}
+<table class="table table-striped proposals-list">
+    <tr>
+        <th>id</th>
+        <th>description</th>
+        <th>delivery time</th>
+        <th>contractor rate</th>
+        <th>contractor</th>
+        {% endraw %}
+        {% if is_granted('ROLE_CLIENT') %}
+        {% raw %}
+        <th>action</th>
+        {% endraw %}
+        {% endif %}
+        
+        {% raw %}
+    </tr>
+    <tr ng-repeat="proposal in proposals">
+        <td>{{ proposal.id }}</td>
+        <td>{{ proposal.description }}</td>
+        <td>{{ proposal.finishDate.date }}</td>
+        <td>{{ proposal.contractorRate }}</td>
+        <td>{{ proposal.username }}</td>
+        {% endraw %}
+        {% if is_granted('ROLE_CLIENT') %}
+        {% raw %}
+        <td><a data="{{ proposal.accepted }}" ng-click="acceptProposal(proposal.taskId, proposal.id, $event)" class="btn btn-success" >accept</a></td>
+        {% endraw %}
+        {% endif %}
+        {% raw %}
+    </tr>
+</table>
+{% endraw %}

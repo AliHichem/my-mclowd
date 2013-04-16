@@ -24,6 +24,11 @@ function ProposalCtrl($scope, $http, AcceptProposal) {
 		$scope.newProposal.milestones.push( { name: '' } ); //-- i can use either $scope or this to reference the array and works.
 	}
 	
+    $scope.removeMilestone = function(elem) {
+    	console.log('tu');
+    	$scope.newProposal.milestones.splice($scope.newProposal.milestones.indexOf(elem), 1);
+    };
+	
     $scope.addProposal = function () {
         if (typeof $scope.proposals === "undefined") {
             $scope.proposals = [];
@@ -51,11 +56,18 @@ function ProposalCtrl($scope, $http, AcceptProposal) {
 	            //var _duration = data.duration
 	            //$scope.newProposal.duration = data.duration_options[_duration];
 	            $scope.newProposal.username = data.user.username;
+	            
+	            console.log($scope.newProposal);
+	            
 	            $scope.proposals.push($scope.newProposal);
 	            
 	            var taskId = $scope.newProposal.task;
+	            var taskType = $scope.newProposal.taskType;
 	            $scope.newProposal = {};
 	            $scope.newProposal.task = taskId;
+	            $scope.newProposal.taskType = taskType;
+	            $scope.newProposal.milestones = [{ name: ''}];
+	            jQuery('.milestones-inputs-list li:first-child a.remove').remove();
             }
         }).
         error(function(data, status) {
@@ -113,6 +125,8 @@ jQuery(document).ready(function() {
 			jQuery('.proposals-list a.hide').hide();
 		}
 	}, 500)
+	
+	jQuery('.milestones-inputs-list li:first-child a.remove').remove();
 })
 
 

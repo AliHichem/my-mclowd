@@ -17,14 +17,14 @@
 <div class="control-group">
     <label class="control-label" for="milestones">{% trans from "app" %}Milestones{% endtrans %}</label>
     {% raw %}
-    <div style="float: left">
-        <ul>
+    <div class="controls">
+        <ul class="milestones-inputs-list">
             <li ng-repeat="milestone in newProposal.milestones">
-                <input id="" type="text" ng-model="milestone.name" >
-                
+                <input placeholder="Milestone" id="" type="text" ng-model="milestone.name" >
+                <a class="btn btn-danger remove" href="" ng-click="removeMilestone(milestone.name)">remove</a>
             </li>
         </ul>
-        <a href ng-click="addMilestone()">add</a>
+        <a href="" class="btn btn-primary" ng-click="addMilestone()">add</a>
     </div>
 </div>
                                 
@@ -39,7 +39,6 @@
                 <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
             </span>
         </div>
-    </span>
     </div>
     {% endraw %}
 </div>

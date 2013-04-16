@@ -26,45 +26,25 @@ class ProposalsController extends Controller
         $serializer = $this->get('serializer');
         
         $postForm = $this->get('request')->request->get('form');
-        $taskType = $postForm['taskType'];
-
-        $milestonesNames = $postForm['milestones'];
         
-        //print_r($milestonesNames);
-        
-        unset($postForm['milestones']);
-        unset($postForm['taskType']);
-        
-        
-        foreach($milestonesNames as $key => $value) {
-            //$m = new Milestone();
-            //$m->setName($value['name']);
-            $postForm['milestones'][$key] = $value['name'];
-            //$postForm['milestones']['name_'.$key] = $m;
+        if (isset($postForm['taskType'])) {
+            $taskType = $postForm['taskType'];
+            unset($postForm['taskType']);
         }
         
         $proposal = new Proposal();
         $form = $this->createForm(new \App\Form\NewProposalType(), $proposal, array('em' => $em, 'taskType' => $taskType));
         
         if ($request->isXmlHttpRequest()) {
-            
-            print_r($postForm);
-            
-            //$finishDate = new \DateTime($postForm['finishDate']);
-            //$postForm['finishDate'] = $finishDate;
-            //die();
             $form->bind($postForm);
             
             if ($form->isValid()) {
-
-                echo 'tu';
-                die();
                 
                 $task = $em->find('App:Task', $postForm['task']);
                 $proposal->setTask($task);
                 $proposal->setIsAccepted(false);
                 $this->persist($proposal, true);
-   
+
                 $response = new Response($serializer->serialize($proposal, 'json'));
                 $response->headers->set('Content-Type', 'application/json');
                 return $response;

@@ -180,7 +180,8 @@ class Proposal {
     
     public function getFinishDate()
     {
-        return $this->finishDate;
+        if ($this->finishDate != null)
+            return date('Y-m-d H:i:s', $this->finishDate->getTimestamp());
     }
     
     public function setTask(Task $task) {
@@ -205,6 +206,12 @@ class Proposal {
     
     public function setMilestones($milestones)
     {
+        foreach ($milestones as $milestone) {
+            if ($milestone->getName() != '')
+                $milestone->setProposal($this);
+            else 
+                return $this;
+        }
         $this->milestones = $milestones;
         return $this;
     }
@@ -212,12 +219,6 @@ class Proposal {
     public function getMilestones()
     {
         return $this->milestones;
-    }
-    
-    public function addMilestones($milestone)
-    {
-        $this->milestones[] = $milestones;
-        return $this;
     }
 
 }

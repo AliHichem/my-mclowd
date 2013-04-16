@@ -29,7 +29,11 @@ class NewProposalType extends AbstractType
         ;
         
         if ($options['taskType'] == 'fixed') {
-            $builder->add('milestones', 'text');
+            $builder->add('milestones', 'collection', array(
+                'type'=> new MilestoneType(), 
+                'allow_add'=>true,
+                'by_reference'=>false
+              ));
         }
 
     }

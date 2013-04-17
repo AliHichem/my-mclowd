@@ -28,12 +28,20 @@ class ProposalsController extends Controller
         if ($request->isXmlHttpRequest()) {
             
             $postForm = $this->get('request')->request->get('form');
+            
+            //print_r($postForm);
+            
+            //$finishDate = new \DateTime($postForm['finishDate']);
+            //$postForm['finishDate'] = $finishDate;
 
             $form->bind($postForm);
+            
+            
             if ($form->isValid()) {
 
                 $task = $em->find('App:Task', $postForm['task']);
                 $proposal->setTask($task);
+                $proposal->setIsAccepted(false);
                 $this->persist($proposal, true);
    
                 $response = new Response($serializer->serialize($proposal, 'json'));
@@ -52,8 +60,7 @@ class ProposalsController extends Controller
             }
         }
         else {
-            
-            $task = $em->find('App\Entity\Task', $request->query->get('task'));            
+            $task = $em->find('App\Entity\Task', $request->query->get('task'));
             $results = $em->getRepository('App\Entity\Proposal')->getProposalsByTask($task->getId());
             $results = json_encode($results);
             
@@ -62,8 +69,6 @@ class ProposalsController extends Controller
                     'taskType' => $task->getType(),
                     'proposalsJson' => $results];
         }
-
-        
     }
     
     public function showAction(Request $request, $id)

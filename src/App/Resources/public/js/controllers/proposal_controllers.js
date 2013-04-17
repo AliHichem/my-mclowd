@@ -1,12 +1,12 @@
-function ProposalCtrl($scope, $http) {
+function ProposalCtrl($scope, $http, AcceptProposal) {
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-	
-	$scope.durationOptions = [
-	    {"value": "1",
-		"name": "1-2 days"},
-		{"value": "2",
-		"name": "3-4 days"}
-	];
+    
+//	$scope.durationOptions = [
+//	    {"value": "1",
+//		"name": "1-2 days"},
+//		{"value": "2",
+//		"name": "3-4 days"}
+//	];
 
 	$scope.ngObjFixHack = function(ngObj) {
 	    var output;
@@ -22,8 +22,12 @@ function ProposalCtrl($scope, $http) {
             $scope.proposals = [];
         }
         
+        $scope.newProposal.finishDate = jQuery('#finishDate').val();
+        
         //var prop = new Proposal($scope.newProposal);
         //prop.$save();
+        
+        console.log($scope.newProposal);
         
         var postData = $scope.ngObjFixHack($scope.newProposal);
         
@@ -37,8 +41,9 @@ function ProposalCtrl($scope, $http) {
             else {
 	            $scope.newProposal.id = data.id;
 	            
-	            var _duration = data.duration
-	            $scope.newProposal.duration = data.duration_options[_duration];
+	            //var _duration = data.duration
+	            //$scope.newProposal.duration = data.duration_options[_duration];
+	            $scope.newProposal.username = data.user.username;
 	            $scope.proposals.push($scope.newProposal);
 	            
 	            var taskId = $scope.newProposal.task;
@@ -52,9 +57,55 @@ function ProposalCtrl($scope, $http) {
         });
     };
     
+    $scope.acceptProposal = function(taskId, proposalId, $event) {   
+        var ap = new AcceptProposal(); 
+        ap.task_id = taskId;
+        ap.proposal_id = proposalId;
+        
+        var clickedEl = jQuery($event.target);
+        clickedEl.text('accepted');
+        
+        jQuery('a.btn-success').each(function(){
+        	if (jQuery(this).text() == 'accept') {
+        		jQuery(this).fadeOut();
+        	}
+        })
+        
+        ap.$save(function(data) {
+        	
+        });
+        return false;
+    };
+    
 }
 
 
 jQuery('input, select, textarea').focus(function() {
 	$('div.' + $(this).attr('id')).fadeOut('slow');
 })
+
+jQuery(document).ready(function() {
+	
+	var flag = false;
+	
+    jQuery('#datetimepicker1').datetimepicker({
+    });
+	
+	jQuery('.proposals-list a.btn-success').each(function(){
+		if (jQuery(this).attr('data') == '1') {
+			flag = true;
+			jQuery(this).text('accepted');
+		}
+		else {
+			jQuery(this).addClass('hide');
+		}
+	});
+	
+	setTimeout(function() {
+		if (flag) {
+			jQuery('.proposals-list a.hide').hide();
+		}
+	}, 500)
+})
+
+

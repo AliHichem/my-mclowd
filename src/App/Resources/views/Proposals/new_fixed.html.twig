@@ -1,0 +1,32 @@
+<div class="control-group">
+    <label class="control-label" for="rate">{% trans from "app" %}My cost{% endtrans %}</label>
+    {% raw %}
+    <div class="controls">
+        <input id="contractorRate" type="text" placeholder="My cost" ng-model="newProposal.contractorRate" /> 
+    </div>
+</div>
+{% endraw %}
+<div class="control-group">
+    <label class="control-label" for="finalRate">{% trans from "app" %}Billed to client{% endtrans %}</label>
+    {% raw %}
+    <div class="controls">
+        <input id="finalRate" type="text" placeholder="Billed to client" ng-model="newProposal.finalRate" /> 
+    </div>
+</div>
+                                
+<div class="control-group">
+{% endraw %}
+    <label class="control-label" for="finishDate">{% trans from "app" %}Estimated delivery date{% endtrans %}</label>
+    {% raw %}
+    <div class="controls">
+        <div id="datetimepicker1" class="input-append date">
+            <input id="finishDate" data-format="yyyy-MM-dd hh:mm:ss" type="text" placeholder="date" ng-model="newProposal.finishDate" />
+            <span class="add-on">
+                <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+            </span>
+        </div>
+    </span>
+    </div>
+    {% endraw %}
+</div>
+

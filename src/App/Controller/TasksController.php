@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use App\Form\SearchType;
 use App\Model\TaskSearch;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class TasksController extends Controller
 {
@@ -175,10 +178,48 @@ class TasksController extends Controller
 
     public function showAction(Request $request, $id, $slug)
     {
-        $task = $this->findOr404('App\Entity\Task', ['id' => $id, 'slug' => $slug]);
+        $accepted = false;
         
+        $task = $this->getEntityManager()->find('App\Entity\Task', $id);
+        $results = $this->getEntityManager()->getRepository('App\Entity\Proposal')->getProposalsByTask($task->getId());
+        $results = json_encode($results);
         
-        return compact('task');
+        $proposals = $task->getProposals();
+        
+        if (!empty($proposals)) {
+            foreach ($proposals as $proposal) {
+                if ($proposal->getIsAccepted()) {
+                    $accepted = true;
+                    break;
+                }
+            }
+        }
+        
+        return [ 
+                'task' => $task,
+                'taskType' => $task->getType(),
+                'proposalsJson' => $results,
+                'accepted' => $accepted
+        ];
+    }
+    
+    /**
+     * @Secure(roles="ROLE_CLIENT")
+     */
+    public function acceptProposalAction(Request $request)
+    {
+        $serializer = $this->get('serializer');
+        
+        $data = json_decode($this->getRequest()->getContent());
+        $taskId = $data->{'task_id'};
+        $proposalId = $data->{'proposal_id'};
+        
+        $res = $this->getEntityManager()->getRepository('App\Entity\Proposal')->acceptByTaskIdProposalId($taskId, $proposalId);
+        
+        $response = new Response($serializer->serialize($res, 'json'));
+        $response->headers->set('Content-Type', 'application/json');
+        //die();
+        return $response;
     }
 
 }

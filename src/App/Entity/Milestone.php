@@ -4,10 +4,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Exception;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use JMS\Serializer\Annotation as Rest;
 
 /**
  * @ORM\Entity(repositoryClass="App\Entity\MilestoneRepository")
  * @ORM\Table(name="milestones")
+ * @Rest\ExclusionPolicy("all")
  */
 class Milestone {
 
@@ -26,13 +28,15 @@ class Milestone {
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Proposal", inversedBy="milestones")
      * @ORM\JoinColumns({
-     *      @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     *      @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      * })
      */
     public $proposal;
     
     /**
      * @ORM\Column(name="name", type="text")
+     * @Rest\Expose
+     * @Rest\SerializedName("name")
      */
     protected $name;
 

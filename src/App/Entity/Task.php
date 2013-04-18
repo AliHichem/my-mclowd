@@ -4,10 +4,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Exception;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use JMS\Serializer\Annotation as Rest;
+use JMS\Serializer\Annotation\Accessor;
 
 /**
  * @ORM\Entity(repositoryClass="TaskRepository")
  * @ORM\Table(name="tasks")
+ * @Rest\ExclusionPolicy("all")
  */
 class Task {
 
@@ -35,6 +38,8 @@ class Task {
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Rest\Expose
+     * @Rest\SerializedName("id")
      */
     protected $id;
 
@@ -101,6 +106,7 @@ class Task {
     
     /**
      * @ORM\OneToMany(targetEntity="Proposal", mappedBy="task")
+     * @Rest\SerializedName("proposals")
      **/
     protected $proposals;
 

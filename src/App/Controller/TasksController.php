@@ -180,11 +180,14 @@ class TasksController extends Controller
     {
         $accepted = false;
         
+        $serializer = $this->get('serializer');
+        
         $task = $this->getEntityManager()->find('App\Entity\Task', $id);
-        $results = $this->getEntityManager()->getRepository('App\Entity\Proposal')->getProposalsByTask($task->getId());
-        $results = json_encode($results);
+        //$results = $this->getEntityManager()->getRepository('App\Entity\Proposal')->getProposalsByTask($task->getId());
+        //$results = json_encode($results);
         
         $proposals = $task->getProposals();
+        $results = $serializer->serialize($proposals, 'json');
         
         if (!empty($proposals)) {
             foreach ($proposals as $proposal) {
@@ -199,7 +202,8 @@ class TasksController extends Controller
                 'task' => $task,
                 'taskType' => $task->getType(),
                 'proposalsJson' => $results,
-                'accepted' => $accepted
+                'accepted' => $accepted,
+                'multiplier' => 8.75
         ];
     }
     

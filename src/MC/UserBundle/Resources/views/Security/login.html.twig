@@ -26,8 +26,7 @@
                         </div>
                     </div>
                 </form>
-                {#<form class="forgot_password" action="{{ path("fos_user_resetting_request") }}" method="get">#}
-                <form class="forgot_password" method="get" style="display: none;">
+                <form class="forgot_password" action="{{ path('fos_user_resetting_send_email') }}" method="post" style="display: none;">
                     <h3>
                         Forgot Password?
                         <p class="small">Please fill in your email address<br/>and we will send you a new one.</p>

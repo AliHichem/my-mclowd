@@ -44,4 +44,10 @@ services:
         arguments: [null, MC\UserBundle\Entity\Manager, SonataAdminBundle:CRUD]
         calls:
             - [ setUserManager, ["@fos_user.user_manager"] ]
-            - [ setContainer, [ @service_container ] ]          
+            - [ setContainer, [ @service_container ] ]
+
+    sonata.admin.setting:
+        class: MC\AdminBundle\Admin\SettingAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Settings, label: Settings }
+        arguments: [null, App\Entity\Setting, SonataAdminBundle:CRUD]

@@ -191,7 +191,7 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     /**
      * @var string
      *
-     * @ORM\Column(name="facebookId", type="string", length=255)
+     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
      */
     protected $facebookId;
 

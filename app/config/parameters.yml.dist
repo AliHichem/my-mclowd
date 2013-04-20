@@ -29,3 +29,5 @@ parameters:
 
     api_facebook_name:    http://www.facebook.com/apps/application.php?id=359140134198842 # App Namespace
     api_facebook_server:  http://mclowd.dev/app_dev.php/ # URL for site
+
+    beanstalk.server: localhost

@@ -1,0 +1,2 @@
+tss_automailer:
+  beanstalk: true

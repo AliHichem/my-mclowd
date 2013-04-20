@@ -53,6 +53,10 @@ class AppKernel extends Kernel
 
             new TSS\AssetsInstallWindowsBundle\TSSAssetsInstallWindowsBundle(),
 
+            new Leezy\PheanstalkBundle\LeezyPheanstalkBundle(),
+
+            new TSS\AutomailerBundle\TSSAutomailerBundle(),
+
             #local
             new MC\UserBundle\MCUserBundle(),
             new MC\AdminBundle\MCAdminBundle(),

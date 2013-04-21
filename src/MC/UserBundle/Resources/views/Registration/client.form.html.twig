@@ -9,7 +9,7 @@
     </div>
 
     <div class="span6 last-span">
-        <form  class="registration-form shared-form" class="form-wrap" action="{{ path('client_registration') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register" novalidate data-validate="parsley">
+        <form  class="registration-form shared-form" action="{{ path('client_registration') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register" novalidate data-validate="parsley">
             <div class="form-item">
                 {{ form_row(form.fullName) }}
             </div>

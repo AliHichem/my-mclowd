@@ -20,7 +20,7 @@
         "symfony/swiftmailer-bundle": "2.2.*",
         "symfony/monolog-bundle": "2.2.*",
         "sensio/distribution-bundle": "2.2.*",
-        "sensio/framework-extra-bundle": "2.2.*",
+        "sensio/framework-extra-bundle": "dev-master",
         "sensio/generator-bundle": "2.2.*",
         "mopa/bootstrap-bundle": "dev-master",
         "knplabs/rad-bundle": "dev-develop#42bc82d98f3f3fab465761d317ff6233cd04f6d3",
@@ -51,11 +51,19 @@
         "phpspec/phpspec2": "dev-develop",
         "friendsofsymfony/rest-bundle": "dev-master",
         "friendsofsymfony/jsrouting-bundle": "1.1.4",
-        "friendsofsymfony/facebook-bundle": "1.1.*"
+        "friendsofsymfony/facebook-bundle": "1.1.*",
+        "tss/automailer-bundle": "dev-master",
+        "leezy/pheanstalk-bundle": "2.*"
     },
     "require-dev": {
         
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/DiliBau/TSSAutomailerBundle"
+        }
+    ],
     "minimum-stability": "dev",
     "config": {
         "bin-dir": "bin"

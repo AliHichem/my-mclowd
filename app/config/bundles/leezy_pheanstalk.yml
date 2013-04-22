@@ -1,0 +1,6 @@
+leezy_pheanstalk:
+    enabled: true
+    pheanstalks:
+        primary:
+            server: %beanstalk.server%
+            default: true

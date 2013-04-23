@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "154bb1edb37a53e5d04f75ce48cd2234",
+    "hash": "e30b39b1f516eeb51f7f9ab41668df2f",
     "packages": [
         {
             "name": "avalanche123/imagine-bundle",
@@ -4426,13 +4426,13 @@
             "target-dir": "TSS/AutomailerBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/DiliBau/TSSAutomailerBundle.git",
-                "reference": "f5b0f2970b647473b08bd68d8dcf6c7ad57cdff7"
+                "url": "https://github.com/radutopala/TSSAutomailerBundle.git",
+                "reference": "e11091f191399131e50e5b96ba8238a84eaced14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DiliBau/TSSAutomailerBundle/zipball/f5b0f2970b647473b08bd68d8dcf6c7ad57cdff7",
-                "reference": "f5b0f2970b647473b08bd68d8dcf6c7ad57cdff7",
+                "url": "https://api.github.com/repos/radutopala/TSSAutomailerBundle/zipball/e11091f191399131e50e5b96ba8238a84eaced14",
+                "reference": "e11091f191399131e50e5b96ba8238a84eaced14",
                 "shasum": ""
             },
             "require": {
@@ -4451,6 +4451,7 @@
                     "TSS\\AutomailerBundle": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -4467,10 +4468,7 @@
                 "swift",
                 "swiftmailer"
             ],
-            "support": {
-                "source": "https://github.com/DiliBau/TSSAutomailerBundle/tree/master"
-            },
-            "time": "2013-04-20 10:03:47"
+            "time": "2013-04-20 11:45:54"
         },
         {
             "name": "twig/extensions",

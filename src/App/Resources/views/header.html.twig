@@ -17,8 +17,13 @@
     <div class="container">
         <div class="row-fluid">
             <div class="logo"><a rel="home" title="Free SMSF Accounting | SMSF" href="http://www.mclowd.com/">Free SMSF Accounting | SMSF</a></div>
-            <div class="toolbar pull-right">
-                <div id="loginLink" class="open"><a target="_blank" href="https://app.mclowd.com/">Log into Mclowd</a></div>
+            <div class="toolbar pull-right visible-desktop">
+                <ul class="logins">
+                    <li><a href="https://app.mclowd.com/"><span class="icon login"></span>Log in to MCLOWD</a></li>
+                    <li><a href="{{ path('fos_user_security_login') }}"><span class="icon facebook"></span>Log in with FACEBOOK</a></li>
+                    <li><a href="https://app.mclowd.com/sign-up"><span class="icon get-started"></span>GET STARTED</a></li>
+                </ul>
+                {#<div id="loginLink" class="open"><a target="_blank" href="https://app.mclowd.com/">Log into Mclowd</a></div>#}
                 <!--<div class="loginBox">
                     <form method="post" action="">
                         <input type="email" name="username" id="username" placeholder="Email address">
@@ -28,7 +33,7 @@
                         <a href="forgot-password.html">Forgot password</a>
                     </form>
                 </div>-->
-                <a class="getStarted" target="_blank" href="https://app.mclowd.com/sign-up">Get Started</a>
+                {#<a class="getStarted" target="_blank" href="https://app.mclowd.com/sign-up">Get Started</a>#}
             </div>
         </div>
     </div>

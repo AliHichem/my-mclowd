@@ -58,12 +58,6 @@
     "require-dev": {
         
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/DiliBau/TSSAutomailerBundle"
-        }
-    ],
     "minimum-stability": "dev",
     "config": {
         "bin-dir": "bin"

@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+<div class="row-fluid" ng-controller="ContractorEditCtrl">
+    <div ng-init='profile={{ userJson|raw }}'></div>
+    {% raw %}
+    <div class="span12">
+        <div class="span6">
+            <label for="profile-fullname">Name</label>
+        </div>
+        <div class="span6">
+            <span id="profile-fullname-span" class="pull-left">{{ profile.fullName }}</span><button class="pull-left btn btn-primary">Edit</button>
+            <div class="hidden-elements pull-left">
+                <input id="profile-fullname" type="text" ng-model="profile.fullName" />
+                <button class="btn btn-success" ng-click="saveFullname(profile)" ng-show="profile.fullName != originalProfile.fullName">Confirm</button>
+            </div>
+        </div>
+    </div>
+    {% endraw %}
+</div>
+
+{% endblock %}

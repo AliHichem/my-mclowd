@@ -114,7 +114,8 @@
                 {% endif %}
 
                 {% if is_granted("ROLE_CONTRACTOR") %}     
-                    <li><a href="{{ path('contractor_edit') }}">Edit profile</a></li>    
+                    <li><a href="{{ path('contractor_edit') }}">Edit profile</a></li>
+                    <li><a href="{{ path('contractor_settings') }}">Settings</a></li>    
                 {% endif %}
 
             </ul>

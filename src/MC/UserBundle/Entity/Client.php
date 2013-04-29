@@ -18,6 +18,11 @@ class Client extends User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /**
+     * @ORM\Column(name="phone", type="string")
+     */
+    protected $phone;
 
     public function getRoles()
     {

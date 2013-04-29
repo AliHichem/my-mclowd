@@ -98,3 +98,7 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education,
         }
     };
 }
+
+jQuery(document).ready(function() {
+	
+});

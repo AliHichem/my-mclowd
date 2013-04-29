@@ -104,6 +104,21 @@ class ContractorController extends BaseController
                 'months' => $this->getMonths()
         ];
     }
+    
+    /**
+     *
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * @Template()
+     * */
+    public function settingsAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+        
+        return ['user' => $user,
+        'userJson' => $serializer->serialize($user, 'json')
+        ];
+    }
 
     /**
      * 

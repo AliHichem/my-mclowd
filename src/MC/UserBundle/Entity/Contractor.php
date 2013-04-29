@@ -27,6 +27,11 @@ class Contractor extends User
      * @ORM\Column(name="has_selected_template", type="boolean")
      */
     protected $hasSelectedTemplate = false;
+    
+    /**
+     * @ORM\Column(name="phone", type="string")
+     */
+    protected $phone;
 
      /**
      * @Rest\SerializedName("contractorTasks")
@@ -76,4 +81,17 @@ class Contractor extends User
     {
         return $this->contractorTasks;
     }
+    
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+    
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+        return $phone;
+    }
+    
+    
 }

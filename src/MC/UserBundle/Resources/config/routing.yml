@@ -21,6 +21,10 @@ registration_validation:
 contractor_edit:
     pattern:  /contractor/edit
     defaults: { _controller: MCUserBundle:Contractor:edit }
+    
+contractor_settings:
+    pattern:  /contractor/settings
+    defaults: { _controller: MCUserBundle:Contractor:settings }
 
 contractor_update_city:
     pattern:  /contractor/update-city

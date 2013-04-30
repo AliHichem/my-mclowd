@@ -49,6 +49,30 @@ contractor_update_fullname:
         _method:  POST
     options:
         expose: true
+        
+contractor_update_password:
+    pattern:  /contractor/update-password
+    defaults: { _controller: MCUserBundle:Contractor:updatePassword }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+contractor_update_phone:
+    pattern:  /contractor/update-phone
+    defaults: { _controller: MCUserBundle:Contractor:updatePhone }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+contractor_update_email:
+    pattern:  /contractor/update-email
+    defaults: { _controller: MCUserBundle:Contractor:updateEmail }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
 
 contractor_update_overview:
     pattern:  /contractor/update-overview

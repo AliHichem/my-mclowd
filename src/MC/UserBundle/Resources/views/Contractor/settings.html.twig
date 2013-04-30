@@ -6,14 +6,67 @@
     <div ng-init='profile={{ userJson|raw }}'></div>
     {% raw %}
     <div class="span12">
-        <div class="span6">
-            <label for="profile-fullname">Name</label>
+        <div class="row-fluid">
+            <div class="span6">
+                <label for="profile-fullname">Name</label>
+            </div>
+            <div class="span6">
+                <span id="profile-fullname-span" class="pull-left">{{ profile.fullName }}</span>
+                <button onclick="javascript:showFields('fullname')" id="edit-profile-fullname" class="pull-left btn btn-primary">Edit</button>
+                <div id="profile-fullname-container" class="hidden-elements pull-left">
+                    <input id="profile-fullname" class="pull-left" type="text" ng-model="profile.fullName" />
+                    <button class="btn btn-success pull-left" ng-click="saveFullname(profile)">Confirm</button>
+                    <button onclick="javascript:hideFields('fullname')" id="edit-profile-fullname-cancel" class="btn btn-warning pull-left">Close</button>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
         </div>
-        <div class="span6">
-            <span id="profile-fullname-span" class="pull-left">{{ profile.fullName }}</span><button class="pull-left btn btn-primary">Edit</button>
-            <div class="hidden-elements pull-left">
-                <input id="profile-fullname" type="text" ng-model="profile.fullName" />
-                <button class="btn btn-success" ng-click="saveFullname(profile)" ng-show="profile.fullName != originalProfile.fullName">Confirm</button>
+        <div class="clearfix" style="height: 20px;"></div>
+        <div class="row-fluid">
+            <div class="span6">
+                <label for="profile-password">Password</label>
+            </div>
+            <div class="span6">
+                <span id="profile-password-span" class="pull-left">{{ profile.password }}</span>
+                <button onclick="javascript:showFields('password')" id="edit-profile-password" class="pull-left btn btn-primary">Edit</button>
+                <div id="profile-password-container" class="hidden-elements pull-left">
+                    <input id="profile-password" class="pull-left" type="text" ng-model="profile.password" />
+                    <button class="btn btn-success pull-left" ng-click="savePassword(profile)">Confirm</button>
+                    <button onclick="javascript:hideFields('password')" id="profile-password-cancel" class="btn btn-warning pull-left">Close</button>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix" style="height: 20px;"></div>
+        <div class="row-fluid">
+            <div class="span6">
+                <label for="profile-password">Email address</label>
+            </div>
+            <div class="span6">
+                <span id="profile-email-span" class="pull-left">{{ profile.email }}</span>
+                <button onclick="javascript:showFields('email')" id="edit-profile-email" class="pull-left btn btn-primary">Edit</button>
+                <div id="profile-email-container" class="hidden-elements pull-left">
+                    <input id="profile-email" class="pull-left" type="text" ng-model="profile.email" />
+                    <button class="btn btn-success pull-left" ng-click="saveEmail(profile)">Confirm</button>
+                    <button onclick="javascript:hideFields('email')" id="profile-email-cancel" class="btn btn-warning pull-left">Close</button>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix" style="height: 20px;"></div>
+        <div class="row-fluid">
+            <div class="span6">
+                <label for="profile-phone">Telephone number</label>
+            </div>
+            <div class="span6">
+                <span id="profile-phone-span" class="pull-left">{{ profile.phone }}</span>
+                <button onclick="javascript:showFields('phone')" id="edit-profile-phone" class="pull-left btn btn-primary">Edit</button>
+                <div id="profile-phone-container" class="hidden-elements pull-left">
+                    <input id="profile-phone" class="pull-left" type="text" ng-model="profile.phone" />
+                    <button class="btn btn-success pull-left" ng-click="savePhone(profile)">Confirm</button>
+                    <button onclick="javascript:hideFields('phone')" id="profile-phone-cancel" class="btn btn-warning pull-left">Close</button>
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
     </div>

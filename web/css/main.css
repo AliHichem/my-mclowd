@@ -35,3 +35,7 @@ ul.milestones-inputs-list {
 .hidden-elements {
 	display: none;
 }
+
+.text-align-right {
+	text-align: right;
+}

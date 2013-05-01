@@ -4,6 +4,7 @@ namespace MC\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
+use MC\UserBundle\Entity\UserSetting;
 
 /**
  * @ORM\Entity
@@ -20,7 +21,7 @@ class Client extends User
     protected $id;
     
     /**
-     * @OneToOne(targetEntity="UserSetting", mappedBy="client")
+     * @ORM\OneToOne(targetEntity="UserSetting", mappedBy="client")
      **/
     protected $setting;
     
@@ -43,5 +44,16 @@ class Client extends User
     public function setPhone($phone) 
     {
         $this->phone = $phone;
+    }
+    
+    public function setSetting($config)
+    {
+        $this->setting = $config;
+        return $this;
+    }
+    
+    public function getSetting()
+    {
+        return $this->setting;
     }
 }

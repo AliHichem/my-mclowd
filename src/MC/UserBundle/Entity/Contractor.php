@@ -7,6 +7,7 @@ use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use ArrayIterator;
 use JMS\Serializer\Annotation as Rest;
+use MC\UserBundle\Entity\UserSetting;
 
 /**
  * @ORM\Entity 
@@ -23,7 +24,7 @@ class Contractor extends User
     protected $id;
 
     /**
-     * @OneToOne(targetEntity="UserSetting", mappedBy="contractor")
+     * @ORM\OneToOne(targetEntity="UserSetting", mappedBy="contractor")
      **/
     protected $setting;
 

@@ -64,6 +64,7 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education,
 
     $scope.saveFullname = function(task) {
         $http.post(Mclowd.path('contractor_update_fullname'), {form: {fullName: task.fullName}});
+        hideFields('fullname');
     };
 
     $scope.saveOverview = function(task) {

@@ -22,6 +22,10 @@ class Contractor extends User
      */
     protected $id;
 
+    /**
+     * @OneToOne(targetEntity="UserSetting", mappedBy="contractor")
+     **/
+    protected $setting;
 
     /**
      * @ORM\Column(name="has_selected_template", type="boolean")

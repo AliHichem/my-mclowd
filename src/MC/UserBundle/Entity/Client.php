@@ -20,6 +20,11 @@ class Client extends User
     protected $id;
     
     /**
+     * @OneToOne(targetEntity="UserSetting", mappedBy="client")
+     **/
+    protected $setting;
+    
+    /**
      * @ORM\Column(name="phone", type="string")
      */
     protected $phone;
@@ -28,5 +33,15 @@ class Client extends User
     {
         $roles = parent::getRoles();
         return array_merge($roles, ['ROLE_CLIENT']);
+    }
+    
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+    
+    public function setPhone($phone) 
+    {
+        $this->phone = $phone;
     }
 }

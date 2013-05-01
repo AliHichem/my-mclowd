@@ -9,6 +9,42 @@ contractor_profile:
 client_registration:
     pattern:  /register/client
     defaults: { _controller: MCUserBundle:Registration:registerClient }
+    
+client_settings:
+    pattern:  /client/settings
+    defaults: { _controller: MCUserBundle:Client:settings }
+    
+client_update_fullname:
+    pattern:  /client/update-fullname
+    defaults: { _controller: MCUserBundle:Client:updateFullname }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+client_update_password:
+    pattern:  /client/update-password
+    defaults: { _controller: MCUserBundle:Client:updatePassword }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+client_update_phone:
+    pattern:  /client/update-phone
+    defaults: { _controller: MCUserBundle:Client:updatePhone }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+client_update_email:
+    pattern:  /client/update-email
+    defaults: { _controller: MCUserBundle:Client:updateEmail }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
 
 contractor_registration:
     pattern:  /register/contractor

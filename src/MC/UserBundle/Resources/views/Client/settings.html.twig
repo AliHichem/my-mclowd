@@ -1,0 +1,65 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+<div class="row-fluid" ng-controller="ClientEditCtrl">
+    <div ng-init='profile={{ userJson|raw }}'></div>
+    <div class="well">
+        <fieldset>
+            <legend>User information</legend>
+            {% include "MCUserBundle:Partials:settings_client_contractor_profile.html.twig" %}
+        </fieldset>
+    </div>
+    
+    <div class="well">
+        {% raw %}
+        <form id="notification-form" class="form-horizontal" ng-submit="addSettings()">
+            <fieldset>
+                <legend>Notification settings</legend>
+                <div class="control-group">
+                    <label class="control-label" for="job_proposals">Job Proposals</label>
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input id="job_proposals" type="checkbox" ng-model="newSetting.incomingProposals">If I post a job, notify me of incoming proposals
+                        </label>
+                    </div> 
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="job_proposals">Workroom messages</label>
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input id="job_proposals" type="checkbox" ng-model="newSetting.workroomMessage">Send me email for each Workroom Message
+                        </label>
+                    </div> 
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="job_proposals">Account Related</label>
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input id="job_proposals" type="checkbox" ng-model="newSetting.importantAccountNotification">Important Account Notifications
+                        </label>
+                    </div> 
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="job_proposals">Marketing</label>
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input id="job_proposals" type="checkbox" ng-model="newSetting.marketplaceNewsletter">Marketplace Newsletter
+                        </label>
+                        <label class="checkbox">
+                            <input id="job_proposals" type="checkbox" ng-model="newSetting.mclowdNewsletter">Mclowd Newsletter
+                        </label>
+                    </div> 
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="submit" class="btn" value="Save" />
+                    </div>
+                </div>
+             </fieldset>
+         </form>
+         {% endraw %}
+    </div>
+</div>
+
+{% endblock %}

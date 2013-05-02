@@ -104,6 +104,21 @@ class ContractorController extends BaseController
                 'months' => $this->getMonths()
         ];
     }
+    
+    /**
+     *
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * @Template()
+     * */
+    public function settingsAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+        
+        return ['user' => $user,
+        'userJson' => $serializer->serialize($user, 'json')
+        ];
+    }
 
     /**
      * 
@@ -150,6 +165,71 @@ class ContractorController extends BaseController
         ;
         return $this->processForm($request, $form); 
 
+    }
+    
+    /**
+     *
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function updatePasswordAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+    
+        $form = $request->get('form');
+        
+        $password = $form['password'];
+        
+        $form = $this
+        ->createFormBuilder($user, ['csrf_protection' => false])
+        ->add('password')->getForm();
+        
+        $form->bind($request);
+        if ($form->isValid()) {
+            $user->setPassword('');
+            $user->setPlainPassword('');
+            $user->setPlainPassword($password);
+            $this->persist($user, true);
+            $resp = $serializer->serialize($user, 'json');
+        } else {
+            return $this->view($this->_getErrorMessages($form), self::INVALID_DATA);
+        }
+        
+        $response = new JsonResponse($resp);
+        return $response;
+    
+    }
+    
+    /**
+     *
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function updatePhoneAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+    
+        $form = $this
+        ->createFormBuilder($user, ['csrf_protection' => false])
+        ->add('phone')->getForm()
+        ;
+        return $this->processForm($request, $form);
+    
+    }
+    
+    /**
+     *
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
+    public function updateEmailAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+    
+        $form = $this
+        ->createFormBuilder($user, ['csrf_protection' => false])
+        ->add('email')->getForm()
+        ;
+        return $this->processForm($request, $form);
+    
     }
 
     /**

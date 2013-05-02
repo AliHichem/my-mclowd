@@ -1,25 +1,72 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends '::main_layout.html.twig' %}
 
-{% block fos_user_content %}
-{% if error %}
-    <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
-{% endif %}
+{% block content %}
+    {% block fos_user_content %}
+    {% if error %}
+        <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+    {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-
-    <label for="username">Username</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-
-    <label for="password">Password</label>
-    <input type="password" id="password" name="_password" required="required" />
-
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">Remember me?</label>
-
-    <input type="submit" id="_submit" name="_submit" value="Login" />
-</form>
+    <div class="row-fluid">
+        <div class="span6 offset3">
+            <div id="form_wrapper" class="form-wrapper">
+                <form class="login active" action="{{ path("fos_user_security_check") }}" method="post">
+                    <h3><span>Mclowd Marketplace</span>Login</h3>
+                    <div class="form-content">
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="email address"/>
+                    </div>
+                    <div class="form-content">
+                        <input type="password" id="password" name="_password" required="required" placeholder="password"/>
+                        <a href="#" data-action="toggle"  rel="forgot_password" class="forgot linkform small">Forgot your password?</a>
+                    </div>
+                    <div class="bottom">
+                        <div class="remember"><input type="checkbox" id="remember_me" name="_remember_me" value="on" /><span>Keep me logged in</span></div>
+                        <div class="button-wrapper">
+                            <button class="special-button-gray-with-arrow" type="submit">Sign into the Marketplace</button>
+                        </div>
+                    </div>
+                </form>
+                <form class="forgot_password" action="{{ path('fos_user_resetting_send_email') }}" method="post" style="display: none;">
+                    <h3>
+                        Forgot Password?
+                        <p class="small">Please fill in your email address<br/>and we will send you a new one.</p>
+                    </h3>
+                    <div class="form-content">
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="email address"/>
+                    </div>
+                    <div class="bottom">
+                        <div class="remember"><a href="#" data-action="toggle" rel="login" class="linkform">Suddenly remebered? Log in here</a></div>
+                        <div class="button-wrapper">
+                            <button class="special-button-gray-with-arrow" type="submit">Send new Password</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     {{ facebook_login_button() }}
 
-{% endblock fos_user_content %}
+    {% endblock fos_user_content %}
+
+{% endblock content %}
+
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript">
+    $(function() {
+        var cls = 'active'
+        ;
+        $('[data-action="toggle"]').click(function (e) {
+            var $parent = $(this).parents('form')
+            ,   $target = $('.' + $(this).attr('rel'))
+            ;
+            $parent.fadeToggle(300, 'swing', function () {
+                $target.fadeToggle().toggleClass(cls);
+                $parent.toggleClass(cls);
+            });
+            return false;
+        });
+    });
+</script>
+
+{% endblock javascripts %}

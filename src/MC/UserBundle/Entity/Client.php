@@ -21,7 +21,7 @@ class Client extends User
     protected $id;
     
     /**
-     * @ORM\OneToOne(targetEntity="UserSetting", mappedBy="client")
+     * @ORM\OneToOne(targetEntity="UserSetting", mappedBy="user")
      **/
     protected $setting;
     
@@ -29,6 +29,11 @@ class Client extends User
      * @ORM\Column(name="phone", type="string")
      */
     protected $phone;
+    
+    public function __construct()
+    {
+        //$this->setting = new UserSetting();
+    }
 
     public function getRoles()
     {

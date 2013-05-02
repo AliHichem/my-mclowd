@@ -45,6 +45,14 @@ client_update_email:
         _method:  POST
     options:
         expose: true
+        
+client_save_setting:
+    pattern:  /client/save-setting
+    defaults: { _controller: MCUserBundle:Client:saveSetting }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
 
 contractor_registration:
     pattern:  /register/contractor

@@ -24,7 +24,7 @@ class Contractor extends User
     protected $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="UserSetting", mappedBy="contractor")
+     * @ORM\OneToOne(targetEntity="UserSetting", mappedBy="user")
      **/
     protected $setting;
 

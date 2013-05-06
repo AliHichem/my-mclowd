@@ -24,6 +24,10 @@ use MC\UserBundle\Entity\ContractorTask;
 use MC\UserBundle\Entity\Qualification;
 
 use Symfony\Component\HttpFoundation\Response;
+
+use MC\UserBundle\Entity\UserSetting;
+use MC\UserBundle\Form\Type\UserSettingFormType;
+
 // SerializationContext::create()->setGroups(['profileForm'])
 class ContractorController extends BaseController
 {
@@ -115,8 +119,11 @@ class ContractorController extends BaseController
         $user = $this->getSecurity()->getToken()->getUser();
         $serializer = $this->get('serializer');
         
+        $userSetting = $user->getSetting();
+        
         return ['user' => $user,
-        'userJson' => $serializer->serialize($user, 'json')
+        'userJson' => $serializer->serialize($user, 'json'),
+        'userSetting' => $serializer->serialize($userSetting, 'json')
         ];
     }
 
@@ -395,5 +402,55 @@ class ContractorController extends BaseController
         }
         return $months;
     }
+    
+    public function saveSettingAction(Request $request)
+    {
+        $user = $this->getSecurity()->getToken()->getUser();
+        $serializer = $this->get('serializer');
+    
+        $userSetting = $user->getSetting();
+    
+        if ($userSetting === null) {
+            $userSetting = new UserSetting();
+        }
+        else {
+    
+            $userSetting->setImportantAccountNotification(false);
+            $userSetting->setIncomingProposals(false);
+            $userSetting->setMarketplaceNewsletter(false);
+            $userSetting->setMclowdNewsletter(false);
+            $userSetting->setWorkroomMessage(false);
+            $this->persist($userSetting, true);
+        }
+    
+        $userSetting->setUser($user);
+    
+    
+    
+        $form = $this->createForm(new \MC\UserBundle\Form\Type\UserSettingFormType(), $userSetting);
+    
+        if ($request->isXmlHttpRequest()) {
+            $form->bind($request);
+    
+            if ($form->isValid()) {
+    
+                $this->persist($userSetting, true);
+                $response = new Response($serializer->serialize($userSetting, 'json'));
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
+            }
+            else {
+    
+                $resp = json_encode([
+                        'error' => $this->_getErrorMessages($form)
+                        ]);
+    
+                $response = new Response($resp);
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
+            }
+        }
+    }
+    
 
 }

@@ -29,11 +29,6 @@ class Client extends User
      * @ORM\Column(name="phone", type="string")
      */
     protected $phone;
-    
-    public function __construct()
-    {
-        //$this->setting = new UserSetting();
-    }
 
     public function getRoles()
     {

@@ -23,26 +23,24 @@ class UserSetting {
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Rest\Expose
-     * @Rest\SerializedName("id")
      */
     protected $id;
     
     /**
      * @ORM\OneToOne(targetEntity="User", inversedBy="setting")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      **/
     protected $user;
     
     /**
-     * @ORM\Column(name="incoming_proposals_notif", type="boolean")
+     * @ORM\Column(name="incoming_proposals_notif", type="boolean", nullable=true)
      * @Rest\Expose
      * @Rest\SerializedName("incomingProposals")
      */
      protected $incomingProposals;
      
      /**
-      * @ORM\Column(name="workroom_msg_notif", type="boolean")
+      * @ORM\Column(name="workroom_msg_notif", type="boolean", nullable=true)
       * @Rest\Expose
       * @Rest\SerializedName("workroomMessage")
       */
@@ -50,23 +48,23 @@ class UserSetting {
      
      
      /**
-      * @ORM\Column(name="important_account_notif", type="boolean")
+      * @ORM\Column(name="important_account_notif", type="boolean", nullable=true)
       * @Rest\Expose
       * @Rest\SerializedName("importantAccountNotification")
       */
      protected $importantAccountNotification;
      
      /**
-      * @ORM\Column(name="marketplace_nsltr", type="boolean")
+      * @ORM\Column(name="marketplace_nsltr", type="boolean", nullable=true)
       * @Rest\Expose
-      * @Rest\SerializedName("marketplace_nsltr")
+      * @Rest\SerializedName("marketplaceNewsletter")
       */
      protected $marketplaceNewsletter;
      
      /**
-      * @ORM\Column(name="mclowd_nsltr", type="boolean")
+      * @ORM\Column(name="mclowd_nsltr", type="boolean", nullable=true)
       * @Rest\Expose
-      * @Rest\SerializedName("mclowd_nsltr")
+      * @Rest\SerializedName("mclowdNewsletter")
       */
      protected $mclowdNewsletter;
      

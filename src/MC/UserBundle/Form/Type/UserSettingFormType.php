@@ -11,11 +11,11 @@ class UserSettingFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('incomingProposals', 'checkbox', array('required' => false))
-                ->add('workroomMessage', 'checkbox', array('required' => false))
-                ->add('importantAccountNotification', 'checkbox', array('required' => false))
-                ->add('marketplaceNewsletter', 'checkbox', array('required' => false))
-                ->add('mclowdNewsletter', 'checkbox', array('required' => false));
+        $builder->add('incomingProposals', 'choice', array('choices' => array(true, false), 'required' => false))
+                ->add('workroomMessage', 'choice', array('choices' => array(true, false), 'required' => false))
+                ->add('importantAccountNotification', 'choice', array('choices' => array(true, false), 'required' => false))
+                ->add('marketplaceNewsletter', 'choice', array('choices' => array(true, false), 'required' => false))
+                ->add('mclowdNewsletter', 'choice', array('choices' => array(true, false), 'required' => false));
         
     }
     

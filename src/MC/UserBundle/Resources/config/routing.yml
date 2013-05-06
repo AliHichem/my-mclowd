@@ -132,6 +132,14 @@ contrator_add_employment:
     requirements:
         _method:  POST
         _format:  json
+        
+contractor_save_setting:
+    pattern:  /contractor/save-setting
+    defaults: { _controller: MCUserBundle:Contractor:saveSetting }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
 
 contrator_remove_employment:
     pattern:  /contractor/employment/{id}

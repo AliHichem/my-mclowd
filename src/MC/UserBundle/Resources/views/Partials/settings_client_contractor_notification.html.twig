@@ -1,0 +1,55 @@
+ {% raw %}
+        <form id="notification-form" class="form-horizontal" ng-submit="addSettings()">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="job_proposals">Job Proposals</label>
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input id="job_proposals" type="checkbox" ng-model="newSetting.incomingProposals">
+                            {% endraw %}
+                            {% if is_granted('ROLE_CLIENT') %}
+                            If I post a job, notify me of incoming proposals
+                            {% endif %}
+                            
+                            {% if is_granted('ROLE_CONTRACTOR') %}
+                            If I submit a proposal, notify me of a response
+                            {% endif %}
+                            {% raw %}
+                        </label>
+                    </div> 
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="job_proposals">Workroom messages</label>
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input id="job_proposals" type="checkbox" ng-model="newSetting.workroomMessage">Send me email for each Workroom Message
+                        </label>
+                    </div> 
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="job_proposals">Account Related</label>
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input id="job_proposals" type="checkbox" ng-model="newSetting.importantAccountNotification">Important Account Notifications
+                        </label>
+                    </div> 
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="job_proposals">Marketing</label>
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input id="job_proposals" type="checkbox" ng-model="newSetting.marketplaceNewsletter">Marketplace Newsletter
+                        </label>
+                        <label class="checkbox">
+                            <input id="job_proposals" type="checkbox" ng-model="newSetting.mclowdNewsletter">Mclowd Newsletter
+                        </label>
+                    </div> 
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="submit" class="btn" value="Save" />
+                    </div>
+                </div>
+             </fieldset>
+        </form>
+{% endraw %}

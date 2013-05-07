@@ -1,5 +1,7 @@
-function ContractorEditCtrl($scope, $http, Qualification, Employment, Education, ContractorTask) {
+function ContractorEditCtrl($scope, $http, Qualification, Employment, Education, ContractorTask, ContractorSetting) {
     $scope.data = {};
+    
+    $scope.newSetting = {};
 
     $scope.addTask = function () {
         var t = new ContractorTask($scope.newTask);
@@ -113,13 +115,14 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education,
         $http.post(Mclowd.path('contractor_update_phone'), {form: { phone: profile.phone }});
         hideFields('phone');
     };
+    
+    $scope.addSettings = function () {
+        var cs = new ContractorSetting($scope.newSetting);
+        cs.$save(function(data) {
+
+        });
+    };
 }
-
-jQuery(document).ready(function() {
-	
-
-	
-});
 
 function showFields(elementName) {
 	

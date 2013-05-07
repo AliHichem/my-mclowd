@@ -4,8 +4,34 @@
 
 <div class="row-fluid" ng-controller="ContractorEditCtrl">
     <div ng-init='profile={{ userJson|raw }}'></div>
+    <div ng-init='newSetting={{ userSetting|raw }}'></div>
+    <div class="well">
+        <fieldset>
+            <legend>User information</legend>
+            {% include "MCUserBundle:Partials:settings_client_contractor_profile.html.twig" %}
+        </fieldset>
+    </div>
     
-    {% include "MCUserBundle:Partials:settings_client_contractor_profile.html.twig" %}
+    <div class="well">
+        <fieldset>
+            <legend>Notification settings</legend>
+            {% include "MCUserBundle:Partials:settings_client_contractor_notification.html.twig" %}
+        </fieldset>
+    </div>
+    
+    <div class="span6" style="margin-left: 0px;">
+        <div class="well">
+            <legend>Financial Accounts</legend>
+            <a href="#">change settings</a>
+        </div>
+    </div>
+    
+    <div class="span6">
+        <div class="well">
+            <legend>Invoice and Tax Settings</legend>
+            <a href="#">change settings</a>
+        </div>
+    </div>
     
 </div>
 

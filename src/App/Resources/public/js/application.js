@@ -36,7 +36,11 @@ mcApp.factory('AcceptProposal', function($resource) {
 
 mcApp.factory('ClientSetting', function($resource) {
 	return $resource(Mclowd.url('/client/save-setting'), {}, {});
-})
+});
+
+mcApp.factory('ContractorSetting', function($resource) {
+	return $resource(Mclowd.url('/contractor/save-setting'), {}, {});
+});
 
 mcApp.controller('RootController', function ($rootScope) {
 

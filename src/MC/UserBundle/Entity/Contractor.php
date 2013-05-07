@@ -98,5 +98,15 @@ class Contractor extends User
         return $phone;
     }
     
+    public function setSetting($config)
+    {
+        $this->setting = $config;
+        return $this;
+    }
+    
+    public function getSetting()
+    {
+        return $this->setting;
+    }
     
 }

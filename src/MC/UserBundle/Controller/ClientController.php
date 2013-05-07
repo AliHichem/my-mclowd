@@ -38,8 +38,11 @@ class ClientController extends BaseController
         $user = $this->getSecurity()->getToken()->getUser();
         $serializer = $this->get('serializer');
         
+        $userSetting = $user->getSetting();
+        
         return ['user' => $user,
-        'userJson' => $serializer->serialize($user, 'json')
+        'userJson' => $serializer->serialize($user, 'json'),
+        'userSetting' => $serializer->serialize($userSetting, 'json')
         ];
     }
 
@@ -149,10 +152,23 @@ class ClientController extends BaseController
         
         $userSetting = $user->getSetting();
         
-        if ($userSetting === null)
+        if ($userSetting === null) {
             $userSetting = new UserSetting();
+        }
+        else {
+
+            $userSetting->setImportantAccountNotification(false);
+            $userSetting->setIncomingProposals(false);
+            $userSetting->setMarketplaceNewsletter(false);
+            $userSetting->setMclowdNewsletter(false);
+            $userSetting->setWorkroomMessage(false);
+            $this->persist($userSetting, true);
+        }
         
         $userSetting->setUser($user);
+        
+        
+        
         $form = $this->createForm(new \MC\UserBundle\Form\Type\UserSettingFormType(), $userSetting);
         
         if ($request->isXmlHttpRequest()) {
@@ -160,11 +176,7 @@ class ClientController extends BaseController
         
             if ($form->isValid()) {
                 
-                //echo $user->getId();
-                
                 $this->persist($userSetting, true);
-
-        
                 $response = new Response($serializer->serialize($userSetting, 'json'));
                 $response->headers->set('Content-Type', 'application/json');
                 return $response;

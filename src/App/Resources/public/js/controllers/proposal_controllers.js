@@ -47,7 +47,7 @@ function ProposalCtrl($scope, $http, AcceptProposal) {
             }
             else {
 	            $scope.newProposal.id = data.id;
-	            $scope.newProposal.username = data.user.username;
+	            $scope.newProposal.username = data.username;
 	            
 	            //console.log($scope.newProposal);
 	            

@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
       _config.vm.box = "mclowd_deploy"
 
       #use :nfs => true only if on mac/linux; use :nfs => false on win
-      _config.vm.synced_folder ".", "/vagrant/mclowd", :nfs => true
+      _config.vm.synced_folder ".", "/var/www/mclowd", :nfs => true
 
       #_config.vm.provider :vmware_fusion do |vf, override|
       #  vf.customize ["modifyvm", :id, "--memory", 1024]
@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
       _config.vm.provider :virtualbox do |vb, override|
         vb.customize ["modifyvm", :id, "--memory", 1024]
         override.vm.box_url = "http://www.trisoft.ro/mclowd_deploy.box"
-        override.vm.network :private_network, ip: "192.168.33.300"
+        override.vm.network :private_network, ip: "192.168.33.201"
       end
     end
 

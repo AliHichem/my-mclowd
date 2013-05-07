@@ -34,6 +34,10 @@ mcApp.factory('AcceptProposal', function($resource) {
     });
 });
 
+mcApp.factory('ClientSetting', function($resource) {
+	return $resource(Mclowd.url('/client/save-setting'), {}, {});
+})
+
 mcApp.controller('RootController', function ($rootScope) {
 
     /* ajax spinner flag */

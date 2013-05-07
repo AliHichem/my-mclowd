@@ -13,7 +13,7 @@ set :application, "mclowd"
 set :app_path,    "app"
 set :user,        "root"
 set :scm,         :git
-set :repository,  "git@github.com:tsslabs/mclowd-marketplace.git"
+set :repository,  "git@github.com:mclowd/mclowd-marketplace.git"
 set :branch,      "master"
 set :deploy_via,  :remote_cache
 

@@ -19,8 +19,9 @@
             </div>
         </div>
         <div class="row-fluid" ng-controller="ProposalCtrl">
+            <div ng-init="multiplier={{ multiplier }}"></div>
             <div class="span12">
-                {% if is_granted('ROLE_CONTRACTOR') and not accepted %}
+                {% if is_granted('ROLE_CONTRACTOR') %}
                 <div class="row-fluid">
                     <div class="span12"> 
                         {% raw %}
@@ -56,6 +57,7 @@
                                 {% raw %}
                                 <div class="control-group">
                                     <div class="controls">
+                                        <input type="hidden" ng-model="newProposal.taskType" ng-init="newProposal.taskType='{% endraw %}{{ taskType }}{% raw %}'">
                                         <input type="hidden" ng-model="newProposal.task" ng-init="newProposal.task='{% endraw %}{{ task }}{% raw %}'" />
                                         <input type="submit" class="btn" value="Make proposal" />
                                     </div>
@@ -84,7 +86,7 @@
                 
             </div>
     
-</div>
+        </div>
         
     </div>
 </div>

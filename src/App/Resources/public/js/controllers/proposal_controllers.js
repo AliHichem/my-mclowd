@@ -1,12 +1,7 @@
 function ProposalCtrl($scope, $http, AcceptProposal) {
     $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     
-//	$scope.durationOptions = [
-//	    {"value": "1",
-//		"name": "1-2 days"},
-//		{"value": "2",
-//		"name": "3-4 days"}
-//	];
+    $scope.newProposal = {};
 
 	$scope.ngObjFixHack = function(ngObj) {
 	    var output;
@@ -17,6 +12,21 @@ function ProposalCtrl($scope, $http, AcceptProposal) {
 	    return output;
 	}
 	
+	$scope.newProposal.milestones = [{ name: ''}];
+	
+	$scope.addMilestone = function() {
+		$scope.newProposal.milestones.push( { name: '' } ); //-- i can use either $scope or this to reference the array and works.
+	}
+	
+    $scope.removeMilestone = function(elem) {
+    	$scope.newProposal.milestones.splice($scope.newProposal.milestones.indexOf(elem), 1);
+    }
+    
+    $scope.change = function() {
+    	$scope.newProposal.finalRate = ((parseFloat($scope.newProposal.contractorRate) * (parseFloat($scope.multiplier) / 100)) + parseFloat($scope.newProposal.contractorRate));
+
+    }
+	
     $scope.addProposal = function () {
         if (typeof $scope.proposals === "undefined") {
             $scope.proposals = [];
@@ -24,31 +34,32 @@ function ProposalCtrl($scope, $http, AcceptProposal) {
         
         $scope.newProposal.finishDate = jQuery('#finishDate').val();
         
-        //var prop = new Proposal($scope.newProposal);
-        //prop.$save();
-        
-        console.log($scope.newProposal);
-        
         var postData = $scope.ngObjFixHack($scope.newProposal);
+        
+        //console.log(postData);
         
     	$http.post(Mclowd.url('/proposals/'), $.param({ form: postData })).success(function(data, status) {
             $scope.status = status;
             $scope.data = data;
-            //console.log(data.id);
+
             if (typeof data.error != 'undefined') {
             	$scope.errors = data.error;
             }
             else {
 	            $scope.newProposal.id = data.id;
-	            
-	            //var _duration = data.duration
-	            //$scope.newProposal.duration = data.duration_options[_duration];
 	            $scope.newProposal.username = data.user.username;
+	            
+	            //console.log($scope.newProposal);
+	            
 	            $scope.proposals.push($scope.newProposal);
 	            
 	            var taskId = $scope.newProposal.task;
+	            var taskType = $scope.newProposal.taskType;
 	            $scope.newProposal = {};
 	            $scope.newProposal.task = taskId;
+	            $scope.newProposal.taskType = taskType;
+	            $scope.newProposal.milestones = [{ name: ''}];
+	            jQuery('.milestones-inputs-list li:first-child a.remove').remove();
             }
         }).
         error(function(data, status) {
@@ -106,6 +117,8 @@ jQuery(document).ready(function() {
 			jQuery('.proposals-list a.hide').hide();
 		}
 	}, 500)
+	
+	jQuery('.milestones-inputs-list li:first-child a.remove').remove();
 })
 
 

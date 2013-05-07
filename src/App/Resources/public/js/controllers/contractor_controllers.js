@@ -64,6 +64,7 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education,
 
     $scope.saveFullname = function(task) {
         $http.post(Mclowd.path('contractor_update_fullname'), {form: {fullName: task.fullName}});
+        hideFields('fullname');
     };
 
     $scope.saveOverview = function(task) {
@@ -97,4 +98,72 @@ function ContractorEditCtrl($scope, $http, Qualification, Employment, Education,
             $scope.data.qualifications.push(new Qualification($scope.profile.qualifications[i]));
         }
     };
+    
+    $scope.savePassword = function(profile) {
+        $http.post(Mclowd.path('contractor_update_password'), {form: { password: profile.password }});
+        hideFields('password');
+    };
+    
+    $scope.saveEmail = function(profile) {
+        $http.post(Mclowd.path('contractor_update_email'), {form: { email: profile.email }});
+        hideFields('email');
+    };
+    
+    $scope.savePhone = function(profile) {
+        $http.post(Mclowd.path('contractor_update_phone'), {form: { phone: profile.phone }});
+        hideFields('phone');
+    };
 }
+
+jQuery(document).ready(function() {
+	
+
+	
+});
+
+function showFields(elementName) {
+	
+	jQuery('#edit-profile-' + elementName).hide();
+	jQuery('#profile-' + elementName + '-span').hide();
+	jQuery('#profile-' + elementName + '-container').show();
+
+}
+
+function hideFields(elementName) {
+	
+	jQuery('#profile-' + elementName + '-container').hide();
+	jQuery('#profile-' + elementName + '-span').show();
+	jQuery('#edit-profile-' + elementName).show();
+		
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

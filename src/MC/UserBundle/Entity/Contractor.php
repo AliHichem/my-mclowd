@@ -7,6 +7,7 @@ use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 use ArrayIterator;
 use JMS\Serializer\Annotation as Rest;
+use MC\UserBundle\Entity\UserSetting;
 
 /**
  * @ORM\Entity 
@@ -22,11 +23,20 @@ class Contractor extends User
      */
     protected $id;
 
+    /**
+     * @ORM\OneToOne(targetEntity="UserSetting", mappedBy="user")
+     **/
+    protected $setting;
 
     /**
      * @ORM\Column(name="has_selected_template", type="boolean")
      */
     protected $hasSelectedTemplate = false;
+    
+    /**
+     * @ORM\Column(name="phone", type="string")
+     */
+    protected $phone;
 
      /**
      * @Rest\SerializedName("contractorTasks")
@@ -76,4 +86,17 @@ class Contractor extends User
     {
         return $this->contractorTasks;
     }
+    
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+    
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+        return $phone;
+    }
+    
+    
 }

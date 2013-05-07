@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+
+<div class="row-fluid" ng-controller="ContractorEditCtrl">
+    <div ng-init='profile={{ userJson|raw }}'></div>
+    
+    {% include "MCUserBundle:Partials:settings_client_contractor_profile.html.twig" %}
+    
+</div>
+
+{% endblock %}

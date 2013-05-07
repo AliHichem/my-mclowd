@@ -9,6 +9,50 @@ contractor_profile:
 client_registration:
     pattern:  /register/client
     defaults: { _controller: MCUserBundle:Registration:registerClient }
+    
+client_settings:
+    pattern:  /client/settings
+    defaults: { _controller: MCUserBundle:Client:settings }
+    
+client_update_fullname:
+    pattern:  /client/update-fullname
+    defaults: { _controller: MCUserBundle:Client:updateFullname }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+client_update_password:
+    pattern:  /client/update-password
+    defaults: { _controller: MCUserBundle:Client:updatePassword }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+client_update_phone:
+    pattern:  /client/update-phone
+    defaults: { _controller: MCUserBundle:Client:updatePhone }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+client_update_email:
+    pattern:  /client/update-email
+    defaults: { _controller: MCUserBundle:Client:updateEmail }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+client_save_setting:
+    pattern:  /client/save-setting
+    defaults: { _controller: MCUserBundle:Client:saveSetting }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
 
 contractor_registration:
     pattern:  /register/contractor
@@ -21,6 +65,10 @@ registration_validation:
 contractor_edit:
     pattern:  /contractor/edit
     defaults: { _controller: MCUserBundle:Contractor:edit }
+    
+contractor_settings:
+    pattern:  /contractor/settings
+    defaults: { _controller: MCUserBundle:Contractor:settings }
 
 contractor_update_city:
     pattern:  /contractor/update-city
@@ -41,6 +89,30 @@ contractor_update_tag_line:
 contractor_update_fullname:
     pattern:  /contractor/update-fullname
     defaults: { _controller: MCUserBundle:Contractor:updateFullname }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+contractor_update_password:
+    pattern:  /contractor/update-password
+    defaults: { _controller: MCUserBundle:Contractor:updatePassword }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+contractor_update_phone:
+    pattern:  /contractor/update-phone
+    defaults: { _controller: MCUserBundle:Contractor:updatePhone }
+    requirements:
+        _method:  POST
+    options:
+        expose: true
+        
+contractor_update_email:
+    pattern:  /contractor/update-email
+    defaults: { _controller: MCUserBundle:Contractor:updateEmail }
     requirements:
         _method:  POST
     options:

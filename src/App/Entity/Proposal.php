@@ -5,6 +5,9 @@ use App\Entity\Task;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use JMS\Serializer\Annotation as Rest;
+use JMS\Serializer\Annotation\Accessor;
+use JMS\Serializer\Annotation\Type;
 
 use Symfony\Component\Validator\ExecutionContext;
 
@@ -12,8 +15,9 @@ use Symfony\Component\Validator\ExecutionContext;
  * @ORM\Entity
  * @ORM\Table(name="proposals")
  * @ORM\Entity(repositoryClass="App\Entity\ProposalRepository")
- * 
+ * @Rest\ExclusionPolicy("all")
  * @Assert\Callback(methods={"validateHourlyOptions", "validateFixedOptions"})
+ * 
  * 
  */
 class Proposal {
@@ -31,17 +35,24 @@ class Proposal {
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Rest\Expose
+     * @Rest\SerializedName("id")
      */
     protected $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Task", inversedBy="proposals")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Rest\Expose
+     * @Type("integer")
+     * @Rest\SerializedName("taskId")
+     * @Accessor(getter="getTaskId")
      */
     public $task;
     
     /**
     * @ORM\OneToMany(targetEntity="App\Entity\Milestone", mappedBy="proposal", cascade={"persist", "remove"})
+    * @Rest\SerializedName("milestones")
     **/
     public $milestones;
 
@@ -49,30 +60,42 @@ class Proposal {
      *
      * @ORM\Column(name="description", type="text")
      * @Assert\NotBlank()
+     * @Rest\Expose
+     * @Rest\SerializedName("description")
      */
     protected $description;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\NotBlank(groups="hourly_group")
+     * @Rest\Expose
+     * @Rest\SerializedName("hours")
      */
     protected $hours;
     
     /**
      * @ORM\Column(name="finish_date", type="datetime", nullable=true)
      * @Assert\NotBlank(groups="fixed_group")
+     * @Rest\Expose
+     * @Rest\SerializedName("finishDate")
+     * @Type("string")
+     * @Accessor(getter="getFinishDate")
      */
     protected $finishDate;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\NotBlank(groups="hourly_group")
+     * @Rest\Expose
+     * @Rest\SerializedName("duration")
      */
     protected $duration;
 
     /**
      * @ORM\Column(name="contractor_rate", type="float")
      * @Assert\NotBlank()
+     * @Rest\Expose
+     * @Rest\SerializedName("contractorRate")
      */
     protected $contractorRate;
     
@@ -84,6 +107,8 @@ class Proposal {
     
     /**
      * @ORM\Column(name="is_accepted", type="smallint", options={"default" = 0})
+     * @Rest\Expose
+     * @Rest\SerializedName("accepted")
      */
     protected $isAccepted;
 
@@ -91,6 +116,9 @@ class Proposal {
      * Trait property here:
      * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Rest\Expose
+     * @Rest\SerializedName("username")
+     * @Accessor(getter="getUsername")
      *
      * @var User $user
      */
@@ -120,6 +148,15 @@ class Proposal {
     public function getId()
     {
         return $this->id;
+    }
+    
+    public function getTaskId()
+    {
+        return $this->getTask()->getId();
+    }
+    
+    public function getUsername() {
+        return $this->user->getUsername();
     }
 
     public function getDescription() {
@@ -174,13 +211,15 @@ class Proposal {
 
     public function setFinishDate($finishDate)
     {
-        $this->finishDate = new \DateTime(date($finishDate));
+        //if ($finishDate != '')
+            $this->finishDate = new \DateTime(date($finishDate));
         return $this;
     }
     
     public function getFinishDate()
     {
-        return $this->finishDate;
+        if ($this->finishDate != null)
+            return date('Y-m-d H:i:s', $this->finishDate->getTimestamp());
     }
     
     public function setTask(Task $task) {
@@ -201,6 +240,23 @@ class Proposal {
     public function getIsAccepted()
     {
         return $this->isAccepted;
+    }
+    
+    public function setMilestones($milestones)
+    {
+        foreach ($milestones as $milestone) {
+            if ($milestone->getName() != '')
+                $milestone->setProposal($this);
+            else 
+                return $this;
+        }
+        $this->milestones = $milestones;
+        return $this;
+    }
+    
+    public function getMilestones()
+    {
+        return $this->milestones;
     }
 
 }

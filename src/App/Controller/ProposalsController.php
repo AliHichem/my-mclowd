@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Milestone;
+
 use App\Entity\Task;
 use App\Entity\Proposal;
 use App\Form\Type\NewProposalType;
@@ -19,31 +21,33 @@ class ProposalsController extends Controller
      */
     public function newAction(Request $request)
     {
+        $taskType = null;
         $em = $this->getDoctrine()->getEntityManager();
         $serializer = $this->get('serializer');
         
-        $proposal = new Proposal;
-        $form = $this->createForm(new \App\Form\NewProposalType(), $proposal, array('em' => $em));
+        $postForm = $this->get('request')->request->get('form');
+        
+        if (isset($postForm['taskType'])) {
+            $taskType = $postForm['taskType'];
+            if ($taskType == 'hourly') {
+                unset($postForm['milestones']);
+            }
+            unset($postForm['taskType']);
+        }
+        
+        $proposal = new Proposal();
+        $form = $this->createForm(new \App\Form\NewProposalType(), $proposal, array('em' => $em, 'taskType' => $taskType));
         
         if ($request->isXmlHttpRequest()) {
-            
-            $postForm = $this->get('request')->request->get('form');
-            
-            //print_r($postForm);
-            
-            //$finishDate = new \DateTime($postForm['finishDate']);
-            //$postForm['finishDate'] = $finishDate;
-
             $form->bind($postForm);
             
-            
             if ($form->isValid()) {
-
+                
                 $task = $em->find('App:Task', $postForm['task']);
                 $proposal->setTask($task);
                 $proposal->setIsAccepted(false);
                 $this->persist($proposal, true);
-   
+
                 $response = new Response($serializer->serialize($proposal, 'json'));
                 $response->headers->set('Content-Type', 'application/json');
                 return $response;

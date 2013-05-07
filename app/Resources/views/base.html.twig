@@ -110,11 +110,13 @@
                 <li><a href="{{ path('contractor_index') }}">Browse contractors</a></li>
                     
                 {% if is_granted("ROLE_CLIENT") %}     
-                    <li><a href="{{ path('app_tasks_my') }}">My tasks</a></li>    
+                    <li><a href="{{ path('app_tasks_my') }}">My tasks</a></li>
+                    <li><a href="{{ path('client_settings') }}">Settings</a></li>    
                 {% endif %}
 
                 {% if is_granted("ROLE_CONTRACTOR") %}     
-                    <li><a href="{{ path('contractor_edit') }}">Edit profile</a></li>    
+                    <li><a href="{{ path('contractor_edit') }}">Edit profile</a></li>
+                    <li><a href="{{ path('contractor_settings') }}">Settings</a></li>  
                 {% endif %}
 
             </ul>

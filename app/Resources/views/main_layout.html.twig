@@ -64,9 +64,11 @@
         </div><!-- /span-->
 
         <div class="span9">
-            {% block breadcrumbs %}
-                {% include('App::breadcrumbs.html.twig') %}
-            {% endblock breadcrumbs %}
+            <ul class="breadcrumb">
+                {% block breadcrumbs %}
+                    {% include('App::breadcrumbs.html.twig') %}
+                {% endblock breadcrumbs %}
+            </ul>
 
             {% block content %}{% endblock content %}
         </div><!--/span-->

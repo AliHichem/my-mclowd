@@ -1,0 +1,273 @@
+{% extends "::main_layout.html.twig" %}
+
+{% block breadcrumbs %}
+    {{ parent() }}
+    <li><span class="divider">&gt;</span> <a href="{{ path('app_profile_index') }}" class="active">Profile</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+            
+            <div class="span12">
+              <div class="section-with-ribbon clearfix"><!-- /////////// Start Name + tag line /////////// -->
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Clark Kent</h2>
+                    <a href="#" class="special-button-gray-with-arrow pull-right visible-desktop" title="Contact Clark Kent">Contact Contractor</a>
+                  </div>
+                </div>
+                
+                <ul class="sub-section tag-line-wrapper">
+                  <li class="even">
+                    <h2 class="blue">Chartered accountant with 20 years experience in SMSF</h2>
+                  </li>
+                </ul>
+              </div><!-- /////////// End Name + tag line /////////// -->
+            </div>
+            
+            <div class="span3 last-span clearfix">
+              <div class="avatar-wrapper no-margin-top">
+                <div class="avatar-frame">
+                  <img src="images/clark-kent-vertical.png" alt="Clark Kent" class="avatar-image"/>
+                </div>
+                <img src="images/profile-avatar-shadow.png" alt="Avatar shadow" class="avatar-shadow"/>
+                <a href="#" class="special-button-gray pull-right" title="Check out Clark Kent's LinkedIn Profile"><span class="blue">Linked In</span> Profile</a>
+              </div>              
+            </div> 
+            
+            <div class="span9">
+              <ul class="contractor-details clearfix"><!-- /////////// Start Contractor Details /////////// -->
+                <li>
+                  <h3>Type of Account: <span class="blue">Individual</span></h3>
+                </li>
+                <li>
+                  <h3>Services Offered: <span class="blue">Accounting and Bookkeeping</span></h3>
+                </li>
+                <li>
+                  <h3>Secondary Services Offered: <span class="blue">Auditing and SMSF</span></h3>
+                </li>
+                <li>
+                  <h3>Price: <span class="blue">Minimum $50 per hour</span></h3>
+                </li>
+                <li>
+                  <h3>Location: <span class="blue">Sydney, NSW, Australia</span></h3>
+                </li>
+              </ul>     
+            </div>
+            
+            <div class="span12 last-span"><!-- /////////// Start Overview /////////// -->
+              <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Overview</h2>
+                  </div>
+                </div>
+                
+                <ul class="sub-section">
+                  <li class="even">
+                    <div class="profile-form clearfix">
+                      <div class="overview">
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque. Cras mollis hendrerit felis. Ut laoreet est et libero feugiat feugiat. In hac habitasse platea dictumst. Mauris ut facilisis augue.   
+                        </p>
+                        <p>
+                          Sed quam mauris, porta non ultricies et, commodo vitae magna. Superman cursus dignissim lorem eu congue. Cum sociis natoque penatibus et magnis dis parturient montes, kriptonite ridiculus mus.
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- /////////// End Overview /////////// -->
+            
+            <div class="span12 last-span"><!-- /////////// Start Skills /////////// -->
+              <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Skills</h2>
+                  </div>
+                </div>
+                
+                <ul class="sub-section">
+                  <li class="odd">
+                    <ul class="attributes-list collapse in" id="skills-list">
+                      <li>
+                        <h4>Accounting</h4>
+                        <div class="attribute-description">
+                          <ul>
+                            <li>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                            <li>
+                              Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.
+                            </li>
+                            <li>
+                              Cras mollis hendrerit felis. Ut laoreet est et libero feugiat feugiat. In hac habitasse platea dictumst.
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Bookkeeping</h4>
+                        <div class="attribute-description">
+                          <ul>
+                            <li>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                            <li>
+                              Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.
+                            </li>
+                            <li>
+                              Cras mollis hendrerit felis. Ut laoreet est et libero feugiat feugiat. In hac habitasse platea dictumst.
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Auditing</h4>
+                        <div class="attribute-description">
+                          <p>Nam convallis enim id leo volutpat non rutrum purus porta. Ut sed neque dolor, et ullamcorper turpis. Nunc pulvinar dignissim nisl, vel luctus libero pharetra nec. Nam mattis ligula pellentesque enim interdum commodo. Phasellus aliquam condimentum nibh vitae luctus.</p>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Finance</h4>
+                        <div class="attribute-description">
+                          <p>Duis sit amet libero at est aliquet condimentum. Maecenas id tempor neque. Morbi tempus dolor sed dui venenatis posuere. Proin lobortis nisl ac ante faucibus iaculis. Sed vestibulum sollicitudin porta. Nullam a nisl id lectus aliquet fringilla. Etiam malesuada consectetur purus in gravida.
+                          Praesent ac lectus eget sem congue blandit ut quis elit. Curabitur nec ultrices nisl. Praesent viverra nulla nisl. </p>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- /////////// End Skills /////////// -->
+            
+            <div class="span12 last-span"><!-- /////////// Start Education /////////// -->
+              <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Education</h2>
+                  </div>
+                </div>
+                
+                <ul class="sub-section">
+                  <li class="even">
+                    <ul class="attributes-list collapse in" id="education-list">
+                      <li>
+                        <h4>Diploma, Advanced Dipl. of Accounting OTAN</h4>
+                        <div class="attribute-description">
+                          <p>February 2011 - May 2012</p>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Doctorate, Environmental engineering University of Newcastle</h4>
+                        <div class="attribute-description">
+                          <p>February 1998 - May 2003</p>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Bachelors, Science and Mathematics University of Newcastle</h4>
+                        <div class="attribute-description">
+                          <p>March 1993 - Nvember 1996</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- /////////// End Education /////////// -->
+            
+            <div class="span12 last-span"><!-- /////////// Start License /////////// -->
+              <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>License and Qualifications</h2>
+                  </div>
+                </div>
+                
+                <ul class="sub-section">
+                  <li class="odd">
+                    <ul class="attributes-list collapse in" id="license-list">
+                      <li>
+                        <h4>Chartered Accountant (CA)</h4>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Association of Chartered Certified Accountants (ACCA)</h4>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Bachedlor of Accountancy (Bacc)</h4>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Bachedlor of Science in Applied Accounting</h4>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- /////////// End License /////////// -->
+            
+            <div class="span12 last-span"><!-- /////////// Start Employment /////////// -->
+              <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Employment</h2>
+                  </div>
+                </div>
+                
+                <ul class="sub-section">
+                  <li class="even">
+                    <ul class="attributes-list collapse in" id="employment-list">
+                      <li>
+                        <h4>Sydney Accountants - Sydney</h4>
+                        <div class="attribute-description">
+                          <p><span class="suitcase icon"></span>Chartered Accountant (CA)</p>
+                          <p><span class="calendar icon"></span>May 2010 - November 2012</p>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.</p>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Village Accountants - Village</h4>
+                        <div class="attribute-description">
+                          <p><span class="suitcase icon"></span>Chartered Accountant (CA)</p>
+                          <p><span class="calendar icon"></span>May 2010 - November 2012</p>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- /////////// End Employment /////////// -->
+            
+            <div class="span5 last-span">
+              <div class="button-wrapper full-width-button">
+                  <button type="submit" class="special-button-gray-with-arrow">Contact Contractor</button>
+                </div>
+            </div>
+          </div>              
+        
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".avatar-frame").imgLiquid({fill:true, fadeInTime:250});
+        });
+        $(function() {
+            $(window).bind("debouncedresize", function() {
+                $(".avatar-frame").imgLiquid({fill:true, fadeInTime:250});
+            });
+        });
+    </script>
+{% endblock %}

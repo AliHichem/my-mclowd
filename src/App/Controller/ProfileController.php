@@ -39,15 +39,26 @@ class ProfileController extends Controller
     public function editAction(Request $request, $id)
     {
         $client = $this->getUser();
-        $form = $this->createBoundObjectForm($client, 'new');
+        $form = $this->createBoundObjectForm($client, 'profile');
 
         if ($form->isBound() && $form->isValid()) {
             $this->persist($client, true);
-            $this->addFlash('success');
+            $this->addFlash('success', 'Profile has been updated');
 
             return $this->redirectToRoute('app_profile_index');
         }
 
         return ['form' => $form->createView()];
+    }
+
+    public function showAction($id)
+    {
+        $client = $this->getUser();
+        if (!$client instanceof Client) {
+            throw $this->createNotFoundException();
+        }
+        return [
+            'client' => $client,
+        ];
     }
 }

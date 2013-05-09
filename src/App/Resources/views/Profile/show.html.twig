@@ -160,8 +160,8 @@
                                     <div class="attribute-description">
                                         <p>{{ educationHistory.startMonth }}-{{ educationHistory.startYear }} - {{ educationHistory.endMonth }}-{{ educationHistory.endYear }}</p>
                                     </div>
-                                    {% if not loop.last %}<li class="separator"></li>{% endif %}
                                 </li>
+                                {% if not loop.last %}<li class="separator"></li>{% endif %}
                             {% endfor %}
                         </ul>
                     </li>
@@ -200,41 +200,35 @@
                 </ul>
               </div>
             </div><!-- /////////// End License /////////// -->
-            
-            <div class="span12 last-span"><!-- /////////// Start Employment /////////// -->
-              <div class="section-with-ribbon no-margin-top clearfix">
+
+        <div class="span12 last-span">
+            <div class="section-with-ribbon no-margin-top clearfix">
                 <div class="blue-ribbon-wrapper">
-                  <div class="blue-ribbon">
-                    <h2>Employment</h2>
-                  </div>
+                    <div class="blue-ribbon">
+                        <h2>Employment</h2>
+                    </div>
                 </div>
-                
+
                 <ul class="sub-section">
-                  <li class="even">
-                    <ul class="attributes-list collapse in" id="employment-list">
-                      <li>
-                        <h4>Sydney Accountants - Sydney</h4>
-                        <div class="attribute-description">
-                          <p><span class="suitcase icon"></span>Chartered Accountant (CA)</p>
-                          <p><span class="calendar icon"></span>May 2010 - November 2012</p>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.</p>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Village Accountants - Village</h4>
-                        <div class="attribute-description">
-                          <p><span class="suitcase icon"></span>Chartered Accountant (CA)</p>
-                          <p><span class="calendar icon"></span>May 2010 - November 2012</p>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.</p>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
+                    <li class="even">
+                        <ul class="attributes-list collapse in" id="employment-list">
+                            {% for employmentHistory in client.employmentHistory %}
+                                <li>
+                                    <h4>{{ employmentHistory.companyName }}</h4>
+                                    <div class="attribute-description">
+                                        <p><span class="suitcase icon"></span>{{ employmentHistory.position }}</p>
+                                        <p><span class="calendar icon"></span>{{ employmentHistory.startMonth }}-{{ employmentHistory.startYear }} - {{ employmentHistory.endMonth }}-{{ employmentHistory.endYear }}</p>
+                                        <p>{{ employmentHistory.description }}</p>
+                                    </div>
+                                </li>
+                                {% if not loop.last %}<li class="separator"></li>{% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
                 </ul>
-              </div>
-            </div><!-- /////////// End Employment /////////// -->
-            
+            </div>
+        </div>
+
             <div class="span5 last-span">
               <div class="button-wrapper full-width-button">
                   <button type="submit" class="special-button-gray-with-arrow">Contact Contractor</button>

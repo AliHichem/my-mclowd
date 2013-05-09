@@ -154,26 +154,15 @@
                 <ul class="sub-section">
                     <li class="even">
                         <ul class="attributes-list collapse in" id="education-list">
-                            <li>
-                                <h4>Diploma, Advanced Dipl. of Accounting OTAN</h4>
-                                <div class="attribute-description">
-                                    <p>February 2011 - May 2012</p>
-                                </div>
-                            </li>
-                            <li class="separator"></li>
-                            <li>
-                                <h4>Doctorate, Environmental engineering University of Newcastle</h4>
-                                <div class="attribute-description">
-                                    <p>February 1998 - May 2003</p>
-                                </div>
-                            </li>
-                            <li class="separator"></li>
-                            <li>
-                                <h4>Bachelors, Science and Mathematics University of Newcastle</h4>
-                                <div class="attribute-description">
-                                    <p>March 1993 - Nvember 1996</p>
-                                </div>
-                            </li>
+                            {% for educationHistory in client.educationHistory %}
+                                <li>
+                                    <h4>{{ educationHistory.institutionName }}</h4>
+                                    <div class="attribute-description">
+                                        <p>{{ educationHistory.startMonth }}-{{ educationHistory.startYear }} - {{ educationHistory.endMonth }}-{{ educationHistory.endYear }}</p>
+                                    </div>
+                                    {% if not loop.last %}<li class="separator"></li>{% endif %}
+                                </li>
+                            {% endfor %}
                         </ul>
                     </li>
                 </ul>

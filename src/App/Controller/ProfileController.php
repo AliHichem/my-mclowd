@@ -54,11 +54,12 @@ class ProfileController extends Controller
     public function showAction($id)
     {
         $this->common();
-        $client = $this->em->getRepository('MCUserBundle:Client')->find($id);
+        $client = $this->em->getRepository('MCUserBundle:Client')->getClientByIdV1($id);
 
         if (!$client instanceof Client) {
             throw $this->createNotFoundException();
         }
+
         return $this->render('App:Profile:show.html.twig', array(
             'client' => $client,
         ));

@@ -536,7 +536,6 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         $this->qualifications->add($q);
     }
 
-
     public function getQualifications()
     {
         return $this->qualifications;
@@ -559,7 +558,6 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
 
         return $this;
     }
-
 
     public function serialize()
     {

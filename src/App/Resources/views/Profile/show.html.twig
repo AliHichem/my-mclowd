@@ -77,71 +77,32 @@
                 </ul>
               </div>
             </div><!-- /////////// End Overview /////////// -->
-            
-            <div class="span12 last-span"><!-- /////////// Start Skills /////////// -->
-              <div class="section-with-ribbon no-margin-top clearfix">
+
+        <div class="span12 last-span">
+            <div class="section-with-ribbon no-margin-top clearfix">
                 <div class="blue-ribbon-wrapper">
-                  <div class="blue-ribbon">
-                    <h2>Skills</h2>
-                  </div>
+                    <div class="blue-ribbon">
+                        <h2>Skills</h2>
+                    </div>
                 </div>
-                
+
                 <ul class="sub-section">
-                  <li class="odd">
-                    <ul class="attributes-list collapse in" id="skills-list">
-                      <li>
-                        <h4>Accounting</h4>
-                        <div class="attribute-description">
-                          <ul>
-                            <li>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </li>
-                            <li>
-                              Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.
-                            </li>
-                            <li>
-                              Cras mollis hendrerit felis. Ut laoreet est et libero feugiat feugiat. In hac habitasse platea dictumst.
-                            </li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Bookkeeping</h4>
-                        <div class="attribute-description">
-                          <ul>
-                            <li>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </li>
-                            <li>
-                              Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.
-                            </li>
-                            <li>
-                              Cras mollis hendrerit felis. Ut laoreet est et libero feugiat feugiat. In hac habitasse platea dictumst.
-                            </li>
-                          </ul>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Auditing</h4>
-                        <div class="attribute-description">
-                          <p>Nam convallis enim id leo volutpat non rutrum purus porta. Ut sed neque dolor, et ullamcorper turpis. Nunc pulvinar dignissim nisl, vel luctus libero pharetra nec. Nam mattis ligula pellentesque enim interdum commodo. Phasellus aliquam condimentum nibh vitae luctus.</p>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Finance</h4>
-                        <div class="attribute-description">
-                          <p>Duis sit amet libero at est aliquet condimentum. Maecenas id tempor neque. Morbi tempus dolor sed dui venenatis posuere. Proin lobortis nisl ac ante faucibus iaculis. Sed vestibulum sollicitudin porta. Nullam a nisl id lectus aliquet fringilla. Etiam malesuada consectetur purus in gravida.
-                          Praesent ac lectus eget sem congue blandit ut quis elit. Curabitur nec ultrices nisl. Praesent viverra nulla nisl. </p>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
+                    <li class="odd">
+                        <ul class="attributes-list collapse in" id="skills-list">
+                            {% for skill in client.skills %}
+                                <li>
+                                    <h4>{{ skill.name }}</h4>
+                                    <div class="attribute-description">
+                                        {{ skill.description }}
+                                    </div>
+                                </li>
+                                {% if not loop.last %}<li class="separator"></li>{% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
                 </ul>
-              </div>
-            </div><!-- /////////// End Skills /////////// -->
+            </div>
+        </div>
 
         <div class="span12 last-span">
             <div class="section-with-ribbon no-margin-top clearfix">

@@ -12,7 +12,7 @@
 
         <div class="pull-right gray-button-holder">
             <a href="#" class="special-button-gray-with-arrow">Register</a>
-            <a href="#" class="special-button-gray-with-arrow">Log In</a>
+            <a href="{{ path('fos_user_security_login') }}" class="special-button-gray-with-arrow">Log In</a>
         </div>
 
         <div class="hero-content clearfix">
@@ -81,7 +81,7 @@
                     </li>
                 </ul>
                 <div class="special-button-holder">
-                    <a class="special-button-blue-with-text start-earning-button" href="#" title="Start Earning | Create your free profile">Create your free profile</a>
+                    <a class="special-button-blue-with-text start-earning-button" href="{{ path('contractor_registration') }}" title="Start Earning | Create your free profile">Create your free profile</a>
                 </div>
             </div>
             <img class="small-shadow" src="/bundles/app/images/small-shadow.png" alt="Small Shadow" width="347" height="24" />

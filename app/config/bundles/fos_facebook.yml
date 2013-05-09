@@ -1,6 +1,6 @@
 fos_facebook:
   alias:  facebook
-  app_id: 234366326701948
-  secret: cf64d990949732f35beb66938458270f
+  app_id: 359140134198842
+  secret: 55a94001b2b465455227db73bbcbeedc
   cookie: true
   permissions: [email, user_birthday, user_location]

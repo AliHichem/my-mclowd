@@ -169,37 +169,28 @@
             </div>
         </div>
 
-            <div class="span12 last-span"><!-- /////////// Start License /////////// -->
-              <div class="section-with-ribbon no-margin-top clearfix">
+        <div class="span12 last-span">
+            <div class="section-with-ribbon no-margin-top clearfix">
                 <div class="blue-ribbon-wrapper">
-                  <div class="blue-ribbon">
-                    <h2>License and Qualifications</h2>
-                  </div>
+                    <div class="blue-ribbon">
+                        <h2>License and Qualifications</h2>
+                    </div>
                 </div>
-                
+
                 <ul class="sub-section">
-                  <li class="odd">
-                    <ul class="attributes-list collapse in" id="license-list">
-                      <li>
-                        <h4>Chartered Accountant (CA)</h4>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Association of Chartered Certified Accountants (ACCA)</h4>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Bachedlor of Accountancy (Bacc)</h4>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Bachedlor of Science in Applied Accounting</h4>
-                      </li>
-                    </ul>
-                  </li>
+                    <li class="odd">
+                        <ul class="attributes-list collapse in" id="license-list">
+                            {% for qualification in client.qualifications %}
+                                <li>
+                                    <h4>{{ qualification.name }}</h4>
+                                </li>
+                                {% if not loop.last %}<li class="separator"></li>{% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
                 </ul>
-              </div>
-            </div><!-- /////////// End License /////////// -->
+            </div>
+        </div>
 
         <div class="span12 last-span">
             <div class="section-with-ribbon no-margin-top clearfix">
@@ -229,13 +220,12 @@
             </div>
         </div>
 
-            <div class="span5 last-span">
-              <div class="button-wrapper full-width-button">
-                  <button type="submit" class="special-button-gray-with-arrow">Contact Contractor</button>
-                </div>
+        <div class="span5 last-span">
+            <div class="button-wrapper full-width-button">
+                <button type="submit" class="special-button-gray-with-arrow">Contact Contractor</button>
             </div>
-          </div>              
-        
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}

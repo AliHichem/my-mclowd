@@ -9,7 +9,7 @@ class ClientRepository extends EntityRepository
     public function ClientSelectByIdV1($user_id)
     {
         $query = $this->getEntityManager()
-            ->createQuery('SELECT c, ceh FROM MCUserBundle:Client c LEFT JOIN c.educationHistory ceh WHERE c.id = :user_id')
+            ->createQuery('SELECT c, ceh, cehi, cq FROM MCUserBundle:Client c LEFT JOIN c.educationHistory ceh LEFT JOIN c.employmentHistory cehi LEFT JOIN c.qualifications cq WHERE c.id = :user_id')
             ->setParameter('user_id', $user_id);
 
         return $query;

@@ -24,6 +24,8 @@
                         <div class="button-wrapper">
                             <button class="special-button-gray-with-arrow" type="submit">Sign into the Marketplace</button>
                         </div>
+
+                        {{ facebook_login_button() }}
                     </div>
                 </form>
                 <form class="forgot_password" action="{{ path('fos_user_resetting_send_email') }}" method="post" style="display: none;">

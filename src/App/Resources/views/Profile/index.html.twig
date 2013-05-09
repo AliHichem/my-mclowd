@@ -21,7 +21,7 @@
                     <img src="{{ asset('bundles/app/images/profile-blank-avatar.jpg') }}" alt="Blank avatar | Upload your photo" class="avatar-image"/>
                 </div>
                 <img src="{{ asset('bundles/app/images/profile-avatar-shadow.png') }}" alt="Avatar shadow" class="avatar-shadow"/>
-                <a href="#" class="special-button-gray pull-right" title="Upload photo">Upload Photo</a>
+                <a href="{{ path('app_profile_edit', { 'id': client.id }) }}" class="special-button-gray pull-right" title="Upload photo">Upload Photo</a>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
                 <div class="blue-ribbon-wrapper">
                     <div class="blue-ribbon">
                         <h2>{{ client.fullName }}</h2>
-                        <a href="#" class="simple-gray-button pull-right" title="Edit your name">Edit</a>
+                        <a href="{{ path('app_profile_edit', { 'id': client.id }) }}" class="simple-gray-button pull-right" title="Edit your name">Edit</a>
                     </div>
                 </div>
 
@@ -72,7 +72,7 @@
                                     <tr class="grade-complete">
                                         <td>{{ task.createdAt|date('d/m/Y') }}</td>
                                         <td>{{ task.user.fullName }}</td>
-                                        <td>Complete</td>
+                                        <td>{{ task.isactive }}</td>
                                         <td>{{ task.budget }}</td>
                                         <td><a href="#" class="task-title" title="Enter data for my SMSF">{{ task.name }}</a></td>
                                     </tr>
@@ -90,6 +90,8 @@
             </div>
         </div>
     </div>
+
+<!--
 <div class="clearfix"></div><br /><br /><br />
 <div id="profile" class="row">
     <form
@@ -109,7 +111,7 @@
         <thead>
             <tr>
                 <th>Date</th>
-                <th><!--Contractor-->id/slug</th>
+                <th><!--Contractor--><!--id/slug</th>
                 <th>Status</th>
                 <th>Cost</th>
                 <th>Task Title</th>
@@ -129,7 +131,7 @@
     </table>
 </div>
     {#{ dump(app.user, app.security, app.request, app.session, app.environment, app.debug) }#}
-
+-->
 {% endblock %}
 
 {% block javascripts %}

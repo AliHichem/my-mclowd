@@ -2,29 +2,27 @@
 
 {% block breadcrumbs %}
     {{ parent() }}
-    <li><span class="divider">&gt;</span> <a href="{{ path('app_profile_index') }}" class="active">Profile</a></li>
+    <li><span class="divider">&gt;</span> <a href="{{ path('app_profile_show', { 'id': client.id }) }}" class="active">View Contractor Profile</a></li>
 {% endblock %}
 
 {% block content %}
     <div class="row-fluid">
-            
-            <div class="span12">
-              <div class="section-with-ribbon clearfix"><!-- /////////// Start Name + tag line /////////// -->
+        <div class="span12">
+            <div class="section-with-ribbon clearfix">
                 <div class="blue-ribbon-wrapper">
-                  <div class="blue-ribbon">
-                    <h2>Clark Kent</h2>
-                    <a href="#" class="special-button-gray-with-arrow pull-right visible-desktop" title="Contact Clark Kent">Contact Contractor</a>
-                  </div>
+                    <div class="blue-ribbon">
+                        <h2>{{ client.displayName }}</h2>
+                        <a href="#" class="special-button-gray-with-arrow pull-right visible-desktop" title="Contact Clark Kent">Contact Contractor</a>
+                    </div>
                 </div>
-                
                 <ul class="sub-section tag-line-wrapper">
-                  <li class="even">
-                    <h2 class="blue">Chartered accountant with 20 years experience in SMSF</h2>
-                  </li>
+                    <li class="even">
+                        <h2 class="blue">Chartered accountant with 20 years experience in SMSF</h2>
+                    </li>
                 </ul>
-              </div><!-- /////////// End Name + tag line /////////// -->
             </div>
-            
+        </div>
+
             <div class="span3 last-span clearfix">
               <div class="avatar-wrapper no-margin-top">
                 <div class="avatar-frame">
@@ -144,44 +142,44 @@
                 </ul>
               </div>
             </div><!-- /////////// End Skills /////////// -->
-            
-            <div class="span12 last-span"><!-- /////////// Start Education /////////// -->
-              <div class="section-with-ribbon no-margin-top clearfix">
+
+        <div class="span12 last-span">
+            <div class="section-with-ribbon no-margin-top clearfix">
                 <div class="blue-ribbon-wrapper">
-                  <div class="blue-ribbon">
-                    <h2>Education</h2>
-                  </div>
+                    <div class="blue-ribbon">
+                        <h2>Education</h2>
+                    </div>
                 </div>
-                
+
                 <ul class="sub-section">
-                  <li class="even">
-                    <ul class="attributes-list collapse in" id="education-list">
-                      <li>
-                        <h4>Diploma, Advanced Dipl. of Accounting OTAN</h4>
-                        <div class="attribute-description">
-                          <p>February 2011 - May 2012</p>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Doctorate, Environmental engineering University of Newcastle</h4>
-                        <div class="attribute-description">
-                          <p>February 1998 - May 2003</p>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Bachelors, Science and Mathematics University of Newcastle</h4>
-                        <div class="attribute-description">
-                          <p>March 1993 - Nvember 1996</p>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
+                    <li class="even">
+                        <ul class="attributes-list collapse in" id="education-list">
+                            <li>
+                                <h4>Diploma, Advanced Dipl. of Accounting OTAN</h4>
+                                <div class="attribute-description">
+                                    <p>February 2011 - May 2012</p>
+                                </div>
+                            </li>
+                            <li class="separator"></li>
+                            <li>
+                                <h4>Doctorate, Environmental engineering University of Newcastle</h4>
+                                <div class="attribute-description">
+                                    <p>February 1998 - May 2003</p>
+                                </div>
+                            </li>
+                            <li class="separator"></li>
+                            <li>
+                                <h4>Bachelors, Science and Mathematics University of Newcastle</h4>
+                                <div class="attribute-description">
+                                    <p>March 1993 - Nvember 1996</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
-              </div>
-            </div><!-- /////////// End Education /////////// -->
-            
+            </div>
+        </div>
+
             <div class="span12 last-span"><!-- /////////// Start License /////////// -->
               <div class="section-with-ribbon no-margin-top clearfix">
                 <div class="blue-ribbon-wrapper">

@@ -5,13 +5,13 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use MC\UserBundle\Entity\Client;
 
-/**
- * Description of ProfileController
- *
- * @author matei
- */
 class ProfileController extends Controller
 {
+    public function common()
+    {
+        $this->em = $this->getDoctrine()->getManager();
+    }
+
     public function indexAction()
     {
         $client = $this->getUser();
@@ -53,12 +53,14 @@ class ProfileController extends Controller
 
     public function showAction($id)
     {
-        $client = $this->getUser();
+        $this->common();
+        $client = $this->em->getRepository('MCUserBundle:Client')->find($id);
+
         if (!$client instanceof Client) {
             throw $this->createNotFoundException();
         }
-        return [
+        return $this->render('App:Profile:show.html.twig', array(
             'client' => $client,
-        ];
+        ));
     }
 }

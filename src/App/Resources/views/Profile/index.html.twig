@@ -1,5 +1,9 @@
 {% extends "::main_layout.html.twig" %}
 
+{% form_theme form _self %}
+
+{% use 'form_div_layout.html.twig' %}
+
 {% block breadcrumbs %}
     {{ parent() }}
     <li><span class="divider">&gt;</span> <a href="{{ path('app_profile_index') }}" class="active">Profile</a></li>
@@ -44,49 +48,49 @@
         </div>
 
         <div class="span12 last-span">
-              <div class="section-with-ribbon clearfix">
+            <div class="section-with-ribbon clearfix">
                 <div class="blue-ribbon-wrapper">
-                  <div class="blue-ribbon">
-                    <h2>My Tasks</h2>
-                  </div>
+                    <div class="blue-ribbon">
+                        <h2>My Tasks</h2>
+                    </div>
                 </div>
-                
-                <ul class="sub-section">
-                  <li class="odd no-padding">
-                    <table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="my-tasks-table">
-                      <thead>
-                        <tr>
-                          <th class="date">Date</th>
-                          <th class="contractor">Contractor</th>
-                          <th class="status">Status</th>
-                          <th class="cost">Cost</th>
-                          <th class="title">Task Title</th>
-                        </tr>
-                      </thead>
-                      
-                      <tbody>
-                        <tr class="grade-complete">
-                          <td>04/08/2013</td>
-                          <td>John Smith</td>
-                          <td>Complete</td>
-                          <td>$560</td>
-                          <td><a href="#" class="task-title" title="Enter data for my SMSF">A task for data tax returns</a></td>
-                        </tr>
 
-                      </tbody>
-                    </table>
-                  </li>
+                <ul class="sub-section">
+                    <li class="odd no-padding">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="my-tasks-table">
+                            <thead>
+                                <tr>
+                                    <th class="date">Date</th>
+                                    <th class="contractor">Contractor</th>
+                                    <th class="status">Status</th>
+                                    <th class="cost">Cost</th>
+                                    <th class="title">Task Title</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in tasks %}
+                                    <tr class="grade-complete">
+                                        <td>{{ task.createdAt|date('d/m/Y') }}</td>
+                                        <td>{{ task.user.fullName }}</td>
+                                        <td>Complete</td>
+                                        <td>{{ task.budget }}</td>
+                                        <td><a href="#" class="task-title" title="Enter data for my SMSF">{{ task.name }}</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </li>
                 </ul>
-              </div>   
-            </div>  
-            
-            <div class="span5 last-span">
-              <div class="button-wrapper full-width-button">
-                  <button type="submit" class="special-button-gray-with-arrow">Save Account</button>
-                </div>
             </div>
-          </div>              
-        
+        </div>
+
+        <div class="span5 last-span">
+            <div class="button-wrapper full-width-button">
+                <button type="submit" class="special-button-gray-with-arrow">Save Account</button>
+            </div>
+        </div>
+    </div>
+<div class="clearfix"></div><br /><br /><br />
 <div id="profile" class="row">
     <form
             id="user_profile"
@@ -133,12 +137,34 @@
     {% javascripts 'bundles/app/js/profile.js.coffee' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".avatar-frame").imgLiquid({fill:true, fadeInTime:250});
+        });
+        $(function() {
+            $(window).bind("debouncedresize", function() {
+                $(".avatar-frame").imgLiquid({fill:true, fadeInTime:250});
+            });
+        });
+
+        $(document).ready(function() {
+            $('#my-tasks-table').dataTable( {
+                "sPaginationType": "full_numbers",
+                "aoColumns": [
+                    { "sType": "datetime-us" },
+                    null,
+                    null,
+                    { "sType": "currency" },
+                    null
+                ]
+            });
+        });
+        $.extend( $.fn.dataTableExt.oStdClasses, {
+            "sWrapper": "dataTables_wrapper form-inline clearfix"
+        });
+    </script>
 {% endblock %}
-
-
-{% form_theme form _self %}
-
-{% use 'form_div_layout.html.twig' %}
 
 {% block form_rows %}
         <div class="span4 image-field">

@@ -26,7 +26,11 @@
         <div class="span3 last-span clearfix">
             <div class="avatar-wrapper no-margin-top">
                 <div class="avatar-frame">
-                    <img src="{{ asset('bundles/app/images/profile-blank-avatar.jpg') }}" alt="" class="avatar-image"/>
+                    {% if contractor.avatar %}
+                        <img src="{{ contractor.avatar.path('medium') }}" />
+                    {% else %}
+                        <img src="{{ asset('bundles/app/images/profile-blank-avatar.jpg') }}" alt="" class="avatar-image"/>
+                    {% endif %}
                 </div>
                 <img src="{{ asset('bundles/app/images/profile-avatar-shadow.png') }}" alt="Avatar shadow" class="avatar-shadow"/>
                 <a href="#" class="special-button-gray pull-right" title="Check out Clark Kent's LinkedIn Profile"><span class="blue">Linked In</span> Profile</a>
@@ -36,7 +40,7 @@
         <div class="span9">
             <ul class="contractor-details clearfix">
                 <li>
-                    <h3>Type of Account: <span class="blue">{{ contractor.type }}</span></h3>
+                    <h3>Type of Account: <span class="blue">{{ contractor.accountType }}</span></h3>
                 </li>
                 <li>
                     <h3>Services Offered: <span class="blue">Accounting and Bookkeeping</span></h3>
@@ -182,44 +186,6 @@
             </div>
         </div>
     </div>
-
-    <h3>{{contractor}}</h3>
-    {% if contractor.avatar %}
-        <img src="{{ contractor.avatar.path('medium') }}" />
-    {% endif %}
-
-    <p>Name: {{contractor.fullName}}</p>
-    <p>City: {{contractor.city}}</p>
-    <p>Tag line: {{contractor.tagLine}}</p>
-    <p>Overview: {{contractor.overview}}</p>
-
-    <h4>Tasks</h4>
-    {% for task in contractor.contractorTasks %}
-        <div>
-            {{ task.name }} - {{ task.price + '$' }}
-        </div>
-    {% endfor %}
-
-    <h4>Education</h4>
-    {% for education in contractor.educationHistory %}
-        <div>
-            {{ education.institutionName }} - {{ education.degree }}
-        </div>
-    {% endfor %}
-
-    <h4>Employment</h4>
-    {% for employment in contractor.employmentHistory %}
-        <div>
-            {{ employment.companyName }} - {{ employment.position }}
-        </div>
-    {% endfor %}
-
-    <h4>Qualifications</h4>
-    {% for qualification in contractor.qualifications %}
-        <div>
-            {{ qualification.name }}
-        </div>
-    {% endfor %}
 {% endblock %}
 
 {% block javascripts %}

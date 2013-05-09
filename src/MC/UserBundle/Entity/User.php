@@ -476,7 +476,6 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         return $this->avatar;
     }
 
-
     public function setAvatar(Asset $avatar)
     {
         $this->avatar = $avatar;

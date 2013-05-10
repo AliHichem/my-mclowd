@@ -47,14 +47,7 @@ class ClientController extends BaseController
         /* @var $taskRepo \Doctrine\ORM\EntityRepository */
         $tasks = $taskRepo->findBy(['user' => $client]);
         $stats = NULL;
-/*
-        return [
-            'client' => $client,
-            'form' => $form->createView(),
-            'stats' => $stats,
-            'tasks' => $tasks,
-        ];
-*/
+
         return $this->render('MCUserBundle:Client:profile.html.twig', array(
             'client' => $client,
             'form' => $form->createView(),

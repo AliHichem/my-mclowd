@@ -40,7 +40,7 @@ class ContractorTask
 
     
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="contractorTasks")
+     * @ORM\ManyToOne(targetEntity="Contractor", inversedBy="contractorTasks")
      * @ORM\JoinColumn(name="contractor_id", referencedColumnName="id")
      */
     protected $user;

@@ -77,7 +77,7 @@ class Education
     protected $description;
     
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="education_history")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="educationHistory")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;

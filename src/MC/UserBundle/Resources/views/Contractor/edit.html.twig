@@ -157,6 +157,7 @@
                             <button type="button" id="remove-education" class="remove-block pull-right" data-toggle="collapse" data-target="#education-list"><span class="remove icon"></span><span class="add icon"></span></button>
                         </div>
                     </div>
+                    <div class="clearfix"></div><br /><br />
                     <form id="education-form" ng-submit="addEducation()">
                         <div><input placeholder="Institution Name" ng-model="newEducation.institutionName" /></div>
                         <div><input placeholder="Name and Type of Degree" ng-model="newEducation.degree" /></div>
@@ -177,6 +178,7 @@
                             <input type="submit" id="education-submit" class="special-button-blue pull-right after-separator" value="Confirm" name="confirm" />
                         </div>
                     </form>
+                    <div class="clearfix"></div><br /><br />
                     <ul class="sub-section">
                         <li class="odd">
                             <ul class="attributes-list collapse in" id="education-list">
@@ -195,7 +197,37 @@
                 </div>
             </div>
 
-
+            <div class="span12 last-span">
+                <div class="section-with-ribbon no-margin-top clearfix">
+                    <div class="blue-ribbon-wrapper">
+                        <div class="blue-ribbon">
+                            <h2>License and Qualifications</h2>
+                            <button type="button" id="remove-license" class="remove-block pull-right" data-toggle="collapse" data-target="#license-list"><span class="remove icon"></span><span class="add icon"></span></button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div><br /><br />
+                    <form id="licence-form" ng-submit="addQualification()">
+                        <input placeholder="Enter licence or qualification" ng-model="newQualification.name" />
+                        <div class="clearfix">
+                            <div class="separator"></div>
+                            <input type="submit" id="license-submit" class="special-button-blue pull-right after-separator" value="Confirm" name="confirm" />
+                        </div>
+                    </form>
+                    <div class="clearfix"></div><br /><br />
+                    <ul class="sub-section">
+                        <li class="even">
+                            <ul class="attributes-list collapse in" id="license-list">
+                                <li ng-repeat="qualification in data.qualifications">
+                                    <h4>{{ qualification.name }}</h4>
+                                    <div class="buttons pull-right">
+                                        <button class="btn btn-danger" ng-click="removeQualification(qualification)">Remove</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
 
     <div class="well">
@@ -216,20 +248,6 @@
 
 
 
-
-    <div class="well">
-        <h5>Licences and qualifications</h5>
-        <form id="licence-form" ng-submit="addQualification()">
-            <input placeholder="Enter licence or qualification" ng-model="newQualification.name" />
-            <input type="submit" value="Add new qualification" />
-        </form>
-
-        <ul>
-            <li ng-repeat="qualification in data.qualifications">
-                {{ qualification.name }} <button class="btn btn-danger" ng-click="removeQualification(qualification)">Remove</button>
-            </li>
-        </ul>
-    </div>
 
 
 
@@ -354,65 +372,7 @@
                 </ul>
               </div>
             </div><!-- /////////// End Skills /////////// -->
-            
-            
-            <div class="span12 last-span"><!-- /////////// Start License /////////// -->
-              <div class="section-with-ribbon no-margin-top clearfix">
-                <div class="blue-ribbon-wrapper">
-                  <div class="blue-ribbon">
-                    <h2>License and Qualifications</h2>
-                    <button type="button" id="remove-license" class="remove-block pull-right" data-toggle="collapse" data-target="#license-list"><span class="remove icon"></span><span class="add icon"></span></button>
-                  </div>
-                </div>
-                
-                <ul class="sub-section">
-                  <li class="even">
-                    <ul class="attributes-list collapse in" id="license-list">
-                      <li>
-                        <h4>Chartered Accountant (CA)</h4>
-                        <div class="buttons pull-right">
-                          <a href="#" class="simple-gray-button pull-right" title="Remove this license">Remove</a>
-                          <a href="#" class="simple-gray-button pull-right" title="Edit this license">Edit</a>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Association of Chartered Certified Accountants (ACCA)</h4>
-                        <div class="buttons pull-right">
-                          <a href="#" class="simple-gray-button pull-right" title="Remove this license">Remove</a>
-                          <a href="#" class="simple-gray-button pull-right" title="Edit this license">Edit</a>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Bachedlor of Accountancy (Bacc)</h4>
-                        <div class="buttons pull-right">
-                          <a href="#" class="simple-gray-button pull-right" title="Remove this license">Remove</a>
-                          <a href="#" class="simple-gray-button pull-right" title="Edit this license">Edit</a>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Bachedlor of Science in Applied Accounting</h4>
-                        <div class="buttons pull-right">
-                          <a href="#" class="simple-gray-button pull-right" title="Remove this license">Remove</a>
-                          <a href="#" class="simple-gray-button pull-right" title="Edit this license">Edit</a>
-                        </div>
-                      </li>
-                    </ul>
-                    
-                    <div class="clearfix">
-                      <div class="separator"></div>
-                      
-                      <a href="#" class="simple-gray-button left after-separator" title="Add another license">Add another license</a>
-                                                                                                                                                        
-                      <input type="submit" id="license-submit" class="special-button-blue pull-right after-separator" value="Confirm" name="confirm" disabled="disabled"/>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div><!-- /////////// End License /////////// -->
-            
+
             <div class="span12 last-span"><!-- /////////// Start Employment /////////// -->
               <div class="section-with-ribbon no-margin-top clearfix">
                 <div class="blue-ribbon-wrapper">

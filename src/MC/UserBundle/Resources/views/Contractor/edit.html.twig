@@ -556,3 +556,90 @@
 
 </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $('#skills-form').on('hidden', function () {
+            $("#skills-form").reset();
+        });
+
+        $(function(){
+            $(function(){
+                window.prettyPrint && prettyPrint();
+
+                var nowTemp1 = new Date();
+                var now1 = new Date(nowTemp1.getFullYear(), nowTemp1.getMonth(), nowTemp1.getDate(), 0, 0, 0, 0);
+
+                var checkin = $('#dpd1').datepicker({
+                    onRender: function(date) {
+                        return date.valueOf() > now1.valueOf() ? 'disabled' : '';
+                    }
+                }).on('changeDate', function(ev) {
+                    if (ev.date.valueOf() > checkout.date.valueOf()) {
+                        var newDate = new Date(ev.date)
+                        newDate.setDate(newDate.getDate() + 1);
+                        checkout.setValue(newDate);
+                    }
+                    checkin.hide();
+                    $('#dpd2')[0].focus();
+                }).data('datepicker');
+                var checkout = $('#dpd2').datepicker({
+                    onRender: function(date) {
+                        return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+                    }
+                }).on('changeDate', function(ev) {
+                    checkout.hide();
+                }).data('datepicker');
+
+                var nowTemp2 = new Date();
+                var now2 = new Date(nowTemp2.getFullYear(), nowTemp2.getMonth(), nowTemp2.getDate(), 0, 0, 0, 0);
+
+                var checkin = $('#job-start-1').datepicker({
+                    onRender: function(date) {
+                        return date.valueOf() > now2.valueOf() ? 'disabled' : '';
+                    }
+                }).on('changeDate', function(ev) {
+                    if (ev.date.valueOf() > checkout.date.valueOf()) {
+                        var newDate = new Date(ev.date)
+                        newDate.setDate(newDate.getDate() + 1);
+                        checkout.setValue(newDate);
+                    }
+                    checkin.hide();
+                    $('#job-end-1')[0].focus();
+                }).data('datepicker');
+                var checkout = $('#job-end-1').datepicker({
+                    onRender: function(date) {
+                        return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+                    }
+                }).on('changeDate', function(ev) {
+                    checkout.hide();
+                }).data('datepicker');
+            });
+
+            $('#education-form').on('hidden', function () {
+                $("#education-form").reset();
+            });
+
+            $('#license-received-date').datepicker();
+
+            $('#license-form').on('hidden', function () {
+                $("#license-form").reset();
+            });
+
+            $('#employment-form').on('hidden', function () {
+                $("#employment-form").reset();
+            });
+        });
+
+        $(document).ready(function () {
+            $(".avatar-frame").imgLiquid({fill:true, fadeInTime:250});
+        });
+        $(function() {
+            $(window).bind("debouncedresize", function() {
+                $(".avatar-frame").imgLiquid({fill:true, fadeInTime:250});
+            });
+        });
+    </script>
+{% endblock %}

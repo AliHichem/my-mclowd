@@ -229,6 +229,54 @@
                 </div>
             </div>
 
+            <div class="span12 last-span">
+                <div class="section-with-ribbon no-margin-top clearfix">
+                    <div class="blue-ribbon-wrapper">
+                        <div class="blue-ribbon">
+                            <h2>Employment</h2>
+                            <button type="button" id="remove-employment" class="remove-block pull-right" data-toggle="collapse" data-target="#employment-list"><span class="remove icon"></span><span class="add icon"></span></button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div><br /><br />
+                    <form id="employment-form" ng-submit="addEmployment()">
+                        <div><input placeholder="Company Name" ng-model="newEmployment.companyName" /></div>
+                        <div><input placeholder="Position" ng-model="newEmployment.position" /></div>
+                        <div><textarea ng-model="newEmployment.description" placeholder="Description (optional)"></textarea></div>
+                        <div>
+                            Start:
+                            <select ng-model="newEmployment.startMonth" ng-options="key as value for (key , value) in months"></select>
+                            <select ng-model="newEmployment.startYear" ng-options="key as value for (key , value) in years"></select>
+                        </div>
+                        <div>
+                            End:
+                            <select ng-model="newEmployment.endMonth" ng-options="key as value for (key , value) in months"></select>
+                            <select ng-model="newEmployment.endYear" ng-options="key as value for (key , value) in years"></select>
+                        </div>
+                        <div class="clearfix">
+                            <div class="separator"></div>
+                            <input type="submit" id="education-submit" class="special-button-blue pull-right after-separator" value="Confirm" name="confirm" />
+                        </div>
+                    </form>
+                    <div class="clearfix"></div><br /><br />
+                    <ul class="sub-section">
+                        <li class="odd">
+                            <ul class="attributes-list collapse in" id="employment-list">
+                                <li ng-repeat="employment in data.employmentHistory">
+                                    <h4>{{ employment.companyName }}</h4>
+                                    <div class="buttons pull-right">
+                                        <button class="btn simple-gray-button pull-right" ng-click="removeEmployment(employment)">Remove</button>
+                                    </div>
+                                    <div class="attribute-description">
+                                        <p><span class="suitcase icon"></span>{{ employment.position }}</p>
+                                        <p><span class="calendar icon"></span>{{ employment.startMonth }}-{{ employment.startYear }} - {{ employment.endMonth }}-{{ employment.endYear }}</p>
+                                        <p>{{ employment.description }}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
     <div class="well">
         <h5>Set prices for tasks</h5>
@@ -241,42 +289,6 @@
         <ul>
             <li ng-repeat="task in data.contractorTasks">
                 {{ task.name }} : {{ task.price + '$' }} <button class="btn btn-danger" ng-click="removeTask(task)">Remove</button>
-            </li>
-        </ul>
-    </div>
-
-
-
-
-
-
-
-     <div class="well">
-        <h5>Employment</h5>
-        <form id="employment-form" ng-submit="addEmployment()">
-            <div><input placeholder="Company Name" ng-model="newEmployment.companyName" /></div>
-            <div><input placeholder="Position" ng-model="newEmployment.position" /></div>
-            <div><textarea ng-model="newEmployment.description" placeholder="Description (optional)"></textarea></div>
-
-            <div>
-                Start:
-                <select ng-model="newEmployment.startMonth" ng-options="key as value for (key , value) in months"></select>
-                <select ng-model="newEmployment.startYear" ng-options="key as value for (key , value) in years"></select>
-            </div>
-            <div>
-                End:
-                <select ng-model="newEmployment.endMonth" ng-options="key as value for (key , value) in months"></select>
-                <select ng-model="newEmployment.endYear" ng-options="key as value for (key , value) in years"></select>
-            </div>
-            
-
-            <input type="submit" value="Add add employment" />
-        </form>
-
-        <ul>
-            <li ng-repeat="employment in data.employmentHistory">
-                {{ employment.companyName }} <small>({{ employment.position }})</small> 
-                <button class="btn btn-danger" ng-click="removeEmployment(employment)">Remove</button>
             </li>
         </ul>
     </div>
@@ -372,57 +384,6 @@
                 </ul>
               </div>
             </div><!-- /////////// End Skills /////////// -->
-
-            <div class="span12 last-span"><!-- /////////// Start Employment /////////// -->
-              <div class="section-with-ribbon no-margin-top clearfix">
-                <div class="blue-ribbon-wrapper">
-                  <div class="blue-ribbon">
-                    <h2>Employment</h2>
-                    <button type="button" id="remove-employment" class="remove-block pull-right" data-toggle="collapse" data-target="#employment-list"><span class="remove icon"></span><span class="add icon"></span></button>
-                  </div>
-                </div>
-                
-                <ul class="sub-section">
-                  <li class="odd">
-                    <ul class="attributes-list collapse in" id="employment-list">
-                      <li>
-                        <h4>Sydney Accountants - Sydney</h4>
-                        <div class="buttons pull-right">
-                          <a href="#" class="simple-gray-button pull-right" title="Remove this employment">Remove</a>
-                          <a href="#" class="simple-gray-button pull-right" title="Edit this employment">Edit</a>
-                        </div>
-                        <div class="attribute-description">
-                          <p><span class="suitcase icon"></span>Chartered Accountant (CA)</p>
-                          <p><span class="calendar icon"></span>May 2010 - November 2012</p>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.</p>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Village Accountants - Village</h4>
-                        <div class="buttons pull-right">
-                          <a href="#" class="simple-gray-button pull-right" title="Remove this employment">Remove</a>
-                          <a href="#" class="simple-gray-button pull-right" title="Edit this employment">Edit</a>
-                        </div>
-                        <div class="attribute-description">
-                          <p><span class="suitcase icon"></span>Chartered Accountant (CA)</p>
-                          <p><span class="calendar icon"></span>May 2010 - November 2012</p>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.</p>
-                        </div>
-                      </li>
-                    </ul>
-                    
-                    <div class="clearfix">
-                      <div class="separator"></div>
-                      
-                      <a href="#" class="simple-gray-button left after-separator" title="Add more employment">Add more employment</a>
-                                                                                                                                                        
-                      <input type="submit" id="education-submit" class="special-button-blue pull-right after-separator" value="Confirm" name="confirm" disabled="disabled"/>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div><!-- /////////// End Employment /////////// -->
 
         <div class="span5 last-span">
             <div class="button-wrapper full-width-button">

@@ -193,7 +193,27 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg"}
      * )
      * */
-    public $uploadedAvatar = null;
+    protected $uploadedAvatar = null;
+
+    /**
+     * Get uploadedAvatar
+     *
+     * @return string
+     */
+    public function getUploadedAvatar()
+    {
+        return $this->uploadedAvatar;
+    }
+
+    /**
+     * Set uploadedAvatar
+     *
+     * @param string $uploadedAvatar
+     */
+    public function setUploadedAvatar($uploadedAvatar)
+    {
+        $this->uploadedAvatar = $uploadedAvatar;
+    }
 
     /**
      * @var string

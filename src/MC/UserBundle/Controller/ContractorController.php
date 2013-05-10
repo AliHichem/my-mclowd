@@ -94,7 +94,7 @@ class ContractorController extends BaseController
             if ($avatarForm->isValid()) {
                 $data = $avatarForm->getData();                
                 $return = $this->get('mc.asset_manager')->upload(
-                    $data->uploadedAvatar, true
+                    $data->getUploadedAvatar(), true
                 );
                 $user->setAvatar($return['object']);                                                
                 $this->persist($user, true);     

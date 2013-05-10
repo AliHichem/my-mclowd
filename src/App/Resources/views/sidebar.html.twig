@@ -39,6 +39,28 @@
     </ul>
 
     <ul class="nav nav-list">
+        <li class="nav-header">My Account</li>
+        <li class="divider"></li>
+        <li><a href="#">Messages</a></li>
+        <li class="divider"></li>
+        <li><a href="#">My Active Tasks</a></li>
+        <li class="divider"></li>
+        <li><a href="#">My Contractors</a></li>
+        <li class="divider"></li>
+        <li><a href="#">My Open Tasks</a></li>
+        <li class="divider"></li>
+        {% if is_granted('ROLE_CLIENT') %}
+            <li><a href="{{ path('client_profile') }}">My Profile</a></li>
+        {% elseif is_granted('ROLE_CONTRACTOR') %}
+            <li><a href="{{ path('contractor_edit') }}">My Profile</a></li>
+        {% endif %}
+        <li class="divider"></li>
+        <li><a href="#">Settings</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Log Out</a></li>
+    </ul>
+
+    <ul class="nav nav-list">
         <li><a href="#">Support</a></li>
         <li class="divider"></li>
         <li><a href="#">Marketplace FAQ's</a></li>

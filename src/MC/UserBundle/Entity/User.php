@@ -180,6 +180,13 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
     protected $qualifications;
 
     /**
+     * @Rest\SerializedName("skills")
+     * @ORM\OneToMany(targetEntity="Skill", mappedBy="user", cascade={"persist"})
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    protected $skills;
+
+    /**
      * Not persisted, used for updates of avatar only
      * @Assert\File(
      *     maxSize="1M",
@@ -469,7 +476,6 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         return $this->avatar;
     }
 
-
     public function setAvatar(Asset $avatar)
     {
         $this->avatar = $avatar;
@@ -529,12 +535,28 @@ abstract class User extends BaseUser implements EncoderAwareInterface, Participa
         $this->qualifications->add($q);
     }
 
-
     public function getQualifications()
     {
         return $this->qualifications;
     }
 
+    public function addSkill(Skill $skill)
+    {
+        $skill->setUser($this);
+        $this->skill->add($skill);
+    }
+
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    public function setSkills(ArrayIterator $skills)
+    {
+        $this->skills = $skills;
+
+        return $this;
+    }
 
     public function serialize()
     {

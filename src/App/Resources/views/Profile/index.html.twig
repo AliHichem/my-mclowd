@@ -1,0 +1,202 @@
+{% extends "::main_layout.html.twig" %}
+
+{% form_theme form _self %}
+
+{% use 'form_div_layout.html.twig' %}
+
+{% block breadcrumbs %}
+    {{ parent() }}
+    <li><span class="divider">&gt;</span> <a href="{{ path('app_profile_index') }}" class="active">Profile</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span12">
+            <h1 class="underlined">My Profile</h1>
+        </div>
+
+        <div class="span3 last-span clearfix">
+            <div class="avatar-wrapper">
+                <div class="avatar-frame">
+                    <img src="{{ asset('bundles/app/images/profile-blank-avatar.jpg') }}" alt="Blank avatar | Upload your photo" class="avatar-image"/>
+                </div>
+                <img src="{{ asset('bundles/app/images/profile-avatar-shadow.png') }}" alt="Avatar shadow" class="avatar-shadow"/>
+                <a href="{{ path('app_profile_edit', { 'id': client.id }) }}" class="special-button-gray pull-right" title="Upload photo">Upload Photo</a>
+            </div>
+        </div>
+
+        <div class="span9">
+            <div class="section-with-ribbon clearfix">
+                <div class="blue-ribbon-wrapper">
+                    <div class="blue-ribbon">
+                        <h2>{{ client.displayName }}</h2>
+                        <a href="{{ path('app_profile_edit', { 'id': client.id }) }}" class="simple-gray-button pull-right" title="Edit your name">Edit</a>
+                    </div>
+                </div>
+
+                <ul class="sub-section">
+                    <li class="even">
+                        <h4>Location</h4>
+                        <form action="" class="profile-form clearfix">
+                            <input type="text" id="location-input" class="solo-input" value="Sydney, NSW">
+                            <p>User of the Mclowd Platform - <span class="blue">Yes</span></p>
+                            <input type="submit" id="location-submit" class="special-button-blue pull-right" value="Confirm" name="confirm" disabled="disabled"/>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="span12 last-span">
+            <div class="section-with-ribbon clearfix">
+                <div class="blue-ribbon-wrapper">
+                    <div class="blue-ribbon">
+                        <h2>My Tasks</h2>
+                    </div>
+                </div>
+
+                <ul class="sub-section">
+                    <li class="odd no-padding">
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="my-tasks-table">
+                            <thead>
+                                <tr>
+                                    <th class="date">Date</th>
+                                    <th class="contractor">Contractor</th>
+                                    <th class="status">Status</th>
+                                    <th class="cost">Cost</th>
+                                    <th class="title">Task Title</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for task in tasks %}
+                                    <tr class="grade-complete">
+                                        <td>{{ task.createdAt|date('d/m/Y') }}</td>
+                                        <td>{{ task.user.fullName }}</td>
+                                        <td>{{ task.isactive }}</td>
+                                        <td>{{ task.budget }}</td>
+                                        <td><a href="#" class="task-title" title="Enter data for my SMSF">{{ task.name }}</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="span5 last-span">
+            <div class="button-wrapper full-width-button">
+                <button type="submit" class="special-button-gray-with-arrow">Save Account</button>
+            </div>
+        </div>
+    </div>
+
+<!--
+<div class="clearfix"></div><br /><br /><br />
+<div id="profile" class="row">
+    <form
+            id="user_profile"
+            action="{{ path('app_profile_index') }}"
+            method="POST" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <input type="submit" value="Save" />
+    </form>
+</div>
+<div id="stats">
+    {{ dump(stats) }}
+</div>
+<div id="tasks">
+    <h3>Tasks</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th><!--Contractor--><!--id/slug</th>
+                <th>Status</th>
+                <th>Cost</th>
+                <th>Task Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ dump(task.timeperiod) }}</td>
+                <td>{{ dump(task.id~'/'~task.slug) }}</td>
+                <td>{{ dump(task.isactive) }}</td>
+                <td>{#{ dump(task.budget.name) }#}</td>
+                <td>{{ dump(task.name) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    {#{ dump(app.user, app.security, app.request, app.session, app.environment, app.debug) }#}
+-->
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts 'bundles/app/js/profile.js.coffee' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".avatar-frame").imgLiquid({fill:true, fadeInTime:250});
+        });
+        $(function() {
+            $(window).bind("debouncedresize", function() {
+                $(".avatar-frame").imgLiquid({fill:true, fadeInTime:250});
+            });
+        });
+
+        $(document).ready(function() {
+            $('#my-tasks-table').dataTable( {
+                "sPaginationType": "full_numbers",
+                "aoColumns": [
+                    { "sType": "datetime-us" },
+                    null,
+                    null,
+                    { "sType": "currency" },
+                    null
+                ]
+            });
+        });
+        $.extend( $.fn.dataTableExt.oStdClasses, {
+            "sWrapper": "dataTables_wrapper form-inline clearfix"
+        });
+    </script>
+{% endblock %}
+
+{% block form_rows %}
+        <div class="span4 image-field">
+            <div class="overlay">
+                
+            </div>
+            <div class="hidden-fields invisible">
+                
+            </div>
+            <div class="btn edit-button">Edit</div>
+        </div>
+        <div class="span8">
+            <div class="name-field">
+                <div class="overlay">
+                    <p>{{ form.vars.data.fullName }}</p>
+                </div>
+                <div class="hidden-fields invisible">
+                    {{ form_row(form['fullName']) }}
+                </div>
+                <div class="btn edit-button">Edit</div>
+            </div>
+            <div class="location-fields">
+                <div class="overlay">
+                    <p>{{ form.vars.data.city }}, {{ form.vars.data.country }}</p>
+                </div>
+                <div class="hidden-fields invisible">
+                    {{ form_row(form['country']) }}
+                    {{ form_row(form['city']) }}
+                </div>
+                <div class="btn edit-button">Edit</div>
+            </div>
+        </div>
+{% endblock form_rows %}

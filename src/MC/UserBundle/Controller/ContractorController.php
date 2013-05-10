@@ -20,6 +20,7 @@ use MC\UserBundle\Form\Type\QualificationFormType;
 use DateTime;
 use MC\UserBundle\Entity\Education;
 use MC\UserBundle\Entity\Employment;
+use MC\UserBundle\Entity\Contractor;
 use MC\UserBundle\Entity\ContractorTask;
 use MC\UserBundle\Entity\Qualification;
 
@@ -31,7 +32,11 @@ use MC\UserBundle\Form\Type\UserSettingFormType;
 // SerializationContext::create()->setGroups(['profileForm'])
 class ContractorController extends BaseController
 {
-    
+    public function common()
+    {
+        $this->em = $this->getDoctrine()->getManager();
+    }
+
     /**
      * @Template()
      */
@@ -46,10 +51,17 @@ class ContractorController extends BaseController
      */
     public function profileAction(Request $request, $id)
     {
-        $contractor = $this->findOr404('MC\UserBundle\Entity\Contractor', ['id' => $id]);
-        return compact('contractor');
-    }
+        $this->common();
+        $contractor = $this->em->getRepository('MCUserBundle:Contractor')->getContractorByIdV1($id);
 
+        if (!$contractor instanceof Contractor) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('MCUserBundle:Contractor:profile.html.twig', array(
+            'contractor' => $contractor,
+        ));
+    }
 
     public function setTemplateAction(Request $request)
     {

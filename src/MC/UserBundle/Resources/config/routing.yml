@@ -13,7 +13,11 @@ client_registration:
 client_settings:
     pattern:  /client/settings
     defaults: { _controller: MCUserBundle:Client:settings }
-    
+
+client_profile:
+    pattern:  /client/profile
+    defaults: { _controller: MCUserBundle:Client:profile }
+
 client_update_fullname:
     pattern:  /client/update-fullname
     defaults: { _controller: MCUserBundle:Client:updateFullname }

@@ -7,7 +7,7 @@ use PUGX\MultiUserBundle\Validator\Constraints\UniqueEntity;
 use MC\UserBundle\Entity\UserSetting;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MC\UserBundle\Entity\ClientRepository")
  * UniqueEntity(fields = "username", targetClass = "MC\UserBundle\Entity\User", message="fos_user.username.already_used")
  * UniqueEntity(fields = "email", targetClass = "MC\UserBundle\Entity\User", message="fos_user.email.already_used")
  */

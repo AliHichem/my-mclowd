@@ -1,42 +1,204 @@
-{% extends '::base.html.twig' %}
+{% extends "::main_layout.html.twig" %}
+
+{% block breadcrumbs %}
+    {{ parent() }}
+    <li><span class="divider">&gt;</span> <a href="{{ path('app_profile_show', { 'id': contractor.id }) }}" class="active">View Contractor Profile</a></li>
+{% endblock %}
 
 {% block content %}
-    <h3>{{contractor}}</h3>
-    {% if contractor.avatar %}
-        <img src="{{ contractor.avatar.path('medium') }}" />
-    {% endif %}
-
-    <p>Name: {{contractor.fullName}}</p>
-    <p>City: {{contractor.city}}</p>
-    <p>Tag line: {{contractor.tagLine}}</p>
-    <p>Overview: {{contractor.overview}}</p>
-
-    <h4>Tasks</h4>
-    {% for task in contractor.contractorTasks %}
-        <div>
-            {{ task.name }} - {{ task.price + '$' }}
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="section-with-ribbon clearfix">
+                <div class="blue-ribbon-wrapper">
+                    <div class="blue-ribbon">
+                        <h2>{{ contractor.displayName }}</h2>
+                        <a href="#" class="special-button-gray-with-arrow pull-right visible-desktop" title="Contact Clark Kent">Contact Contractor</a>
+                    </div>
+                </div>
+                <ul class="sub-section tag-line-wrapper">
+                    <li class="even">
+                        <h2 class="blue">{{contractor.tagLine}}</h2>
+                    </li>
+                </ul>
+            </div>
         </div>
-    {% endfor %}
 
-    <h4>Education</h4>
-    {% for education in contractor.educationHistory %}
-        <div>
-            {{ education.institutionName }} - {{ education.degree }}
+        <div class="span3 last-span clearfix">
+            <div class="avatar-wrapper no-margin-top">
+                <div class="avatar-frame">
+                    {% if contractor.avatar %}
+                        <img src="{{ contractor.avatar.path('medium') }}" />
+                    {% else %}
+                        <img src="{{ asset('bundles/app/images/profile-blank-avatar.jpg') }}" alt="" class="avatar-image"/>
+                    {% endif %}
+                </div>
+                <img src="{{ asset('bundles/app/images/profile-avatar-shadow.png') }}" alt="Avatar shadow" class="avatar-shadow"/>
+                <a href="#" class="special-button-gray pull-right" title="Check out Clark Kent's LinkedIn Profile"><span class="blue">Linked In</span> Profile</a>
+            </div>
         </div>
-    {% endfor %}
 
-    <h4>Employment</h4>
-    {% for employment in contractor.employmentHistory %}
-        <div>
-            {{ employment.companyName }} - {{ employment.position }}
+        <div class="span9">
+            <ul class="contractor-details clearfix">
+                <li>
+                    <h3>Type of Account: <span class="blue">{{ contractor.accountType }}</span></h3>
+                </li>
+                <li>
+                    <h3>Services Offered: <span class="blue">Accounting and Bookkeeping</span></h3>
+                </li>
+                <li>
+                    <h3>Secondary Services Offered: <span class="blue">Auditing and SMSF</span></h3>
+                </li>
+                <li>
+                    <h3>Price: <span class="blue">Minimum $50 per hour</span></h3>
+                </li>
+                <li>
+                    <h3>Location: <span class="blue">{{ contractor.city }}, NSW, Australia</span></h3>
+                </li>
+            </ul>
         </div>
-    {% endfor %}
 
-    <h4>Qualifications</h4>
-    {% for qualification in contractor.qualifications %}
-        <div>
-            {{ qualification.name }}
+        <div class="span12 last-span">
+            <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                    <div class="blue-ribbon">
+                        <h2>Overview</h2>
+                    </div>
+                </div>
+
+                <ul class="sub-section">
+                    <li class="even">
+                        <div class="profile-form clearfix">
+                            <div class="overview">
+                                {{ contractor.overview }}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-    {% endfor %}
 
+        <div class="span12 last-span">
+            <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                    <div class="blue-ribbon">
+                        <h2>Skills</h2>
+                    </div>
+                </div>
+
+                <ul class="sub-section">
+                    <li class="odd">
+                        <ul class="attributes-list collapse in" id="skills-list">
+                            {% for skill in contractor.skills %}
+                                <li>
+                                    <h4>{{ skill.name }}</h4>
+                                    <div class="attribute-description">
+                                        {{ skill.description }}
+                                    </div>
+                                </li>
+                                {% if not loop.last %}<li class="separator"></li>{% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="span12 last-span">
+            <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                    <div class="blue-ribbon">
+                        <h2>Education</h2>
+                    </div>
+                </div>
+
+                <ul class="sub-section">
+                    <li class="even">
+                        <ul class="attributes-list collapse in" id="education-list">
+                            {% for educationHistory in contractor.educationHistory %}
+                                <li>
+                                    <h4>{{ educationHistory.institutionName }}</h4>
+                                    <div class="attribute-description">
+                                        <p>{{ educationHistory.startMonth }}-{{ educationHistory.startYear }} - {{ educationHistory.endMonth }}-{{ educationHistory.endYear }}</p>
+                                    </div>
+                                </li>
+                                {% if not loop.last %}<li class="separator"></li>{% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="span12 last-span">
+            <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                    <div class="blue-ribbon">
+                        <h2>License and Qualifications</h2>
+                    </div>
+                </div>
+
+                <ul class="sub-section">
+                    <li class="odd">
+                        <ul class="attributes-list collapse in" id="license-list">
+                            {% for qualification in contractor.qualifications %}
+                                <li>
+                                    <h4>{{ qualification.name }}</h4>
+                                </li>
+                                {% if not loop.last %}<li class="separator"></li>{% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="span12 last-span">
+            <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                    <div class="blue-ribbon">
+                        <h2>Employment</h2>
+                    </div>
+                </div>
+
+                <ul class="sub-section">
+                    <li class="even">
+                        <ul class="attributes-list collapse in" id="employment-list">
+                            {% for employmentHistory in contractor.employmentHistory %}
+                                <li>
+                                    <h4>{{ employmentHistory.companyName }}</h4>
+                                    <div class="attribute-description">
+                                        <p><span class="suitcase icon"></span>{{ employmentHistory.position }}</p>
+                                        <p><span class="calendar icon"></span>{{ employmentHistory.startMonth }}-{{ employmentHistory.startYear }} - {{ employmentHistory.endMonth }}-{{ employmentHistory.endYear }}</p>
+                                        <p>{{ employmentHistory.description }}</p>
+                                    </div>
+                                </li>
+                                {% if not loop.last %}<li class="separator"></li>{% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="span5 last-span">
+            <div class="button-wrapper full-width-button">
+                <button type="submit" class="special-button-gray-with-arrow">Contact Contractor</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".avatar-frame").imgLiquid({fill:true, fadeInTime:250});
+        });
+        $(function() {
+            $(window).bind("debouncedresize", function() {
+                $(".avatar-frame").imgLiquid({fill:true, fadeInTime:250});
+            });
+        });
+    </script>
 {% endblock %}

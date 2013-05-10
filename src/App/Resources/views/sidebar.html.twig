@@ -49,7 +49,11 @@
         <li class="divider"></li>
         <li><a href="#">My Open Tasks</a></li>
         <li class="divider"></li>
-        <li><a href="{{ path('app_profile_index') }}">My Profile</a></li>
+        {% if is_granted('ROLE_CLIENT') %}
+            <li><a href="{{ path('app_profile_index') }}">My Profile</a></li>
+        {% elseif is_granted('ROLE_CONTRACTOR') %}
+            <li><a href="{{ path('contractor_edit') }}">My Profile</a></li>
+        {% endif %}
         <li class="divider"></li>
         <li><a href="#">Settings</a></li>
         <li class="divider"></li>

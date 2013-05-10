@@ -1,6 +1,414 @@
-{% extends '::base.html.twig' %}
+{% extends "::main_layout.html.twig" %}
+
+{% block breadcrumbs %}
+    {{ parent() }}
+    <li><span class="divider">&gt;</span> <a href="{{ path('contractor_edit') }}" class="active">Edit Profile</a></li>
+{% endblock %}
 
 {% block content %}
+    <div class="row-fluid">
+        <div class="span12">
+            <h1 class="underlined">Your profile</h1>
+            <p class="addon"><span class="attention icon"></span>Items with <span class="red">red star *</span> are mandatory!</p>
+        </div>
+
+            <div class="span3 last-span clearfix">
+              <div class="avatar-wrapper">
+                <div class="avatar-frame">
+                  <img src="images/clark-kent-vertical.png" alt="Clark Kent" class="avatar-image"/>
+                </div>
+                <img src="images/profile-avatar-shadow.png" alt="Avatar shadow" class="avatar-shadow"/>
+                <a href="#" class="special-button-gray pull-right" title="Upload photo">Upload new Photo</a>
+              </div>              
+            </div> 
+            
+            <div class="span9">
+              <div class="section-with-ribbon clearfix"><!-- /////////// Start Account Details /////////// -->
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Clark Kent</h2>
+                    <a href="#" class="simple-gray-button pull-right" title="Edit your name">Edit</a>
+                  </div>
+                </div>
+                
+                <ul class="sub-section">
+                  <li class="even" id="tag-line">
+                    <form action="" class="profile-form clearfix">
+                      <input type="text" id="tag-line-input" name="tag-line" value="I am a professional independent accountant from Sydney." />
+                      <input type="submit" id="tag-line-submit" class="special-button-blue pull-right" value="Confirm" name="confirm" disabled="disabled"/>
+                    </form>
+                  </li>
+                  
+                  <li class="odd">
+                    <h4>Type of Account<span class="red">*</span></h4>
+                    <form action="" class="profile-form clearfix">
+                      <div class="radio-wrapper">
+                        <input type="radio" class="account-type-radio" name="account-type" value="individual" checked/> Individual  
+                      </div>
+                      
+                      <div class="radio-wrapper">
+                        <input type="radio" class="account-type-radio" name="account-type" value="business"/> Business
+                      </div>
+                      
+                      <input type="submit" id="account-type-submit" class="special-button-blue pull-right" value="Confirm" name="confirm" disabled="disabled"/>
+                    </form>
+                  </li>
+                </ul>
+              </div>      
+            </div> 
+            
+            <div class="span12 last-span">
+              <div id="profile-details-2" class="section-with-ribbon no-margin-top clearfix">
+                <ul class="sub-section">
+                  <li class="even">
+                    <h4>Services Offered<span class="red">*</span></h4>
+                    <form action="" class="profile-form clearfix">
+                      <ul class="services-list">
+                        <li><input type="checkbox" class="service-checkbox" checked>Accounting</li>
+                        <li><input type="checkbox" class="service-checkbox">Audit</li>
+                        <li><input type="checkbox" class="service-checkbox" checked>Bookkeeping</li>
+                        <li><input type="checkbox" class="service-checkbox">Concierge</li>
+                        <li><input type="checkbox" class="service-checkbox">Data Entry</li>
+                        <li><input type="checkbox" class="service-checkbox">Tax</li>
+                      </ul> 
+                                           
+                      <input type="submit" id="service-offered-submit" class="special-button-blue pull-right" value="Confirm" name="confirm" disabled="disabled"/>
+                    </form>
+                  </li>
+                  
+                  <li class="odd">
+                    <h4>Pricing<span class="red">*</span></h4>
+                    <form action="" class="profile-form clearfix">
+                      <div class="minimum-price-wrapper clearfix">
+                        <div class="left">
+                          <input type="checkbox" id="minimum-per-hour-checkbox" class="price-checkbox" checked/> Minimum per hour
+                        </div>
+                        <input type="text" placeholder="Enter amount in US dollars" class="minimum-per-hour-input left" value="$50"/>
+                      </div>  
+                        
+                      <div class="separator"></div>
+                      
+                      <div class="task-price-wrapper clearfix">
+                        <div class="span12">
+                          <input type="checkbox" id="task-pricing-checkbox" class="price-checkbox"/> Set price for tasks
+                        </div>
+                        <input type="text" placeholder="Enter a task" class="task-input left" disabled/>
+                        <span class="left">From:</span>
+                        <input type="text" placeholder="Enter amount in US dollars" class="task-price-input left" disabled/>
+                      </div>
+                      
+                      <div class="separator"></div>
+                      
+                      <input type="checkbox" id="no-price-checkbox" class="price-checkbox"/> Do not set price
+                      
+                      <input type="submit" id="pricing-submit" class="special-button-blue pull-right" value="Confirm" name="confirm" disabled="disabled"/>
+                    </form>
+                  </li>
+                  
+                  <li class="even">
+                    <h4>Location<span class="red">*</span></h4>
+                    <form action="" class="profile-form clearfix">
+                      <input type="text" id="location-input" value="Sydney, NSW">                                            
+                      <input type="submit" id="location-submit" class="special-button-blue pull-right" value="Confirm" name="confirm" disabled="disabled"/>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- /////////// End Account Details /////////// -->
+            
+            <div class="span12 last-span"><!-- /////////// Start Overview /////////// -->
+              <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Overview<span class="red">*</span></h2>
+                  </div>
+                </div>
+                
+                <ul class="sub-section">
+                  <li class="odd">
+                    <div class="profile-form clearfix">
+                      <div class="overview">
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque. Cras mollis hendrerit felis. Ut laoreet est et libero feugiat feugiat. In hac habitasse platea dictumst. Mauris ut facilisis augue.   
+                        </p>
+                        <p>
+                          Sed quam mauris, porta non ultricies et, commodo vitae magna. Superman cursus dignissim lorem eu congue. Cum sociis natoque penatibus et magnis dis parturient montes, kriptonite ridiculus mus.
+                        </p>
+                      </div> 
+                      <a href="#" class="simple-gray-button floating-edit-button pull-right" title="Edit your description">Edit</a>
+                      
+                      <div class="separator"></div>
+                                                                      
+                      <input type="submit" id="overview-submit" class="special-button-blue pull-right" value="Confirm" name="confirm" disabled="disabled"/>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- /////////// End Overview /////////// -->
+            
+            <div class="span12 last-span"><!-- /////////// Start Skills /////////// -->
+              <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Skills</h2>
+                    <button type="button" id="remove-skills" class="remove-block pull-right" data-toggle="collapse" data-target="#skills-list"><span class="remove icon"></span><span class="add icon"></span></button>
+                  </div>
+                </div>
+                
+                <ul class="sub-section">
+                  <li class="even">
+                    <ul class="attributes-list collapse in" id="skills-list">
+                      <li>
+                        <h4>Accounting</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this skill">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this skill">Edit</a>
+                        </div>
+                        <div class="attribute-description">
+                          <ul>
+                            <li>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                            <li>
+                              Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.
+                            </li>
+                            <li>
+                              Cras mollis hendrerit felis. Ut laoreet est et libero feugiat feugiat. In hac habitasse platea dictumst.
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Bookkeeping</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this skill">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this skill">Edit</a>
+                        </div>
+                        <div class="attribute-description">
+                          <ul>
+                            <li>
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </li>
+                            <li>
+                              Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.
+                            </li>
+                            <li>
+                              Cras mollis hendrerit felis. Ut laoreet est et libero feugiat feugiat. In hac habitasse platea dictumst.
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Auditing</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this skill">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this skill">Edit</a>
+                        </div>
+                        <div class="attribute-description">
+                          <p>Nam convallis enim id leo volutpat non rutrum purus porta. Ut sed neque dolor, et ullamcorper turpis. Nunc pulvinar dignissim nisl, vel luctus libero pharetra nec. Nam mattis ligula pellentesque enim interdum commodo. Phasellus aliquam condimentum nibh vitae luctus.</p>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Finance</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this skill">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this skill">Edit</a>
+                        </div>
+                        <div class="attribute-description">
+                          <p>Duis sit amet libero at est aliquet condimentum. Maecenas id tempor neque. Morbi tempus dolor sed dui venenatis posuere. Proin lobortis nisl ac ante faucibus iaculis. Sed vestibulum sollicitudin porta. Nullam a nisl id lectus aliquet fringilla. Etiam malesuada consectetur purus in gravida.
+                          Praesent ac lectus eget sem congue blandit ut quis elit. Curabitur nec ultrices nisl. Praesent viverra nulla nisl. </p>
+                        </div>
+                      </li>
+                    </ul>
+                    
+                    <div class="clearfix">
+                      <div class="separator"></div>
+                      
+                      <a href="#" class="simple-gray-button left after-separator" title="Add another skill">Add another skill</a>
+                                                                                                                                                        
+                      <input type="submit" id="education-submit" class="special-button-blue pull-right after-separator" value="Confirm" name="confirm" disabled="disabled"/>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- /////////// End Skills /////////// -->
+            
+            <div class="span12 last-span"><!-- /////////// Start Education /////////// -->
+              <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Education</h2>
+                    <button type="button" id="remove-education" class="remove-block pull-right" data-toggle="collapse" data-target="#education-list"><span class="remove icon"></span><span class="add icon"></span></button>
+                  </div>
+                </div>
+                
+                <ul class="sub-section">
+                  <li class="odd">
+                    <ul class="attributes-list collapse in" id="education-list">
+                      <li>
+                        <h4>Diploma, Advanced Dipl. of Accounting OTAN</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this education">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this education">Edit</a>
+                        </div>
+                        <div class="attribute-description">
+                          <p>February 2011 - May 2012</p>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Doctorate, Environmental engineering University of Newcastle</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this education">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this education">Edit</a>
+                        </div>
+                        <div class="attribute-description">
+                          <p>February 1998 - May 2003</p>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Bachelors, Science and Mathematics University of Newcastle</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this education">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this education">Edit</a>
+                        </div>
+                        <div class="attribute-description">
+                          <p>March 1993 - Nvember 1996</p>
+                        </div>
+                      </li>
+                    </ul>
+                    
+                    <div class="clearfix">
+                      <div class="separator"></div>
+                      
+                      <a href="#" class="simple-gray-button left after-separator" title="Add another education">Add another education</a>
+                                                                                                                                                        
+                      <input type="submit" id="education-submit" class="special-button-blue pull-right after-separator" value="Confirm" name="confirm" disabled="disabled"/>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- /////////// End Education /////////// -->
+            
+            <div class="span12 last-span"><!-- /////////// Start License /////////// -->
+              <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>License and Qualifications</h2>
+                    <button type="button" id="remove-license" class="remove-block pull-right" data-toggle="collapse" data-target="#license-list"><span class="remove icon"></span><span class="add icon"></span></button>
+                  </div>
+                </div>
+                
+                <ul class="sub-section">
+                  <li class="even">
+                    <ul class="attributes-list collapse in" id="license-list">
+                      <li>
+                        <h4>Chartered Accountant (CA)</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this license">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this license">Edit</a>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Association of Chartered Certified Accountants (ACCA)</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this license">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this license">Edit</a>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Bachedlor of Accountancy (Bacc)</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this license">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this license">Edit</a>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Bachedlor of Science in Applied Accounting</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this license">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this license">Edit</a>
+                        </div>
+                      </li>
+                    </ul>
+                    
+                    <div class="clearfix">
+                      <div class="separator"></div>
+                      
+                      <a href="#" class="simple-gray-button left after-separator" title="Add another license">Add another license</a>
+                                                                                                                                                        
+                      <input type="submit" id="license-submit" class="special-button-blue pull-right after-separator" value="Confirm" name="confirm" disabled="disabled"/>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- /////////// End License /////////// -->
+            
+            <div class="span12 last-span"><!-- /////////// Start Employment /////////// -->
+              <div class="section-with-ribbon no-margin-top clearfix">
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Employment</h2>
+                    <button type="button" id="remove-employment" class="remove-block pull-right" data-toggle="collapse" data-target="#employment-list"><span class="remove icon"></span><span class="add icon"></span></button>
+                  </div>
+                </div>
+                
+                <ul class="sub-section">
+                  <li class="odd">
+                    <ul class="attributes-list collapse in" id="employment-list">
+                      <li>
+                        <h4>Sydney Accountants - Sydney</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this employment">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this employment">Edit</a>
+                        </div>
+                        <div class="attribute-description">
+                          <p><span class="suitcase icon"></span>Chartered Accountant (CA)</p>
+                          <p><span class="calendar icon"></span>May 2010 - November 2012</p>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.</p>
+                        </div>
+                      </li>
+                      <li class="separator"></li>
+                      <li>
+                        <h4>Village Accountants - Village</h4>
+                        <div class="buttons pull-right">
+                          <a href="#" class="simple-gray-button pull-right" title="Remove this employment">Remove</a>
+                          <a href="#" class="simple-gray-button pull-right" title="Edit this employment">Edit</a>
+                        </div>
+                        <div class="attribute-description">
+                          <p><span class="suitcase icon"></span>Chartered Accountant (CA)</p>
+                          <p><span class="calendar icon"></span>May 2010 - November 2012</p>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin volutpat porttitor arcu, at egestas urna fringilla nec. Sed feugiat nisi a diam aliquet scelerisque.</p>
+                        </div>
+                      </li>
+                    </ul>
+                    
+                    <div class="clearfix">
+                      <div class="separator"></div>
+                      
+                      <a href="#" class="simple-gray-button left after-separator" title="Add more employment">Add more employment</a>
+                                                                                                                                                        
+                      <input type="submit" id="education-submit" class="special-button-blue pull-right after-separator" value="Confirm" name="confirm" disabled="disabled"/>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div><!-- /////////// End Employment /////////// -->
+            
+            <div class="span5 last-span">
+              <div class="button-wrapper full-width-button">
+                  <button type="submit" class="special-button-gray-with-arrow">Save Profile</button>
+                </div>
+            </div>
+          </div>              
+        
 
 <h3>{{ user }}</h3>
 

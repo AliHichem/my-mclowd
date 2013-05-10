@@ -150,88 +150,52 @@
             </div>
 
             <div class="span12 last-span">
-              <div class="section-with-ribbon no-margin-top clearfix">
-                <div class="blue-ribbon-wrapper">
-                  <div class="blue-ribbon">
-                    <h2>Education</h2>
-                    <button type="button" id="remove-education" class="remove-block pull-right" data-toggle="collapse" data-target="#education-list"><span class="remove icon"></span><span class="add icon"></span></button>
-                  </div>
-                </div>
-                <ul class="sub-section">
-                  <li class="odd">
-                    <ul class="attributes-list collapse in" id="education-list">
-                      <li>
-                        <h4>Diploma, Advanced Dipl. of Accounting OTAN</h4>
-                        <div class="buttons pull-right">
-                          <a href="#" class="simple-gray-button pull-right" title="Remove this education">Remove</a>
-                          <a href="#" class="simple-gray-button pull-right" title="Edit this education">Edit</a>
+                <div class="section-with-ribbon no-margin-top clearfix">
+                    <div class="blue-ribbon-wrapper">
+                        <div class="blue-ribbon">
+                            <h2>Education</h2>
+                            <button type="button" id="remove-education" class="remove-block pull-right" data-toggle="collapse" data-target="#education-list"><span class="remove icon"></span><span class="add icon"></span></button>
                         </div>
-                        <div class="attribute-description">
-                          <p>February 2011 - May 2012</p>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Doctorate, Environmental engineering University of Newcastle</h4>
-                        <div class="buttons pull-right">
-                          <a href="#" class="simple-gray-button pull-right" title="Remove this education">Remove</a>
-                          <a href="#" class="simple-gray-button pull-right" title="Edit this education">Edit</a>
-                        </div>
-                        <div class="attribute-description">
-                          <p>February 1998 - May 2003</p>
-                        </div>
-                      </li>
-                      <li class="separator"></li>
-                      <li>
-                        <h4>Bachelors, Science and Mathematics University of Newcastle</h4>
-                        <div class="buttons pull-right">
-                          <a href="#" class="simple-gray-button pull-right" title="Remove this education">Remove</a>
-                          <a href="#" class="simple-gray-button pull-right" title="Edit this education">Edit</a>
-                        </div>
-                        <div class="attribute-description">
-                          <p>March 1993 - Nvember 1996</p>
-                        </div>
-                      </li>
-                    </ul>
-                    <div class="clearfix">
-                      <div class="separator"></div>
-                      <a href="#" class="simple-gray-button left after-separator" title="Add another education">Add another education</a>
-                      <input type="submit" id="education-submit" class="special-button-blue pull-right after-separator" value="Confirm" name="confirm" disabled="disabled"/>
                     </div>
-                  </li>
-                </ul>
-              </div>
+                    <form id="education-form" ng-submit="addEducation()">
+                        <div><input placeholder="Institution Name" ng-model="newEducation.institutionName" /></div>
+                        <div><input placeholder="Name and Type of Degree" ng-model="newEducation.degree" /></div>
+                        <div><textarea ng-model="newEducation.description" placeholder="Description (optional)"></textarea></div>
+                        <div>
+                            Start:
+                            <select ng-model="newEducation.startMonth" ng-options="key as value for (key , value) in months"></select>
+                            <select ng-model="newEducation.startYear" ng-options="key as value for (key , value) in years"></select>
+                        </div>
+                        <div>
+                            End:
+                            <select ng-model="newEducation.endMonth" ng-options="key as value for (key , value) in months"></select>
+                            <select ng-model="newEducation.endYear" ng-options="key as value for (key , value) in years"></select>
+                        </div>
+
+                        <div class="clearfix">
+                            <div class="separator"></div>
+                            <input type="submit" id="education-submit" class="special-button-blue pull-right after-separator" value="Confirm" name="confirm" />
+                        </div>
+                    </form>
+                    <ul class="sub-section">
+                        <li class="odd">
+                            <ul class="attributes-list collapse in" id="education-list">
+                                <li ng-repeat="education in data.educationHistory">
+                                    <h4>{{ education.institutionName }}</h4>
+                                    <div class="buttons pull-right">
+                                        <button class="btn btn-danger" ng-click="removeEducation(education)">Remove</button>
+                                    </div>
+                                    <div class="attribute-description">
+                                        <p>{{ education.startMonth }}-{{ education.startYear }} - {{ education.endMonth }}-{{ education.endYear }}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-    <div class="well">
-        <h5>Education</h5>
-        <form id="education-form" ng-submit="addEducation()">
-            <div><input placeholder="Institution Name" ng-model="newEducation.institutionName" /></div>
-            <div><input placeholder="Name and Type of Degree" ng-model="newEducation.degree" /></div>
-            <div><textarea ng-model="newEducation.description" placeholder="Description (optional)"></textarea></div>
 
-           
-            <div>
-                Start:
-                <select ng-model="newEducation.startMonth" ng-options="key as value for (key , value) in months"></select>
-                <select ng-model="newEducation.startYear" ng-options="key as value for (key , value) in years"></select>
-            </div>
-            <div>
-                End:
-                <select ng-model="newEducation.endMonth" ng-options="key as value for (key , value) in months"></select>
-                <select ng-model="newEducation.endYear" ng-options="key as value for (key , value) in years"></select>
-            </div>
-
-            <input type="submit" value="Add education" />
-        </form>
-
-        <ul>
-            <li ng-repeat="education in data.educationHistory">
-                {{ education.institutionName }} <small>({{ education.degree }})</small> 
-                <button class="btn btn-danger" ng-click="removeEducation(education)">Remove</button>
-            </li>
-        </ul>
-    </div>
 
 
     <div class="well">

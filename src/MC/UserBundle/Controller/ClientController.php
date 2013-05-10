@@ -14,6 +14,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use MC\UserBundle\Form\Type\UserSettingFormType;
+use MC\UserBundle\Entity\Client;
 
 use DateTime;
 
@@ -22,6 +23,45 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ClientController extends BaseController
 {
+    public function common()
+    {
+        $this->em = $this->getDoctrine()->getManager();
+    }
+
+    /**
+     * @Secure(roles="ROLE_CLIENT")
+     */
+    public function profileAction()
+    {
+        $client = $this->getUser();
+        if (!$client instanceof Client) {
+            throw $this->createNotFoundException();
+        }
+        $form = $this->createBoundObjectForm($client, 'profile');
+        if ($form->isBound() && $form->isValid()) {
+            $this->getEntityManager()->flush();
+            $this->addFlash('success', 'Profile has been updated');
+            return $this->redirectToRoute('client_profile');
+        }
+        $taskRepo = $this->get('app.entity.task_repository');
+        /* @var $taskRepo \Doctrine\ORM\EntityRepository */
+        $tasks = $taskRepo->findBy(['user' => $client]);
+        $stats = NULL;
+/*
+        return [
+            'client' => $client,
+            'form' => $form->createView(),
+            'stats' => $stats,
+            'tasks' => $tasks,
+        ];
+*/
+        return $this->render('MCUserBundle:Client:profile.html.twig', array(
+            'client' => $client,
+            'form' => $form->createView(),
+            'stats' => $stats,
+            'tasks' => $tasks,
+        ));
+    }
 
     public function setTemplateAction(Request $request)
     {

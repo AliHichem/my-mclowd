@@ -83,7 +83,7 @@ class Employment
     protected $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="employment_history")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="employmentHistory")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;

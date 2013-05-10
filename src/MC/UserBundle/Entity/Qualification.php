@@ -33,7 +33,7 @@ class Qualification
 
     
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="contractorTasks")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="qualifications")
      * @ORM\JoinColumn(name="contractor_id", referencedColumnName="id")
      */
     protected $user;

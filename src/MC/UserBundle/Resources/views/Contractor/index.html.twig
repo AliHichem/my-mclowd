@@ -1,10 +1,278 @@
-{% extends '::base.html.twig' %}
+{% extends '::main_layout.html.twig' %}
 
 {% block content %}
-    <h3>Listing contractors</h3>
+    
+
+              <div id="my-active-tasks" class="section-with-ribbon clearfix"><!-- /////////// Start My Active Tasks /////////// -->
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>My active tasks</h2>
+                  </div>
+                </div>                
+                
+                <ul class="sub-section"><!-- /////////// Start My Active Tasks List /////////// -->
+                  <li class="even"><!-- /////////// Start Active Task Even /////////// -->
+                    <h3 class="task-title">
+                      <a href="#" title="View Task"><span class="blue">Assistance with entering data</span></a>
+                    </h3>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="info clearfix">
+                      <div class="contractor">
+                        <span class="figure-single icon"></span><b>Client:</b> <a class="blue" href="#" title="View tasks assigned to John Smith">John Smith</a>
+                      </div>
+                      
+                      <div class="posted">
+                        <span class="calendar icon"></span><b>Started:</b> 21/03/2012 &nbsp;&nbsp;|&nbsp;&nbsp; <b>Deadline:</b> 21/05/2012
+                      </div>
+                      
+                      <a href="#" class="simple-green-button pull-right" title="View Task"><span class="task icon"></span>View task</a>
+                    </div>
+                  </li><!-- /////////// End Active Task Even /////////// -->
+                  
+                  <li class="odd"><!-- /////////// Start Active Task Odd /////////// -->
+                    <h3 class="task-title">
+                      <a href="#" title="View Task"><span class="blue">Assistance with entering data for this long task title that occupies two lines but still looks nice</span></a>
+                    </h3>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="info clearfix">
+                      <div class="contractor">
+                        <span class="figure-single icon"></span><b>Client:</b> <a class="blue" href="#" title="View tasks assigned to Dave Stewart">Dave Stewart</a>
+                      </div>
+                      
+                      <div class="posted">
+                        <span class="calendar icon"></span><b>Started:</b> 21/03/2012 &nbsp;&nbsp;|&nbsp;&nbsp; <b>Deadline:</b> 21/05/2012
+                      </div>
+                      
+                      <a href="#" class="simple-green-button pull-right" title="View Task"><span class="task icon"></span>View task</a>
+                    </div>
+                  </li><!-- /////////// End Active Task Odd /////////// -->
+                  
+                  <li class="even"><!-- /////////// Start Active Task Even /////////// -->
+                    <h3 class="task-title">
+                      <a href="#" title="View Task"><span class="blue">Help with my SMSF</span></a>
+                    </h3>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="info clearfix">
+                      <div class="contractor">
+                        <span class="figure-single icon"></span><b>Client:</b> <a class="blue" href="#" title="View tasks assigned to Bob Dylan">Bob Dylan</a>
+                      </div>
+                      
+                      <div class="posted">
+                        <span class="calendar icon"></span><b>Started:</b> 21/03/2012 &nbsp;&nbsp;|&nbsp;&nbsp; <b>Deadline:</b> 21/05/2012
+                      </div>
+                      
+                      <a href="#" class="simple-green-button pull-right" title="View Task"><span class="task icon"></span>View task</a>
+                    </div>
+                  </li><!-- /////////// End Active Task Even /////////// -->
+                </ul><!-- /////////// End Active Tasks List /////////// -->
+                
+                <div class="special-button-holder">
+                  <a href="#" class="special-button-blue-with-arrow">View more</a>
+                </div>
+              </div><!-- /////////// End My Active Tasks /////////// -->
+
+              <div id="recommended-tasks" class="section-with-ribbon clearfix"><!-- /////////// Start Recommended Tasks /////////// -->
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Recommended tasks</h2>
+                  </div>
+                </div>                
+                
+                <ul class="sub-section"><!-- /////////// Start Recommended Tasks List /////////// -->
+                  <li class="even"><!-- /////////// Start Recommended Task Even /////////// -->
+                    <h3 class="task-title">
+                      <a href="#" title="View Task"><span class="blue">Accounting:</span> <i>I need someone to look over my account for the past year</i></a>
+                    </h3>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="info clearfix">
+                      <div class="details">
+                        <span class="payment icon"></span><b>Hourly</b> - Estimated budget: <b>$21 per hour</b>
+                      </div>
+                      
+                      <div class="posted">
+                        <span class="calendar icon"></span><b>Posted on</b> 21/03/2012 by <a href="#" class="posted-by" title="View all tasks posted by Joe Bloggs">Joe Bloggs</a>
+                      </div>
+                      
+                      <a href="#" class="simple-green-button pull-right" title="View Task"><span class="task icon"></span>View task</a>
+                    </div>
+                  </li><!-- /////////// End Recommended Task Even /////////// -->
+                  
+                  <li class="odd"><!-- /////////// Start Recommended Task Odd /////////// -->
+                    <h3 class="task-title">
+                      <a href="#" title="View Task"><span class="blue">Bookkeeping:</span> <i>I need help on my bookkeeping for my SMSF</i></a>
+                    </h3>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="info clearfix">
+                      <div class="details">
+                        <span class="payment icon"></span><b>Fixed Budget</b> - Estimated budget: <b>$850</b>
+                      </div>
+                      
+                      <div class="posted">
+                        <span class="calendar icon"></span><b>Posted on</b> 19/03/2012 by <a href="#" class="posted-by" title="View all tasks posted by Joe Bloggs">Joe Bloggs</a>
+                      </div>
+                      
+                      <a href="#" class="simple-green-button pull-right" title="View Task"><span class="task icon"></span>View task</a>
+                    </div>
+                  </li><!-- /////////// End Recommended Task Odd /////////// -->
+                  
+                  <li class="even"><!-- /////////// Start Recommended Task Even /////////// -->
+                    <h3 class="task-title">
+                      <a href="#" title="View Task"><span class="blue">Data Entry:</span> <i>I need someone to look over my account for the past year</i></a>
+                    </h3>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="info clearfix">
+                      <div class="details">
+                        <span class="payment icon"></span><b>Hourly</b> - Estimated budget: <b>$15 per hour</b>
+                      </div>
+                      
+                      <div class="posted">
+                        <span class="calendar icon"></span><b>Posted on</b> 02/03/2012 by <a href="#" class="posted-by" title="View all tasks posted by Joe Bloggs">Joe Bloggs</a>
+                      </div>
+                      
+                      <a href="#" class="simple-green-button pull-right" title="View Task"><span class="task icon"></span>View task</a>
+                    </div>
+                  </li><!-- /////////// End Recommended Task Even /////////// -->
+                  
+                  <li class="odd"><!-- /////////// Start Recommended Task Odd /////////// -->
+                    <h3 class="task-title">
+                      <a href="#" title="View Task"><span class="blue">Financial Planning:</span> <i>I just started a family business and I need someone with a lot of experience in financial planning to ...</i></a>
+                    </h3>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="info clearfix">
+                      <div class="details">
+                        <span class="payment icon"></span><b>Fixed Budget</b> - Estimated budget: <b>$850</b>
+                      </div>
+                      
+                      <div class="posted">
+                        <span class="calendar icon"></span><b>Posted on</b> 19/03/2012 by <a href="#" class="posted-by" title="View all tasks posted by Joe Bloggs">Joe Bloggs</a>
+                      </div>
+                      
+                      <a href="#" class="simple-green-button pull-right" title="View Task"><span class="task icon"></span>View task</a>
+                    </div>
+                  </li><!-- /////////// End Recommended Task Odd /////////// -->
+                  
+                  <li class="even"><!-- /////////// Start Recommended Task Even /////////// -->
+                    <h3 class="task-title">
+                      <a href="#" title="View Task"><span class="blue">Accounting:</span> <i>I need someone to look over my account for the past year</i></a>
+                    </h3>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="info clearfix">
+                      <div class="details">
+                        <span class="payment icon"></span><b>Hourly</b> - Estimated budget: <b>$21 per hour</b>
+                      </div>
+                      
+                      <div class="posted">
+                        <span class="calendar icon"></span><b>Posted on</b> 21/03/2012 by <a href="#" class="posted-by" title="View all tasks posted by Joe Bloggs">Joe Bloggs</a>
+                      </div>
+                      
+                      <a href="#" class="simple-green-button pull-right" title="View Task"><span class="task icon"></span>View task</a>
+                    </div>
+                  </li><!-- /////////// End Recommended Task Even /////////// -->
+                </ul><!-- /////////// End Recommended Tasks List /////////// -->
+                
+                <div class="special-button-holder">
+                  <a href="#" class="special-button-blue-with-arrow" title="View more recommended tasks">View more</a>
+                </div>
+              </div><!-- /////////// End Recommended Tasks /////////// -->
+              
+              <div id="invited tasks" class="section-with-ribbon clearfix"><!-- /////////// Start Invited Tasks /////////// -->
+                <div class="blue-ribbon-wrapper">
+                  <div class="blue-ribbon">
+                    <h2>Invited Tasks</h2>
+                  </div>
+                </div>                
+                
+                <ul class="sub-section"><!-- /////////// Start Invited Tasks List /////////// -->
+                  <li class="even"><!-- /////////// Start Invited Task Even /////////// -->
+                    <h3 class="task-title">
+                      <a href="#" title="View Task"><span class="blue">Accounting:</span> <i>I need someone to look over my account for the past year</i></a>
+                    </h3>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="info clearfix">
+                      <div class="details">
+                        <span class="payment icon"></span><b>Hourly</b> - Estimated budget: <b>$21 per hour</b>
+                      </div>
+                      
+                      <div class="posted">
+                        <span class="calendar icon"></span><b>Posted on</b> 21/03/2012 by <a href="#" class="posted-by" title="View all tasks posted by Joe Bloggs">Joe Bloggs</a>
+                      </div>
+                      
+                      <a href="#" class="simple-green-button pull-right" title="View Task"><span class="task icon"></span>View task</a>
+                    </div>
+                  </li><!-- /////////// End Invited Task Even /////////// -->
+                  
+                  <li class="odd"><!-- /////////// Start Invited Task Odd /////////// -->
+                    <h3 class="task-title">
+                      <a href="#" title="View Task"><span class="blue">Bookkeeping:</span> <i>I need help on my bookkeeping for my SMSF</i></a>
+                    </h3>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="info clearfix">
+                      <div class="details">
+                        <span class="payment icon"></span><b>Fixed Budget</b> - Estimated budget: <b>$850</b>
+                      </div>
+                      
+                      <div class="posted">
+                        <span class="calendar icon"></span><b>Posted on</b> 19/03/2012 by <a href="#" class="posted-by" title="View all tasks posted by Joe Bloggs">Joe Bloggs</a>
+                      </div>
+                      
+                      <a href="#" class="simple-green-button pull-right" title="View Task"><span class="task icon"></span>View task</a>
+                    </div>
+                  </li><!-- /////////// End Invited Task Odd /////////// -->
+                  
+                  <li class="even"><!-- /////////// Start Invited Task Even /////////// -->
+                    <h3 class="task-title">
+                      <a href="#" title="View Task"><span class="blue">Data Entry:</span> <i>I need someone to look over my account for the past year</i></a>
+                    </h3>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="info clearfix">
+                      <div class="details">
+                        <span class="payment icon"></span><b>Hourly</b> - Estimated budget: <b>$15 per hour</b>
+                      </div>
+                      
+                      <div class="posted">
+                        <span class="calendar icon"></span><b>Posted on</b> 02/03/2012 by <a href="#" class="posted-by" title="View all tasks posted by Joe Bloggs">Joe Bloggs</a>
+                      </div>
+                      
+                      <a href="#" class="simple-green-button pull-right" title="View Task"><span class="task icon"></span>View task</a>
+                    </div>
+                  </li><!-- /////////// End Invited Task Even /////////// -->
+                </ul>
+                
+                <div class="special-button-holder">
+                  <a href="#" class="special-button-blue-with-arrow" title="View more invited tasks">View more</a>
+                </div>
+              </div><!-- /////////// End Invited Tasks /////////// -->
+              
+
+            
+{#
+        <h3>Listing contractors</h3>
 
     {% for contractor in contractors %}
         <a href="{{ path('contractor_profile', {id: contractor.id}) }}">{{ contractor }}</a>
-    {% endfor %}
+    {% endfor %} #}
 
 {% endblock %}
+              

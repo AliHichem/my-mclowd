@@ -44,6 +44,15 @@ class Contractor extends User
      * @ORM\OrderBy({"name" = "ASC"})
      */
     protected $contractorTasks;
+    
+    
+    
+     /**
+     * @Rest\SerializedName("contractorProposals")
+     * @ORM\OneToMany(targetEntity="App\Entity\Proposal", mappedBy="user", cascade={"persist"})
+     */
+    protected $contractorProposals;
+    
 
     public function __construct()
     {
@@ -68,6 +77,17 @@ class Contractor extends User
     {
         $this->hasSelectedTemplate = $hasSelectedTemplate;
         return $this;
+    }
+    
+    public function setContractorProposals(ArrayIterator $tasks) 
+    {
+        $this->contractorTasks = $tasks;        
+        return $this;
+    }
+    
+    public function getContractorProposals() 
+    {
+        return $this->contractorTasks;
     }
 
     public function setContractorTasks(ArrayIterator $tasks) 

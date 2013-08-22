@@ -2,16 +2,13 @@ contractor_index:
     pattern:  /contractors
     defaults: { _controller: MCUserBundle:Contractor:index }
 
-
-contractor_mymarket:
-    pattern:  /contractors/mymarket
-    defaults: { _controller: MCUserBundle:Contractor:mymarket }
-
-
 contractor_profile:
     pattern:  /contractors/{id}
     defaults: { _controller: MCUserBundle:Contractor:profile }
 
+contractor_mymarket:
+    pattern:  /contractors/mymarket
+    defaults: { _controller: MCUserBundle:Contractor:mymarket }
 
 client_registration:
     pattern:  /register/client

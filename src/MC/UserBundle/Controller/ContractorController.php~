@@ -39,29 +39,11 @@ class ContractorController extends BaseController
 
     /**
      * @Template()
-     * 
-     * @Secure(roles="ROLE_CONTRACTOR")
      */
     public function indexAction(Request $request)
     {
-        $this->common();
-        
         $contractors = $this->getRepository('MC\UserBundle\Entity\Contractor')->findAll();
-        
-        $user = $this->getSecurity()->getToken()->getUser();
-        
-        $contractor = $this->em->getRepository('MCUserBundle:Contractor')->getContractorByIdV1($user->getId());
-        
-        $contractorTasks = $contractor->getContractorTasks();
-        
-        //foreach($contractorTasks as $c)
-        //{
-        //    echo $c->getId();
-        //} 
-           
-        
-        return array('contractors' => compact($contractors),
-                'cTasks', $contractorTasks);
+        return compact('contractors');
     }
 
     /**
@@ -482,7 +464,9 @@ class ContractorController extends BaseController
         }
     }
 
-    
+    /**
+     * @Secure(roles="ROLE_CONTRACTOR")
+     * */
     public function mymarketAction(Request $request)
     {
 

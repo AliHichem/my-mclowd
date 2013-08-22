@@ -44,7 +44,9 @@ class ContractorTask
      * @ORM\JoinColumn(name="contractor_id", referencedColumnName="id")
      */
     protected $user;
-
+ 
+    
+   
 
     /**
      * Get id

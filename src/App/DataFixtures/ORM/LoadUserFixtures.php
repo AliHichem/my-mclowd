@@ -8,7 +8,8 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use MC\UserBundle\Entity\Client,
     MC\UserBundle\Entity\Contractor,
-    MC\UserBundle\Entity\Manager;
+    MC\UserBundle\Entity\Manager,
+    MC\UserBundle\Entity\ContractorTask;
 
 class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -43,7 +44,36 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user2->setPlainPassword('contractor');
         $user2->setEnabled(true);
         $this->container->get('fos_user.user_manager')->updateUser($user2);
-
+        
+        
+        $this->addReference('contractor_reference', $user2);
+        
+        
+        $task1 = new ContractorTask();
+        $task1->setName("Some task");
+        $task1->setPrice(200);
+        $task1->setUser($this->getReference("contractor_reference"));
+        
+        $manager->persist($task1);
+        $manager->flush();
+        
+        $task2 = new ContractorTask();
+        $task2->setName("Some task 2");
+        $task2->setPrice(500);
+        $task2->setUser($this->getReference("contractor_reference"));
+        
+        $manager->persist($task2);
+        $manager->flush();
+        
+        $task3 = new ContractorTask();
+        $task3->setName("Some task 3");
+        $task3->setPrice(255);
+        $task3->setUser($this->getReference("contractor_reference"));
+        
+        $manager->persist($task3);
+        $manager->flush();
+        
+        
         $user3 = new Manager();
         $user3->setUsername('admin');
         $user3->setEmail('admin@mclowd.com');

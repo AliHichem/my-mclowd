@@ -1,0 +1,33 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     localhost
+    database_port:     ~
+    database_name:     mclowd_dev
+    database_user:     root
+    database_password: mclowd1
+
+    mailer_transport:  smtp
+    mailer_host:       smtp.mandrillapp.com
+    mailer_user:       adam@mclowd.com
+    mailer_password:   wxQtSpa1RJFqEh0-xLThDw
+    mailer_port : 587
+
+    locale:            en
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    #Amazon S3
+    mclowd.s3.key: AKIAIAV3H4NN5LNNXKPQ
+    mclowd.s3.secret: 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
+    mclowd.s3.uri_prefix: http://media.marketplace.mclowd.com/
+
+    #node.js communication
+    notifications_server: '127.0.0.1'
+    notifications_port: '6060'
+
+    #mailer
+    mailer_from: noreply@trisoft.ro
+
+    api_facebook_name:    http://www.facebook.com/apps/application.php?id=359140134198842 # App Namespace
+    api_facebook_server:  http://mclowd.dev/app_dev.php/ # URL for site
+
+    beanstalk.server: localhost

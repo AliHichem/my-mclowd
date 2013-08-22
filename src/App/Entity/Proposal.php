@@ -40,6 +40,8 @@ class Proposal {
      */
     protected $id;
 
+    
+    
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Task", inversedBy="proposals")
      * @ORM\JoinColumn(name="task_id", referencedColumnName="id", onDelete="CASCADE")
@@ -112,6 +114,8 @@ class Proposal {
      */
     protected $isAccepted;
 
+    
+    //contractor
     /**
      * Trait property here:
      * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User")
@@ -123,6 +127,8 @@ class Proposal {
      * @var User $user
      */
     protected $user;
+    
+    
     
     public function __construct()
     {

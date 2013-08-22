@@ -25,6 +25,9 @@ class Client extends User
      **/
     protected $setting;
     
+    
+    
+    
     /**
      * @ORM\Column(name="phone", type="string")
      */

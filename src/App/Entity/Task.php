@@ -110,6 +110,8 @@ class Task {
      **/
     protected $proposals;
 
+    
+    //client
     /*
      * Trait property here:
      * @ORM\ManyToOne(targetEntity="MC\UserBundle\Entity\User", inversedBy="tasks")
@@ -118,6 +120,8 @@ class Task {
      * @var User $user
      */
     protected $user;
+    
+    
     
     public function __construct()
     {
